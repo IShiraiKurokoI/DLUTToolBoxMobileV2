@@ -1,0 +1,15 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="login_margin_left_right">24.0dip</dimen>
+    <dimen name="login_tv_title_max_margin_bottom">50.0dip</dimen>
+    <dimen name="login_tv_title_max_margin_top">66.0dip</dimen>
+    <dimen name="login_tv_title_max_text_size">18.0dip</dimen>
+    <dimen name="login_tv_title_mini_margin_bottom">20.0dip</dimen>
+    <dimen name="login_tv_title_mini_margin_top">16.0dip</dimen>
+    <dimen name="login_tv_title_mini_text_size">15.0dip</dimen>
+</resources>

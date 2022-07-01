@@ -1,0 +1,17 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/app/src/main/java/com/Shirai_Kuroko/DLUTMobile/Utils/BackendUtils.java
+/app/src/main/AndroidManifest.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties

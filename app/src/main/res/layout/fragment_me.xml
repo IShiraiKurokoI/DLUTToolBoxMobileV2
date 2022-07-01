@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_theme_color"
+    tools:context=".UI.MainPageFragments.MeFragment">
+
+    <com.Shirai_Kuroko.DLUTMobile.Widgets.PullDownScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <View
+                android:id="@id/bg_view"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="62.0dip"
+                android:background="@drawable/bg_mine_panel" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@id/head_panel"
+                    android:layout_width="fill_parent"
+                    android:layout_height="230.0dip">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/headimgwrap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="23.0dip"
+                        app:cardCornerRadius="39dp">
+
+                        <ImageView
+                            android:id="@id/head"
+                            android:layout_width="78.0dip"
+                            android:layout_height="78.0dip"
+                            android:src="@drawable/share_default_icon"
+                            tools:ignore="ContentDescription" />
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:id="@id/name_panel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/headimgwrap"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="16.0dip"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@id/name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:maxEms="14"
+                            android:singleLine="true"
+                            android:text="@string/defaultname"
+                            android:textSize="16.0sp" />
+
+                        <ImageView
+                            android:id="@id/icon_sex"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8.0dip"
+                            android:src="@drawable/icon_sex_boy"
+                            tools:ignore="ContentDescription" />
+
+                        <ImageView
+                            android:id="@id/icon_identity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4.0dip"
+                            android:src="@drawable/icon_flag_bachelor"
+                            tools:ignore="ContentDescription" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@id/normal_user_panel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/name_panel"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@id/parent_org"
+                            android:layout_width="200.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4.0dip"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:singleLine="true"
+                            android:text="@string/defaultorgname"
+                            android:textSize="12.0sp" />
+
+                        <TextView
+                            android:id="@id/tv_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4.0dip"
+                            android:drawablePadding="4.0dip"
+                            android:gravity="center_vertical"
+                            android:includeFontPadding="false"
+                            android:text="@string/default_coins"
+                            android:textColor="@color/text_color_fbb700"
+                            android:textSize="12.0sp"
+                            android:visibility="visible"
+                            app:drawableStartCompat="@drawable/gold_coins" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@id/btn_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
+
+                    <Button
+                        android:id="@+id/button_Info"
+                        style="@style/AppButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="8dp"
+                        android:drawableTop="@drawable/icon_mine_user_info"
+                        android:text="@string/me_Info"
+                        app:layout_constraintEnd_toStartOf="@+id/button_Security"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="TextContrastCheck" />
+
+                    <Button
+                        android:id="@+id/button_Card"
+                        style="@style/AppButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="16dp"
+                        android:drawableTop="@drawable/icon_mine_card"
+                        android:text="@string/me_Card"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/button_Security"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="TextContrastCheck" />
+
+                    <Button
+                        android:id="@+id/button_Security"
+                        style="@style/AppButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/icon_mine_account_safe"
+                        android:text="@string/me_Security"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="TextContrastCheck" />
+
+                    <Button
+                        android:id="@+id/button_Gift"
+                        style="@style/AppButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:drawableTop="@drawable/icon_mine_gift"
+                        android:text="@string/me_Gift"
+                        app:layout_constraintEnd_toStartOf="@+id/button_Feedback"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/button_Info"
+                        tools:ignore="TextContrastCheck" />
+
+                    <Button
+                        android:id="@+id/button_Feedback"
+                        style="@style/AppButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:drawableTop="@drawable/icon_mine_feedback"
+                        android:text="@string/me_Feedback"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/button_Security"
+                        tools:ignore="TextContrastCheck" />
+
+                    <Button
+                        android:id="@+id/button_Parent"
+                        style="@style/AppButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:drawableTop="@drawable/icon_mine_school_c_parent"
+                        android:text="@string/parentbind"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/button_Feedback"
+                        app:layout_constraintTop_toBottomOf="@+id/button_Card"
+                        tools:ignore="TextContrastCheck" />
+
+                    <Button
+                        android:id="@+id/button_Setting"
+                        style="@style/AppButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:drawableTop="@drawable/icon_mine_setting"
+                        android:text="@string/me_Setting"
+                        app:layout_constraintEnd_toStartOf="@+id/button_About"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/button_Gift"
+                        tools:ignore="TextContrastCheck" />
+
+                    <Button
+                        android:id="@+id/button_About"
+                        style="@style/AppButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:drawableTop="@drawable/icon_mine_about"
+                        android:text="@string/me_About"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/button_Feedback"
+                        tools:ignore="TextContrastCheck" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </FrameLayout>
+    </com.Shirai_Kuroko.DLUTMobile.Widgets.PullDownScrollView>
+</RelativeLayout>

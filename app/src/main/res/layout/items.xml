@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:maxHeight="72dp"
+    android:minHeight="72dp">
+    <TextView
+        android:id="@+id/Position_Num"
+        android:layout_width="40dp"
+        android:layout_height="72dp"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/App_ID"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:paddingStart="8dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
+        android:layout_gravity="center"
+        tools:ignore="RtlSymmetry">
+        <ImageView
+            android:id="@+id/App_Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            tools:ignore="ContentDescription,RtlSymmetry" />
+    </androidx.cardview.widget.CardView>
+    <RelativeLayout
+        android:id="@+id/center_panel"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1.0"
+        android:paddingStart="8dp"
+        tools:ignore="RtlSymmetry">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="72.0dip"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
+            <TextView
+                android:id="@+id/App_Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:textSize="14.0sp" />
+            <TextView
+                android:id="@+id/App_Describe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8.0dip"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:textSize="12.0sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/Btn_Add_Remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="10dp"/>
+</LinearLayout>

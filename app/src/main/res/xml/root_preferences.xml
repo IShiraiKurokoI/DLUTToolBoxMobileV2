@@ -1,0 +1,89 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/messages_header">
+
+        <EditTextPreference
+            android:id="@+id/Username"
+            android:title="@string/Username_title"
+            android:singleLine="true"
+            android:inputType="number"
+            app:dialogMessage="请输入统一认证系统使用的学工号"
+            app:dialogTitle="设置学工号"
+            app:key="Username"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:id="@+id/Password"
+            android:key="Password"
+            android:selectAllOnFocus="false"
+            android:singleLine="true"
+            android:title="@string/Password_title"
+            android:inputType="textPassword"
+            app:dialogMessage="请输入统一认证使用的密码"
+            app:dialogTitle="设置密码"
+            app:useSimpleSummaryProvider="true"/>
+        <EditTextPreference
+            android:id="@+id/NetworkPassword"
+            android:key="NetworkPassword"
+            android:selectAllOnFocus="false"
+            android:singleLine="true"
+            android:title="@string/Network_title"
+            android:inputType="textPassword"
+            app:dialogMessage="请设置登陆校园网使用的密码"
+            app:dialogTitle="设置校园网密码"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:id="@+id/MailAddress"
+            android:key="MailAddress"
+            android:selectAllOnFocus="false"
+            android:singleLine="true"
+            android:title="@string/MailAddress_title"
+            app:dialogMessage="请设置登陆校园邮箱使用的账号"
+            app:dialogTitle="设置校园邮箱账号"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:id="@+id/MailPassword"
+            android:key="MailPassword"
+            android:selectAllOnFocus="false"
+            android:singleLine="true"
+            android:title="@string/MailPassword_title"
+            android:inputType="textPassword"
+            app:dialogMessage="请设置登陆校园邮箱使用的密码"
+            app:dialogTitle="设置校园邮箱密码"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/other_header">
+
+        <SwitchPreferenceCompat
+            android:id="@+id/AutoLogin"
+            app:key="AutoLogin"
+            app:summaryOff="@string/login_off"
+            app:summaryOn="@string/login_on"
+            app:title="@string/login_title" />
+        <SwitchPreferenceCompat
+            android:id="@+id/Dark"
+            app:key="Dark"
+            app:title="@string/Theme_title" />
+        <Preference
+            app:key="Clean_Cache"
+            app:summary="0MB"
+            app:title="@string/clean_cache"
+            app:useSimpleSummaryProvider="true"/>
+
+
+    </PreferenceCategory>
+
+    <Preference
+        android:key="APPCONFIG"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        app:isPreferenceVisible="false"/>
+    <Preference
+        android:key="HomeGridConfig"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        app:isPreferenceVisible="false"/>
+
+</PreferenceScreen>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="60dp"
+    android:layout_height="60dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/transparent">
+
+    <LinearLayout
+        android:id="@+id/edit_ll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:orientation="vertical"
+        android:paddingTop="8dp">
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            android:layout_gravity="center"
+            tools:ignore="RtlSymmetry"
+            app:cardBackgroundColor="#00000000">
+        <ImageView
+            android:id="@+id/icon_iv"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitXY"
+            android:background="@color/transparent"
+            tools:ignore="ContentDescription" />
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/name_tv"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:background="@color/transparent"
+            android:includeFontPadding="false"
+            android:textSize="11sp"/>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/delet_iv"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignEnd="@id/edit_ll"
+        android:layout_alignTop="@id/edit_ll"
+        android:background="@drawable/default_btn_selector"
+        android:padding="0dp"
+        android:scaleType="centerInside"
+        android:src="@mipmap/btn_service_manage_delete"
+        tools:ignore="ContentDescription" />
+
+</RelativeLayout>

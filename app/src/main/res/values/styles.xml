@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/main_theme_color</item>
+    </style>
+    <style name="login_btn">
+        <item name="android:textSize">18.0dip</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/selector_bg_btn_login</item>
+    </style>
+    <style name="login_txt">
+        <item name="android:textSize">14.0dip</item>
+        <item name="android:textColor">@color/selector_login_txt_color</item>
+        <item name="android:paddingLeft">10.0dip</item>
+        <item name="android:paddingTop">20.0dip</item>
+        <item name="android:paddingRight">10.0dip</item>
+        <item name="android:paddingBottom">20.0dip</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+</resources>

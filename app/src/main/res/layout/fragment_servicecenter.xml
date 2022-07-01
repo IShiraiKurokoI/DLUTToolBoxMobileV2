@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/appcenterfragment">
+
+    <SearchView
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <HorizontalScrollView
+        android:id="@+id/Catagory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:scrollbarAlwaysDrawHorizontalTrack="false" >
+        <LinearLayout
+            android:id="@+id/CatagoryLinear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:id="@+id/CatagoryLinear1"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+                <ImageView
+                    android:layout_height="40dp"
+                    android:layout_width="60dp"
+                    android:scaleType="center"
+                    android:src="@drawable/icon_service_all"
+                    tools:ignore="ContentDescription" />
+                <TextView
+                    android:id="@+id/all"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:layout_width="60dp"
+                    android:textSize="11sp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@string/all"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/CatagoryLinear2"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+                <ImageView
+                    android:layout_height="40dp"
+                    android:layout_width="60dp"
+                    android:scaleType="center"
+                    android:src="@drawable/icon_service_study"
+                    tools:ignore="ContentDescription" />
+                <TextView
+                    android:id="@+id/study"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:layout_width="60dp"
+                    android:textSize="11sp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@string/study"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/CatagoryLinear3"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+                <ImageView
+                    android:layout_height="40dp"
+                    android:layout_width="60dp"
+                    android:scaleType="center"
+                    android:src="@drawable/icon_service_office"
+                    tools:ignore="ContentDescription" />
+                <TextView
+                    android:id="@+id/office"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:layout_width="60dp"
+                    android:textSize="11sp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@string/office"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/CatagoryLinear4"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+                <ImageView
+                    android:layout_height="40dp"
+                    android:layout_width="60dp"
+                    android:scaleType="center"
+                    android:src="@drawable/icon_service_life"
+                    tools:ignore="ContentDescription" />
+                <TextView
+                    android:id="@+id/life"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:layout_width="60dp"
+                    android:textSize="11sp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@string/life"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/CatagoryLinear5"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+                <ImageView
+                    android:layout_height="40dp"
+                    android:layout_width="60dp"
+                    android:scaleType="center"
+                    android:src="@drawable/icon_service_social"
+                    tools:ignore="ContentDescription" />
+                <TextView
+                    android:id="@+id/social"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:layout_width="60dp"
+                    android:textSize="11sp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@string/social"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/CatagoryLinear6"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+                <ImageView
+                    android:layout_height="40dp"
+                    android:layout_width="60dp"
+                    android:scaleType="center"
+                    android:src="@drawable/icon_service_game"
+                    tools:ignore="ContentDescription" />
+                <TextView
+                    android:id="@+id/game"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:layout_width="60dp"
+                    android:textSize="11sp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@string/game"/>
+            </LinearLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <ListView
+        android:id="@+id/applistview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="?attr/actionBarSize"/>
+    <LinearLayout
+        android:id="@+id/emptyview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_weight="1"
+        android:visibility="gone"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+    <ImageView
+        android:id="@+id/emptyicon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:src="@drawable/icon_connect_book_or_search_result_empty"
+        tools:ignore="ContentDescription" />
+        <TextView
+            android:id="@+id/emptytext"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_weight = "1"
+            android:gravity = "center"
+            android:layout_marginTop="30dp"
+            android:text="@string/empty"/>
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

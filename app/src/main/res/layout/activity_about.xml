@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="none">
+    <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:id="@id/main_panel" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="vertical" android:background="@drawable/bg_about_whistle_top_panel" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <RelativeLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="56.0dip">
+                <TextView android:textColor="@color/white" android:gravity="center_vertical" android:id="@id/iv_back" android:paddingLeft="16.0dip" android:paddingRight="16.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/back_to"
+                    app:drawableStartCompat="@drawable/notice_detail_back_sel" />
+                <TextView android:textSize="18.0sp" android:textColor="@color/white" android:id="@id/tv_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="关于" android:layout_centerInParent="true"
+                    tools:ignore="HardcodedText" />
+            </RelativeLayout>
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="156.0dip"
+                tools:ignore="UseCompoundDrawables">
+                <ImageView android:id="@id/top_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/icon_about_whistle_logo" android:contentDescription="@null" />
+                <TextView android:textSize="12.0sp" android:textColor="@color/white" android:id="@id/version_tv" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:includeFontPadding="false" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:background="@color/white" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <View android:background="@color/divider_color" android:layout_width="fill_parent" android:layout_height="1.0px"
+                tools:ignore="PxUsage" />
+            <RelativeLayout android:id="@id/version_update_panel" android:background="@drawable/list_item_bg" android:layout_width="fill_parent" android:layout_height="52.0dip">
+                <TextView android:textSize="14.0sp" android:textColor="@color/text_color_50" android:id="@id/version_update" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16.0dip" android:text="版本更新" android:layout_centerVertical="true"
+                    tools:ignore="HardcodedText" />
+                <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="16.0dip" android:layout_alignParentEnd="true" android:layout_centerVertical="true"
+                    tools:ignore="RelativeOverlap">
+                    <TextView android:textSize="14.0sp" android:textColor="@color/idg_white_btn_text_sel" android:id="@id/version_update_label" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                    <RelativeLayout android:gravity="center_horizontal" android:id="@id/has_new_version" android:background="@drawable/notice_unread_count" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="16.0dip">
+                        <TextView android:textSize="10.0sp" android:textColor="@android:color/white" android:id="@id/unread_no" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/newnotice" android:includeFontPadding="false" android:layout_centerInParent="true"
+                            tools:ignore="SmallSp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+            <View android:background="@color/divider_color" android:paddingLeft="16.0dip" android:paddingRight="16.0dip" android:layout_width="fill_parent" android:layout_height="1.0px"
+                tools:ignore="PxUsage" />
+            <RelativeLayout android:id="@id/share_to_friends" android:background="@drawable/list_item_bg" android:layout_width="fill_parent" android:layout_height="52.0dip">
+                <TextView android:textSize="14.0sp" android:textColor="@color/text_color_50" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16.0dip" android:text="@string/invite" android:layout_centerVertical="true"
+                    tools:ignore="RelativeOverlap" />
+                <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="10.0dip" android:layout_alignParentEnd="true" android:layout_centerVertical="true">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/setting_right_arrow_nor"
+                        tools:ignore="ContentDescription" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <View android:background="@color/divider_color" android:paddingLeft="16.0dip" android:paddingRight="16.0dip" android:layout_width="fill_parent" android:layout_height="1.0px"
+                tools:ignore="PxUsage" />
+            <RelativeLayout android:id="@id/version_intro" android:background="@drawable/list_item_bg" android:layout_width="fill_parent" android:layout_height="52.0dip">
+                <TextView android:textSize="14.0sp" android:textColor="@color/text_color_50"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16.0dip" android:text="@string/versionintro" android:layout_centerVertical="true"
+                    tools:ignore="RelativeOverlap" />
+                <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="10.0dip" android:layout_alignParentEnd="true" android:layout_centerVertical="true">
+                    <ImageView  android:layout_width="wrap_content" android:layout_height="wrap_content"  android:src="@drawable/setting_right_arrow_nor"
+                        tools:ignore="ContentDescription" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <View android:background="@color/divider_color" android:paddingLeft="16.0dip" android:paddingRight="16.0dip" android:layout_width="fill_parent" android:layout_height="1.0px"
+                tools:ignore="PxUsage" />
+            <RelativeLayout android:id="@id/service_disclaimer" android:background="@drawable/list_item_bg" android:layout_width="fill_parent" android:layout_height="52.0dip">
+                <TextView android:textSize="14.0sp" android:textColor="@color/text_color_50" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16.0dip" android:text="@string/serviceprotocal" android:layout_centerVertical="true"
+                    tools:ignore="RelativeOverlap" />
+                <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="10.0dip" android:layout_alignParentEnd="true" android:layout_centerVertical="true">
+                    <ImageView  android:layout_width="wrap_content" android:layout_height="wrap_content"  android:src="@drawable/setting_right_arrow_nor"
+                        tools:ignore="ContentDescription" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <View android:background="@color/divider_color" android:layout_width="fill_parent" android:layout_height="1.0px"
+                tools:ignore="PxUsage" />
+            <RelativeLayout android:id="@id/privacy_policy" android:background="@drawable/list_item_bg" android:layout_width="fill_parent" android:layout_height="52.0dip">
+                <TextView android:textSize="14.0sp" android:textColor="@color/text_color_50" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16.0dip" android:text="@string/privac" android:layout_centerVertical="true"
+                    tools:ignore="RelativeOverlap" />
+                <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="10.0dip" android:layout_alignParentEnd="true" android:layout_centerVertical="true">
+                    <ImageView  android:layout_width="wrap_content" android:layout_height="wrap_content"  android:src="@drawable/setting_right_arrow_nor"
+                        tools:ignore="ContentDescription" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <View android:background="@color/divider_color" android:layout_width="fill_parent" android:layout_height="1.0px"
+                tools:ignore="PxUsage" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,812 @@
+[
+  {
+    "id": 0,
+    "category": "life",
+    "app_name": "玉兰卡",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/08/ynZM2VlLGmmAb9t7AAAj67t6MTY8968130",
+    "describe": "包含玉兰卡充值、自助缴费、流水账单、会议查询等功能。",
+    "popularity": "18069060",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=19b32196decf419a&redirect_uri=https%3A%2F%2Fcard.m.dlut.edu.cn%2Fhomerj%2FopenRjOAuthPage&response_type=code&scope=base_api&state=weishao",
+    "issubscription": 0
+  },
+  {
+    "id": 1,
+    "category": "study",
+    "app_name": "我的课表",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU-IiAPBCnAAAamt9Ip481490708",
+    "describe": "学生、任课教师课表信息，数据以教务、研究生系统为准，本应用课表数据仅供参考！",
+    "popularity": "16427658",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=9qXqHnRQuhhViycC&redirect_uri=https%3a%2f%2flightapp.m.dlut.edu.cn%2fcheck%2fcourseschedule&response_type=code&scope=base_api&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 2,
+    "category": "life",
+    "app_name": "图书馆预约",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/02/03/ynZM2V8hIHuAakGbAABHogF7lj8252.png",
+    "describe": "图书馆入馆预约系统为读者提供座位和研修间的预约使用服务，请读者按图书馆的座位和研修间的使用规则合理预约使用空间资源。",
+    "popularity": "13430254",
+    "url": "https://sso.dlut.edu.cn/cas/login?service=http://seat.lib.dlut.edu.cn/yanxiujian/client/login.php?redirect=index.php&from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 3,
+    "category": "study",
+    "app_name": "我的成绩",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2VlUWLqADKhKAAAUi-vic4E4521607",
+    "describe": "查询我的教务成绩信息",
+    "popularity": "6972703",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=9qXqHnRQuhhViycC&redirect_uri=https%3a%2f%2flightapp.m.dlut.edu.cn%2fcheck%2fschscore&response_type=code&scope=base_api&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 4,
+    "category": "life",
+    "app_name": "网络自助",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/5B/ynZM2VmyW9mAGzv_AAAXfJXYcgw8899921",
+    "describe": "查询上网流量使用情况、网费余额、IP服务、域名等网络服务，还可以自助重置邮箱密码。",
+    "popularity": "4372597",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=9qXqHnRQuhhViycC&redirect_uri=https%3a%2f%2flightapp.m.dlut.edu.cn%2fcheck%2fnethelp&response_type=code&scope=base_api&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 5,
+    "category": "study",
+    "app_name": "考试安排",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/7B/ynZM2Vn7QI6AOQVDAAAZa-V0lMA6705172",
+    "describe": "考试安排，快速了解考试时间、地点，数据仅供参考以教务数据为准! 当前版本只汇总了本科生数据，研究生同学请勿着急～",
+    "popularity": "4182740",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=9qXqHnRQuhhViycC&redirect_uri=https%3a%2f%2flightapp.m.dlut.edu.cn%2fcheck%2fexamplan&response_type=code&scope=base_api&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 6,
+    "category": "life",
+    "app_name": "浴室预约",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/01/FA/ynZM2V7UyAqAM6yFAAAzNGbR99s260.png",
+    "describe": "浴室预约测试",
+    "popularity": "3057018",
+    "url": "http://webvpn.dlut.edu.cn/http-8193/77726476706e69737468656265737421a2a713d27661301e295cc7f9/openHomeRJPage?from=rj&filter=app",
+    "issubscription": 0
+  },
+  {
+    "id": 7,
+    "category": "office",
+    "app_name": "我赞赞我吐槽",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/01/0D/ynZM2VuVHpGAV97WAAAZMppK4Xc428.png",
+    "describe": "我赞赞我吐槽是针对学校职能部处、学部学院等部门服务进行评价和反馈的应用。",
+    "popularity": "2794106",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=9qXqHnRQuhhViycC&redirect_uri=https%3a%2f%2flightapp.m.dlut.edu.cn%2fcheck%2fcomplainpraise&response_type=code&scope=base_api&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 8,
+    "category": "office",
+    "app_name": "迎新系统",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2VlnDrGAZ4zkAAAXPSNRMjc4254667",
+    "describe": "负责迎新教师可以查看接站信息、花名册、报到率、绿色通道情况；新入学的同学可以查看自己室友、同班同学、迎新快讯、迎新通知；",
+    "popularity": "2721606",
+    "url": "http://yxxt.dlut.edu.cn:8080/yx/login/app/sso?from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 9,
+    "category": "life",
+    "app_name": "体育场馆预订",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/02/30/ynZM2V9Mj2GAXxRpAAAZEquDC1U035.png",
+    "describe": "提供在线购买体育馆票、卡、场地等功能，在线查看自己已购买的订单等信息。",
+    "popularity": "2332500",
+    "url": "https://webvpn.dlut.edu.cn/https/77726476706e69737468656265737421e4ee429b693464456a468ca88d1b203b/diantuo/mobileLogin.do?from=rj&filter=app",
+    "issubscription": 0
+  },
+  {
+    "id": 10,
+    "category": "study",
+    "app_name": "空闲教室",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/08/ynZM2VkeVL2AGt4BAAAYlzvpSVo6550599",
+    "describe": "查询空余教室信息",
+    "popularity": "1715716",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=9qXqHnRQuhhViycC&redirect_uri=https%3a%2f%2flightapp.m.dlut.edu.cn%2fcheck%2femptyclassroom&response_type=code&scope=base_api&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 11,
+    "category": "office",
+    "app_name": "办事大厅",
+    "icon": "https://my.m.dlut.edu.cn/images/appicon/shejiao.png",
+    "describe": "学校办事大厅应用，师生可在此应用下办理业务。",
+    "popularity": "1395454",
+    "url": "https://ehall.dlut.edu.cn/fp/view?m=fp&from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 12,
+    "category": "life",
+    "app_name": "校车定位",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/02/31/ynZM2V9Mt0SAE0SFAABPvJJ1-9A273.png",
+    "describe": "实现凌水校区校车定位，方便师生查看校车位置。",
+    "popularity": "1209660",
+    "url": "http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421e0f852953339675e300c85b98c1b2631ea0487e4/dlutBus/ssoAuth?from=rj&filter=app",
+    "issubscription": 0
+  },
+  {
+    "id": 13,
+    "category": "study",
+    "app_name": "研究生系统",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/01/2B/ynZM2VwcpHeADVLoAAAxsF8nPV0948.png",
+    "describe": "研究生管理信息系统移动版本",
+    "popularity": "1013553",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=abccc53d6b78cb01&redirect_uri=http%3a%2f%2fdutgs.dlut.edu.cn%3a443%2fSmartWap%2foAuth.do&response_type=code&scope=base_api&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 14,
+    "category": "office",
+    "app_name": "电子邮件",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/45/ynZM2VmdGl6AH-LhAAAYbvXmkRY0582290",
+    "describe": "学校电子邮件",
+    "popularity": "879168",
+    "url": "http://mail.dlut.edu.cn",
+    "issubscription": 0
+  },
+  {
+    "id": 15,
+    "category": "office",
+    "app_name": "教师主页",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU_9iAdpatAAAcFW_puS88241415",
+    "describe": "各个院系的教师信息介绍",
+    "popularity": "803915",
+    "url": "http://faculty.dlut.edu.cn/",
+    "issubscription": 0
+  },
+  {
+    "id": 16,
+    "category": "study",
+    "app_name": "图书借阅",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2VlVDfOAH_FlAAAQiDCdlzs0313949",
+    "describe": "图书借阅、委托、账目清单、遗失赔偿信息查询",
+    "popularity": "769498",
+    "url": "http://mobile.lib.dlut.edu.cn/m/reader/hwthau.action?from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 17,
+    "category": "life",
+    "app_name": "校园地图",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkVANOAaHFwAAAhBvGkHdU6252034",
+    "describe": "校园3D地图",
+    "popularity": "738859",
+    "url": "http://map.dlut.edu.cn/",
+    "issubscription": 0
+  },
+  {
+    "id": 18,
+    "category": "life",
+    "app_name": "校历",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU_zyAVLJJAAAWwzlljqM2626410",
+    "describe": "当前学期校历，可根据身份自动识别大学期、小学期",
+    "popularity": "711121",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=9qXqHnRQuhhViycC&redirect_uri=https%3a%2f%2flightapp.m.dlut.edu.cn%2fcheck%2fschcalendar&response_type=code&scope=base_api&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 19,
+    "category": "life",
+    "app_name": "跳蚤市场",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/AF/ynZM2Vso7YGAGwRfAAAZLmkTJ08566.png",
+    "describe": "本应用用于校内师生转让或赠送物品。",
+    "popularity": "695326",
+    "url": "https://res.dlut.edu.cn/tp_cgp?from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 20,
+    "category": "life",
+    "app_name": "返校前-学生返校申请",
+    "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
+    "describe": "该应用为学生申请返校的入口。适用于 国内本科生、研究生。",
+    "popularity": "654307",
+    "url": "https://ehall.dlut.edu.cn/fp/s/dcLKox?from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 21,
+    "category": "office",
+    "app_name": "校内通知",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/34/ynZM2VmRCTmAYyO4AAAZ_eqIXRM2301923",
+    "describe": "校内通知、校内文件、干部工作",
+    "popularity": "623599",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=9qXqHnRQuhhViycC&redirect_uri=https%3a%2f%2flightapp.m.dlut.edu.cn%2fcheck%2fmemo&response_type=code&scope=base_api&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 22,
+    "category": "life",
+    "app_name": "校园缴费",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/01/EF/ynZM2V5cX6uADgWxAAAbr4bV4J8446.png",
+    "describe": "大连理工大学一卡通电子支付平台",
+    "popularity": "611717",
+    "url": "http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/casLogin?filter=app&from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 23,
+    "category": "life",
+    "app_name": "体质测评",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/01/25/ynZM2VwAqXuAfK3HAAAQNK-baPo920.png",
+    "describe": "本系统通过校园网登录，查看个人测评项目，提供网上预约及测评结果查看。\n教职员工测试地址：刘长春体育馆负一层（主入口右侧进入）；\n学生体质测试地址：中心田径场主席台及跑廊。",
+    "popularity": "586957",
+    "url": "https://webvpn.dlut.edu.cn/http-8081/77726476706e69737468656265737421a2a713d27661301e285dc7fdcb0d/cas/mobileCheckJump?from=rj&filter=app",
+    "issubscription": 0
+  },
+  {
+    "id": 24,
+    "category": "study",
+    "app_name": "四六级查询",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2VlocseAbGj2AAAhfXbUWgg692.png",
+    "describe": "通过中国教育考试网进行四六级成绩的查询。",
+    "popularity": "534154",
+    "url": "http://cet.neea.edu.cn/html1/folder/21045/4870-1.htm",
+    "issubscription": 0
+  },
+  {
+    "id": 25,
+    "category": "office",
+    "app_name": "公共通知",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU-9iAJ779AAAqN7kS9pY1398660",
+    "describe": "公共通知可以查看各个部门院系通知公告。",
+    "popularity": "518264",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=9qXqHnRQuhhViycC&redirect_uri=https%3a%2f%2flightapp.m.dlut.edu.cn%2fcheck%2fnotice&response_type=code&scope=base_api&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 26,
+    "category": "study",
+    "app_name": "返校后信息上报",
+    "icon": "https://my.m.dlut.edu.cn/images/appicon/shejiao.png",
+    "describe": "返校后健康信息上报/Transition and recovery health reporting：适用于 国内本科生、研究生、留学生",
+    "popularity": "378441",
+    "url": "https://ehall.dlut.edu.cn/fp/s/sf4Bke?from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 27,
+    "category": "life",
+    "app_name": "离校系统",
+    "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
+    "describe": "新离校系统",
+    "popularity": "374528",
+    "url": "https://webvpn.dlut.edu.cn/http-8080/77726476706e69737468656265737421fcef0f982b257c1e7b0c9ce29b5b/lx/mobilelogin/sso?from=rj&filter=app",
+    "issubscription": 0
+  },
+  {
+    "id": 28,
+    "category": "office",
+    "app_name": "学校新闻",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU-aqAYmGdAAARVIgc0DA1466483",
+    "describe": "快速了解学校概要新闻",
+    "popularity": "278274",
+    "url": "http://news.dlut.edu.cn/",
+    "issubscription": 0
+  },
+  {
+    "id": 29,
+    "category": "life",
+    "app_name": "在校住宿学生外出申请 ",
+    "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
+    "describe": "用于新冠肺炎疫情防控期间在校住宿学生弹性封闭管理出校申请。",
+    "popularity": "206919",
+    "url": "https://ehall.dlut.edu.cn/fp/s/qyUXbf?from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 30,
+    "category": "fun",
+    "app_name": "视频直播",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/AE/ynZM2Vsjs_WAbKVBAAAUZ1O0wWU349.png",
+    "describe": "大连理工大学高清视频平台，平台需在校园网环境下使用，属于校内流量，免流量费。",
+    "popularity": "179072",
+    "url": "https://sso.dlut.edu.cn/cas/login?service=http://video.dlut.edu.cn/dlut-cas?from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 31,
+    "category": "life",
+    "app_name": "活动报名",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/01/0B/ynZM2VuPucOAG2EUAAAijVD0PLU792.png",
+    "describe": "校内举办的各类活动将在此应用发布，校内师生可以通过此应用报名或者领票，活动管理人员可以通过手机的管理端应用刷码验票。",
+    "popularity": "168561",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=9qXqHnRQuhhViycC&redirect_uri=https%3a%2f%2flightapp.m.dlut.edu.cn%2fcheck%2fticketonline&response_type=code&scope=base_api&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 32,
+    "category": "life",
+    "app_name": "返校中-健康状况和行程轨迹上报",
+    "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
+    "describe": "健康状况和行程轨迹上报：适用于 国内本科生、研究生、教职工、自聘人员",
+    "popularity": "156672",
+    "url": "https://ehall.dlut.edu.cn/fp/s/gfNOnp?from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 33,
+    "category": "life",
+    "app_name": "校内生活",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/8D/ynZM2VomenWAeOXkAAANqO47Geg0182891",
+    "describe": "各校区图书馆、食堂、场馆等服务场所开放时间及校区班车运行时间",
+    "popularity": "155619",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=9qXqHnRQuhhViycC&redirect_uri=https%3a%2f%2flightapp.m.dlut.edu.cn%2fcheck%2fschlife&response_type=code&scope=base_api&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 34,
+    "category": "life",
+    "app_name": "校内点餐",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/01/50/ynZM2V0iBPCAD9VwAAAqiXkNdzA224.png",
+    "describe": "点餐系统可以方便师生进行线上预约点餐，预约后线下通过取餐码便捷取餐",
+    "popularity": "137686",
+    "url": "http://webvpn.dlut.edu.cn/http-8088/77726476706e69737468656265737421a2a713d27661301e295cc7fb/openHomeRJPage?from=rj&filter=app",
+    "issubscription": 0
+  },
+  {
+    "id": 35,
+    "category": "life",
+    "app_name": "学生临时离连申请",
+    "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
+    "describe": "该应用用于在校住宿及在连不在学校住宿学生离连申请备案。",
+    "popularity": "131854",
+    "url": "https://ehall.dlut.edu.cn/fp/s/tr3Lmj?from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 36,
+    "category": "office",
+    "app_name": "学工系统",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/01/F6/ynZM2V6qTHOADRmFAAAaO5TnZvA986.png",
+    "describe": "为学生提供学工一体化系统中的各类通知查询、个人信息查询与修改；为辅导员和学生工作部门提供学生基本信息查询与筛选、学生工作人员基本信息查询、网络办公系统通知查看等。",
+    "popularity": "105251",
+    "url": "http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f4e2558f267e6c5c6b1cc7a99c406d36b7/DLUT/Login/Index?from=rj&filter=app",
+    "issubscription": 0
+  },
+  {
+    "id": 37,
+    "category": "office",
+    "app_name": "就业信息",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/01/2B/ynZM2VwcpEmACJvsAAASGKGgtfo473.png",
+    "describe": "大工就业服务平台为毕业生和用人单位提供了线上注册、需求发布、场地申请、招聘会预约、生源管理、网上签约、派遣管理等功能，服务广大毕业生学子求职就业，方便招聘企业招才揽才。",
+    "popularity": "103378",
+    "url": "http://mcareer.dlut.edu.cn/mAutoLogin?idlutlink=index&from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 38,
+    "category": "life",
+    "app_name": "心理测评",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/02/A1/ynZM2WBYEe-ALSxiAAA-gtcEwFw355.png",
+    "describe": "为学生提供心理健康相关服务，包括心理测试、报告查询、心理咨询预约、个人信息查询等相关服务。",
+    "popularity": "100351",
+    "url": "https://sso.dlut.edu.cn/cas/login?service=http://xinli.dlut.edu.cn:81/psym/Default/Index?from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 39,
+    "category": "office",
+    "app_name": "校内公示",
+    "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
+    "describe": "学校校园门户校内公示的直接展示",
+    "popularity": "100093",
+    "url": "https://portal.dlut.edu.cn/tp/view?m=up&from=rj#act=up/publicity",
+    "issubscription": 0
+  },
+  {
+    "id": 40,
+    "category": "life",
+    "app_name": "建行悦生活",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/5B/ynZM2VmyVgKAd-EPAAAYxpZfwd41645169",
+    "describe": "建行悦生活，包含生活常用缴费功能",
+    "popularity": "80700",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=9qXqHnRQuhhViycC&redirect_uri=https%3a%2f%2flightapp.m.dlut.edu.cn%2fcheck%2fccblife&response_type=code&scope=base_api&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 41,
+    "category": "life",
+    "app_name": "快递查询",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/66/ynZM2VnLWSaAJKY7AAAkX4ZoFA40140603",
+    "describe": "查询各类快递，该应用由互联网第三方提供",
+    "popularity": "75828",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=fcf2106edde68e3c&redirect_uri=http%3a%2f%2fwww.kuaidi100.com&response_type=code&scope=all&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 42,
+    "category": "life",
+    "app_name": "校园黄页",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU_seAKxroAAAQdRbBtmw9038204",
+    "describe": "学校各单位的联系方式",
+    "popularity": "66837",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=9qXqHnRQuhhViycC&redirect_uri=https%3a%2f%2flightapp.m.dlut.edu.cn%2fcheck%2fofficetel&response_type=code&scope=base_api&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 43,
+    "category": "life",
+    "app_name": "失物招领",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2Vli91KANtAuAAATb6WPdjg6232663",
+    "describe": "失物招领",
+    "popularity": "66375",
+    "url": "https://wlightapp.m.dlut.edu.cn/lostandfound",
+    "issubscription": 0
+  },
+  {
+    "id": 44,
+    "category": "office",
+    "app_name": "官方主页",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/64/ynZM2VnEY6GAdhnPAAAjrL12SSc3513707",
+    "describe": "大连理工大学官方网站",
+    "popularity": "63780",
+    "url": "http://www.dlut.edu.cn",
+    "issubscription": 0
+  },
+  {
+    "id": 45,
+    "category": "office",
+    "app_name": "照片采集",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/01/19/ynZM2VvAP52AemfbAAA0ZwVo190430.png",
+    "describe": "本应用用于会议签到、宿舍通道机等人脸识别服务。如果您本人在上述场景下不能被人脸识别设备识别，或者本应用显示“您的人脸识别照片不满足识别要求，请点击照片采集框进行采集，建议您上传证件照”，则需要您通过本应用上传照片进行照片采集。（本应用仅限于校园网环境下使用）",
+    "popularity": "58067",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=e792ad1aad829c78&redirect_uri=http%3a%2f%2fdutisc2.dlut.edu.cn%2fctm02h5c%2fschool&response_type=code&scope=base_api&state=authorize",
+    "issubscription": 0
+  },
+  {
+    "id": 46,
+    "category": "study",
+    "app_name": "党建园地",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/A9/ynZM2VrkCoOAOJ_gAAAa8o1hjHA163.png",
+    "describe": "党建题库知识测试应用",
+    "popularity": "44359",
+    "url": "http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f4fd5898693464456a468ca88d1b203b/Login.aspx?from=rj&filter=app",
+    "issubscription": 0
+  },
+  {
+    "id": 47,
+    "category": "social",
+    "app_name": "移动自助",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/14/ynZM2VmH0PmAG5uFAAAilppM9Qo8711333",
+    "describe": "中国移动自助",
+    "popularity": "42442",
+    "url": "http://edu.aibeiok.com/",
+    "issubscription": 0
+  },
+  {
+    "id": 48,
+    "category": "life",
+    "app_name": "校园网测速",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/01/45/ynZM2Vzjo7-AEl7QAAAv69n_AZs158.png",
+    "describe": "学校校园无线网测速工具，如果您想知道所在校园区域的无线网速度，可以使用本工具进行测速。测速的结果不代表访问的实际速度，访问实际速度是由校园网和访问服务的提供商的速度等多种因素决定的。",
+    "popularity": "39949",
+    "url": "http://speedtest.dlut.edu.cn/",
+    "issubscription": 0
+  },
+  {
+    "id": 49,
+    "category": "social",
+    "app_name": "易班",
+    "icon": "https://my.m.dlut.edu.cn/images/appicon/yule.png",
+    "describe": "易班网",
+    "popularity": "38630",
+    "url": "http://www.yiban.cn",
+    "issubscription": 0
+  },
+  {
+    "id": 50,
+    "category": "office",
+    "app_name": "学校概况",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU_IKAaIdPAAAZftzAzPc1764114",
+    "describe": "学校概况介绍",
+    "popularity": "38607",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=9qXqHnRQuhhViycC&redirect_uri=https%3a%2f%2flightapp.m.dlut.edu.cn%2fcheck%2fschdesc&response_type=code&scope=base_api&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 51,
+    "category": "life",
+    "app_name": "宿舍电费（测试）",
+    "icon": "https://my.m.dlut.edu.cn/images/appicon/shejiao.png",
+    "describe": "宿舍电费查询",
+    "popularity": "37285",
+    "url": "http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/casLogin?target=openEleRoutePage?from=rj&filter=app",
+    "issubscription": 0
+  },
+  {
+    "id": 52,
+    "category": "social",
+    "app_name": "官方微博",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/45/ynZM2VmdGjmAdiJPAAAc47CEc1Q1587217",
+    "describe": "大连理工大学官方微博",
+    "popularity": "37040",
+    "url": "http://weibo.com/duters",
+    "issubscription": 0
+  },
+  {
+    "id": 53,
+    "category": "life",
+    "app_name": "互帮互助",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/01/22/ynZM2VvyhUSAY2kwAAAguGXRhgI468.png",
+    "describe": "顺手带、借东西、图书交换、兼职工作、实习工作、联合创业都可以在互帮互助通过积分寻求帮助。你也可以通过此应用施助于人，并获取悬赏金积分。",
+    "popularity": "26403",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=9qXqHnRQuhhViycC&redirect_uri=https%3a%2f%2flightapp.m.dlut.edu.cn%2fcheck%2fhelp&response_type=code&scope=base_api&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 54,
+    "category": "office",
+    "app_name": "调查问卷",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2VlsDimAOrJHAAAUG6dAb505075498",
+    "describe": "校内各单位可以通过本应用发布调查问卷。问卷设计和发布本单位的信息化专干有权限。",
+    "popularity": "25599",
+    "url": "https://wlightapp.m.dlut.edu.cn/questionnaire",
+    "issubscription": 0
+  },
+  {
+    "id": 55,
+    "category": "life",
+    "app_name": "校报",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/01/22/ynZM2VvudlKADs6DAAAbslcI-uo343.png",
+    "describe": "大连理工大学校报",
+    "popularity": "24806",
+    "url": "http://dllg.leaderteam.com.cn/phone/shouye.aspx",
+    "issubscription": 0
+  },
+  {
+    "id": 56,
+    "category": "office",
+    "app_name": "机构知识库",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/01/14/ynZM2VurU1CAWR60AAAdLHl4Y2E380.png",
+    "describe": "大连理工大学机构知识库作为支撑我校学术研究的基础设施，以知识管理与学术交流为目标，收集、组织、管理、保存、传播我校教职工的学术研究成果，全面展示我校学术科研水平，实现知识传播与共享。机构知识库中拥有期刊论文、会议论文、学位论文、专利、著作、报纸、标准等多种类型学术成果。",
+    "popularity": "24737",
+    "url": "http://dlutir.dlut.edu.cn/Mobile/Home/Index",
+    "issubscription": 0
+  },
+  {
+    "id": 57,
+    "category": "office",
+    "app_name": "自助打印",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/01/25/ynZM2Vv97QaAZQDFAAAXvITm0Jg604.png",
+    "describe": "自助打印服务平台为师生提供线上电子成绩单和电子证明文件申请，线下自助打印情况及自助打印终端位置查看等服务。",
+    "popularity": "22572",
+    "url": "http://eproof.dlut.edu.cn/sso/login_sj.jsp?from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 58,
+    "category": "life",
+    "app_name": "门禁管理",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/02/9B/ynZM2WA_INuAQzvbAAASWmFwefE245.png",
+    "describe": "为门禁管理员提供门禁授权管理功能",
+    "popularity": "20141",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421fdf24f962e3e2654721d9de29d51367bba66/cser/static/menjin/index.html?type=mob&from=rj&filter=app",
+    "issubscription": 0
+  },
+  {
+    "id": 59,
+    "category": "life",
+    "app_name": "平安大工",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/6D/ynZM2VntfSSADIDlAAAy0MisHFc7154732",
+    "describe": "平安大工，发现校园内安全、交通、消防等隐患的行为或事件，共创美好校园",
+    "popularity": "20057",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=9qXqHnRQuhhViycC&redirect_uri=https%3a%2f%2flightapp.m.dlut.edu.cn%2fcheck%2fsafetydlut&response_type=code&scope=base_api&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 60,
+    "category": "life",
+    "app_name": "预约排号",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/02/44/ynZM2V9Vvd6AW456AABWXBbIxGY056.png",
+    "describe": "网信中心服务大厅预约排号系统，可以先预约排号，待时间快到时再去服务大厅办理业务，避免在大厅等待。",
+    "popularity": "16215",
+    "url": "https://card.m.dlut.edu.cn/bookinggnumJq/openRjOAuthPage?from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 61,
+    "category": "social",
+    "app_name": "电信选号",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/14/ynZM2VmH0O2AJtBTAAAVkijl2t04899563",
+    "describe": "电信选号",
+    "popularity": "14985",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=e8d5afbffb2fd0bd&redirect_uri=http%3a%2f%2fu.eqxiu.com%2fs%2fXqSVK051&response_type=code&scope=all&state=dlut",
+    "issubscription": 0
+  },
+  {
+    "id": 62,
+    "category": "social",
+    "app_name": "联通自助选号",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/14/ynZM2VmH0OKAYIzmAAAcsXX30Xw6753218",
+    "describe": "中国联通自助选号",
+    "popularity": "14393",
+    "url": "https://m.10010.com/scaffold-show/T-common?p=91&c=940&u=C%2F7Lk6SBpwpHD%2FSPw%2FvWJg%3D%3D&s=02,03&sceneFlag=03",
+    "issubscription": 0
+  },
+  {
+    "id": 63,
+    "category": "life",
+    "app_name": "智能助手",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/02/44/ynZM2V9VqPOAZ4ZgAACSZGfegWo269.png",
+    "describe": "该系统主要是以一问一答形式，精确的定位网络用户所需要的提问知识，通过与用户进行交互，为用户提供个性化的信息服务。",
+    "popularity": "13500",
+    "url": "https://ehall.dlut.edu.cn/fp/s/fhUKdt?from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 64,
+    "category": "life",
+    "app_name": "资源预约",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/02/83/ynZM2V_N3euAAn5PAAAZ46zJWmQ263.png",
+    "describe": "供师生预约使用会议室、多功能厅等各类公共资源",
+    "popularity": "12497",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f7f05b85693464456a468ca88d1b203b/cas/account/RedirectPage?redirect_uri=http%3a%2f%2fresource.dlut.edu.cn%2f%23%2fapp%2fbooking-types/?from=rj&filter=app",
+    "issubscription": 0
+  },
+  {
+    "id": 65,
+    "category": "office",
+    "app_name": "移动OA",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/03/9F/ynZM2WIgRWeAXK2gAAAuFIR6-Pc622.png",
+    "describe": "学校协同办公自动化信息系统（OA系统）开放手机移动端，旨在进一步满足教职员工办公需求。OA系统移动端功能与PC端保持一致，用户可通过该移动端完成公文办理、签报管理、督查督办、信访处理等流程。",
+    "popularity": "10773",
+    "url": "http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421fff64c9d2e3e2654721d9de29d51367b3f95f8ea72/wui/cas-entrance.jsp?path=%2Fspa%2Fem%2Fmobile.html?from=rj&filter=app",
+    "issubscription": 0
+  },
+  {
+    "id": 66,
+    "category": "office",
+    "app_name": "大工头条",
+    "icon": "https://my.m.dlut.edu.cn/images/appicon/yule.png",
+    "describe": "唤起学校“大工头条”微信小程序",
+    "popularity": "9778",
+    "url": "https://lightapp.m.dlut.edu.cn/openwechat",
+    "issubscription": 0
+  },
+  {
+    "id": 67,
+    "category": "office",
+    "app_name": "组工平台",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/03/D8/ynZM2WJC7gCAYYfMAABOdPZK638911.png",
+    "describe": "组工平台",
+    "popularity": "5306",
+    "url": "http://webvpn.dlut.edu.cn/https/77726476706e69737468656265737421eaed4686693464456a468ca88d1b203b/cas?from=rj&filter=app",
+    "issubscription": 0
+  },
+  {
+    "id": 68,
+    "category": "office",
+    "app_name": "多媒体教室管理",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/03/4A/ynZM2WGOE1KAbZSmAAAKzt9dyGg960.png",
+    "describe": "该系统为多媒体教室信息管理系统，为授课教师和值班学生提供多媒体教室及设备的远程控制、故障报修、信息查询、在线帮助等各项服务。",
+    "popularity": "5120",
+    "url": "http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421fdfa0c9f2b317b436c0786a1c91b2739229acd001df9ca7891/h5/cas-authorizations?from=rj&filter=app",
+    "issubscription": 0
+  },
+  {
+    "id": 69,
+    "category": "office",
+    "app_name": "培训管理",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/02/AE/ynZM2WCFBIqARg_gAAAodUwo5gA430.png",
+    "describe": "学校专任教师教学培训管理系统移动版，涵盖从培训报名到培训反馈的全过程数据管理，教师可自由查看个人历史培训数据。",
+    "popularity": "2494",
+    "url": "https://sso.dlut.edu.cn/cas/login?service=http://ctfdpeixun.dlut.edu.cn/auth/login/?next=/user/dashboard&from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 70,
+    "category": "study",
+    "app_name": "选课系统（教务系统）",
+    "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
+    "describe": "教务系统的选课界面",
+    "popularity": "16060060",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login ",
+    "issubscription": 0
+  },
+  {
+    "id": 71,
+    "category": "study",
+    "app_name": "考试信息（教务系统）",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/7B/ynZM2Vn7QI6AOQVDAAAZa-V0lMA6705172",
+    "describe": "教务系统的考试信息",
+    "popularity": "16060060",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login ",
+    "issubscription": 0
+  },
+  {
+    "id": 72,
+    "category": "study",
+    "app_name": "教务主页",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/08/ynZM2VkeVL2AGt4BAAAYlzvpSVo6550599",
+    "describe": "教务系统主页",
+    "popularity": "16060060",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login ",
+    "issubscription": 0
+  },
+  {
+    "id": 73,
+    "category": "study",
+    "app_name": "成绩信息（教务系统）",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2VlUWLqADKhKAAAUi-vic4E4521607",
+    "describe": "教务系统的成绩信息",
+    "popularity": "16060060",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login ",
+    "issubscription": 0
+  },
+  {
+    "id": 74,
+    "category": "study",
+    "app_name": "评教系统（教务系统）",
+    "icon": "https://my.m.dlut.edu.cn/images/appicon/shejiao.png",
+    "describe": "教务系统的评教系统",
+    "popularity": "16060060",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login ",
+    "issubscription": 0
+  },
+  {
+    "id": 75,
+    "category": "study",
+    "app_name": "我的课表（教务系统）",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU-IiAPBCnAAAamt9Ip481490708",
+    "describe": "教务系统的详细课表",
+    "popularity": "16060060",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login ",
+    "issubscription": 0
+  },
+  {
+    "id": 76,
+    "category": "study",
+    "app_name": "班级课表（教务系统）",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU-IiAPBCnAAAamt9Ip481490708",
+    "describe": "教务系统的班级课表",
+    "popularity": "16060060",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login ",
+    "issubscription": 0
+  },
+  {
+    "id": 77,
+    "category": "study",
+    "app_name": "培养方案（教务系统）",
+    "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
+    "describe": "教务系统的培养方案",
+    "popularity": "16060060",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login",
+    "issubscription": 0
+  },
+  {
+    "id": 78,
+    "category": "life",
+    "app_name": "校园网自服务（开发区校区）",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/5B/ynZM2VmyW9mAGzv_AAAXfJXYcgw8899921",
+    "describe": "开发区校区的校园网自服务",
+    "popularity": "16060060",
+    "url": "http://172.20.20.1:8080",
+    "issubscription": 0
+  },
+  {
+    "id": 79,
+    "category": "study",
+    "app_name": "开课查询（教务系统）",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/8D/ynZM2VomenWAeOXkAAANqO47Geg0182891",
+    "describe": "开课信息查询（教务系统）",
+    "popularity": "16060060",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login",
+    "issubscription": 0
+  },
+  {
+    "id": 80,
+    "category": "life",
+    "app_name": "校园网状态（校内访问）",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/5B/ynZM2VmyW9mAGzv_AAAXfJXYcgw8899921",
+    "describe": "CERNET网络监控，仅校园网内可以访问，实时显示校园网线路负载以及流量情况",
+    "popularity": "16060060",
+    "url": "file:///android_asset/Monitor.html",
+    "issubscription": 0
+  }
+]

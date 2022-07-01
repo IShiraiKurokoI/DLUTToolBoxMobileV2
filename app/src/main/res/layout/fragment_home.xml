@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".UI.MainPageFragments.HomeFragment"
+    android:orientation="vertical">
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="@string/my_service"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="0dp"
+        android:textSize="18sp"/>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/HomeCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
+        android:layout_gravity="center"
+        android:background="@color/GridBackColor"
+        tools:ignore="RtlSymmetry">
+    <GridView
+        android:id="@+id/main_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="auto_fit"
+        android:columnWidth="80dp"
+        android:layout_margin="10dp"
+        android:stretchMode="columnWidth"/>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
