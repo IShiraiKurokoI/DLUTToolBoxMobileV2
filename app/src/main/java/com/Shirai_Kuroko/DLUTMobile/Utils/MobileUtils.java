@@ -70,6 +70,7 @@ public class MobileUtils {
     public static Handler Layouthandler;
     public static Handler LayoutDefaulthandler;
     public static Handler Failurehandler;
+    public static Handler NoNeedhandler;
 
     @SuppressLint("HandlerLeak")
     public static void CheckUpDate(Context context, TextView textView, RelativeLayout relativeLayout, boolean DoNotice)
@@ -88,10 +89,10 @@ public class MobileUtils {
             if(LastestVersion.equals(Version))
             {
                 Log.i("无需更新", " 当前版本"+LastestVersion);
-                Layouthandler.sendMessage(new Message());
+                LayoutDefaulthandler.sendMessage(new Message());
                 if(DoNotice)
                 {
-                    Toast.makeText(context,"你使用的是最新版本！",Toast.LENGTH_SHORT).show();
+                    NoNeedhandler.sendMessage(new Message());
                 }
             }
             else
@@ -147,6 +148,12 @@ public class MobileUtils {
                 textView.setText("检查更新失败");
                 relativeLayout.setVisibility(View.GONE);
                 Toast.makeText(context,"API访问请求过多，请稍后再试",Toast.LENGTH_LONG).show();
+            }
+        };
+        NoNeedhandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);Toast.makeText(context,"你使用的是最新版本！",Toast.LENGTH_SHORT).show();
             }
         };
     }
