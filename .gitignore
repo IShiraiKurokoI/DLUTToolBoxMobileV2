@@ -9,7 +9,8 @@
 /.idea/assetWizardSettings.xml
 /app/src/main/java/com/Shirai_Kuroko/DLUTMobile/Utils/BackendUtils.java
 /app/src/main/java/com/Shirai_Kuroko/DLUTMobile/Utils/GithubUtils.java
-/app/release
+/app/release/app-release.apk
+/app/release/output-metadata.json
 /app/src/main/AndroidManifest.xml
 .DS_Store
 /build
