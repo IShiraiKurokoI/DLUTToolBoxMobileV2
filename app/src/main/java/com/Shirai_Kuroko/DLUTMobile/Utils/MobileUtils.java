@@ -45,10 +45,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
 public class MobileUtils {
     public static String GetAppVersion(Context context)
     {
@@ -77,7 +73,7 @@ public class MobileUtils {
     {
         new Thread(() -> {
             String Version = MobileUtils.GetAppVersion(context);
-            String UpdateJson = GetGithubHttpRequest("https://api.github.com/repos/MuoRanLY/DLUTToolBoxMobileV2/releases/latest");
+            String UpdateJson = GithubUtils.GetGithubHttpRequest("https://api.github.com/repos/MuoRanLY/DLUTToolBoxMobileV2/releases/latest");
             if(UpdateJson.equals(""))
             {
                 Log.i("错误", "API 请求超限");
@@ -163,7 +159,7 @@ public class MobileUtils {
     {
         new Thread(() -> {
             String Version = MobileUtils.GetAppVersion(context);
-            String UpdateJson = GetGithubHttpRequest("https://api.github.com/repos/MuoRanLY/DLUTToolBoxMobileV2/releases/latest");
+            String UpdateJson = GithubUtils.GetGithubHttpRequest("https://api.github.com/repos/MuoRanLY/DLUTToolBoxMobileV2/releases/latest");
             if(UpdateJson.equals(""))
             {
                 return;
@@ -234,26 +230,7 @@ public class MobileUtils {
         UpdateDialog.show();
     }
 
-    public static String GetGithubHttpRequest(String Url){
-        try {
-            OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象
-            Request request = new Request.Builder()
-                    .url(Url)//请求接口。如果需要传参拼接到接口后面。
-                    .header("Authorization","Token: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")
-                    .build();//创建Request 对象
-            Response response;
-            response = client.newCall(request).execute();//得到Response 对象
-            if (response.isSuccessful()) {
-                if (response.body() != null) {
-                    return response.body().string();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-        return "";
-    }
+
 
 
     public static void ShareToFriend(Context context)
