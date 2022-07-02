@@ -1,5 +1,7 @@
 package com.Shirai_Kuroko.DLUTMobile.Utils;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -12,18 +14,28 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.Display;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 
-import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
+import com.Shirai_Kuroko.DLUTMobile.Entities.GithubLatestBean;
+import com.Shirai_Kuroko.DLUTMobile.Managers.CacheManager;
+import com.Shirai_Kuroko.DLUTMobile.R;
+import com.alibaba.fastjson.JSON;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -31,6 +43,11 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MobileUtils {
     public static String GetAppVersion(Context context)
@@ -49,18 +66,188 @@ public class MobileUtils {
         return version;
     }
 
-    public static void CheckUpDate(Context context, TextView textView, RelativeLayout relativeLayout,boolean DoNotice)
+    public static Handler handler;
+    public static Handler Layouthandler;
+    public static Handler LayoutDefaulthandler;
+    public static Handler Failurehandler;
+
+    @SuppressLint("HandlerLeak")
+    public static void CheckUpDate(Context context, TextView textView, RelativeLayout relativeLayout, boolean DoNotice)
     {
-        //ToDo:检查更新的实现方法
-        textView.setText("已是最新版本");
-        relativeLayout.setVisibility(View.GONE);
-        TextView Unread = relativeLayout.findViewById(R.id.unread_no);
-        Unread.setText("");
-        if(DoNotice)
-        {
-            Toast.makeText(context,"你使用的是最新版本！",Toast.LENGTH_SHORT).show();
-        }
+        new Thread(() -> {
+            String Version = MobileUtils.GetAppVersion(context);
+            String UpdateJson = GetGithubHttpRequest("https://api.github.com/repos/MuoRanLY/DLUTToolBoxMobileV2/releases/latest");
+            if(UpdateJson.equals(""))
+            {
+                Log.i("错误", "API 请求超限");
+                Failurehandler.sendMessage(new Message());
+                return;
+            }
+            GithubLatestBean githubLatestBean = JSON.parseObject(UpdateJson,GithubLatestBean.class);
+            String LastestVersion = githubLatestBean.getTagName();
+            if(LastestVersion.equals(Version))
+            {
+                Log.i("无需更新", " 当前版本"+LastestVersion);
+                Layouthandler.sendMessage(new Message());
+                if(DoNotice)
+                {
+                    Toast.makeText(context,"你使用的是最新版本！",Toast.LENGTH_SHORT).show();
+                }
+            }
+            else
+            {
+                Layouthandler.sendMessage(new Message());
+                String UpdateContent = githubLatestBean.getBody();
+                String UpdateTime = githubLatestBean.getPublishedAt();
+                String UpdateDownloadUrl = githubLatestBean.getAssets().get(0).getBrowserDownloadUrl();
+                String UpdateSize = CacheManager.getFormatSize(githubLatestBean.getAssets().get(0).getSize());
+                Log.i("需要更新", "新版本："+LastestVersion+"\n更新时间："+UpdateTime+"\n更新内容："+UpdateContent+"\n下载地址："+UpdateDownloadUrl);
+                if(DoNotice)
+                {
+                    List<String> msgList = new ArrayList<>();
+                    msgList.add(LastestVersion);
+                    msgList.add(UpdateSize);
+                    msgList.add(UpdateContent);
+                    msgList.add(UpdateDownloadUrl);
+                    Message msg =new Message();
+                    msg.obj=msgList;
+                    handler.sendMessage(msg);
+                }
+            }
+        }).start();
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                Toast.makeText(context,"发现新版本！",Toast.LENGTH_LONG).show();
+                ArrayList<String> list = (ArrayList<String>) msg.obj;   //实例化对接收数据
+                ShowUpdateDialog(context,list.get(0),list.get(1),list.get(2),list.get(3));//自定义的方法，真正需要参数的地方
+            }
+        };
+        Layouthandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                textView.setText("发现新版本");
+                relativeLayout.setVisibility(View.VISIBLE);
+            }
+        };
+        LayoutDefaulthandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                textView.setText("已是最新版本");
+                relativeLayout.setVisibility(View.GONE);
+            }
+        };
+        Failurehandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                textView.setText("检查更新失败");
+                relativeLayout.setVisibility(View.GONE);
+                Toast.makeText(context,"API访问请求过多，请稍后再试",Toast.LENGTH_LONG).show();
+            }
+        };
     }
+
+    @SuppressLint("HandlerLeak")
+    public static void CheckUpDateOnStartUp(Context context)
+    {
+        new Thread(() -> {
+            String Version = MobileUtils.GetAppVersion(context);
+            String UpdateJson = GetGithubHttpRequest("https://api.github.com/repos/MuoRanLY/DLUTToolBoxMobileV2/releases/latest");
+            if(UpdateJson.equals(""))
+            {
+                return;
+            }
+            GithubLatestBean githubLatestBean = JSON.parseObject(UpdateJson,GithubLatestBean.class);
+            String LastestVersion = githubLatestBean.getTagName();
+            if(Objects.equals(LastestVersion, Version))
+            {
+                Log.i("无需更新", " 当前版本"+LastestVersion);
+            }
+            else
+            {
+                String UpdateContent = githubLatestBean.getBody();
+                String UpdateTime = githubLatestBean.getPublishedAt();
+                String UpdateDownloadUrl = githubLatestBean.getAssets().get(0).getBrowserDownloadUrl();
+                String UpdateSize = CacheManager.getFormatSize(githubLatestBean.getAssets().get(0).getSize());
+                Log.i("需要更新", "新版本："+LastestVersion+"\n更新时间："+UpdateTime+"\n更新内容："+UpdateContent+"\n下载地址："+UpdateDownloadUrl);
+                List<String> msgList = new ArrayList<>();
+                msgList.add(LastestVersion);
+                msgList.add(UpdateSize);
+                msgList.add(UpdateContent);
+                msgList.add(UpdateDownloadUrl);
+                Message msg =new Message();
+                msg.obj=msgList;
+                handler.sendMessage(msg);
+            }
+        }).start();
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                ArrayList<String> list = (ArrayList<String>) msg.obj;   //实例化对接收数据
+                ShowUpdateDialog(context,list.get(0),list.get(1),list.get(2),list.get(3));//自定义的方法，真正需要参数的地方
+            }
+        };
+    }
+
+    @SuppressLint("SetTextI18n")
+    public static void ShowUpdateDialog(Context context, String version, String size, String content, String downloadUrl)
+    {
+        Dialog UpdateDialog =new Dialog(context, R.style.CustomDialog);
+        @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(
+                R.layout.dialog_update, null);
+        final TextView tv_version = view.findViewById(R.id.tv_version);
+        tv_version.setText("版本： "+version);
+        final TextView tv_apk_size = view.findViewById(R.id.tv_apk_size);
+        tv_apk_size.setText("大小： "+size);
+        final TextView tv_update_msg = view.findViewById(R.id.tv_update_msg);
+        tv_update_msg.setText(content);
+        final Button btn_ignore = view.findViewById(R.id.btn_ignore);
+        btn_ignore.setOnClickListener(v -> UpdateDialog.dismiss());
+        final Button btn_update = view.findViewById(R.id.btn_update);
+        btn_update.setOnClickListener(v -> {
+            Uri uri = Uri.parse(downloadUrl);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            context.startActivity(intent);
+            Toast.makeText(context,"正在为您打开下载页面",Toast.LENGTH_LONG).show();
+            UpdateDialog.dismiss();
+        });
+        final View btn_update_dialog_close = view.findViewById(R.id.btn_update_dialog_close);
+        btn_update_dialog_close.setOnClickListener(v -> UpdateDialog.dismiss());
+        Window window =UpdateDialog.getWindow();
+        window.setContentView(view);
+        window.setGravity(Gravity.CENTER);
+        window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT,
+                android.view.WindowManager.LayoutParams.WRAP_CONTENT);
+        UpdateDialog.setCanceledOnTouchOutside(false);
+        UpdateDialog.show();
+    }
+
+    public static String GetGithubHttpRequest(String Url){
+        try {
+            OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象
+            Request request = new Request.Builder()
+                    .url(Url)//请求接口。如果需要传参拼接到接口后面。
+                    .header("Authorization","Token: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")
+                    .build();//创建Request 对象
+            Response response;
+            response = client.newCall(request).execute();//得到Response 对象
+            if (response.isSuccessful()) {
+                if (response.body() != null) {
+                    return response.body().string();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+        return "";
+    }
+
 
     public static void ShareToFriend(Context context)
     {

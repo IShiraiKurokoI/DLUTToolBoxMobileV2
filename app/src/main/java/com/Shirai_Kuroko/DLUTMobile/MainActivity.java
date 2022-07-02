@@ -23,9 +23,7 @@ import com.Shirai_Kuroko.DLUTMobile.UI.SettingsActivity;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 import com.Shirai_Kuroko.DLUTMobile.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.igexin.sdk.GetuiPushException;
 import com.igexin.sdk.IUserLoggerInterface;
-import com.igexin.sdk.PushManager;
 
 public class MainActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
@@ -49,12 +47,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
         PermissionHelper.GetAllPermission(this);
         com.igexin.sdk.PushManager.getInstance().initialize(this, IntentService.class);
-        com.igexin.sdk.PushManager.getInstance().setDebugLogger(this, new IUserLoggerInterface() {
-            @Override
-            public void log(String s) {
-                Log.i("PUSH_LOG",s);
-            }
-        });
+        com.igexin.sdk.PushManager.getInstance().setDebugLogger(this, s -> Log.i("PUSH_LOG",s));
+        MobileUtils.CheckUpDateOnStartUp(this);
         if(ConfigHelper.NeedConfig())
         {
             Toast.makeText(this, "⚠请完善配置信息！⚠", Toast.LENGTH_SHORT).show();

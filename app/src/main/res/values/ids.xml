@@ -53,4 +53,12 @@
     <item name="icon_identity" type="id" />
     <item name="vp_banner" type="id" />
     <item name="rg_banner_indicator_group" type="id" />
+    <item name="ll_dialog_panel" type="id" />
+    <item name="dialog_top_panel" type="id" />
+    <item name="btn_update_dialog_close" type="id" />
+    <item name="tv_version" type="id" />
+    <item name="tv_apk_size" type="id" />
+    <item name="tv_update_msg" type="id" />
+    <item name="btn_ignore" type="id" />
+    <item name="btn_update" type="id" />
 </resources>
