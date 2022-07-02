@@ -42,7 +42,7 @@ public class BrowserActivity extends AppCompatActivity {
     ApplicationConfig thisapp;
     private WebView webView;
     private LoadingView loading;
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint({"SetJavaScriptEnabled", "NewApi"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +105,15 @@ public class BrowserActivity extends AppCompatActivity {
         webSettings.setSavePassword(false);
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
+        webSettings.setAllowContentAccess(true);
+        webSettings.setDatabaseEnabled(true);
+        webSettings.setAllowFileAccessFromFileURLs(true);
+        webSettings.setAllowUniversalAccessFromFileURLs(true);
+        if (ConfigHelper.GetThemeType(this)) { //判断如果系统是深色主题
+            webSettings.setForceDark(WebSettings.FORCE_DARK_ON);//强制开启webview深色主题模式
+        } else {
+            webSettings.setForceDark(WebSettings.FORCE_DARK_OFF);
+        }
         //背景透明
         webView.setBackgroundColor(0); // 设置背景色
         webView.getBackground().setAlpha(0); // 设置透明度 范围：0-255
@@ -240,6 +249,8 @@ public class BrowserActivity extends AppCompatActivity {
             {
                 if(url.contains("/student/home"))
                 {
+                    webView.getSettings().setLoadWithOverviewMode(false);
+                    webView.getSettings().setUseWideViewPort(false);
                     webView.evaluateJavascript("window.location.href='/student/for-std/exam-arrange'",value -> {});
                 }
                 if(url.contains("exam-arrange"))
@@ -252,6 +263,8 @@ public class BrowserActivity extends AppCompatActivity {
             {
                 if(url.contains("/student/home"))
                 {
+                    webView.getSettings().setLoadWithOverviewMode(false);
+                    webView.getSettings().setUseWideViewPort(false);
                     webView.evaluateJavascript("window.location.href='/student/for-std/grade/sheet'",value -> {});
                 }
                 if(url.contains("for-std/grade/sheet"))
@@ -264,6 +277,8 @@ public class BrowserActivity extends AppCompatActivity {
             {
                 if(url.contains("/student/home"))
                 {
+                    webView.getSettings().setLoadWithOverviewMode(false);
+                    webView.getSettings().setUseWideViewPort(false);
                     webView.evaluateJavascript("window.location.href='/student/for-std/evaluation/summative'",value -> {});
                 }
                 if(url.contains("evaluation"))

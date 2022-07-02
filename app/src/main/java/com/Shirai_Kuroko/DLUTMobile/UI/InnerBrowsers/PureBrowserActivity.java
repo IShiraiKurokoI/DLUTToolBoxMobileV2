@@ -24,6 +24,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.QRCodeHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
@@ -33,7 +34,7 @@ public class PureBrowserActivity extends AppCompatActivity {
 
     private WebView webView;
     private LoadingView loading;
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint({"SetJavaScriptEnabled", "NewApi"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +68,11 @@ public class PureBrowserActivity extends AppCompatActivity {
         //禁止系统缩放字体
         webSettings.setTextZoom(100);
         webView.setDrawingCacheEnabled(true);
+        if (ConfigHelper.GetThemeType(this)) { //判断如果系统是深色主题
+            webSettings.setForceDark(WebSettings.FORCE_DARK_ON);//强制开启webview深色主题模式
+        } else {
+            webSettings.setForceDark(WebSettings.FORCE_DARK_OFF);
+        }
         //背景透明
         webView.setBackgroundColor(Color.WHITE); // 设置背景色
         webView.getBackground().setAlpha(125); // 设置透明度 范围：0-255
