@@ -61,4 +61,20 @@
     <item name="tv_update_msg" type="id" />
     <item name="btn_ignore" type="id" />
     <item name="btn_update" type="id" />
+    <item name="head_text" type="id" />
+    <item name="user_head" type="id" />
+    <item name="arrow" type="id" />
+    <item name="my_info_name" type="id" />
+    <item name="my_info_nickname" type="id" />
+    <item name="my_info_student_number" type="id" />
+    <item name="my_info_org" type="id" />
+    <item name="my_info_identity" type="id" />
+    <item name="my_info_jobs" type="id" />
+    <item name="my_info_office_phone" type="id" />
+    <item name="my_info_mobile" type="id" />
+    <item name="my_info_fixed_line" type="id" />
+    <item name="my_info_wechat" type="id" />
+    <item name="my_info_qq" type="id" />
+    <item name="my_info_email" type="id" />
+    <item name="title" type="id" />
 </resources>

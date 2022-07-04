@@ -8,6 +8,7 @@
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/default_btn_selector.xml" value="0.166" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/dialog_center_bg.xml" value="0.1" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/dialog_update_left_btn_nor.xml" value="0.1" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/divider_hor.xml" value="0.1025" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.148" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.148" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/ic_launcher_background.xml" value="0.105" />
@@ -27,6 +28,7 @@
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/selector_nav_me.xml" value="0.1" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/selector_nav_notifications.xml" value="0.1" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/selector_rb_banner_indicator.xml" value="0.185" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/setting_right_arrow.xml" value="0.1025" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/shape_bg_btn_login_disable.xml" value="0.181" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/shape_dialog_bg.xml" value="0.1" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.14825970548862116" />
@@ -55,6 +57,7 @@
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/content_scrolling.xml" value="0.11372847011144883" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/content_security.xml" value="0.1" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/dialog_update.xml" value="0.264" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/divider_hor.xml" value="0.15625" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/drag_grid_item.xml" value="0.152" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/draggriditem.xml" value="0.1" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/fragment_appcenter.xml" value="0.1" />
@@ -68,6 +71,8 @@
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/items.xml" value="0.1" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/loading.xml" value="0.6" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/main_gridi_tem.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/preference_detail_item.xml" value="0.15625" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/preference_detail_item1.xml" value="0.15520833333333334" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/setting_item_for_include.xml" value="0.14375" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/settings_activity.xml" value="0.1574074074074074" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/test.xml" value="0.1" />

@@ -4,6 +4,183 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.InfoActivity">
+    tools:context=".UI.PersonalInfoActivity">
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/InfoScrollView">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@id/head_panel"
+                android:layout_width="fill_parent"
+                android:layout_height="52.0dip"
+                android:background="@drawable/list_item_bg">
+
+                <TextView
+                    android:id="@id/head_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16.0dip"
+                    android:text="@string/user_head"
+                    android:textColor="@color/text_color_50"
+                    android:textSize="14.0sp"
+                    tools:ignore="RelativeOverlap,RtlSymmetry" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@id/arrow"
+                    android:layout_centerVertical="true"
+                    app:cardCornerRadius="20dip">
+                <ImageView
+                    android:id="@id/user_head"
+                    android:layout_width="40.0dip"
+                    android:layout_height="40.0dip"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitCenter"
+                    tools:ignore="ContentDescription" />
+                </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:id="@id/arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/setting_right_arrow" />
+            </RelativeLayout>
+
+            <com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView
+                android:id="@id/my_info_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_bg"
+                android:minHeight="52.0dip"
+                app:accessStyle="none"
+                app:divider_location="bottom"
+                app:titleName="@string/friend_info_name" />
+
+            <com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView
+                android:id="@id/my_info_nickname"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_bg"
+                android:minHeight="52.0dip"
+                app:divider_location="bottom"
+                app:titleName="昵称" />
+
+            <com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView
+                android:id="@id/my_info_student_number"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_bg"
+                android:minHeight="52.0dip"
+                app:accessStyle="none"
+                app:divider_location="bottom"
+                app:titleName="职工号/学号" />
+
+            <com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView
+                android:id="@id/my_info_org"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_bg"
+                android:minHeight="52.0dip"
+                app:accessStyle="none"
+                app:divider_location="bottom"
+                app:titleName="单位名称" />
+
+            <com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView
+                android:id="@id/my_info_identity"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_bg"
+                android:minHeight="52.0dip"
+                app:accessStyle="none"
+                app:divider_location="bottom"
+                app:titleName="身份类型" />
+
+            <com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView
+                android:id="@id/my_info_jobs"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_bg"
+                android:minHeight="52.0dip"
+                app:accessStyle="none"
+                app:divider_location="bottom"
+                app:titleName="岗位信息" />
+
+            <com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView
+                android:id="@id/my_info_office_phone"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_bg"
+                android:minHeight="52.0dip"
+                app:accessStyle="none"
+                app:divider_location="both"
+                app:titleName="办公电话" />
+
+            <com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView
+                android:id="@id/my_info_mobile"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_bg"
+                android:minHeight="52.0dip"
+                app:accessStyle="none"
+                app:divider_location="bottom"
+                app:titleName="手机号" />
+
+            <com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView
+                android:id="@id/my_info_fixed_line"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_bg"
+                android:minHeight="52.0dip"
+                app:accessStyle="none"
+                app:divider_location="bottom"
+                app:titleName="固定电话" />
+
+            <com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView
+                android:id="@id/my_info_wechat"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_bg"
+                android:minHeight="52.0dip"
+                app:accessStyle="none"
+                app:divider_location="bottom"
+                app:titleName="微信号" />
+
+            <com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView
+                android:id="@id/my_info_qq"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_bg"
+                android:minHeight="52.0dip"
+                app:accessStyle="none"
+                app:divider_location="bottom"
+                app:titleName="QQ号" />
+
+            <com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView
+                android:id="@id/my_info_email"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_bg"
+                android:minHeight="52.0dip"
+                app:accessStyle="none"
+                app:divider_location="bottom"
+                app:titleName="邮箱" />
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,7 +23,7 @@ import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.AboutActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.CardActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.GiftActivity;
-import com.Shirai_Kuroko.DLUTMobile.UI.InfoActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.PersonalInfoActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.ParentBindActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.AccountSafeActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.SettingsActivity;
@@ -51,7 +51,7 @@ public class MeFragment extends Fragment {
             return;
         }
         button_Info.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), InfoActivity.class);
+            Intent intent = new Intent(getActivity(), PersonalInfoActivity.class);
             startActivity(intent);
         });
         Button button_Card = requireActivity().requireViewById(R.id.button_Card);//打开证件页面
@@ -112,7 +112,7 @@ public class MeFragment extends Fragment {
         ImageView StudentIdentity = requireView().findViewById(R.id.icon_identity);
         TextView StudentOrg = requireView().findViewById(R.id.parent_org);
         TextView StudentScore = requireView().findViewById(R.id.tv_score);
-        MobileUtils.InitializeMeFragementInfo(StudentHeader,StudentName,StudentSex,StudentIdentity,StudentOrg,StudentScore,requireContext());
+        MobileUtils.InitializeMeFragmentInfo(StudentHeader,StudentName,StudentSex,StudentIdentity,StudentOrg,StudentScore,requireContext());
         //ToDo:增加初始化学生内容信息的部分
     }
     @Override

@@ -9,13 +9,13 @@
     <com.youth.banner.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="180dp"
         app:banner_indicator_marginBottom="13dp"
         app:banner_indicator_selected_width="20dp"
         app:banner_indicator_normal_width="20dp"/>
     <View
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="@color/divider"/>
     <TextView
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         android:layout_marginBottom="0dp"/>
     <View
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="@color/divider"/>
     <GridView
         android:id="@+id/main_grid"
@@ -37,6 +37,6 @@
         android:stretchMode="columnWidth"/>
     <View
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="@color/divider"/>
 </LinearLayout>

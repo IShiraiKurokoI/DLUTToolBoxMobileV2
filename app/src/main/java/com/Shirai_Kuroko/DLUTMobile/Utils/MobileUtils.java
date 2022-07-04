@@ -27,6 +27,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ import com.Shirai_Kuroko.DLUTMobile.Entities.GithubLatestBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Managers.CacheManager;
 import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView;
 import com.alibaba.fastjson.JSON;
 
 import java.io.File;
@@ -71,7 +73,7 @@ public class MobileUtils {
     public static Handler LayoutDefaulthandler;
     public static Handler Failurehandler;
     public static Handler NoNeedhandler;
-
+    @SuppressWarnings("unchecked")
     @SuppressLint("HandlerLeak")
     public static void CheckUpDate(Context context, TextView textView, RelativeLayout relativeLayout, boolean DoNotice)
     {
@@ -157,7 +159,7 @@ public class MobileUtils {
             }
         };
     }
-
+    @SuppressWarnings("unchecked")
     @SuppressLint("HandlerLeak")
     public static void CheckUpDateOnStartUp(Context context)
     {
@@ -239,7 +241,7 @@ public class MobileUtils {
 
     public static void ShareToFriend(Context context)
     {
-        ShareTextToFriend(context,"i大工+ 民间自制增强版i大工\n 下载地址：\n https://github.com/MuoRanLY/DLUTToolBoxMobileV2/releases/latest");
+        ShareTextToFriend(context,"i大工+ \n民间自制增强版i大工\n下载地址：\nhttps://github.com/MuoRanLY/DLUTToolBoxMobileV2/releases/latest");
         Toast.makeText(context,"分享成功",Toast.LENGTH_SHORT).show();
     }
 
@@ -393,10 +395,11 @@ public class MobileUtils {
         return false;
     }
 
+    @SuppressWarnings({"ConstantConditions"})
     public static int getDefaultDisplayDensity()
     {
         try {
-            Class  aClass = Class.forName("android.view.WindowManagerGlobal");
+            @SuppressLint("PrivateApi") Class<?> aClass = Class.forName("android.view.WindowManagerGlobal");
             Method method = aClass.getMethod("getWindowManagerService");
             method.setAccessible(true);
             Object iwm = method.invoke(aClass);
@@ -432,7 +435,7 @@ public class MobileUtils {
         try {
             Intent intent = new Intent(Intent.ACTION_SEND);
             // 给目标应用一个临时授权
-            intent.putExtra(Intent.EXTRA_TEXT,text);
+            intent.putExtra(Intent.EXTRA_TEXT, text);
             intent.setType("text/plain");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -440,7 +443,7 @@ public class MobileUtils {
             List<ResolveInfo> resInfo = pm.queryIntentActivities(intent,0);
             if(resInfo.isEmpty()){
                 Toast.makeText(context,"未找到合适的分享应用！",Toast.LENGTH_LONG).show();
-                return ;
+                return;
             }
             List<Intent> targetIntents = new ArrayList<>();
             for (ResolveInfo resolveInfo : resInfo) {
@@ -464,8 +467,8 @@ public class MobileUtils {
                     Intent target = new Intent();
                     target.setAction(Intent.ACTION_SEND);
                     target.setComponent(new ComponentName(activityInfo.packageName,activityInfo.name));
-                    intent.putExtra(Intent.EXTRA_TEXT,text);
-                    target.setType("text/plain");//必须设置，否则选定分享类型后不能跳转界面
+                    target.putExtra(Intent.EXTRA_TEXT, text);
+                    target.setType("text/plain");
                     targetIntents.add(new LabeledIntent(target,activityInfo.packageName,resolveInfo.loadLabel(pm),resolveInfo.icon));
                 }
             }
@@ -489,7 +492,10 @@ public class MobileUtils {
             ArrayList<ApplicationConfig> ConfigNow = ConfigHelper.getmlist(context);
             ArrayList<ApplicationConfig> DefaultList;
             List<ApplicationConfig> jsonlist = JSON.parseArray(ConfigHelper.getdefconfigString(context),ApplicationConfig.class);
-            ApplicationConfig[] acfs =jsonlist.toArray(new ApplicationConfig[0]);
+            ApplicationConfig[] acfs = new ApplicationConfig[0];
+            if (jsonlist != null) {
+                acfs = jsonlist.toArray(new ApplicationConfig[0]);
+            }
             DefaultList = new ArrayList<>(Arrays.asList(acfs));
             for (int i =0;i<ConfigNow.size();i++)
             {
@@ -544,8 +550,63 @@ public class MobileUtils {
         return TestList;
     }
 
-    public static void  InitializeMeFragementInfo(ImageView StudentHeader,TextView StudentName,ImageView StudentSex,ImageView StudentIdentity,TextView StudentOrg,TextView StudentScore,Context context)
+    public static void InitializeMeFragmentInfo(ImageView StudentHeader, TextView StudentName, ImageView StudentSex, ImageView StudentIdentity, TextView StudentOrg, TextView StudentScore, Context context)
     {
-        //ToDo:向后端请求数据初始化学生信息
+        //ToDo:向后端请求数据初始化界面学生信息
+    }
+
+    public static void  InitializePersonalInfo(Context context, ScrollView InfoScrollView)
+    {
+        //ToDo:向后端请求数据初始化学生信息界面,现在还是测试数据
+        RelativeLayout head_panel = InfoScrollView.findViewById(R.id.head_panel);
+        ImageView user_head = head_panel.findViewById(R.id.user_head);
+        user_head.setImageResource(R.drawable.me_defaulthead);
+        head_panel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context,"修改头像",Toast.LENGTH_SHORT).show();
+            }
+        });
+        PreferenceRightDetailView my_info_name = InfoScrollView.findViewById(R.id.my_info_name);
+        my_info_name.SetContentText("学生姓名");
+        PreferenceRightDetailView my_info_nickname = InfoScrollView.findViewById(R.id.my_info_nickname);
+        my_info_nickname.SetContentText("学生昵称");
+        my_info_nickname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context,"修改昵称",Toast.LENGTH_SHORT).show();
+            }
+        });
+        PreferenceRightDetailView my_info_student_number = InfoScrollView.findViewById(R.id.my_info_student_number);
+        my_info_student_number.SetContentText("学生学号");
+        PreferenceRightDetailView my_info_org = InfoScrollView.findViewById(R.id.my_info_org);
+        my_info_org.SetContentText("学生单位名称");
+        PreferenceRightDetailView my_info_identity = InfoScrollView.findViewById(R.id.my_info_identity);
+        my_info_identity.SetContentText("学生");
+        if(my_info_identity.GetContentText()=="学生")
+        {
+            PreferenceRightDetailView my_info_jobs = InfoScrollView.findViewById(R.id.my_info_jobs);
+            my_info_jobs.setVisibility(View.GONE);
+            PreferenceRightDetailView my_info_office_phone = InfoScrollView.findViewById(R.id.my_info_office_phone);
+            my_info_office_phone.setVisibility(View.GONE);
+            PreferenceRightDetailView my_info_fixed_line = InfoScrollView.findViewById(R.id.my_info_fixed_line);
+            my_info_fixed_line.setVisibility(View.GONE);
+        }
+        PreferenceRightDetailView my_info_mobile = InfoScrollView.findViewById(R.id.my_info_mobile);
+        my_info_mobile.SetContentText("手机号");
+        PreferenceRightDetailView my_info_wechat = InfoScrollView.findViewById(R.id.my_info_wechat);//微信号，如果为空则移除
+        my_info_wechat.SetContentText("");
+        if(my_info_wechat.GetContentText()=="")
+        {
+            my_info_wechat.setVisibility(View.GONE);
+        }
+        PreferenceRightDetailView my_info_qq = InfoScrollView.findViewById(R.id.my_info_qq);//QQ号，如果为空则移除
+        my_info_qq.SetContentText("");
+        if(my_info_qq.GetContentText()=="")
+        {
+            my_info_qq.setVisibility(View.GONE);
+        }
+        PreferenceRightDetailView my_info_email = InfoScrollView.findViewById(R.id.my_info_email);
+        my_info_email.SetContentText("邮箱");
     }
 }

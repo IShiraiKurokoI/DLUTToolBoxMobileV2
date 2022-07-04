@@ -67,7 +67,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/setting_right_arrow_nor"
+                        android:src="@drawable/setting_right_arrow"
                         tools:ignore="ContentDescription" />
                 </RelativeLayout>
             </RelativeLayout>
@@ -77,7 +77,7 @@
                 <TextView android:textSize="14.0sp" android:textColor="@color/text_color_50"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16.0dip" android:text="@string/versionintro" android:layout_centerVertical="true"
                     tools:ignore="RelativeOverlap" />
                 <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="10.0dip" android:layout_alignParentEnd="true" android:layout_centerVertical="true">
-                    <ImageView  android:layout_width="wrap_content" android:layout_height="wrap_content"  android:src="@drawable/setting_right_arrow_nor"
+                    <ImageView  android:layout_width="wrap_content" android:layout_height="wrap_content"  android:src="@drawable/setting_right_arrow"
                         tools:ignore="ContentDescription" />
                 </RelativeLayout>
             </RelativeLayout>
@@ -87,7 +87,7 @@
                 <TextView android:textSize="14.0sp" android:textColor="@color/text_color_50" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16.0dip" android:text="@string/serviceprotocal" android:layout_centerVertical="true"
                     tools:ignore="RelativeOverlap" />
                 <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="10.0dip" android:layout_alignParentEnd="true" android:layout_centerVertical="true">
-                    <ImageView  android:layout_width="wrap_content" android:layout_height="wrap_content"  android:src="@drawable/setting_right_arrow_nor"
+                    <ImageView  android:layout_width="wrap_content" android:layout_height="wrap_content"  android:src="@drawable/setting_right_arrow"
                         tools:ignore="ContentDescription" />
                 </RelativeLayout>
             </RelativeLayout>
@@ -97,7 +97,7 @@
                 <TextView android:textSize="14.0sp" android:textColor="@color/text_color_50" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16.0dip" android:text="@string/privac" android:layout_centerVertical="true"
                     tools:ignore="RelativeOverlap" />
                 <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="10.0dip" android:layout_alignParentEnd="true" android:layout_centerVertical="true">
-                    <ImageView  android:layout_width="wrap_content" android:layout_height="wrap_content"  android:src="@drawable/setting_right_arrow_nor"
+                    <ImageView  android:layout_width="wrap_content" android:layout_height="wrap_content"  android:src="@drawable/setting_right_arrow"
                         tools:ignore="ContentDescription" />
                 </RelativeLayout>
             </RelativeLayout>

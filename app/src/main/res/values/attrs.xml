@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PreferenceRightDetailView">
+        <attr name="titleName" format="string" />
+        <attr name="titleContent" format="string" />
+        <attr name="titleColor" format="color" />
+        <attr name="contentColor" format="color" />
+        <attr name="titleSize" format="dimension" />
+        <attr name="contentSize" format="dimension" />
+        <attr name="accessStyle" format="integer">
+            <enum name="arrow" value="1" />
+            <enum name="none" value="0" />
+        </attr>
+        <attr name="accessImage" format="reference" />
+        <attr name="divider_location" format="integer">
+            <enum name="both" value="3" />
+            <enum name="bottom" value="2" />
+            <enum name="none" value="0" />
+            <enum name="top" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>

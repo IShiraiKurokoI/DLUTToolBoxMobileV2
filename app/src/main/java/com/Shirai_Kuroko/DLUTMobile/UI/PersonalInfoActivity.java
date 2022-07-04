@@ -8,8 +8,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 
-public class InfoActivity extends AppCompatActivity {
+public class PersonalInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class InfoActivity extends AppCompatActivity {
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setTitle("个人资料");
         }
+        MobileUtils.InitializePersonalInfo(this,requireViewById(R.id.InfoScrollView));
     }
 
 
