@@ -2,7 +2,6 @@ package com.Shirai_Kuroko.DLUTMobile.UI.MainPageFragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,16 +14,19 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.Shirai_Kuroko.DLUTMobile.Adapters.ADBannerAdapter;
+import com.Shirai_Kuroko.DLUTMobile.Entities.GridAppID;
+import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.MainActivity;
 import com.Shirai_Kuroko.DLUTMobile.R;
-import com.Shirai_Kuroko.DLUTMobile.Entities.GridAppID;
-import com.Shirai_Kuroko.DLUTMobile.UI.ServiceManagement.AppGridManageActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.BrowserActivity;
-import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
+import com.Shirai_Kuroko.DLUTMobile.UI.ServiceManagement.AppGridManageActivity;
+import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 import com.bumptech.glide.Glide;
+import com.youth.banner.Banner;
+import com.youth.banner.indicator.RectangleIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,7 @@ public class HomeFragment extends Fragment {
         MainActivity.SetActionBarTitle("首页");
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
-    public int CatagorySelected = Color.argb(180,228,245,255);
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -56,10 +58,13 @@ public class HomeFragment extends Fragment {
         else {
             Toast.makeText(requireActivity(),"错误：未检测到主界面GridView",Toast.LENGTH_SHORT).show();
         }
-        CardView cv = requireView().findViewById(R.id.HomeCardView);
-        if(cv!=null)
+
+        Banner banner = requireView().findViewById(R.id.banner);
+        if(banner!=null)
         {
-            cv.setCardBackgroundColor(CatagorySelected);
+            banner.setAdapter(new ADBannerAdapter(MobileUtils.GetGalllery(requireActivity()),requireActivity()));
+            banner.addBannerLifecycleObserver(requireActivity());
+            banner.setIndicator(new RectangleIndicator(requireActivity()));
         }
     }
 

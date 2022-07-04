@@ -10,10 +10,13 @@ buildscript {
         maven {
             url "https://mvn.getui.com/nexus/content/repositories/releases/"
         }
+        maven {
+            url "https://s01.oss.sonatype.org/content/groups/public" 
+        }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:7.2.1"
-        classpath "com.mob.sdk:MobSDK:+"
+//        classpath "com.mob.sdk:MobSDK:+"
     }
 }
 

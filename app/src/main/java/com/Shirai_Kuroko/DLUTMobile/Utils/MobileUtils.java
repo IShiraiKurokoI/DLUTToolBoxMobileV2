@@ -25,14 +25,17 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 
+import com.Shirai_Kuroko.DLUTMobile.Entities.ADBannerBean;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
 import com.Shirai_Kuroko.DLUTMobile.Entities.GithubLatestBean;
+import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Managers.CacheManager;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.alibaba.fastjson.JSON;
@@ -41,6 +44,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -235,6 +239,7 @@ public class MobileUtils {
 
     public static void ShareToFriend(Context context)
     {
+        ShareTextToFriend(context,"i大工+ 民间自制增强版i大工\n 下载地址：\n https://github.com/MuoRanLY/DLUTToolBoxMobileV2/releases/latest");
         Toast.makeText(context,"分享成功",Toast.LENGTH_SHORT).show();
     }
 
@@ -388,11 +393,6 @@ public class MobileUtils {
         return false;
     }
 
-    public static void ShareTextToFriend(Context context,String text)
-    {
-        //ToDo:通过QQ微信分享文本
-    }
-
     public static int getDefaultDisplayDensity()
     {
         try {
@@ -427,8 +427,125 @@ public class MobileUtils {
         return res;
     }
 
-    public static void CheckConfigUpdates()
+    public static void ShareTextToFriend(Context context,String text)
     {
-        //ToDo:检测已存在的config与defconfig之间的差别，更新信息;
+        try {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            // 给目标应用一个临时授权
+            intent.putExtra(Intent.EXTRA_TEXT,text);
+            intent.setType("text/plain");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            PackageManager pm = context.getPackageManager();
+            List<ResolveInfo> resInfo = pm.queryIntentActivities(intent,0);
+            if(resInfo.isEmpty()){
+                Toast.makeText(context,"未找到合适的分享应用！",Toast.LENGTH_LONG).show();
+                return ;
+            }
+            List<Intent> targetIntents = new ArrayList<>();
+            for (ResolveInfo resolveInfo : resInfo) {
+                ActivityInfo activityInfo = resolveInfo.activityInfo;
+                if (activityInfo.packageName.contains("com.tencent.mm")
+                        || activityInfo.packageName.contains("com.tencent.mobileqq")){
+                    //过滤掉qq收藏
+                    if (resolveInfo.loadLabel(pm).toString().contains("QQ收藏")){
+                        continue;
+                    }
+                    if (resolveInfo.loadLabel(pm).toString().contains("微信收藏")){
+                        continue;
+                    }
+                    if (resolveInfo.loadLabel(pm).toString().contains("微信状态")){
+                        continue;
+                    }
+                    if (resolveInfo.loadLabel(pm).toString().contains("面对面快传")){
+                        continue;
+                    }
+                    Log.i("找到符合的程序", resolveInfo.loadLabel(pm).toString());
+                    Intent target = new Intent();
+                    target.setAction(Intent.ACTION_SEND);
+                    target.setComponent(new ComponentName(activityInfo.packageName,activityInfo.name));
+                    intent.putExtra(Intent.EXTRA_TEXT,text);
+                    target.setType("text/plain");//必须设置，否则选定分享类型后不能跳转界面
+                    targetIntents.add(new LabeledIntent(target,activityInfo.packageName,resolveInfo.loadLabel(pm),resolveInfo.icon));
+                }
+            }
+            if (targetIntents.size()<= 0){
+                Toast.makeText(context,"未找到合适的分享应用！",Toast.LENGTH_LONG).show();
+                return;
+            }
+            Intent chooser = Intent.createChooser(targetIntents.remove(targetIntents.size() - 1), "选择分享");
+            if (chooser == null) return;
+            LabeledIntent[] labeledIntents = targetIntents.toArray(new LabeledIntent[targetIntents.size()]);
+            chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS,labeledIntents);
+            context.startActivity(chooser);
+        } catch (Exception e) {
+            Log.i("产生错误", e.toString());
+        }
+    }
+
+    public static void CheckConfigUpdates(Context context)
+    {
+        try {
+            ArrayList<ApplicationConfig> ConfigNow = ConfigHelper.getmlist(context);
+            ArrayList<ApplicationConfig> DefaultList;
+            List<ApplicationConfig> jsonlist = JSON.parseArray(ConfigHelper.getdefconfigString(context),ApplicationConfig.class);
+            ApplicationConfig[] acfs =jsonlist.toArray(new ApplicationConfig[0]);
+            DefaultList = new ArrayList<>(Arrays.asList(acfs));
+            for (int i =0;i<ConfigNow.size();i++)
+            {
+                ApplicationConfig DefaultNow = DefaultList.get(i);
+                ApplicationConfig Now = ConfigNow.get(i);
+                if(!Now.getAppName().equals(DefaultNow.getAppName()))
+                {
+                    Now.setApp_name(DefaultNow.getAppName());
+                }
+                if(!Now.getCategory().equals(DefaultNow.getCategory()))
+                {
+                    Now.setCategory(DefaultNow.getCategory());
+                }
+                if(!Now.getIcon().equals(DefaultNow.getIcon()))
+                {
+                    Now.setIcon(DefaultNow.getIcon());
+                }
+                if(!Now.getDescribe().equals(DefaultNow.getDescribe()))
+                {
+                    Now.setDescribe(DefaultNow.getDescribe());
+                }
+                if(!Now.getPopularity().equals(DefaultNow.getPopularity()))
+                {
+                    Now.setPopularity(DefaultNow.getPopularity());
+                }
+                if(!Now.getUrl().equals(DefaultNow.getUrl()))
+                {
+                    Now.setUrl(DefaultNow.getUrl());
+                }
+                ConfigNow.set(i,Now);
+            }
+            for(int i =ConfigNow.size();i< DefaultList.size();i++)
+            {
+                ConfigNow.add(DefaultList.get(i));
+            }
+            ConfigHelper.SavePrefJson(context, JSON.toJSONString(ConfigNow));
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<ADBannerBean> GetGalllery(Context context)
+    {
+        //ToDo:现在还是测试数据，要接入后端;
+        List<ADBannerBean> TestList = new ArrayList<>();
+        TestList.add(new ADBannerBean("https://store.m.dlut.edu.cn/group1/M00/03/F4/ynZM2WJM71mAKr72AARQiyjmtFk292.jpg","https://mp.weixin.qq.com/s/Mo0fZHrQJeM-73NtI9gFVg"));
+        TestList.add(new ADBannerBean("https://store.m.dlut.edu.cn/group1/M00/03/BC/ynZM2WI4RvKAQy4gAAJIhNmlTrE469.jpg","https://mp.weixin.qq.com/s?__biz=MzA5OTQ3NDk0MA==&mid=2247487051&idx=1&sn=49f71a4b113851c499abeeac9a6330fd&chksm=908082d8a7f70bce289c4154fcf29753331acd5a7644dc4ff214b6972b8d9c54d7d23e19f0ad&token=1181643235&lang=zh_CN#rd"));
+        TestList.add(new ADBannerBean("https://store.m.dlut.edu.cn/group1/M00/03/9F/ynZM2WIhX9KASuRdAAIZR5mI6Jw528.jpg","https://mp.weixin.qq.com/s?__biz=MzA5OTQ3NDk0MA==&mid=2247487000&idx=1&sn=a5934deade574159f4fd9bcb24e22e84&chksm=9080828ba7f70b9ddabd904fd01febc8e960d17dcd551d3af1fac20902683722c06e98fb841c&token=2084118938&lang=zh_CN#rd"));
+        TestList.add(new ADBannerBean("https://store.m.dlut.edu.cn/group1/M00/03/9E/ynZM2WIdvxGAdEDKAAFQncz22qY733.jpg","https://mp.weixin.qq.com/s?__biz=MzA5OTQ3NDk0MA==&mid=2247486965&idx=1&sn=552f4aa98b3e7e03f833f4751c96e96f&chksm=90808166a7f70870b571199eb3bfa7500a74858bbcfddc32377ec1865aff3e1f98c6f4ac76db&token=1054495584&lang=zh_CN#rd"));
+        TestList.add(new ADBannerBean("https://store.m.dlut.edu.cn/group1/M00/03/77/ynZM2WG1TgyAVzKaAAFv5jyhqUg313.jpg","https://mp.weixin.qq.com/s/wxmVXeDxZcD3rY1NHfOebg"));
+        return TestList;
+    }
+
+    public static void  InitializeMeFragementInfo(ImageView StudentHeader,TextView StudentName,ImageView StudentSex,ImageView StudentIdentity,TextView StudentOrg,TextView StudentScore,Context context)
+    {
+        //ToDo:向后端请求数据初始化学生信息
     }
 }

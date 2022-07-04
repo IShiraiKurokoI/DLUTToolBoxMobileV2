@@ -27,6 +27,7 @@ import com.Shirai_Kuroko.DLUTMobile.UI.InfoActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.ParentBindActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.AccountSafeActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.SettingsActivity;
+import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -111,6 +112,7 @@ public class MeFragment extends Fragment {
         ImageView StudentIdentity = requireView().findViewById(R.id.icon_identity);
         TextView StudentOrg = requireView().findViewById(R.id.parent_org);
         TextView StudentScore = requireView().findViewById(R.id.tv_score);
+        MobileUtils.InitializeMeFragementInfo(StudentHeader,StudentName,StudentSex,StudentIdentity,StudentOrg,StudentScore,requireContext());
         //ToDo:增加初始化学生内容信息的部分
     }
     @Override

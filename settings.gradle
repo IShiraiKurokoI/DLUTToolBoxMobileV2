@@ -10,6 +10,9 @@ pluginManagement {
         maven {
             url "https://mvn.getui.com/nexus/content/repositories/releases/"
         }
+        maven {
+            url "https://s01.oss.sonatype.org/content/groups/public"
+        }
     }
 }
 dependencyResolutionManagement {
@@ -23,6 +26,9 @@ dependencyResolutionManagement {
         }
         maven {
             url "https://mvn.getui.com/nexus/content/repositories/releases/"
+        }
+        maven {
+            url "https://s01.oss.sonatype.org/content/groups/public"
         }
     }
 }

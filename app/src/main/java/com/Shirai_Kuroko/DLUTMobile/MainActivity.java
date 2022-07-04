@@ -23,7 +23,6 @@ import com.Shirai_Kuroko.DLUTMobile.UI.SettingsActivity;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 import com.Shirai_Kuroko.DLUTMobile.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.igexin.sdk.IUserLoggerInterface;
 
 public class MainActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
@@ -49,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         com.igexin.sdk.PushManager.getInstance().initialize(this, IntentService.class);
         com.igexin.sdk.PushManager.getInstance().setDebugLogger(this, s -> Log.i("PUSH_LOG",s));
         MobileUtils.CheckUpDateOnStartUp(this);
+        MobileUtils.CheckConfigUpdates(this);
         if(ConfigHelper.NeedConfig())
         {
             Toast.makeText(this, "⚠请完善配置信息！⚠", Toast.LENGTH_SHORT).show();

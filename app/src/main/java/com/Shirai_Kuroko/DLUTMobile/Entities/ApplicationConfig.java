@@ -60,4 +60,28 @@ public class ApplicationConfig {
     public void setIssubscription(Integer issubscription) {
         this.issubscription = issubscription;
     }
+
+    public void setApp_name(String app_name) {
+        this.app_name = app_name;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public void setPopularity(String popularity) {
+        this.popularity = popularity;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

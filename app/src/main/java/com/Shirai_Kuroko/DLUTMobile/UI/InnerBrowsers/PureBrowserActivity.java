@@ -30,10 +30,13 @@ import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 import com.Shirai_Kuroko.DLUTMobile.Widgets.LoadingView;
 
+import java.util.Objects;
+
 public class PureBrowserActivity extends AppCompatActivity {
 
     private WebView webView;
     private LoadingView loading;
+    boolean NoTitle = false;
     @SuppressLint({"SetJavaScriptEnabled", "NewApi"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,10 @@ public class PureBrowserActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setTitle(Name);
+        }
+        if(Objects.equals(Name, ""))
+        {
+            NoTitle=true;
         }
         loading = new LoadingView(this,R.style.CustomDialog);
         loading.show();
@@ -83,6 +90,10 @@ public class PureBrowserActivity extends AppCompatActivity {
         public void onPageFinished(WebView view, String url) {//页面加载完成
             Log.i("加载完成", url);
             loading.dismiss();
+            if(NoTitle)
+            {
+                Objects.requireNonNull(getSupportActionBar()).setTitle(webView.getTitle());
+            }
         }
 
         @Override
@@ -113,6 +124,7 @@ public class PureBrowserActivity extends AppCompatActivity {
             }
             return super.shouldOverrideUrlLoading(view, request);
         }
+
     };
 
     //WebChromeClient主要辅助WebView处理Javascript的对话框、网站图标、网站title、加载进度等
@@ -137,6 +149,10 @@ public class PureBrowserActivity extends AppCompatActivity {
         @Override
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
+            if(NoTitle)
+            {
+                Objects.requireNonNull(getSupportActionBar()).setTitle(title);
+            }
         }
 
         //加载进度回调

@@ -33,7 +33,7 @@ public class ConfigHelper {
         return mList;
     }
 
-    private static String getdefconfigString(Context context) {
+    public static String getdefconfigString(Context context) {
         StringBuilder termsString = new StringBuilder();
         BufferedReader reader;
         try {
