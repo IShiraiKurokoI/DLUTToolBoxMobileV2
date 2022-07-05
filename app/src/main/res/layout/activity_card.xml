@@ -6,4 +6,105 @@
     android:layout_height="match_parent"
     tools:context=".UI.CardActivity">
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="56.0dip"
+        android:background="@color/main_theme_color"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0">
+
+        <TextView
+            android:id="@id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="16.0dip"
+            android:paddingRight="16.0dip"
+            android:text="@string/back_to"
+            android:textColor="@color/white"
+            app:drawableStartCompat="@drawable/notice_detail_back_sel" />
+
+        <TextView
+            android:id="@id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="我的证件"
+            android:textColor="@color/white"
+            android:textSize="18.0sp"
+            tools:ignore="HardcodedText" />
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
+        app:layout_constraintVertical_bias="0">
+
+        <ImageView
+            android:id="@id/image_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            android:src="@drawable/bg_my_card_mark"
+            app:layout_constraintDimensionRatio="1080:1132"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <com.Shirai_Kuroko.DLUTMobile.Widgets.SchoolCardView
+            android:id="@id/sc_card"
+            android:layout_width="0.0dip"
+            android:layout_height="0.0dip"
+            app:layout_constraintBottom_toBottomOf="@id/image_bg"
+            app:layout_constraintEnd_toEndOf="@id/image_bg"
+            app:layout_constraintStart_toStartOf="@id/image_bg"
+            app:layout_constraintTop_toTopOf="@id/image_bg" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:id="@id/rl_act_my_card_qrcode_panel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <ImageView
+            android:id="@id/iv_act_my_card_qrcode"
+            android:layout_width="@dimen/my_card_qrcode_size"
+            android:layout_height="@dimen/my_card_qrcode_size"
+            android:foregroundGravity="center_horizontal"
+            android:src="@drawable/icon_whistle_app_store_link_qr_code"
+            tools:ignore="ContentDescription" />
+
+        <View
+            android:id="@id/v_act_my_card_qrcode_refresh"
+            android:layout_width="@dimen/my_card_qrcode_size"
+            android:layout_height="@dimen/my_card_qrcode_size"
+            android:background="@drawable/bg_refresh_qrcode"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="@dimen/my_card_qrcode_size"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_act_my_card_qrcode"
+            android:layout_marginTop="8.0dip"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/my_card_refresh_tips"
+            android:textColor="#ff999999"
+            android:textSize="12.0sp" />
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

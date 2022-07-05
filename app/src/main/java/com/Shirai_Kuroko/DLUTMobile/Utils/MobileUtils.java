@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,11 +37,13 @@ import androidx.core.content.FileProvider;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ADBannerBean;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
 import com.Shirai_Kuroko.DLUTMobile.Entities.GithubLatestBean;
+import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Managers.CacheManager;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView;
 import com.alibaba.fastjson.JSON;
+import com.bumptech.glide.Glide;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -552,15 +555,53 @@ public class MobileUtils {
 
     public static void InitializeMeFragmentInfo(ImageView StudentHeader, TextView StudentName, ImageView StudentSex, ImageView StudentIdentity, TextView StudentOrg, TextView StudentScore, Context context)
     {
-        //ToDo:向后端请求数据初始化界面学生信息
+        LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
+        if(UserBean == null)
+        {
+            return;
+        }
+        LoginResponseBean.DataDTO.MyInfoDTO infoDTO = UserBean.getData().getMy_info();
+        Glide.with(context).load(infoDTO.getHead()).into(StudentHeader);
+        StudentName.setText(infoDTO.getName());
+        switch (infoDTO.getAuthority_identity())
+        {
+            case "bachelor":
+            {
+                StudentIdentity.setImageResource(R.drawable.icon_flag_bachelor);
+                break;
+            }
+            case "master":
+            {
+                StudentIdentity.setImageResource(R.drawable.icon_flag_master);
+            }
+            default:
+            {
+                StudentIdentity.setImageResource(R.drawable.icon_flag_teacher);
+            }
+        }
+        if(infoDTO.getSex().equals("boy"))
+        {
+            StudentSex.setImageResource(R.drawable.icon_sex_boy);
+        }else
+        {
+            StudentSex.setImageResource(R.drawable.icon_sex_girl);
+        }
+        StudentOrg.setText(infoDTO.getOrg().get(0).getName());
+        StudentScore.setText(String.valueOf(UserBean.getData().getScore().getSum()));
     }
 
     public static void  InitializePersonalInfo(Context context, ScrollView InfoScrollView)
     {
-        //ToDo:向后端请求数据初始化学生信息界面,现在还是测试数据
+        LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
+        if(UserBean == null)
+        {
+            return;
+        }
+        LoginResponseBean.DataDTO.MyInfoDTO infoDTO = UserBean.getData().getMy_info();
         RelativeLayout head_panel = InfoScrollView.findViewById(R.id.head_panel);
         ImageView user_head = head_panel.findViewById(R.id.user_head);
         user_head.setImageResource(R.drawable.me_defaulthead);
+        Glide.with(context).load(infoDTO.getHead()).into(user_head);
         head_panel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -569,8 +610,10 @@ public class MobileUtils {
         });
         PreferenceRightDetailView my_info_name = InfoScrollView.findViewById(R.id.my_info_name);
         my_info_name.SetContentText("学生姓名");
+        my_info_name.SetContentText(infoDTO.getName());
         PreferenceRightDetailView my_info_nickname = InfoScrollView.findViewById(R.id.my_info_nickname);
         my_info_nickname.SetContentText("学生昵称");
+        my_info_nickname.SetContentText(infoDTO.getNick_name());
         my_info_nickname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -579,8 +622,10 @@ public class MobileUtils {
         });
         PreferenceRightDetailView my_info_student_number = InfoScrollView.findViewById(R.id.my_info_student_number);
         my_info_student_number.SetContentText("学生学号");
+        my_info_student_number.SetContentText(infoDTO.getStudentNumber());
         PreferenceRightDetailView my_info_org = InfoScrollView.findViewById(R.id.my_info_org);
         my_info_org.SetContentText("学生单位名称");
+        my_info_org.SetContentText(infoDTO.getOrg().get(0).getName());
         PreferenceRightDetailView my_info_identity = InfoScrollView.findViewById(R.id.my_info_identity);
         my_info_identity.SetContentText("学生");
         if(my_info_identity.GetContentText()=="学生")
@@ -594,19 +639,21 @@ public class MobileUtils {
         }
         PreferenceRightDetailView my_info_mobile = InfoScrollView.findViewById(R.id.my_info_mobile);
         my_info_mobile.SetContentText("手机号");
+        my_info_mobile.SetContentText(infoDTO.getCelphone());
         PreferenceRightDetailView my_info_wechat = InfoScrollView.findViewById(R.id.my_info_wechat);//微信号，如果为空则移除
-        my_info_wechat.SetContentText("");
-        if(my_info_wechat.GetContentText()=="")
+        my_info_wechat.SetContentText(infoDTO.getWechatcode());
+        if(my_info_wechat.GetContentText().length()<4)
         {
             my_info_wechat.setVisibility(View.GONE);
         }
         PreferenceRightDetailView my_info_qq = InfoScrollView.findViewById(R.id.my_info_qq);//QQ号，如果为空则移除
-        my_info_qq.SetContentText("");
-        if(my_info_qq.GetContentText()=="")
+        my_info_qq.SetContentText(infoDTO.getQqcode());
+        if(my_info_qq.GetContentText().length()<4)
         {
             my_info_qq.setVisibility(View.GONE);
         }
         PreferenceRightDetailView my_info_email = InfoScrollView.findViewById(R.id.my_info_email);
         my_info_email.SetContentText("邮箱");
+        my_info_email.SetContentText(infoDTO.getEmail());
     }
 }

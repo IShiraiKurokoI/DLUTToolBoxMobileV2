@@ -5,26 +5,101 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:scrollbars="none">
-    <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:id="@id/main_panel" android:layout_width="fill_parent" android:layout_height="wrap_content">
-        <LinearLayout android:orientation="vertical" android:background="@drawable/bg_about_whistle_top_panel" android:layout_width="fill_parent" android:layout_height="wrap_content">
-            <RelativeLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="56.0dip">
-                <TextView android:textColor="@color/white" android:gravity="center_vertical" android:id="@id/iv_back" android:paddingLeft="16.0dip" android:paddingRight="16.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/back_to"
+
+    <LinearLayout
+        android:id="@id/main_panel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_about_whistle_top_panel"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="56.0dip"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@id/iv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="16.0dip"
+                    android:paddingRight="16.0dip"
+                    android:text="@string/back_to"
+                    android:textColor="@color/white"
                     app:drawableStartCompat="@drawable/notice_detail_back_sel" />
-                <TextView android:textSize="18.0sp" android:textColor="@color/white" android:id="@id/tv_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="关于" android:layout_centerInParent="true"
+
+                <TextView
+                    android:id="@id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="关于"
+                    android:textColor="@color/white"
+                    android:textSize="18.0sp"
                     tools:ignore="HardcodedText" />
             </RelativeLayout>
-            <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="156.0dip"
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="156.0dip"
+                android:gravity="center"
+                android:orientation="vertical"
                 tools:ignore="UseCompoundDrawables">
-                <ImageView android:id="@id/top_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/icon_about_whistle_logo" android:contentDescription="@null" />
-                <TextView android:textSize="12.0sp" android:textColor="@color/white" android:id="@id/version_tv" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:includeFontPadding="false" />
+
+                <ImageView
+                    android:id="@id/top_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@null"
+                    android:src="@drawable/icon_about_whistle_logo" />
+
+                <TextView
+                    android:id="@id/version_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12.0dip"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/white"
+                    android:textSize="12.0sp" />
             </LinearLayout>
         </LinearLayout>
-        <LinearLayout android:orientation="vertical" android:background="@color/white" android:layout_width="fill_parent" android:layout_height="wrap_content">
-            <View android:background="@color/divider_color" android:layout_width="fill_parent" android:layout_height="1.0px"
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0px"
+                android:background="@color/divider_color"
                 tools:ignore="PxUsage" />
-            <RelativeLayout android:id="@id/version_update_panel" android:background="@drawable/list_item_bg" android:layout_width="fill_parent" android:layout_height="52.0dip">
-                <TextView android:textSize="14.0sp" android:textColor="@color/text_color_50" android:id="@id/version_update" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16.0dip" android:text="版本更新" android:layout_centerVertical="true"
+
+            <RelativeLayout
+                android:id="@id/version_update_panel"
+                android:layout_width="fill_parent"
+                android:layout_height="52.0dip"
+                android:background="@drawable/list_item_bg">
+
+                <TextView
+                    android:id="@id/version_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16.0dip"
+                    android:text="版本更新"
+                    android:textColor="@color/text_color_50"
+                    android:textSize="14.0sp"
                     tools:ignore="HardcodedText" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -32,13 +107,15 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="16.0dip"
                     tools:ignore="RelativeOverlap">
+
                     <RelativeLayout
                         android:id="@id/has_new_version"
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
-                        android:background="@drawable/notice_unread_count"
                         android:layout_gravity="center_vertical"
+                        android:background="@drawable/notice_unread_count"
                         android:visibility="gone">
+
                         <TextView
                             android:id="@id/unread_no"
                             android:layout_width="30dp"
@@ -50,6 +127,7 @@
                             android:textSize="10.0sp"
                             tools:ignore="SmallSp" />
                     </RelativeLayout>
+
                     <TextView
                         android:id="@id/version_update_label"
                         android:layout_width="wrap_content"
@@ -58,12 +136,38 @@
                         android:textSize="14.0sp" />
                 </LinearLayout>
             </RelativeLayout>
-            <View android:background="@color/divider_color" android:paddingLeft="16.0dip" android:paddingRight="16.0dip" android:layout_width="fill_parent" android:layout_height="1.0px"
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0px"
+                android:background="@color/divider_color"
+                android:paddingLeft="16.0dip"
+                android:paddingRight="16.0dip"
                 tools:ignore="PxUsage" />
-            <RelativeLayout android:id="@id/share_to_friends" android:background="@drawable/list_item_bg" android:layout_width="fill_parent" android:layout_height="52.0dip">
-                <TextView android:textSize="14.0sp" android:textColor="@color/text_color_50" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16.0dip" android:text="@string/invite" android:layout_centerVertical="true"
+
+            <RelativeLayout
+                android:id="@id/share_to_friends"
+                android:layout_width="fill_parent"
+                android:layout_height="52.0dip"
+                android:background="@drawable/list_item_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16.0dip"
+                    android:text="@string/invite"
+                    android:textColor="@color/text_color_50"
+                    android:textSize="14.0sp"
                     tools:ignore="RelativeOverlap" />
-                <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="10.0dip" android:layout_alignParentEnd="true" android:layout_centerVertical="true">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10.0dip">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -71,37 +175,126 @@
                         tools:ignore="ContentDescription" />
                 </RelativeLayout>
             </RelativeLayout>
-            <View android:background="@color/divider_color" android:paddingLeft="16.0dip" android:paddingRight="16.0dip" android:layout_width="fill_parent" android:layout_height="1.0px"
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0px"
+                android:background="@color/divider_color"
+                android:paddingLeft="16.0dip"
+                android:paddingRight="16.0dip"
                 tools:ignore="PxUsage" />
-            <RelativeLayout android:id="@id/version_intro" android:background="@drawable/list_item_bg" android:layout_width="fill_parent" android:layout_height="52.0dip">
-                <TextView android:textSize="14.0sp" android:textColor="@color/text_color_50"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16.0dip" android:text="@string/versionintro" android:layout_centerVertical="true"
+
+            <RelativeLayout
+                android:id="@id/version_intro"
+                android:layout_width="fill_parent"
+                android:layout_height="52.0dip"
+                android:background="@drawable/list_item_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16.0dip"
+                    android:text="@string/versionintro"
+                    android:textColor="@color/text_color_50"
+                    android:textSize="14.0sp"
                     tools:ignore="RelativeOverlap" />
-                <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="10.0dip" android:layout_alignParentEnd="true" android:layout_centerVertical="true">
-                    <ImageView  android:layout_width="wrap_content" android:layout_height="wrap_content"  android:src="@drawable/setting_right_arrow"
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10.0dip">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/setting_right_arrow"
                         tools:ignore="ContentDescription" />
                 </RelativeLayout>
             </RelativeLayout>
-            <View android:background="@color/divider_color" android:paddingLeft="16.0dip" android:paddingRight="16.0dip" android:layout_width="fill_parent" android:layout_height="1.0px"
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0px"
+                android:background="@color/divider_color"
+                android:paddingLeft="16.0dip"
+                android:paddingRight="16.0dip"
                 tools:ignore="PxUsage" />
-            <RelativeLayout android:id="@id/service_disclaimer" android:background="@drawable/list_item_bg" android:layout_width="fill_parent" android:layout_height="52.0dip">
-                <TextView android:textSize="14.0sp" android:textColor="@color/text_color_50" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16.0dip" android:text="@string/serviceprotocal" android:layout_centerVertical="true"
+
+            <RelativeLayout
+                android:id="@id/service_disclaimer"
+                android:layout_width="fill_parent"
+                android:layout_height="52.0dip"
+                android:background="@drawable/list_item_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16.0dip"
+                    android:text="@string/serviceprotocal"
+                    android:textColor="@color/text_color_50"
+                    android:textSize="14.0sp"
                     tools:ignore="RelativeOverlap" />
-                <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="10.0dip" android:layout_alignParentEnd="true" android:layout_centerVertical="true">
-                    <ImageView  android:layout_width="wrap_content" android:layout_height="wrap_content"  android:src="@drawable/setting_right_arrow"
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10.0dip">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/setting_right_arrow"
                         tools:ignore="ContentDescription" />
                 </RelativeLayout>
             </RelativeLayout>
-            <View android:background="@color/divider_color" android:layout_width="fill_parent" android:layout_height="1.0px"
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0px"
+                android:background="@color/divider_color"
                 tools:ignore="PxUsage" />
-            <RelativeLayout android:id="@id/privacy_policy" android:background="@drawable/list_item_bg" android:layout_width="fill_parent" android:layout_height="52.0dip">
-                <TextView android:textSize="14.0sp" android:textColor="@color/text_color_50" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16.0dip" android:text="@string/privac" android:layout_centerVertical="true"
+
+            <RelativeLayout
+                android:id="@id/privacy_policy"
+                android:layout_width="fill_parent"
+                android:layout_height="52.0dip"
+                android:background="@drawable/list_item_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16.0dip"
+                    android:text="@string/privac"
+                    android:textColor="@color/text_color_50"
+                    android:textSize="14.0sp"
                     tools:ignore="RelativeOverlap" />
-                <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="10.0dip" android:layout_alignParentEnd="true" android:layout_centerVertical="true">
-                    <ImageView  android:layout_width="wrap_content" android:layout_height="wrap_content"  android:src="@drawable/setting_right_arrow"
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10.0dip">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/setting_right_arrow"
                         tools:ignore="ContentDescription" />
                 </RelativeLayout>
             </RelativeLayout>
-            <View android:background="@color/divider_color" android:layout_width="fill_parent" android:layout_height="1.0px"
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0px"
+                android:background="@color/divider_color"
                 tools:ignore="PxUsage" />
         </LinearLayout>
     </LinearLayout>

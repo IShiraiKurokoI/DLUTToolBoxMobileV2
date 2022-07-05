@@ -2,6 +2,7 @@ package com.Shirai_Kuroko.DLUTMobile;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,11 +16,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.PreferenceManager;
 
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.PermissionHelper;
 import com.Shirai_Kuroko.DLUTMobile.Services.IntentService;
-import com.Shirai_Kuroko.DLUTMobile.UI.SettingsActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.LoginActivity;
+import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 import com.Shirai_Kuroko.DLUTMobile.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -49,11 +52,24 @@ public class MainActivity extends AppCompatActivity {
         com.igexin.sdk.PushManager.getInstance().setDebugLogger(this, s -> Log.i("PUSH_LOG",s));
         MobileUtils.CheckUpDateOnStartUp(this);
         MobileUtils.CheckConfigUpdates(this);
-        if(ConfigHelper.NeedConfig())
+        if(ConfigHelper.NeedLogin(this))
         {
-            Toast.makeText(this, "⚠请完善配置信息！⚠", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+            String Un = prefs.getString("Username","");
+            String Pd = prefs.getString("Password","");
+            if(Un.length()*Pd.length()!=0)
+            {
+                BackendUtils.Login(this,Un,Pd);
+            }
+            else
+            {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
+        }
+        else
+        {
+            BackendUtils.ReSendMsgInfo(this);
         }
     }
 

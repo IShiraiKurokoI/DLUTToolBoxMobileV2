@@ -1,5 +1,6 @@
 package com.Shirai_Kuroko.DLUTMobile.UI;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,6 +26,7 @@ import androidx.preference.PreferenceManager;
 
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.PureBrowserActivity;
+import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 import com.Shirai_Kuroko.DLUTMobile.Widgets.LoadingView;
 
@@ -123,8 +125,9 @@ public class LoginActivity extends AppCompatActivity {
             {
                 loading = new LoadingView(mContext,R.style.CustomDialog);
                 loading.show();
-                Toast.makeText(mContext,"账户名："+UserName.getText()+"  密码："+UserName.getText(),Toast.LENGTH_LONG).show();
-                this.finish();
+                prefs.edit().putString("Username",UserName.getText().toString()).apply();
+                prefs.edit().putString("Password",Password.getText().toString()).apply();
+                BackendUtils.LoginForLogin(this,UserName.getText().toString(),Password.getText().toString(),this,loading);
             }
         });
         FindPassword.setOnClickListener(v -> {

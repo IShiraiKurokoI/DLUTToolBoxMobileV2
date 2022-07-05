@@ -77,4 +77,9 @@
     <item name="my_info_qq" type="id" />
     <item name="my_info_email" type="id" />
     <item name="title" type="id" />
+    <item name="image_bg" type="id" />
+    <item name="rl_act_my_card_qrcode_panel" type="id" />
+    <item name="sc_card" type="id" />
+    <item name="iv_act_my_card_qrcode" type="id" />
+    <item name="v_act_my_card_qrcode_refresh" type="id" />
 </resources>

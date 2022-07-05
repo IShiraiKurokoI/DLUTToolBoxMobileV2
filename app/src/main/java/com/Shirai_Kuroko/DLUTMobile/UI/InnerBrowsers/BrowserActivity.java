@@ -1,6 +1,7 @@
 package com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -26,6 +27,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
+import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.QRCodeHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
@@ -117,6 +119,18 @@ public class BrowserActivity extends AppCompatActivity {
         //背景透明
         webView.setBackgroundColor(0); // 设置背景色
         webView.getBackground().setAlpha(0); // 设置透明度 范围：0-255
+    }
+
+    public void SyncCookie(Context context)
+    {
+        //Todo:同步cookie自动认证
+        LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
+        if(UserBean == null)
+        {
+            return;
+        }
+        LoginResponseBean.DataDTO.MyInfoDTO infoDTO = UserBean.getData().getMy_info();
+        String skey = infoDTO.getSkey();
     }
 
     //WebViewClient主要帮助WebView处理各种通知、请求事件

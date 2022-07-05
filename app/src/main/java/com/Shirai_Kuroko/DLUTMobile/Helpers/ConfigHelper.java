@@ -9,6 +9,7 @@ import androidx.preference.PreferenceManager;
 
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
 import com.Shirai_Kuroko.DLUTMobile.Entities.GridAppID;
+import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Entities.NotificationPayload;
 import com.alibaba.fastjson.JSON;
 
@@ -18,6 +19,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class ConfigHelper {
 
@@ -211,5 +213,33 @@ public class ConfigHelper {
             return "游戏类";
         }
         return "未知分类";
+    }
+
+    public static void SaveLoginResultToPref(String result,Context context)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.edit().putString("UserBean",result).apply();
+    }
+
+    public static Boolean NeedLogin(Context context)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        if(Objects.equals(prefs.getString("UserBean", ""), ""))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public static LoginResponseBean GetUserBean(Context context)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String Json = prefs.getString("UserBean", "");
+        LoginResponseBean loginResponseBean = new LoginResponseBean();
+        loginResponseBean = JSON.parseObject(Json,LoginResponseBean.class);
+        return loginResponseBean;
     }
 }

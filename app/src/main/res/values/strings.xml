@@ -90,4 +90,5 @@
     <string name="YuLanKa">玉兰卡</string>
     <string name="user_head">头像</string>
     <string name="friend_info_name">姓名</string>
+    <string name="my_card_refresh_tips">每5分钟自动更新</string>
 </resources>
