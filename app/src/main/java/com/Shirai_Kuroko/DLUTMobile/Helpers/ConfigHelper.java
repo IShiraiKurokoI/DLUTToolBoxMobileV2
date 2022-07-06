@@ -11,6 +11,7 @@ import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
 import com.Shirai_Kuroko.DLUTMobile.Entities.GridAppID;
 import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Entities.NotificationPayload;
+import com.Shirai_Kuroko.DLUTMobile.Entities.UserScoreBean;
 import com.alibaba.fastjson.JSON;
 
 import java.io.BufferedReader;
@@ -176,14 +177,6 @@ public class ConfigHelper {
         SaveNotificationPayloadPrefJson(context,JSON.toJSONString(mList));
     }
 
-    public static boolean NeedConfig()
-    {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ContextHelper.getContext());
-        String Un = prefs.getString("Username","");
-        String Pd = prefs.getString("Password","");
-        return Un.length() * Pd.length() == 0;
-    }
-
     public static void SaveDebugInfoPrefJson(Context context,String json)
     {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -241,5 +234,20 @@ public class ConfigHelper {
         LoginResponseBean loginResponseBean = new LoginResponseBean();
         loginResponseBean = JSON.parseObject(Json,LoginResponseBean.class);
         return loginResponseBean;
+    }
+
+    public static UserScoreBean GetUserScoreBean(Context context)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String Json = prefs.getString("UserScoreBean", "");
+        UserScoreBean userScoreBean = new UserScoreBean();
+        userScoreBean = JSON.parseObject(Json,UserScoreBean.class);
+        return userScoreBean;
+    }
+
+    public static void SaveUserScoreBean(Context context,String json)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.edit().putString("UserScoreBean",json).apply();
     }
 }

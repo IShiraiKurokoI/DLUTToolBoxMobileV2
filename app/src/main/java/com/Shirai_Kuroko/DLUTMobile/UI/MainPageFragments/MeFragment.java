@@ -113,7 +113,6 @@ public class MeFragment extends Fragment {
         TextView StudentOrg = requireView().findViewById(R.id.parent_org);
         TextView StudentScore = requireView().findViewById(R.id.tv_score);
         MobileUtils.InitializeMeFragmentInfo(StudentHeader,StudentName,StudentSex,StudentIdentity,StudentOrg,StudentScore,requireContext());
-        //ToDo:增加初始化学生内容信息的部分
     }
     @Override
     public void onResume() {

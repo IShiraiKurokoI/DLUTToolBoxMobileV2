@@ -64,6 +64,10 @@ public class LoginResponseBean {
             return score;
         }
 
+        public void setMy_info(MyInfoDTO my_info) {
+            this.my_info = my_info;
+        }
+
         @NoArgsConstructor
         @Data
         public static class MyInfoDTO {
@@ -206,6 +210,10 @@ public class LoginResponseBean {
 
             public String getTittle() {
                 return tittle;
+            }
+
+            public String getUser_id() {
+                return user_id;
             }
 
             @NoArgsConstructor

@@ -54,22 +54,26 @@ public class MainActivity extends AppCompatActivity {
         MobileUtils.CheckConfigUpdates(this);
         if(ConfigHelper.NeedLogin(this))
         {
+            Log.i("", "需要登陆");
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
             String Un = prefs.getString("Username","");
             String Pd = prefs.getString("Password","");
             if(Un.length()*Pd.length()!=0)
             {
+                Log.i("", "静默登陆");
                 BackendUtils.Login(this,Un,Pd);
             }
             else
             {
+                Log.i("", "弹出登陆");
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
             }
         }
         else
         {
-            BackendUtils.ReSendMsgInfo(this);
+            Log.i("", "重收信息");
+            BackendUtils.ReSendUserInfo(this);
         }
     }
 

@@ -1,6 +1,7 @@
 package com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -11,6 +12,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
@@ -24,6 +27,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.QRCodeHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
@@ -83,7 +87,44 @@ public class PureBrowserActivity extends AppCompatActivity {
         //背景透明
         webView.setBackgroundColor(Color.WHITE); // 设置背景色
         webView.getBackground().setAlpha(125); // 设置透明度 范围：0-255
+        SyncCookie(this);
         webView.loadUrl(Url);
+    }
+
+    public void SyncCookie(Context context)
+    {
+        try {
+            CookieSyncManager.createInstance(context);
+            final CookieManager instance = CookieManager.getInstance();
+            instance.setAcceptCookie(true);
+            LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
+            if(UserBean == null)
+            {
+                return;
+            }
+            LoginResponseBean.DataDTO.MyInfoDTO infoDTO = UserBean.getData().getMy_info();
+            String skey = infoDTO.getSkey();
+            final StringBuilder sb = new StringBuilder();
+            sb.append("whistlekey");
+            sb.append('=');
+            sb.append(skey);
+            instance.setCookie(".dlut.edu.cn", sb.toString());
+            instance.setCookie("api.dlut.edu.cn", sb.toString());
+            instance.setCookie("webvpn.dlut.edu.cn", sb.toString());
+            final StringBuilder sb3 = new StringBuilder();
+            sb3.append(UserBean.getData().getTgtinfo().get(0).getName());
+            sb3.append("=");
+            sb3.append(UserBean.getData().getTgtinfo().get(0).getValue());
+            sb3.append("; Max-Age=");
+            sb3.append("3600");
+            instance.setCookie(".dlut.edu.cn", sb3.toString());
+            instance.setCookie("api.dlut.edu.cn", sb3.toString());
+            instance.setCookie("webvpn.dlut.edu.cn", sb3.toString());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
     private final WebViewClient webViewClient=new WebViewClient(){
         @Override

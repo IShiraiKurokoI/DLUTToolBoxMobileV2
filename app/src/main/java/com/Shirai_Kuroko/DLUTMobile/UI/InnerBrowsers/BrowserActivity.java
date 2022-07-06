@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
@@ -61,14 +63,6 @@ public class BrowserActivity extends AppCompatActivity {
             actionBar.setTitle(thisapp.getAppName());
         }
         webView = findViewById(R.id.BrowserWebView);
-        if(thisapp.getId()!=66)
-        {
-            webView.loadUrl(thisapp.getUrl());
-        }
-        else
-        {
-            webView.loadUrl("https://news.dlut.edu.cn/ttgz.htm");
-        }
         loading = new LoadingView(this,R.style.CustomDialog);
         loading.show();
         webView.addJavascriptInterface(this,"WhistleBrowser");//添加js监听 这样html就能调用客户端
@@ -119,18 +113,51 @@ public class BrowserActivity extends AppCompatActivity {
         //背景透明
         webView.setBackgroundColor(0); // 设置背景色
         webView.getBackground().setAlpha(0); // 设置透明度 范围：0-255
+        SyncCookie(this);
+        if(thisapp.getId()!=66)
+        {
+            webView.loadUrl(thisapp.getUrl());
+        }
+        else
+        {
+            webView.loadUrl("https://news.dlut.edu.cn/ttgz.htm");
+        }
     }
 
     public void SyncCookie(Context context)
     {
-        //Todo:同步cookie自动认证
-        LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
-        if(UserBean == null)
-        {
-            return;
+        try {
+            CookieSyncManager.createInstance(context);
+            final CookieManager instance = CookieManager.getInstance();
+            instance.setAcceptCookie(true);
+            LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
+            if(UserBean == null)
+            {
+                return;
+            }
+            LoginResponseBean.DataDTO.MyInfoDTO infoDTO = UserBean.getData().getMy_info();
+            String skey = infoDTO.getSkey();
+            final StringBuilder sb = new StringBuilder();
+            sb.append("whistlekey");
+            sb.append('=');
+            sb.append(skey);
+            instance.setCookie(".dlut.edu.cn", sb.toString());
+            instance.setCookie("api.dlut.edu.cn", sb.toString());
+            instance.setCookie("webvpn.dlut.edu.cn", sb.toString());
+            final StringBuilder sb3 = new StringBuilder();
+            sb3.append(UserBean.getData().getTgtinfo().get(0).getName());
+            sb3.append("=");
+            sb3.append(UserBean.getData().getTgtinfo().get(0).getValue());
+            sb3.append("; Max-Age=");
+            sb3.append("3600");
+            instance.setCookie(".dlut.edu.cn", sb3.toString());
+            instance.setCookie("api.dlut.edu.cn", sb3.toString());
+            instance.setCookie("webvpn.dlut.edu.cn", sb3.toString());
         }
-        LoginResponseBean.DataDTO.MyInfoDTO infoDTO = UserBean.getData().getMy_info();
-        String skey = infoDTO.getSkey();
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     //WebViewClient主要帮助WebView处理各种通知、请求事件

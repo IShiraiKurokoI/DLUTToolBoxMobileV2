@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.LabeledIntent;
 import android.content.pm.PackageInfo;
@@ -28,12 +29,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceManager;
 
+import com.Shirai_Kuroko.DLUTMobile.Adapters.ADBannerAdapter;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ADBannerBean;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
 import com.Shirai_Kuroko.DLUTMobile.Entities.GithubLatestBean;
@@ -44,10 +47,13 @@ import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView;
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
+import com.youth.banner.Banner;
+import com.youth.banner.indicator.RectangleIndicator;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Method;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -541,18 +547,6 @@ public class MobileUtils {
         }
     }
 
-    public static List<ADBannerBean> GetGalllery(Context context)
-    {
-        //ToDo:现在还是测试数据，要接入后端;
-        List<ADBannerBean> TestList = new ArrayList<>();
-        TestList.add(new ADBannerBean("https://store.m.dlut.edu.cn/group1/M00/03/F4/ynZM2WJM71mAKr72AARQiyjmtFk292.jpg","https://mp.weixin.qq.com/s/Mo0fZHrQJeM-73NtI9gFVg"));
-        TestList.add(new ADBannerBean("https://store.m.dlut.edu.cn/group1/M00/03/BC/ynZM2WI4RvKAQy4gAAJIhNmlTrE469.jpg","https://mp.weixin.qq.com/s?__biz=MzA5OTQ3NDk0MA==&mid=2247487051&idx=1&sn=49f71a4b113851c499abeeac9a6330fd&chksm=908082d8a7f70bce289c4154fcf29753331acd5a7644dc4ff214b6972b8d9c54d7d23e19f0ad&token=1181643235&lang=zh_CN#rd"));
-        TestList.add(new ADBannerBean("https://store.m.dlut.edu.cn/group1/M00/03/9F/ynZM2WIhX9KASuRdAAIZR5mI6Jw528.jpg","https://mp.weixin.qq.com/s?__biz=MzA5OTQ3NDk0MA==&mid=2247487000&idx=1&sn=a5934deade574159f4fd9bcb24e22e84&chksm=9080828ba7f70b9ddabd904fd01febc8e960d17dcd551d3af1fac20902683722c06e98fb841c&token=2084118938&lang=zh_CN#rd"));
-        TestList.add(new ADBannerBean("https://store.m.dlut.edu.cn/group1/M00/03/9E/ynZM2WIdvxGAdEDKAAFQncz22qY733.jpg","https://mp.weixin.qq.com/s?__biz=MzA5OTQ3NDk0MA==&mid=2247486965&idx=1&sn=552f4aa98b3e7e03f833f4751c96e96f&chksm=90808166a7f70870b571199eb3bfa7500a74858bbcfddc32377ec1865aff3e1f98c6f4ac76db&token=1054495584&lang=zh_CN#rd"));
-        TestList.add(new ADBannerBean("https://store.m.dlut.edu.cn/group1/M00/03/77/ynZM2WG1TgyAVzKaAAFv5jyhqUg313.jpg","https://mp.weixin.qq.com/s/wxmVXeDxZcD3rY1NHfOebg"));
-        return TestList;
-    }
-
     public static void InitializeMeFragmentInfo(ImageView StudentHeader, TextView StudentName, ImageView StudentSex, ImageView StudentIdentity, TextView StudentOrg, TextView StudentScore, Context context)
     {
         LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
@@ -587,7 +581,22 @@ public class MobileUtils {
             StudentSex.setImageResource(R.drawable.icon_sex_girl);
         }
         StudentOrg.setText(infoDTO.getOrg().get(0).getName());
-        StudentScore.setText(String.valueOf(UserBean.getData().getScore().getSum()));
+        if(ConfigHelper.GetUserScoreBean(context)!=null)
+        {
+            StudentScore.setText(String.valueOf(ConfigHelper.GetUserScoreBean(context).getData().getUser_points()));
+        }
+        else
+        {
+            BackendUtils.GetScore(context,StudentScore);
+        }
+    }
+
+    public static void GetScore(Context context,TextView Score)
+    {
+        if(ConfigHelper.GetUserScoreBean(context)!=null)
+        {
+            Score.setText(String.valueOf(ConfigHelper.GetUserScoreBean(context).getData().getUser_points()));
+        }
     }
 
     public static void  InitializePersonalInfo(Context context, ScrollView InfoScrollView)
@@ -655,5 +664,23 @@ public class MobileUtils {
         PreferenceRightDetailView my_info_email = InfoScrollView.findViewById(R.id.my_info_email);
         my_info_email.SetContentText("邮箱");
         my_info_email.SetContentText(infoDTO.getEmail());
+    }
+
+
+    public static void GetGalllery(Context context, Banner banner)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String Cache = prefs.getString("GalleryCache","");
+        if(!Cache.equals(""))
+        {
+            List<ADBannerBean> CacheGallery = JSON.parseArray(Cache,ADBannerBean.class);
+            banner.setAdapter(new ADBannerAdapter(CacheGallery,context));
+            banner.addBannerLifecycleObserver((FragmentActivity)context);
+            banner.setIndicator(new RectangleIndicator(context));
+        }
+        if(!prefs.getString("GalleryCacheDate","").contains(LocalDate.now().toString()))
+        {
+            BackendUtils.GetGallery(context,banner);
+        }
     }
 }

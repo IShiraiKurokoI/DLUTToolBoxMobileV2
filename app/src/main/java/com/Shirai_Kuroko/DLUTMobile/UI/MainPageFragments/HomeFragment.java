@@ -62,15 +62,13 @@ public class HomeFragment extends Fragment {
         Banner banner = requireView().findViewById(R.id.banner);
         if(banner!=null)
         {
-            banner.setAdapter(new ADBannerAdapter(MobileUtils.GetGalllery(requireActivity()),requireActivity()));
-            banner.addBannerLifecycleObserver(requireActivity());
-            banner.setIndicator(new RectangleIndicator(requireActivity()));
+            MobileUtils.GetGalllery(requireActivity(),banner);
         }
     }
 
 
 
-    class MainGridAdapter extends BaseAdapter
+    public class MainGridAdapter extends BaseAdapter
     {
         private List<GridAppID> mList;
 
