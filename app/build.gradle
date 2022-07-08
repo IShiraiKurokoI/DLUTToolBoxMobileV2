@@ -36,7 +36,7 @@ android {
         minSdk 29
         targetSdk 31
         versionCode 1
-        versionName "1.1"
+        versionName "1.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -110,14 +110,11 @@ dependencies {
     implementation 'pub.devrel:easypermissions:3.0.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.13'
     implementation 'io.github.youth5201314:banner:2.2.2'
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     implementation 'io.github.lucksiege:pictureselector:v3.10.5'
-    // image compress library (Not necessary)
     implementation 'io.github.lucksiege:compress:v3.10.4'
-    // uCrop library (Not necessary)
     implementation 'io.github.lucksiege:ucrop:v3.10.4'
-    // simple camerax library (Not necessary)
     implementation 'io.github.lucksiege:camerax:v3.10.4'
 }
