@@ -21,7 +21,7 @@
                 android:id="@id/bg_view"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_marginTop="62.0dip"
+                android:layout_marginTop="110.0dip"
                 android:background="@drawable/bg_mine_panel" />
 
             <LinearLayout
@@ -32,14 +32,14 @@
                 <RelativeLayout
                     android:id="@id/head_panel"
                     android:layout_width="fill_parent"
-                    android:layout_height="230.0dip">
+                    android:layout_height="250.0dip">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/headimgwrap"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="23.0dip"
+                        android:layout_marginTop="71.0dip"
                         app:cardCornerRadius="39dp">
 
                         <ImageView

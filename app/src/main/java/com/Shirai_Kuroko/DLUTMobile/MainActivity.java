@@ -9,9 +9,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -29,19 +30,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
-    private static ActionBar bar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setNavigationBarColor(getResources().getColor(R.color.main_theme_color));
         com.Shirai_Kuroko.DLUTMobile.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        bar=getSupportActionBar();
-        if(bar!=null)
-        {
-            bar.setTitle("首页");
-            bar.setElevation(0);
-        }
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -74,14 +70,6 @@ public class MainActivity extends AppCompatActivity {
         {
             Log.i("", "重收信息");
             BackendUtils.ReSendUserInfo(this);
-        }
-    }
-
-    public static void SetActionBarTitle(String Title)
-    {
-        if(bar!=null)
-        {
-            bar.setTitle(Title);
         }
     }
 
@@ -124,5 +112,4 @@ public class MainActivity extends AppCompatActivity {
     public Resources getResources() {
         return MobileUtils.getResources(super.getResources());
     }
-
 }

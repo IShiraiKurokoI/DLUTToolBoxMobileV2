@@ -1,11 +1,7 @@
 package com.Shirai_Kuroko.DLUTMobile.UI.MainPageFragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,25 +14,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
-import com.Shirai_Kuroko.DLUTMobile.MainActivity;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.AboutActivity;
-import com.Shirai_Kuroko.DLUTMobile.UI.CardActivity;
-import com.Shirai_Kuroko.DLUTMobile.UI.GiftActivity;
-import com.Shirai_Kuroko.DLUTMobile.UI.PersonalInfoActivity;
-import com.Shirai_Kuroko.DLUTMobile.UI.ParentBindActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.AccountSafeActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.CardActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.FeedbackActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.GiftActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.ParentBindActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.PersonalInfoActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.SettingsActivity;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
-
-import java.util.Arrays;
-import java.util.Date;
 
 public class MeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        MainActivity.SetActionBarTitle("");
         return inflater.inflate(R.layout.fragment_me, container, false);
     }
 
@@ -71,15 +63,8 @@ public class MeFragment extends Fragment {
         });
         Button button_Feedback = requireActivity().requireViewById(R.id.button_Feedback);//发送反馈邮件
         button_Feedback.setOnClickListener(v -> {
-            Intent email = new Intent(Intent.ACTION_SEND);
-            email.putExtra(Intent.EXTRA_EMAIL, new String[]{"ishirai_kurokoi@foxmail.com"});
-            String Date ="日期: " + new Date().toLocaleString();
-            String Version ="\n程序版本: "+ getAppVersionName(getContext());
-            String OSVersion = "\nAndroid系统版本: " +getSdkVersion();
-            email.putExtra(Intent.EXTRA_SUBJECT, Arrays.toString(new String[]{"i大工+使用反馈"}));
-            email.putExtra(Intent.EXTRA_TEXT, Date+Version+OSVersion);
-            email.setType("message/rfc822");
-            startActivity(Intent.createChooser(email, "选择您想发送反馈的邮件客户端"));
+            Intent intent = new Intent(getActivity(), FeedbackActivity.class);
+            startActivity(intent);
         });
         Button button_Setting = requireActivity().requireViewById(R.id.button_Setting);//打开设置界面
         button_Setting.setOnClickListener(v -> {
@@ -113,34 +98,14 @@ public class MeFragment extends Fragment {
         TextView StudentOrg = requireView().findViewById(R.id.parent_org);
         TextView StudentScore = requireView().findViewById(R.id.tv_score);
         MobileUtils.InitializeMeFragmentInfo(StudentHeader,StudentName,StudentSex,StudentIdentity,StudentOrg,StudentScore,requireContext());
+
     }
+
     @Override
     public void onResume() {
         super.onResume();
         UIInitialize();
-        MainActivity.SetActionBarTitle("");
     }
-
-    public static String getAppVersionName(Context context) {
-        String versionName = "";
-        try {
-            // ---get the package info---
-            PackageManager pm = context.getPackageManager();
-            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
-            versionName = pi.versionName;
-            if (versionName == null || versionName.length() <= 0) {
-                return "";
-            }
-        } catch (Exception e) {
-            Log.e("VersionInfo", "Exception", e);
-        }
-        return versionName;
-    }
-
-    public static String getSdkVersion() {
-        return android.os.Build.VERSION.RELEASE;
-    }
-
 
 
     @Override

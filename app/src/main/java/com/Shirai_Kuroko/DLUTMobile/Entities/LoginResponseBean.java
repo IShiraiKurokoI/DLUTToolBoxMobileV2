@@ -48,6 +48,26 @@ public class LoginResponseBean {
         @JsonProperty("expires_skey")
         private String expires_skey;
 
+        public String getPword() {
+            return pword;
+        }
+
+        public void setPword(String pword) {
+            this.pword = pword;
+        }
+
+        public void setCas_IS_EXPIRED_PWD(String cas_IS_EXPIRED_PWD) {
+            this.cas_IS_EXPIRED_PWD = cas_IS_EXPIRED_PWD;
+        }
+
+        public void setUSER_FIRST_LOGIN(String USER_FIRST_LOGIN) {
+            this.USER_FIRST_LOGIN = USER_FIRST_LOGIN;
+        }
+
+        public void setTgtinfo(List<TgtinfoDTO> tgtinfo) {
+            this.tgtinfo = tgtinfo;
+        }
+
         public MyInfoDTO getMy_info() {
             return my_info;
         }
@@ -148,6 +168,10 @@ public class LoginResponseBean {
                 return name;
             }
 
+            public void setHead(String head) {
+                this.head = head;
+            }
+
             public String getNick_name() {
                 return nick_name;
             }
@@ -214,6 +238,18 @@ public class LoginResponseBean {
 
             public String getUser_id() {
                 return user_id;
+            }
+
+            public void setSkey(String skey) {
+                this.skey = skey;
+            }
+
+            public void setExpires_skey(String expires_skey) {
+                this.expires_skey = expires_skey;
+            }
+
+            public String getExpires_skey() {
+                return expires_skey;
             }
 
             @NoArgsConstructor

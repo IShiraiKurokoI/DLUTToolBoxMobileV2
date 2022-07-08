@@ -23,7 +23,9 @@ public class CacheManager {
             cacheSize += getFolderSize(context.getExternalCacheDir());
         }
         cacheSize+=getFolderSize(context.getExternalFilesDir("Share"));
+        cacheSize+=getFolderSize(context.getExternalFilesDir("Crop"));
         Log.i("分享图片缓存目录：", context.getExternalFilesDir("Share").toString());
+        Log.i("头像上传缓存目录：", context.getExternalFilesDir("Crop").toString());
         return getFormatSize(cacheSize);
     }
 
@@ -32,6 +34,7 @@ public class CacheManager {
 
         deleteDir(context.getCacheDir());
         deleteDir(context.getExternalFilesDir("Share"));
+        deleteDir(context.getExternalFilesDir("Crop"));
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             deleteDir(context.getExternalCacheDir());
         }

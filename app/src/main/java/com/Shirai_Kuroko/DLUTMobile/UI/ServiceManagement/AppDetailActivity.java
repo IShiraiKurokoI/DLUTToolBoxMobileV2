@@ -12,14 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
-import com.Shirai_Kuroko.DLUTMobile.R;
-import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.BrowserActivity;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
+import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.BrowserActivity;
 import com.bumptech.glide.Glide;
 
 public class AppDetailActivity extends AppCompatActivity {
@@ -37,12 +36,10 @@ public class AppDetailActivity extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         ThemeType = prefs.getBoolean("Dark",false);
         thisapp = ConfigHelper.getmlist(this).get(numid);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowTitleEnabled(true);
-            actionBar.setTitle(thisapp.getAppName());
-        }
+        TextView Return = requireViewById(R.id.iv_back);
+        Return.setOnClickListener(v -> finish());
+        TextView title = requireViewById(R.id.tv_title);
+        title.setText(thisapp.getAppName());
         ImageView di = findViewById(R.id.DetailImage);
         Glide.with(this).load(thisapp.getIcon()).into(di);
         TextView dt =findViewById(R.id.DetailName);

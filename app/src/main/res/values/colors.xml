@@ -62,4 +62,5 @@
     <color name="idg_theme_color">#ff0073bd</color>
     <color name="idg_white_btn_text_nor">#ff0073bd</color>
     <color name="idg_white_btn_text_pre">#ff005c97</color>
+    <color name="comment_edit_hint">#ff8d8d8d</color>
 </resources>

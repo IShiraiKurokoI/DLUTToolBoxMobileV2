@@ -16,17 +16,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.Shirai_Kuroko.DLUTMobile.Adapters.ADBannerAdapter;
 import com.Shirai_Kuroko.DLUTMobile.Entities.GridAppID;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
-import com.Shirai_Kuroko.DLUTMobile.MainActivity;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.BrowserActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.ServiceManagement.AppGridManageActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.ServiceManagement.AppcenterActivity;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
-import com.youth.banner.indicator.RectangleIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +35,6 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        MainActivity.SetActionBarTitle("首页");
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -64,6 +61,14 @@ public class HomeFragment extends Fragment {
         {
             MobileUtils.GetGalllery(requireActivity(),banner);
         }
+        ImageView imageView = requireView().findViewById(R.id.iv_search);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(requireActivity(), AppcenterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

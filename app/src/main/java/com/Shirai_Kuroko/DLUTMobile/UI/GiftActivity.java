@@ -1,12 +1,12 @@
 package com.Shirai_Kuroko.DLUTMobile.UI;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.Shirai_Kuroko.DLUTMobile.R;
 
@@ -16,13 +16,9 @@ public class GiftActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gift);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowTitleEnabled(true);
-            actionBar.setTitle("积分换礼");
-        }
-        Toast.makeText(this, "此界面尚未实现！", Toast.LENGTH_SHORT).show();
+        TextView Return = requireViewById(R.id.iv_back);
+        Return.setOnClickListener(v -> finish());
+        Toast.makeText(this,"抱歉，此功能暂未实现！",Toast.LENGTH_SHORT).show();
     }
 
     @Override

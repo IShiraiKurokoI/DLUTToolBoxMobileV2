@@ -9,6 +9,7 @@ import androidx.preference.PreferenceManager;
 
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
 import com.Shirai_Kuroko.DLUTMobile.Entities.GridAppID;
+import com.Shirai_Kuroko.DLUTMobile.Entities.IDPhotoResult;
 import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Entities.NotificationPayload;
 import com.Shirai_Kuroko.DLUTMobile.Entities.UserScoreBean;
@@ -249,5 +250,20 @@ public class ConfigHelper {
     {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         prefs.edit().putString("UserScoreBean",json).apply();
+    }
+
+    public static IDPhotoResult GetIDPhoto(Context context)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String Json = prefs.getString("IDPhotoResult", "");
+        IDPhotoResult idPhotoResult = new IDPhotoResult();
+        idPhotoResult = JSON.parseObject(Json,IDPhotoResult.class);
+        return idPhotoResult;
+    }
+
+    public static void SaveIDPhoto(Context context,String json)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.edit().putString("IDPhotoResult",json).apply();
     }
 }

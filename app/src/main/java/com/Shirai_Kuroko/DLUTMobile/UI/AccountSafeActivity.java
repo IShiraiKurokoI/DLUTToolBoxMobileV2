@@ -1,48 +1,50 @@
 package com.Shirai_Kuroko.DLUTMobile.UI;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
+import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.Shirai_Kuroko.DLUTMobile.Widgets.LoadingView;
 
 public class AccountSafeActivity extends AppCompatActivity {
 
     private WebView webView;
     private LoadingView loadingView;
+    private Context context;
     @SuppressLint({"SetJavaScriptEnabled", "NewApi"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_safe);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowTitleEnabled(true);
-            actionBar.setTitle("账号安全");
-        }
+        context=this;
+        TextView Return = requireViewById(R.id.iv_back);
+        Return.setOnClickListener(v -> finish());
         loadingView= new LoadingView(this,R.style.CustomDialog);
         loadingView.show();
         webView = findViewById(R.id.SecurityWebView);
-        webView.loadUrl("https://portal.dlut.edu.cn/tp_core/h5?act=sys/uacm/profileResetPwd");
         webView.addJavascriptInterface(this,"android");//添加js监听 这样html就能调用客户端
         webView.setWebChromeClient(webChromeClient);
         webView.setWebViewClient(webViewClient);
@@ -63,6 +65,46 @@ public class AccountSafeActivity extends AppCompatActivity {
         //支持屏幕缩放
         webSettings.setSupportZoom(true);
         webSettings.setBuiltInZoomControls(true);
+        SyncCookie(this);
+        webView.loadUrl("https://portal.dlut.edu.cn/tp_core/h5?act=sys/uacm/profileResetPwd");
+    }
+
+    public void SyncCookie(Context context)
+    {
+        try {
+            final CookieManager instance = CookieManager.getInstance();
+            instance.setAcceptCookie(true);
+            LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
+            if(UserBean == null)
+            {
+                return;
+            }
+            LoginResponseBean.DataDTO.MyInfoDTO infoDTO = UserBean.getData().getMy_info();
+            String skey = infoDTO.getSkey();
+            final StringBuilder sb = new StringBuilder();
+            sb.append("whistlekey");
+            sb.append('=');
+            sb.append(skey);
+            instance.setCookie(".dlut.edu.cn", sb.toString());
+            instance.setCookie("api.dlut.edu.cn", sb.toString());
+            instance.setCookie("webvpn.dlut.edu.cn", sb.toString());
+            instance.setCookie("sso.dlut.edu.cn", sb.toString());
+            final StringBuilder sb3 = new StringBuilder();
+            sb3.append(UserBean.getData().getTgtinfo().get(0).getName());
+            sb3.append("=");
+            sb3.append(UserBean.getData().getTgtinfo().get(0).getValue());
+            sb3.append("; Max-Age=");
+            sb3.append("3600");
+            instance.setCookie(".dlut.edu.cn", sb3.toString());
+            instance.setCookie("api.dlut.edu.cn", sb3.toString());
+            instance.setCookie("webvpn.dlut.edu.cn", sb3.toString());
+            instance.setCookie("sso.dlut.edu.cn", sb3.toString());
+            instance.flush();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     //WebViewClient主要帮助WebView处理各种通知、请求事件
@@ -91,8 +133,18 @@ public class AccountSafeActivity extends AppCompatActivity {
             }
             else
             {
-                loadingView.dismiss();
+                    loadingView.dismiss();
             }
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+
+            if (request.getUrl().toString().contains("https://portal.dlut.edu.cn/tp_core/view?m=up#act=portal/viewhome"))
+            {
+                return true;
+            }
+            return super.shouldOverrideUrlLoading(view, request);
         }
 
         @Override
@@ -145,6 +197,7 @@ public class AccountSafeActivity extends AppCompatActivity {
         super.onDestroy();
         //释放资源
         webView.destroy();
+        BackendUtils.ReSendUserInfo(getBaseContext());
         webView=null;
     }
     @Override

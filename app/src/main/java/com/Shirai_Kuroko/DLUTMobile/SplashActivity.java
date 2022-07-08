@@ -39,7 +39,7 @@ public class SplashActivity extends AppCompatActivity {
         }
         Handler handler = new Handler();
         // 延迟SPLASH_DISPLAY_LENGHT时间然后跳转到MainActivity
-        int SPLASH_DISPLAY_LENGTH = 1000;
+        int SPLASH_DISPLAY_LENGTH = 2000;
         handler.postDelayed(() -> {
             Intent intent = new Intent(SplashActivity.this,
                     MainActivity.class);

@@ -13,6 +13,9 @@ pluginManagement {
         maven {
             url "https://s01.oss.sonatype.org/content/groups/public"
         }
+        maven {
+            url 'https://jitpack.io'
+        }
     }
 }
 dependencyResolutionManagement {
@@ -29,6 +32,9 @@ dependencyResolutionManagement {
         }
         maven {
             url "https://s01.oss.sonatype.org/content/groups/public"
+        }
+        maven {
+            url 'https://jitpack.io'
         }
     }
 }

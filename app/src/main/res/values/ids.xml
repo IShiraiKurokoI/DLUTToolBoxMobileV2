@@ -82,4 +82,18 @@
     <item name="sc_card" type="id" />
     <item name="iv_act_my_card_qrcode" type="id" />
     <item name="v_act_my_card_qrcode_refresh" type="id" />
+    <item name="iv_school_card" type="id" />
+    <item name="iv_school_card_head" type="id" />
+    <item name="tv_school_card_name" type="id" />
+    <item name="tv_school_card_second_line" type="id" />
+    <item name="tv_school_card_three_line" type="id" />
+    <item name="iv_school_card1" type="id" />
+    <item name="number_et" type="id" />
+    <item name="content_et" type="id" />
+    <item name="comment_words_limit" type="id" />
+    <item name="tv_feedback_qq_group" type="id" />
+    <item name="tv_search" type="id" />
+    <item name="iv_search" type="id" />
+    <item name="iv_title" type="id" />
+    <item name="iv_more" type="id" />
 </resources>

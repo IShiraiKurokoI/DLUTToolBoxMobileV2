@@ -16,18 +16,17 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
-import com.Shirai_Kuroko.DLUTMobile.MainActivity;
-import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
-import com.Shirai_Kuroko.DLUTMobile.UI.ServiceManagement.AppDetailActivity;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
+import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.UI.ServiceManagement.AppDetailActivity;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -62,7 +61,6 @@ public class ServiceCenterFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        MainActivity.SetActionBarTitle("服务大厅");
         UIInitialize();
     }
 
@@ -74,20 +72,24 @@ public class ServiceCenterFragment extends Fragment {
     {
         ListView mListView = requireView().findViewById(R.id.applistview);
         final LayoutInflater inflater = LayoutInflater.from(requireActivity());
+        @SuppressLint("InflateParams")
         View footview = inflater.inflate(R.layout.view_listfooter, null, false);
         mListView.addFooterView(footview);
         adapter = new MainListViewAdapter();
         View emptyView = requireView().findViewById(R.id.emptyview);
         mListView.setEmptyView(emptyView);
+        TextView Return = requireView().findViewById(R.id.iv_back);
+        Return.setOnClickListener(v -> getActivity().finish());
         if(nobar)
         {
             mListView.setPadding(0,0,0,0);
+            Return.setVisibility(View.VISIBLE);
         }
         mListView.setAdapter(adapter);
         mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                SearchView search;
+                androidx.appcompat.widget.SearchView search;
                 search= requireActivity().findViewById(R.id.search);
                 if(search!=null)
                 {
@@ -102,12 +104,12 @@ public class ServiceCenterFragment extends Fragment {
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
             }
         });
-        SearchView search;
+        androidx.appcompat.widget.SearchView search;
         search= requireActivity().findViewById(R.id.search);
         search.setIconifiedByDefault(false);
         search.setSubmitButtonEnabled(true);
         search.setQueryHint("查找");
-        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        search.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             //            单击搜索按钮时激发该方法
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -119,7 +121,7 @@ public class ServiceCenterFragment extends Fragment {
                 cleanbg();
                 LinearLayout l1 =requireActivity().findViewById(R.id.CatagoryLinear1);
                 l1.setBackgroundColor(CatagorySelected);
-                search.clearFocus();
+//                search.clearFocus();
                 return true;
             }
             @Override
@@ -373,7 +375,7 @@ public class ServiceCenterFragment extends Fragment {
 
     public void Refresh()
     {
-        SearchView search;
+        androidx.appcompat.widget.SearchView search;
         search= requireActivity().findViewById(R.id.search);
         String query = search.getQuery().toString();
         if (!TextUtils.isEmpty(query)){

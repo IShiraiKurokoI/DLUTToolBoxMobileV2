@@ -6,6 +6,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UI.MainPageFragments.HomeFragment"
     android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="56.0dip"
+        android:background="@color/main_theme_color"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0">
+
+        <ImageView
+            android:id="@id/iv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="16.0dip"
+            android:paddingRight="16.0dip"
+            android:src="@drawable/search_btn_sel"/>
+
+        <ImageView
+            android:id="@id/iv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/icon_first_page_logo" />
+
+        <ImageView
+            android:id="@id/iv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentEnd="true"
+            android:paddingLeft="16.0dip"
+            android:paddingRight="16.0dip"/>
+<!--        ToDO:增加右边的更多按钮-->
+    </RelativeLayout>
     <com.youth.banner.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"

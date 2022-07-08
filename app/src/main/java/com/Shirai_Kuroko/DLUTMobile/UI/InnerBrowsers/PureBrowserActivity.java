@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.CookieManager;
-import android.webkit.CookieSyncManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
@@ -94,7 +93,6 @@ public class PureBrowserActivity extends AppCompatActivity {
     public void SyncCookie(Context context)
     {
         try {
-            CookieSyncManager.createInstance(context);
             final CookieManager instance = CookieManager.getInstance();
             instance.setAcceptCookie(true);
             LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
@@ -111,6 +109,7 @@ public class PureBrowserActivity extends AppCompatActivity {
             instance.setCookie(".dlut.edu.cn", sb.toString());
             instance.setCookie("api.dlut.edu.cn", sb.toString());
             instance.setCookie("webvpn.dlut.edu.cn", sb.toString());
+            instance.setCookie("sso.dlut.edu.cn", sb.toString());
             final StringBuilder sb3 = new StringBuilder();
             sb3.append(UserBean.getData().getTgtinfo().get(0).getName());
             sb3.append("=");
@@ -120,6 +119,8 @@ public class PureBrowserActivity extends AppCompatActivity {
             instance.setCookie(".dlut.edu.cn", sb3.toString());
             instance.setCookie("api.dlut.edu.cn", sb3.toString());
             instance.setCookie("webvpn.dlut.edu.cn", sb3.toString());
+            instance.setCookie("sso.dlut.edu.cn", sb3.toString());
+            instance.flush();
         }
         catch (Exception e)
         {

@@ -91,4 +91,6 @@
     <string name="user_head">头像</string>
     <string name="friend_info_name">姓名</string>
     <string name="my_card_refresh_tips">每5分钟自动更新</string>
+    <string name="feedback_comment_et_hint">感谢您的宝贵建议...</string>
+    <string name="talk_comment_limit">140</string>
 </resources>

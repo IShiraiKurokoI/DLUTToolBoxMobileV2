@@ -17,6 +17,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -26,12 +27,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
@@ -44,6 +47,7 @@ import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Managers.CacheManager;
 import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.UI.PersonalInfoActivity;
 import com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView;
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
@@ -253,7 +257,7 @@ public class MobileUtils {
         ShareTextToFriend(context,"i大工+ \n民间自制增强版i大工\n下载地址：\nhttps://github.com/MuoRanLY/DLUTToolBoxMobileV2/releases/latest");
         Toast.makeText(context,"分享成功",Toast.LENGTH_SHORT).show();
     }
-
+    @SuppressWarnings("ALL")
     public static boolean BrowserSharePictureToFriend(Context context, WebView webView, ApplicationConfig thisapp,Bitmap bitmap)
     {
         try {
@@ -331,7 +335,7 @@ public class MobileUtils {
         }
         return false;
     }
-
+    @SuppressWarnings("ALL")
     public static boolean PureBrowserSharePictureToFriend(Context context, WebView webView, Bitmap bitmap)
     {
         try {
@@ -438,7 +442,7 @@ public class MobileUtils {
         res.updateConfiguration(config, res.getDisplayMetrics());
         return res;
     }
-
+    @SuppressWarnings("ALL")
     public static void ShareTextToFriend(Context context,String text)
     {
         try {
@@ -556,6 +560,10 @@ public class MobileUtils {
         }
         LoginResponseBean.DataDTO.MyInfoDTO infoDTO = UserBean.getData().getMy_info();
         Glide.with(context).load(infoDTO.getHead()).into(StudentHeader);
+        StudentHeader.setOnClickListener(view -> {
+            Intent intent = new Intent(context, PersonalInfoActivity.class);
+            context.startActivity(intent);
+        });
         StudentName.setText(infoDTO.getName());
         switch (infoDTO.getAuthority_identity())
         {
@@ -611,23 +619,31 @@ public class MobileUtils {
         ImageView user_head = head_panel.findViewById(R.id.user_head);
         user_head.setImageResource(R.drawable.me_defaulthead);
         Glide.with(context).load(infoDTO.getHead()).into(user_head);
-        head_panel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context,"修改头像",Toast.LENGTH_SHORT).show();
-            }
-        });
         PreferenceRightDetailView my_info_name = InfoScrollView.findViewById(R.id.my_info_name);
         my_info_name.SetContentText("学生姓名");
         my_info_name.SetContentText(infoDTO.getName());
         PreferenceRightDetailView my_info_nickname = InfoScrollView.findViewById(R.id.my_info_nickname);
         my_info_nickname.SetContentText("学生昵称");
         my_info_nickname.SetContentText(infoDTO.getNick_name());
-        my_info_nickname.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context,"修改昵称",Toast.LENGTH_SHORT).show();
-            }
+        my_info_nickname.setOnClickListener(view -> {
+            final EditText inputServer = new EditText(context);
+            inputServer.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50)});
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("输入新昵称").setView(inputServer)
+                    .setNegativeButton("取消", null);
+            inputServer.setText(infoDTO.getNick_name());
+            builder.setPositiveButton("确定", (dialog, which) -> {
+                String NewNickName = inputServer.getText().toString();
+                if(!NewNickName.isEmpty())
+                {
+                    BackendUtils.ChangeNickName(context,NewNickName,my_info_nickname);
+                }
+                else
+                {
+                    Toast.makeText(context,"不能设置空昵称！",Toast.LENGTH_SHORT).show();
+                }
+            });
+            builder.show();
         });
         PreferenceRightDetailView my_info_student_number = InfoScrollView.findViewById(R.id.my_info_student_number);
         my_info_student_number.SetContentText("学生学号");
@@ -666,7 +682,7 @@ public class MobileUtils {
         my_info_email.SetContentText(infoDTO.getEmail());
     }
 
-
+    @SuppressWarnings("ALL")
     public static void GetGalllery(Context context, Banner banner)
     {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);

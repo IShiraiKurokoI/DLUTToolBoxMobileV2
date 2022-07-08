@@ -8,17 +8,39 @@
         <item name="android:background">@color/main_theme_color</item>
     </style>
     <style name="login_btn">
-        <item name="android:textSize">18.0dip</item>
+        <item name="android:textSize">18.0sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@drawable/selector_bg_btn_login</item>
     </style>
     <style name="login_txt">
-        <item name="android:textSize">14.0dip</item>
+        <item name="android:textSize">14.0sp</item>
         <item name="android:textColor">@color/selector_login_txt_color</item>
         <item name="android:paddingLeft">10.0dip</item>
         <item name="android:paddingTop">20.0dip</item>
         <item name="android:paddingRight">10.0dip</item>
         <item name="android:paddingBottom">20.0dip</item>
         <item name="android:includeFontPadding">false</item>
+    </style>
+
+<style name="main_menu_photo_anim">
+        <item name="android:windowEnterAnimation">@anim/photo_dialog_in_anim</item>
+        <item name="android:windowExitAnimation">@anim/photo_dialog_out_anim</item>
+    </style>
+
+    <!--修改searchView字体颜色、大小-->
+    <style name="AppAutoCompleteTextView" parent="Widget.AppCompat.AutoCompleteTextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/gray</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorHighlightInverse">@color/white</item>
+        <item name="android:textColorHintInverse">@color/white</item>
+        <item name="android:textAppearance">@style/AutoCompleteTextAppearance</item>
+    </style>
+
+    <style name="AutoCompleteTextAppearance" parent="android:TextAppearance">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textColorHighlight">@color/white</item>
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>

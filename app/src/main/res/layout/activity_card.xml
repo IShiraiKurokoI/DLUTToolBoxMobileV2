@@ -61,21 +61,85 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
-        <com.Shirai_Kuroko.DLUTMobile.Widgets.SchoolCardView
-            android:id="@id/sc_card"
-            android:layout_width="0.0dip"
-            android:layout_height="0.0dip"
-            app:layout_constraintBottom_toBottomOf="@id/image_bg"
-            app:layout_constraintEnd_toEndOf="@id/image_bg"
-            app:layout_constraintStart_toStartOf="@id/image_bg"
-            app:layout_constraintTop_toTopOf="@id/image_bg" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/bg_school_card_shadow"
+            app:layout_constraintBottom_toBottomOf="@+id/image_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/image_bg"
+            app:layout_constraintVertical_bias="0"
+            app:cardCornerRadius="10dp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@id/iv_school_card"
+                android:layout_width="303.0dip"
+                android:layout_height="189.0dip"
+                android:background="@drawable/shape_bg_school_card"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_school_card_hor"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@id/iv_school_card_head"
+                android:layout_width="60dip"
+                android:layout_height="80.0dip"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16.0dip"
+                android:background="@drawable/icon_school_card_head_pic"
+                tools:ignore="ContentDescription" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/iv_school_card"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="18.0dip"
+                android:layout_toEndOf="@id/iv_school_card_head"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@id/tv_school_card_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:singleLine="true"
+                    android:textSize="12.0sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@id/tv_school_card_second_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.0dip"
+                    android:includeFontPadding="false"
+                    android:singleLine="true"
+                    android:textSize="12.0sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@id/tv_school_card_three_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.0dip"
+                    android:includeFontPadding="false"
+                    android:singleLine="true"
+                    android:textSize="12.0sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </RelativeLayout>
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <RelativeLayout
         android:id="@id/rl_act_my_card_qrcode_panel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        app:layout_constraintVertical_bias="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,7 +150,6 @@
             android:layout_width="@dimen/my_card_qrcode_size"
             android:layout_height="@dimen/my_card_qrcode_size"
             android:foregroundGravity="center_horizontal"
-            android:src="@drawable/icon_whistle_app_store_link_qr_code"
             tools:ignore="ContentDescription" />
 
         <View

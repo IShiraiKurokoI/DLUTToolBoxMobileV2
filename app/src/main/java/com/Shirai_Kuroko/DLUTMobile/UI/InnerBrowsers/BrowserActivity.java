@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.CookieManager;
-import android.webkit.CookieSyncManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
@@ -29,11 +28,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
+import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
 import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.QRCodeHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
-import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 import com.Shirai_Kuroko.DLUTMobile.Widgets.LoadingView;
 
@@ -62,6 +61,7 @@ public class BrowserActivity extends AppCompatActivity {
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setTitle(thisapp.getAppName());
         }
+        SyncCookie(this);
         webView = findViewById(R.id.BrowserWebView);
         loading = new LoadingView(this,R.style.CustomDialog);
         loading.show();
@@ -113,7 +113,6 @@ public class BrowserActivity extends AppCompatActivity {
         //背景透明
         webView.setBackgroundColor(0); // 设置背景色
         webView.getBackground().setAlpha(0); // 设置透明度 范围：0-255
-        SyncCookie(this);
         if(thisapp.getId()!=66)
         {
             webView.loadUrl(thisapp.getUrl());
@@ -122,12 +121,12 @@ public class BrowserActivity extends AppCompatActivity {
         {
             webView.loadUrl("https://news.dlut.edu.cn/ttgz.htm");
         }
+        SyncCookie(this);
     }
 
     public void SyncCookie(Context context)
     {
         try {
-            CookieSyncManager.createInstance(context);
             final CookieManager instance = CookieManager.getInstance();
             instance.setAcceptCookie(true);
             LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
@@ -144,6 +143,7 @@ public class BrowserActivity extends AppCompatActivity {
             instance.setCookie(".dlut.edu.cn", sb.toString());
             instance.setCookie("api.dlut.edu.cn", sb.toString());
             instance.setCookie("webvpn.dlut.edu.cn", sb.toString());
+            instance.setCookie("sso.dlut.edu.cn", sb.toString());
             final StringBuilder sb3 = new StringBuilder();
             sb3.append(UserBean.getData().getTgtinfo().get(0).getName());
             sb3.append("=");
@@ -153,6 +153,8 @@ public class BrowserActivity extends AppCompatActivity {
             instance.setCookie(".dlut.edu.cn", sb3.toString());
             instance.setCookie("api.dlut.edu.cn", sb3.toString());
             instance.setCookie("webvpn.dlut.edu.cn", sb3.toString());
+            instance.setCookie("sso.dlut.edu.cn", sb3.toString());
+            instance.flush();
         }
         catch (Exception e)
         {
@@ -161,7 +163,7 @@ public class BrowserActivity extends AppCompatActivity {
     }
 
     //WebViewClient主要帮助WebView处理各种通知、请求事件
-    private final WebViewClient webViewClient=new WebViewClient(){
+    public final WebViewClient webViewClient=new WebViewClient(){
         @Override
         public void onPageFinished(WebView view, String url) {//页面加载完成
             Log.i("加载完成", url);
@@ -174,7 +176,7 @@ public class BrowserActivity extends AppCompatActivity {
                 if(b)
                 {
                     Toast.makeText(getBaseContext(),"正在执行认证，请稍候喵",Toast.LENGTH_SHORT).show();
-                    view.evaluateJavascript("un.value='"+Un+"';pd.value='"+Pd+"';login()", value -> {
+                    view.evaluateJavascript("$(\"#un\").val('"+Un+"');$(\"#pd\").val('"+Pd+"');login()", value -> {
                     });
                 }
                 else
@@ -188,18 +190,29 @@ public class BrowserActivity extends AppCompatActivity {
             }
             if(url.contains("api.m.dlut.edu.cn/login?client_id="))//api自动认证
             {
-                if(b)
+                LoginResponseBean.DataDTO.MyInfoDTO myInfoDTO = ConfigHelper.GetUserBean(getBaseContext()).getData().getMy_info();
+                if(myInfoDTO!=null)
                 {
-                    Toast.makeText(getBaseContext(),"正在执行认证，请稍候喵",Toast.LENGTH_SHORT).show();
-                    view.evaluateJavascript("username.value='"+Un+"';password.value='"+Pd+"';submit.disabled='';submit.click()", value -> {
-                    });
-                }
-                else
+                    if(myInfoDTO.getSkey()!=null)
+                    {
+                        view.evaluateJavascript("getSsoKey('"+myInfoDTO.getSkey().replace("%3D","")+"')", value -> {
+                        });
+                    }
+                }else
                 {
-                    AlertDialog.Builder localBuilder = new AlertDialog.Builder(webView.getContext());
-                    localBuilder.setMessage("个人信息未配置完全，集成认证失败，请手动认证并前往设置界面补全信息！").setPositiveButton("确定",null);
-                    localBuilder.setCancelable(false);
-                    localBuilder.create().show();
+                    if(b)
+                    {
+                        Toast.makeText(getBaseContext(),"正在执行认证，请稍候喵",Toast.LENGTH_SHORT).show();
+                        view.evaluateJavascript("username.value='"+Un+"';password.value='"+Pd+"';submit.disabled='';submit.click()", value -> {
+                        });
+                    }
+                    else
+                    {
+                        AlertDialog.Builder localBuilder = new AlertDialog.Builder(webView.getContext());
+                        localBuilder.setMessage("个人信息未配置完全，集成认证失败，请手动认证并前往设置界面补全信息！").setPositiveButton("确定",null);
+                        localBuilder.setCancelable(false);
+                        localBuilder.create().show();
+                    }
                 }
                 return;
             }
@@ -413,7 +426,7 @@ public class BrowserActivity extends AppCompatActivity {
     }
 
     //WebChromeClient主要辅助WebView处理Javascript的对话框、网站图标、网站title、加载进度等
-    private final WebChromeClient webChromeClient=new WebChromeClient(){
+    public final WebChromeClient webChromeClient=new WebChromeClient(){
         //不支持js的alert弹窗，需要自己监听然后通过dialog弹窗
         @Override
         public boolean onJsAlert(WebView webView, String url, String message, JsResult result) {
@@ -456,7 +469,6 @@ public class BrowserActivity extends AppCompatActivity {
         super.onDestroy();
         //释放资源
         webView.destroy();
-        webView.clearHistory();
         webView=null;
     }
 

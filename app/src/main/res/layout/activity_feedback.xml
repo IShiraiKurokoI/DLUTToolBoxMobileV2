@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.FeedbackActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="56.0dip"
+        android:background="@color/main_theme_color"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0">
+
+        <TextView
+            android:id="@id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="16.0dip"
+            android:paddingRight="16.0dip"
+            android:text="@string/back_to"
+            android:textColor="@color/white"
+            app:drawableStartCompat="@drawable/notice_detail_back_sel" />
+
+        <TextView
+            android:id="@id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="问题反馈"
+            android:textColor="@color/white"
+            android:textSize="18.0sp"
+            tools:ignore="HardcodedText" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="52.0dip"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="16.0dip"
+            android:paddingRight="16.0dip">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="联系方式:"
+                android:textColor="@color/text_color_50"
+                android:textSize="14.0sp"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@id/number_et"
+                android:layout_width="fill_parent"
+                android:layout_height="44.0dip"
+                android:background="@null"
+                android:hint="邮箱（建议）/QQ/不填写"
+                android:inputType="text"
+                android:paddingLeft="10.0dip"
+                android:paddingRight="10.0dip"
+                android:singleLine="true"
+                android:textColor="#ff666666"
+                android:textColorHint="@color/text_color_bb"
+                android:textSize="14.0sp"
+                tools:ignore="Autofill,HardcodedText,TextFields" />
+        </LinearLayout>
+
+        <include layout="@layout/divider_hor" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center|start|top">
+
+            <EditText
+                android:id="@id/content_et"
+                android:maxLength="140"
+                android:layout_width="fill_parent"
+                android:layout_height="180.0dip"
+                android:background="@color/white"
+                android:gravity="center|start|top"
+                android:hint="@string/feedback_comment_et_hint"
+                android:minLines="7"
+                android:paddingLeft="16.0dip"
+                android:paddingTop="12.0dip"
+                android:paddingRight="16.0dip"
+                android:paddingBottom="32.0dip"
+                android:textColor="@color/text_color_66"
+                android:textColorHint="@color/text_color_bb"
+                android:textSize="12.0sp"
+                tools:ignore="Autofill"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@id/comment_words_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/content_et"
+                android:layout_alignBottom="@id/content_et"
+                android:layout_marginEnd="16.0dip"
+                android:layout_marginBottom="16.0dip"
+                android:includeFontPadding="false"
+                android:text="@string/talk_comment_limit"
+                android:textColor="@color/comment_edit_hint"
+                android:textSize="12.0sp" />
+        </RelativeLayout>
+
+        <include layout="@layout/divider_hor" />
+        <Button
+            android:id="@+id/Submit"
+            style="@style/AppButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="0dp"
+            android:text="提交"
+            android:textSize="24sp"
+            android:background="@color/main_theme_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="HardcodedText"
+            android:enabled="false"/>
+        <include layout="@layout/divider_hor" />
+        <TextView
+            android:id="@id/tv_feedback_qq_group"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16.0dip"
+            android:paddingTop="20.0dip"
+            android:text="作者邮箱：ishirai_kurokoi@foxmail.com"
+            android:textColor="@color/text_8d"
+            android:textSize="16.0sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

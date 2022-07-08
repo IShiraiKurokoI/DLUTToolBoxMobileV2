@@ -23,6 +23,7 @@
 -keep class com.sina.**{*;}
 -keep class com.mob.**{*;}
 -keep class com.bytedance.**{*;}
+-keep class com.getui.**{*;}
 -dontwarn cn.sharesdk.**
 -dontwarn com.sina.**
 -dontwarn com.mob.**
@@ -31,9 +32,12 @@
 -dontwarn com.alibaba.fastjson.**
 -keep class com.alibaba.fastjson.** { *; }
 
--dontwarn cn.sharesdk.**
--dontwarn com.sina.**
--dontwarn com.mob.**
-
 -keep class com.bytedance.**{*;}
 -keep class com.tencent.wework.api.** {*;}
+-keep class com.luck.picture.lib.** { *; }
+
+-keep class com.luck.lib.camerax.** { *; }
+
+-dontwarn com.yalantis.ucrop**
+-keep class com.yalantis.ucrop** { *; }
+-keep interface com.yalantis.ucrop** { *; }

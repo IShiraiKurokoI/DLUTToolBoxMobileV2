@@ -17,11 +17,13 @@
         <item name="colorAccent">@color/main_theme_color</item>
         <item name="android:textColor">@color/black</item>
         <item name="buttonStyle">@style/AppButton</item>
+        <item name="autoCompleteTextViewStyle">@style/AppAutoCompleteTextView</item>
     </style>
 
     <style name="Theme.I大工.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="autoCompleteTextViewStyle">@style/AppAutoCompleteTextView</item>
     </style>
 
     <style name="AppButton" parent="Widget.AppCompat.Button.Borderless.Colored">

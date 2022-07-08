@@ -3,13 +3,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/appcenterfragment">
-
-    <SearchView
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="86.0dip"
+        android:background="@color/main_theme_color"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0">
+        <TextView
+            android:id="@id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="18dp"
+            android:paddingLeft="16.0dip"
+            android:paddingRight="16.0dip"
+            android:textAlignment="center"
+            android:text="@string/back_to"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            app:drawableStartCompat="@drawable/notice_detail_back_sel" />
+        <TextView
+            android:id="@id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dp"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="@string/title_dashboard"/>
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/main_theme_color"
+            app:searchIcon="@drawable/btn_start_search_nor"
+            android:layout_marginTop="40dp"
+            app:goIcon="@color/transparent"
+            app:closeIcon="@drawable/selector_btn_login_et_clear"/>
+    </RelativeLayout>
 
     <HorizontalScrollView
         android:id="@+id/Catagory"
