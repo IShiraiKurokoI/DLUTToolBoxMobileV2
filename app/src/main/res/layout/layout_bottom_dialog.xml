@@ -18,6 +18,7 @@
             android:gravity="center"
             android:padding="15dp"
             android:text="相册"
+            android:textColor="@color/black"
             android:textSize="16sp"/>
 
         <View
@@ -33,6 +34,7 @@
             android:gravity="center"
             android:padding="15dp"
             android:text="拍照"
+            android:textColor="@color/black"
             android:textSize="16sp"/>
 
         <TextView
@@ -44,6 +46,7 @@
             android:gravity="center"
             android:padding="15dp"
             android:text="取消"
+            android:textColor="@color/black"
             android:textSize="16sp"/>
 
     </LinearLayout>

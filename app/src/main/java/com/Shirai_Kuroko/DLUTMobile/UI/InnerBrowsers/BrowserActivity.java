@@ -493,6 +493,11 @@ public class BrowserActivity extends AppCompatActivity {
             }
             case 1:
             {
+                if(webView.getOriginalUrl().contains("file"))
+                {
+                    Toast.makeText(this, "此页面无法在浏览器内打开", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
                 Intent intent= new Intent();
                 intent.setAction("android.intent.action.VIEW");
                 Uri content_url = Uri.parse(webView.getOriginalUrl());

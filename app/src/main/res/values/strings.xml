@@ -93,4 +93,8 @@
     <string name="my_card_refresh_tips">每5分钟自动更新</string>
     <string name="feedback_comment_et_hint">感谢您的宝贵建议...</string>
     <string name="talk_comment_limit">140</string>
+    <string name="wodejifen">我的积分</string>
+    <string name="outcome">本月支出</string>
+    <string name="xxxx">- -</string>
+    <string name="income">本月收入</string>
 </resources>

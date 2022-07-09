@@ -12,5 +12,10 @@
     <dimen name="login_tv_title_mini_margin_bottom">20.0dip</dimen>
     <dimen name="login_tv_title_mini_margin_top">16.0dip</dimen>
     <dimen name="login_tv_title_mini_text_size">15.0dip</dimen>
-    <dimen name="my_card_qrcode_size">120.0dip</dimen>
+    <dimen name="my_card_qrcode_size">120.0dip</dimen>    <dimen name="list_divider_margin">16.0dip</dimen>
+    <dimen name="list_item_content_padding">16.0dip</dimen>
+    <dimen name="list_item_header_margin_content">10.0dip</dimen>
+    <dimen name="list_item_header_size">48.0dip</dimen>
+    <dimen name="list_item_height">72.0dip</dimen>
+    <dimen name="list_item_icon_margin">10.0dip</dimen>
 </resources>

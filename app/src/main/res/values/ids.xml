@@ -96,4 +96,38 @@
     <item name="iv_search" type="id" />
     <item name="iv_title" type="id" />
     <item name="iv_more" type="id" />
+    <item name="iv_coin_gift_home" type="id" />
+    <item name="tv_my_score_gift_home" type="id" />
+    <item name="tv_gift_home_my_score" type="id" />
+    <item name="tv_gift_home_rank" type="id" />
+    <item name="ll_gift_home_income" type="id" />
+    <item name="tv_gift_home_income" type="id" />
+    <item name="ll_gift_home_pay" type="id" />
+    <item name="tv_gift_home_pay" type="id" />
+    <item name="iv_icon" type="id" />
+    <item name="Score_detail" type="id" />
+    <item name="tv_item_title" type="id" />
+    <item name="tv_item_txt" type="id" />
+    <item name="iv_item_gift_arrow" type="id" />
+    <item name="Gift_Record" type="id" />
+    <item name="Gift_Shop" type="id" />
+    <item name="Score_Rank" type="id" />
+    <item name="Score_lottery" type="id" />
+    <item name="tv_intro" type="id" />
+    <item name="iv_icon1" type="id" />
+    <item name="tv_item_title1" type="id" />
+    <item name="tv_item_txt1" type="id" />
+    <item name="iv_item_gift_arrow1" type="id" />
+    <item name="iv_icon2" type="id" />
+    <item name="tv_item_title2" type="id" />
+    <item name="tv_item_txt2" type="id" />
+    <item name="iv_item_gift_arrow2" type="id" />
+    <item name="iv_icon3" type="id" />
+    <item name="tv_item_title3" type="id" />
+    <item name="tv_item_txt3" type="id" />
+    <item name="iv_item_gift_arrow3" type="id" />
+    <item name="iv_icon4" type="id" />
+    <item name="tv_item_title4" type="id" />
+    <item name="tv_item_txt4" type="id" />
+    <item name="iv_item_gift_arrow4" type="id" />
 </resources>

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".UI.GiftActivity">
+
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="fill_parent"
@@ -26,7 +28,8 @@
             android:paddingRight="16.0dip"
             android:text="@string/back_to"
             android:textColor="@color/white"
-            app:drawableStartCompat="@drawable/notice_detail_back_sel" />
+            app:drawableStartCompat="@drawable/notice_detail_back_sel"
+            tools:ignore="RelativeOverlap" />
 
         <TextView
             android:id="@id/tv_title"
@@ -37,5 +40,389 @@
             android:textColor="@color/white"
             android:textSize="18.0sp"
             tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@id/tv_intro"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:paddingLeft="16.0dip"
+            android:paddingRight="16.0dip"
+            android:text="积分说明"
+            android:textColor="@color/white"
+            tools:ignore="HardcodedText" />
     </RelativeLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_theme_color"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="14.0dip">
+
+            <ImageView
+                android:id="@id/iv_coin_gift_home"
+                android:layout_width="45.0dip"
+                android:layout_height="50.0dip"
+                android:src="@drawable/icon_coin_gift_home_header"
+                tools:ignore="ContentDescription" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20.0dip"
+                android:layout_toEndOf="@id/iv_coin_gift_home"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@id/tv_my_score_gift_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:text="@string/wodejifen"
+                    android:textColor="#ffffffff"
+                    android:textSize="16.0sp" />
+
+                <TextView
+                    android:id="@id/tv_gift_home_my_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="2.0dip"
+                    android:includeFontPadding="false"
+                    android:text="@string/xxxx"
+                    android:textColor="#ffffffff"
+                    android:textSize="24.0sp"
+                    tools:ignore="RtlHardcoded" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@id/tv_gift_home_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15.0dip"
+            android:layout_marginBottom="21.0dip"
+            android:textColor="#ffffffff"
+            android:textSize="14.0sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="70.0dip"
+        android:background="#ff047bc7"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:weightSum="2.0">
+
+        <LinearLayout
+            android:id="@id/ll_gift_home_income"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="@string/income"
+                android:textColor="#ffd2daff"
+                android:textSize="14.0sp" />
+
+            <TextView
+                android:id="@id/tv_gift_home_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6.5dip"
+                android:includeFontPadding="false"
+                android:text="@string/xxxx"
+                android:textColor="#ffffffff"
+                android:textSize="17.0sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@id/ll_gift_home_pay"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/outcome"
+                android:textColor="#ffd2daff"
+                android:textSize="14.0sp" />
+
+            <TextView
+                android:id="@id/tv_gift_home_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6.5dip"
+                android:includeFontPadding="false"
+                android:text="@string/xxxx"
+                android:textColor="#ffffffff"
+                android:textSize="17.0sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@id/Score_detail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_marginStart="16.0dip"
+            android:src="@drawable/icon_score"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@id/tv_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_marginStart="8.0dip"
+            android:layout_toEndOf="@id/iv_icon"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="积分明细"
+            android:textColor="#ff505050"
+            android:textSize="14.0sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@id/tv_item_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_marginStart="8.0dip"
+            android:layout_toStartOf="@id/iv_item_gift_arrow"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#ff888888"
+            android:textSize="14.0sp"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageView
+            android:id="@id/iv_item_gift_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8.0dip"
+            android:layout_marginEnd="@dimen/list_item_content_padding"
+            android:src="@drawable/album_list_item_arrow_sel"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@id/Gift_Record"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@id/iv_icon1"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_marginStart="16.0dip"
+            android:src="@drawable/icon_gift_exchange_record"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@id/tv_item_title1"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_marginStart="8.0dip"
+            android:layout_toEndOf="@id/iv_icon1"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="兑换记录"
+            android:textColor="#ff505050"
+            android:textSize="14.0sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@id/tv_item_txt1"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_marginStart="8.0dip"
+            android:layout_toStartOf="@id/iv_item_gift_arrow1"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#ff888888"
+            android:textSize="14.0sp"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageView
+            android:id="@id/iv_item_gift_arrow1"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8.0dip"
+            android:layout_marginEnd="@dimen/list_item_content_padding"
+            android:src="@drawable/album_list_item_arrow_sel"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@id/Gift_Shop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@id/iv_icon2"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_marginStart="16.0dip"
+            android:src="@drawable/icon_gift_shop"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@id/tv_item_title2"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_marginStart="8.0dip"
+            android:layout_toEndOf="@id/iv_icon2"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="礼品商店"
+            android:textColor="#ff505050"
+            android:textSize="14.0sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@id/tv_item_txt2"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_marginStart="8.0dip"
+            android:layout_toStartOf="@id/iv_item_gift_arrow2"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#ff888888"
+            android:textSize="14.0sp"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageView
+            android:id="@id/iv_item_gift_arrow2"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8.0dip"
+            android:layout_marginEnd="@dimen/list_item_content_padding"
+            android:src="@drawable/album_list_item_arrow_sel"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@id/Score_Rank"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@id/iv_icon3"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_marginStart="16.0dip"
+            android:src="@drawable/icon_ranking_list"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@id/tv_item_title3"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_marginStart="8.0dip"
+            android:layout_toEndOf="@id/iv_icon3"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="排行榜"
+            android:textColor="#ff505050"
+            android:textSize="14.0sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@id/tv_item_txt3"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_marginStart="8.0dip"
+            android:layout_toStartOf="@id/iv_item_gift_arrow3"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#ff888888"
+            android:textSize="14.0sp"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageView
+            android:id="@id/iv_item_gift_arrow3"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8.0dip"
+            android:layout_marginEnd="@dimen/list_item_content_padding"
+            android:src="@drawable/album_list_item_arrow_sel"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@id/Score_lottery"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@id/iv_icon4"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_marginStart="16.0dip"
+            android:src="@drawable/icon_lottery"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@id/tv_item_title4"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_marginStart="8.0dip"
+            android:layout_toEndOf="@id/iv_icon4"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="积分抽奖"
+            android:textColor="#ff505050"
+            android:textSize="14.0sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@id/tv_item_txt4"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_marginStart="8.0dip"
+            android:layout_toStartOf="@id/iv_item_gift_arrow4"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#ff888888"
+            android:textSize="14.0sp"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageView
+            android:id="@id/iv_item_gift_arrow4"
+            android:layout_width="wrap_content"
+            android:layout_height="48.0dip"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8.0dip"
+            android:layout_marginEnd="@dimen/list_item_content_padding"
+            android:src="@drawable/album_list_item_arrow_sel"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>
