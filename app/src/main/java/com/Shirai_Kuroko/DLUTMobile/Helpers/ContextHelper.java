@@ -6,12 +6,12 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 
 public class ContextHelper extends Application {
-    private  static Context context;
+    private static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        context=getApplicationContext();
+        context = getApplicationContext();
         Resources res = super.getResources();
         Configuration config = new Configuration();
         config.setToDefaults();

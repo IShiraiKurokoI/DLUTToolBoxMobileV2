@@ -3,6 +3,7 @@ package com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -26,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
@@ -41,6 +43,7 @@ public class PureBrowserActivity extends AppCompatActivity {
     private WebView webView;
     private LoadingView loading;
     boolean NoTitle = false;
+
     @SuppressLint({"SetJavaScriptEnabled", "NewApi"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,22 +53,21 @@ public class PureBrowserActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String Url = intent.getStringExtra("Url");
         String Name = intent.getStringExtra("Name");
-        webView=findViewById(R.id.PureBrowser);
+        webView = findViewById(R.id.PureBrowser);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setTitle(Name);
         }
-        if(Objects.equals(Name, ""))
-        {
-            NoTitle=true;
+        if (Objects.equals(Name, "")) {
+            NoTitle = true;
         }
-        loading = new LoadingView(this,R.style.CustomDialog);
+        loading = new LoadingView(this, R.style.CustomDialog);
         loading.show();
         webView.setWebChromeClient(this.webChromeClient);
         webView.setWebViewClient(this.webViewClient);
-        WebSettings webSettings=webView.getSettings();
+        WebSettings webSettings = webView.getSettings();
         webSettings.setUserAgentString(getString(R.string.UserAgent));//设置默认UA
         webSettings.setJavaScriptEnabled(true);//允许使用js
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);//不使用缓存，只从网络获取数据.
@@ -88,17 +90,18 @@ public class PureBrowserActivity extends AppCompatActivity {
         webView.setBackgroundColor(Color.WHITE); // 设置背景色
         webView.getBackground().setAlpha(125); // 设置透明度 范围：0-255
         SyncCookie(this);
+        if (!Url.contains("rj")) {
+            loading.show();
+        }
         webView.loadUrl(Url);
     }
 
-    public void SyncCookie(Context context)
-    {
+    public void SyncCookie(Context context) {
         try {
             final CookieManager instance = CookieManager.getInstance();
             instance.setAcceptCookie(true);
             LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
-            if(UserBean == null)
-            {
+            if (UserBean == null) {
                 return;
             }
             LoginResponseBean.DataDTO.MyInfoDTO infoDTO = UserBean.getData().getMy_info();
@@ -122,43 +125,88 @@ public class PureBrowserActivity extends AppCompatActivity {
             instance.setCookie("webvpn.dlut.edu.cn", sb3.toString());
             instance.setCookie("sso.dlut.edu.cn", sb3.toString());
             instance.flush();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    private final WebViewClient webViewClient=new WebViewClient(){
+
+    private final WebViewClient webViewClient = new WebViewClient() {
         @Override
         public void onPageFinished(WebView view, String url) {//页面加载完成
             Log.i("加载完成", url);
             loading.dismiss();
-            if(NoTitle)
-            {
+            if (NoTitle) {
                 Objects.requireNonNull(getSupportActionBar()).setTitle(webView.getTitle());
             }
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+            String Un = prefs.getString("Username", "");
+            String Pd = prefs.getString("Password", "");
+            final boolean b = Un.length() * Pd.length() != 0;
+            if (url.contains("sso.dlut.edu.cn/cas/login?service=") || url.contains("webvpn.dlut.edu.cn%2Flogin%3Fcas_login%3Dtrue"))//sso自动认证
+            {
+                if (b) {
+                    Toast.makeText(getBaseContext(), "正在执行认证，请稍候喵", Toast.LENGTH_SHORT).show();
+                    view.evaluateJavascript("$(\"#un\").val('" + Un + "');$(\"#pd\").val('" + Pd + "');login()", value -> {
+                    });
+                } else {
+                    AlertDialog.Builder localBuilder = new AlertDialog.Builder(webView.getContext());
+                    localBuilder.setMessage("个人信息未配置完全，集成认证失败，请手动认证并前往设置界面补全信息！").setPositiveButton("确定", null);
+                    localBuilder.setCancelable(false);
+                    localBuilder.create().show();
+                }
+                return;
+            }
+            if (url.contains("api.m.dlut.edu.cn/login?client_id="))//api自动认证
+            {
+                LoginResponseBean.DataDTO.MyInfoDTO myInfoDTO = ConfigHelper.GetUserBean(getBaseContext()).getData().getMy_info();
+                if (myInfoDTO != null) {
+                    if (myInfoDTO.getSkey() != null) {
+                        view.evaluateJavascript("getSsoKey('" + myInfoDTO.getSkey().replace("%3D", "") + "')", value -> {
+                        });
+                    }
+                } else {
+                    if (b) {
+                        Toast.makeText(getBaseContext(), "正在执行认证，请稍候喵", Toast.LENGTH_SHORT).show();
+                        view.evaluateJavascript("username.value='" + Un + "';password.value='" + Pd + "';submit.disabled='';submit.click()", value -> {
+                        });
+                    } else {
+                        AlertDialog.Builder localBuilder = new AlertDialog.Builder(webView.getContext());
+                        localBuilder.setMessage("个人信息未配置完全，集成认证失败，请手动认证并前往设置界面补全信息！").setPositiveButton("确定", null);
+                        localBuilder.setCancelable(false);
+                        localBuilder.create().show();
+                    }
+                }
+                return;
+            }
+            if (url.contains("webvpn.dlut.edu.cn/login"))//webvpn跳转处理
+            {
+                view.evaluateJavascript("document.getElementById('cas-login').click()", value -> {
+                });
+                return;
+            }
+            webView.clearHistory();
         }
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {//页面开始加载
-            loading.show();//显示加载条
+            if (!url.contains("https://api.m.dlut.edu.cn/login?")) {
+                loading.show();//显示加载条
+            }
             Log.i("开始加载", url);//日志记录加载了什么页面
         }
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-            String url =request.getUrl().toString();
+            String url = request.getUrl().toString();
             //支付自动拉起外置应用
-            if(url.startsWith("weixin://")|| url.startsWith("alipays://") || url.startsWith("upwrp://"))
-            {
+            if (url.startsWith("weixin://") || url.startsWith("alipays://") || url.startsWith("upwrp://")) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.setData(request.getUrl());
                 startActivity(intent);
                 return true;
             }
-            if(!url.startsWith("http://")&&!url.startsWith("https://"))
-            {
+            if (!url.startsWith("http://") && !url.startsWith("https://")) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.setData(request.getUrl());
@@ -171,13 +219,13 @@ public class PureBrowserActivity extends AppCompatActivity {
     };
 
     //WebChromeClient主要辅助WebView处理Javascript的对话框、网站图标、网站title、加载进度等
-    private final WebChromeClient webChromeClient=new WebChromeClient(){
+    private final WebChromeClient webChromeClient = new WebChromeClient() {
         //不支持js的alert弹窗，需要自己监听然后通过dialog弹窗
         @Override
         public boolean onJsAlert(WebView webView, String url, String message, JsResult result) {
-            Log.i("TAG", "onJsAlert: "+message);
+            Log.i("TAG", "onJsAlert: " + message);
             AlertDialog.Builder localBuilder = new AlertDialog.Builder(webView.getContext());
-            localBuilder.setMessage(message).setPositiveButton("确定",null);
+            localBuilder.setMessage(message).setPositiveButton("确定", null);
             localBuilder.setCancelable(false);
             localBuilder.create().show();
             //注意:
@@ -192,8 +240,7 @@ public class PureBrowserActivity extends AppCompatActivity {
         @Override
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
-            if(NoTitle)
-            {
+            if (NoTitle) {
                 Objects.requireNonNull(getSupportActionBar()).setTitle(title);
             }
         }
@@ -209,7 +256,7 @@ public class PureBrowserActivity extends AppCompatActivity {
      * JS调用android的方法
      */
     @JavascriptInterface //仍然必不可少
-    public void  getClient(String str){
+    public void getClient(String str) {
 
     }
 
@@ -219,7 +266,9 @@ public class PureBrowserActivity extends AppCompatActivity {
         //释放资源
         webView.destroy();
         webView.clearHistory();
-        webView=null;
+        CookieManager.getInstance().removeAllCookies(null);
+        CookieManager.getInstance().flush();
+        webView = null;
     }
 
     /* 创建菜单 */
@@ -241,31 +290,28 @@ public class PureBrowserActivity extends AppCompatActivity {
                 webView.reload();
                 return true;
             }
-            case 1:
-            {
-                if(webView.getOriginalUrl().contains("file"))
-                {
+            case 1: {
+                if (webView.getOriginalUrl().contains("file")) {
                     Toast.makeText(this, "此页面无法在浏览器内打开", Toast.LENGTH_SHORT).show();
                     return false;
                 }
-                Intent intent= new Intent();
+                Intent intent = new Intent();
                 intent.setAction("android.intent.action.VIEW");
                 Uri content_url = Uri.parse(webView.getOriginalUrl());
                 intent.setData(content_url);
                 startActivity(intent);
                 return true;
             }
-            case 2:
-            {
+            case 2: {
                 float scale = webView.getScale();
                 int width = webView.getWidth();
                 int height = (int) (webView.getContentHeight() * scale + 0.5);
                 Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);//设置相应的图片质量
                 Canvas canvas = new Canvas(bitmap);
                 webView.draw(canvas);
-                Bitmap qr = QRCodeHelper.createQRCodeBitmap(webView.getOriginalUrl(),200,200,"UTF-8","H","0", Color.BLACK,Color.WHITE);
-                canvas.drawBitmap(qr,bitmap.getWidth()-210,bitmap.getHeight()-210,null);
-                return MobileUtils.PureBrowserSharePictureToFriend(this,webView,bitmap);
+                Bitmap qr = QRCodeHelper.createQRCodeBitmap(webView.getOriginalUrl(), 200, 200, "UTF-8", "H", "0", Color.BLACK, Color.WHITE);
+                canvas.drawBitmap(qr, bitmap.getWidth() - 210, bitmap.getHeight() - 210, null);
+                return MobileUtils.PureBrowserSharePictureToFriend(this, webView, bitmap);
             }
         }
         return super.onOptionsItemSelected(item);
@@ -274,11 +320,9 @@ public class PureBrowserActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if (webView.canGoBack()){//点击返回按钮的时候判断有没有上一页
+        if (webView.canGoBack()) {//点击返回按钮的时候判断有没有上一页
             webView.goBack(); // goBack()表示返回webView的上一页面
-        }
-        else
-        {
+        } else {
             super.onBackPressed();
         }
     }

@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.AboutActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.AccountSafeActivity;
@@ -32,14 +31,11 @@ public class MeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_me, container, false);
     }
 
-    public void UIInitialize()
-    {
+    public void UIInitialize() {
         Button button_Info;
         try {
             button_Info = getActivity().requireViewById(R.id.button_Info);//打开个人信息页面
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return;
         }
         button_Info.setOnClickListener(v -> {
@@ -81,24 +77,17 @@ public class MeFragment extends Fragment {
             Intent intent = new Intent(getActivity(), AboutActivity.class);
             startActivity(intent);
         });
-        if(ConfigHelper.GetThemeType(requireContext()))
-        {
-            View bg = requireActivity().findViewById(R.id.bg_view);
-            bg.setBackgroundResource(R.drawable.bg_mine_panel_dark);
-        }
         InfoInitialize();
     }
 
-    public void InfoInitialize()
-    {
+    public void InfoInitialize() {
         ImageView StudentHeader = requireView().findViewById(R.id.head);
         TextView StudentName = requireView().findViewById(R.id.name);
         ImageView StudentSex = requireView().findViewById(R.id.icon_sex);
         ImageView StudentIdentity = requireView().findViewById(R.id.icon_identity);
         TextView StudentOrg = requireView().findViewById(R.id.parent_org);
         TextView StudentScore = requireView().findViewById(R.id.tv_score);
-        MobileUtils.InitializeMeFragmentInfo(StudentHeader,StudentName,StudentSex,StudentIdentity,StudentOrg,StudentScore,requireContext());
-
+        MobileUtils.InitializeMeFragmentInfo(StudentHeader, StudentName, StudentSex, StudentIdentity, StudentOrg, StudentScore, requireContext());
     }
 
     @Override

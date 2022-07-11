@@ -25,7 +25,9 @@
         <item name="windowNoTitle">true</item>
         <item name="autoCompleteTextViewStyle">@style/AppAutoCompleteTextView</item>
     </style>
-
+    <style name="bg_view">
+        <item name="android:background">@drawable/bg_mine_panel</item>
+    </style>>
     <style name="AppButton" parent="Widget.AppCompat.Button.Borderless.Colored">
         <item name="android:textColor">@color/black</item>
     </style>

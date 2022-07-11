@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/dialog"
+    android:layout_width="240.0dip"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="40.0dip"
+    android:layout_marginRight="40.0dip"
+    android:background="@drawable/round_edge">
+
+    <TextView
+        android:id="@id/title"
+        android:layout_width="240.0dip"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="12.0dip"
+        android:textColor="@color/std_color_txt_A"
+        android:textSize="16.0dip" />
+
+    <TextView
+        android:id="@id/msg"
+        android:layout_width="240.0dip"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:gravity="center|top"
+        android:paddingLeft="20.0dip"
+        android:paddingTop="12.0dip"
+        android:paddingRight="20.0dip"
+        android:paddingBottom="12.0dip"
+        android:textColor="@color/std_color_txt_A"
+        android:textSize="12.0dip" />
+
+    <View
+        android:id="@id/divider"
+        android:layout_width="240.0dip"
+        android:layout_height="1.0px"
+        android:layout_below="@id/msg"
+        android:background="@drawable/divider_hor" />
+
+    <LinearLayout
+        android:layout_width="240.0dip"
+        android:layout_height="44.0dip"
+        android:layout_below="@id/divider"
+        android:divider="@drawable/divider_ver"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <Button
+            android:id="@id/ok"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/dialog_center_single_btn_sel"
+            android:textColor="@color/black"
+            android:textSize="16.0dip" />
+    </LinearLayout>
+</RelativeLayout>

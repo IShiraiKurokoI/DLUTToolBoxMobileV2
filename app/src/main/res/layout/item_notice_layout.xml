@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@id/tv_notice_time"
+        style="@style/tv_notice_time" />
+
+    <LinearLayout
+        android:id="@id/item_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <CheckBox
+            android:id="@id/card_view_check_box"
+            style="@style/notice_check_box" />
+
+        <LinearLayout
+            android:id="@id/popup_base_view"
+            style="@style/notice_card_view_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@id/tv_notice_title"
+                style="@style/tv_notice_title_lite"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@id/iv_notice_big"
+                style="@style/iv_notice_big"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"/>
+
+            <TextView
+                android:id="@id/tv_notice_desc"
+                style="@style/tv_notice_desc_style_lite"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

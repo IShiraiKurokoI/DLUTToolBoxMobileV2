@@ -32,35 +32,35 @@ public class GiftActivity extends AppCompatActivity {
         TextView Outcome = findViewById(R.id.tv_gift_home_pay);
         UserScoreBean userScoreBean = ConfigHelper.GetUserScoreBean(this);
         Score.setText(String.valueOf(userScoreBean.getData().getUser_points()));
-        Rank.setText("超过了全校"+userScoreBean.getData().getRank()+"的人");
+        Rank.setText("超过了全校" + userScoreBean.getData().getRank() + "的人");
         Income.setText(String.valueOf(userScoreBean.getData().getIn_points()));
         Outcome.setText(String.valueOf(userScoreBean.getData().getOut_points()));
-        BackendUtils.GetScore(this,Score,Rank,Income,Outcome);
+        BackendUtils.GetScore(this, Score, Rank, Income, Outcome);
         TextView tv_intro = findViewById(R.id.tv_intro);
         tv_intro.setOnClickListener(view -> {
-            Intent intent=new Intent(GiftActivity.this, PureBrowserActivity.class);
-            intent.putExtra("Name","积分说明");
-            intent.putExtra("Url","file:///android_asset/ScoreIntro.html");
+            Intent intent = new Intent(GiftActivity.this, PureBrowserActivity.class);
+            intent.putExtra("Name", "积分说明");
+            intent.putExtra("Url", "file:///android_asset/ScoreIntro.html");
             startActivity(intent);
         });
         RelativeLayout Score_detail = findViewById(R.id.Score_detail);
         Score_detail.setOnClickListener(view -> {
-            Intent intent=new Intent(GiftActivity.this, ScoreDetailActivity.class);
+            Intent intent = new Intent(GiftActivity.this, ScoreDetailActivity.class);
             startActivity(intent);
         });
         RelativeLayout Gift_Record = findViewById(R.id.Gift_Record);
         Gift_Record.setOnClickListener(view -> {
-            Intent intent=new Intent(GiftActivity.this, ExchangeRecordActivity.class);
+            Intent intent = new Intent(GiftActivity.this, ExchangeRecordActivity.class);
             startActivity(intent);
         });
         RelativeLayout Gift_Shop = findViewById(R.id.Gift_Shop);
         Gift_Shop.setOnClickListener(view -> {
-            Intent intent=new Intent(GiftActivity.this, GiftShopActivity.class);
+            Intent intent = new Intent(GiftActivity.this, GiftShopActivity.class);
             startActivity(intent);
         });
         RelativeLayout Score_Rank = findViewById(R.id.Score_Rank);
         Score_Rank.setOnClickListener(view -> {
-            Intent intent=new Intent(GiftActivity.this, ScoreRankActivity.class);
+            Intent intent = new Intent(GiftActivity.this, ScoreRankActivity.class);
             startActivity(intent);
         });
         RelativeLayout Score_lottery = findViewById(R.id.Score_lottery);

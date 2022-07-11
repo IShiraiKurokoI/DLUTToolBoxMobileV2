@@ -1,4 +1,4 @@
-package com.Shirai_Kuroko.DLUTMobile.Entities;
+package com.Shirai_Kuroko.DLUTMobile.Entities.Oringinal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

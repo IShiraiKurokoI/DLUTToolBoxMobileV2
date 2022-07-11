@@ -14,7 +14,8 @@
     <color name="GridBackColor">#8CE4F5FF</color>
     <color name="divider">#8C808080</color>
     <color name="transparent">#00000000</color>
-    <color name="transparent_half">#23000000</color>    <color name="text_50_white">#7fffffff</color>
+    <color name="transparent_half">#23000000</color>
+    <color name="text_50_white">#7fffffff</color>
     <color name="text_8d">#ff8d8d8d</color>
     <color name="text_color_0a8a52">#ff0a8a52</color>
     <color name="text_color_0dac67">#ff0dac67</color>
@@ -63,4 +64,35 @@
     <color name="idg_white_btn_text_nor">#ff0073bd</color>
     <color name="idg_white_btn_text_pre">#ff005c97</color>
     <color name="comment_edit_hint">#ff8d8d8d</color>
+    <color name="std_color_txt_A">#ff505050</color>
+    <color name="tx_color_0dac67">#ff0dac67</color>
+    <color name="tx_color_50">#ff505050</color>
+    <color name="tx_color_66">#ff666666</color>
+    <color name="tx_color_bb">#ffbbbbbb</color>
+    <color name="tx_color_cc">#ffcccccc</color>
+    <color name="bg_color_e6">#ffe6e6e6</color>
+    <color name="back_ground_color_f0">#fff0f0f0</color>
+    <color name="background_color_005c97">#ff005c97</color>
+    <color name="background_color_0073bd">#ff0073bd</color>
+    <color name="background_color_00_alpha_50">#7f000000</color>
+    <color name="background_color_0a8a52">#ff0a8a52</color>
+    <color name="background_color_0dac67">#ff0dac67</color>
+    <color name="background_color_29634a">#ff29634a</color>
+    <color name="background_color_83c4a7">#ff83c4a7</color>
+    <color name="background_color_alpha_30">#4fffffff</color>
+    <color name="background_color_b6">#ffb6b6b6</color>
+    <color name="background_color_cc">#ffcccccc</color>
+    <color name="background_color_d2">#ffd2d2d2</color>
+    <color name="background_color_dc">#ffdcdcdc</color>
+    <color name="background_color_e2">#ffe2e2e2</color>
+    <color name="background_color_e4f5ff">#ffe4f5ff</color>
+    <color name="background_color_e6">#ffe6e6e6</color>
+    <color name="background_color_ed">#ffededed</color>
+    <color name="background_color_f1">#fff1f1f1</color>
+    <color name="background_color_f1_70">#b2f1f1f1</color>
+    <color name="background_color_fa">#fffafafa</color>
+    <color name="background_color_fb">#fffbfbfb</color>
+    <color name="background_color_ff_alpha_50">#7fffffff</color>
+    <color name="background_color_fffcf1">#fffffcf1</color>
+    <color name="bg_color_f0">#fff0f0f0</color>
 </resources>

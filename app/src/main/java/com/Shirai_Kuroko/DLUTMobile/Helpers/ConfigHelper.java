@@ -1,10 +1,12 @@
 package com.Shirai_Kuroko.DLUTMobile.Helpers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.preference.PreferenceManager;
 
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
@@ -149,17 +151,6 @@ public class ConfigHelper {
         return mList;
     }
 
-    public static ArrayList<NotificationPayload> GetNotificationHistoryList(Context context)
-    {
-        ArrayList<NotificationPayload> mList;
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String PayloadHistory = prefs.getString("NotificationPayloadHistory","[]");
-        List<NotificationPayload> jsonlist = JSON.parseArray(PayloadHistory,NotificationPayload.class);
-        NotificationPayload[] nphs =jsonlist.toArray(new NotificationPayload[0]);
-        mList = new ArrayList<>(Arrays.asList(nphs));
-        return mList;
-    }
-
     public static void SaveNotificationPayloadPrefJson(Context context,String json)
     {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -175,7 +166,21 @@ public class ConfigHelper {
         NotificationPayload[] nphs =jsonlist.toArray(new NotificationPayload[0]);
         mList = new ArrayList<>(Arrays.asList(nphs));
         mList.add(JSON.parseObject(payload, NotificationPayload.class));
+        prefs.edit().putBoolean("unread",true).apply();
+        prefs.edit().putInt("unreadcount",prefs.getInt("unreadcount",0)+1).apply();
         SaveNotificationPayloadPrefJson(context,JSON.toJSONString(mList));
+        LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("com.Shirai_Kuroko.DLUTMobile.ReceivedNew"));
+    }
+
+    public static List<NotificationPayload> GetNotificationHistoryList(Context context)
+    {
+        ArrayList<NotificationPayload> mList;
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String PayloadHistory = prefs.getString("NotificationPayloadHistory","[]");
+        List<NotificationPayload> jsonlist = JSON.parseArray(PayloadHistory,NotificationPayload.class);
+        NotificationPayload[] nphs =jsonlist.toArray(new NotificationPayload[0]);
+        mList = new ArrayList<>(Arrays.asList(nphs));
+        return mList;
     }
 
     public static void SaveDebugInfoPrefJson(Context context,String json)

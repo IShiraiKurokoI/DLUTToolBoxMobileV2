@@ -32,6 +32,10 @@
         <item name="actionMenuTextColor">@color/main_theme_color</item>
     </style>
 
+    <style name="bg_view">
+        <item name="android:background">@drawable/bg_mine_panel_dark</item>
+    </style>>
+
     <!-- ActionBar styles -->
     <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar">
         <item name="android:background">@color/main_theme_color</item>

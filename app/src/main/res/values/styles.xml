@@ -4,9 +4,6 @@
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
-    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:background">@color/main_theme_color</item>
-    </style>
     <style name="login_btn">
         <item name="android:textSize">18.0sp</item>
         <item name="android:textColor">@color/white</item>
@@ -42,5 +39,98 @@
         <item name="android:textColorHint">@color/white</item>
         <item name="android:textColorHighlight">@color/white</item>
         <item name="android:textSize">16sp</item>
+    </style>
+    <style name="tv_gift_detail">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">#ff505050</item>
+        <item name="android:lines">1</item>
+    </style>
+    <style name="tv_notice_desc_style">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">@color/text_color_88</item>
+        <item name="android:id">@id/tv_notice_desc</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8.0dip</item>
+        <item name="android:text">description</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+    <style name="tv_notice_desc_style_lite" parent="@style/tv_notice_desc_style">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+    </style>
+    <style name="tv_notice_desc_style_special" parent="@style/tv_notice_desc_style_lite">
+        <item name="android:layout_marginBottom">10.0dip</item>
+    </style>
+    <style name="tv_notice_time">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">@color/text_color_ff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:background">@drawable/shape_notice_time_bg</item>
+        <item name="android:paddingLeft">10.0dip</item>
+        <item name="android:paddingRight">10.0dip</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">20.0dip</item>
+        <item name="android:layout_marginTop">12.0dip</item>
+        <item name="android:layout_marginBottom">6.0dip</item>
+        <item name="android:text">time</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+    <style name="tv_notice_title">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textColor">@color/text_color_50</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">21.0dip</item>
+        <item name="android:text">title</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+    <style name="tv_notice_title_lite" parent="@style/tv_notice_title">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+    </style>
+    <style name="notice_card_view_bg" parent="@style/notice_card_view_special_bg">
+        <item name="android:paddingBottom">12.0dip</item>
+    </style>
+    <style name="notice_card_view_special_bg">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">@drawable/shape_bg_message_card_view</item>
+        <item name="android:paddingLeft">10.0dip</item>
+        <item name="android:paddingTop">13.0dip</item>
+        <item name="android:paddingRight">10.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">6.0dip</item>
+    </style>
+    <style name="notice_check_box">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:paddingTop">16.0dip</item>
+        <item name="android:paddingRight">8.0dip</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">16.0dip</item>
+        <item name="android:button">@null</item>
+        <item name="android:drawableLeft">@drawable/item_notice_check_box_src</item>
+    </style>
+    <style name="notice_item_root_style">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">16.0dip</item>
+        <item name="android:layout_marginRight">16.0dip</item>
+    </style>
+    <style name="iv_notice_big">
+        <item name="android:layout_width">308.0dip</item>
+        <item name="android:layout_height">171.0dip</item>
+        <item name="android:layout_marginTop">12.0dip</item>
+        <item name="android:src">@drawable/icon_notice_default</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+    <style name="iv_notice_big_special" parent="@style/iv_notice_big">
+        <item name="android:layout_marginBottom">10.0dip</item>
     </style>
 </resources>

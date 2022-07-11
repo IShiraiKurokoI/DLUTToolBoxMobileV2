@@ -48,42 +48,36 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         GridView mgv = requireView().findViewById(R.id.main_grid);
         adapter = new MainGridAdapter();
-        if(mgv!=null)
-        {
+        if (mgv != null) {
             mgv.setAdapter(adapter);
-        }
-        else {
-            Toast.makeText(requireActivity(),"错误：未检测到主界面GridView",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(requireActivity(), "错误：未检测到主界面GridView", Toast.LENGTH_SHORT).show();
         }
 
         Banner banner = requireView().findViewById(R.id.banner);
-        if(banner!=null)
-        {
-            MobileUtils.GetGalllery(requireActivity(),banner);
+        if (banner != null) {
+            MobileUtils.GetGalllery(requireActivity(), banner);
         }
         ImageView imageView = requireView().findViewById(R.id.iv_search);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(requireActivity(), AppcenterActivity.class);
+                Intent intent = new Intent(requireActivity(), AppcenterActivity.class);
                 startActivity(intent);
             }
         });
     }
 
 
-
-    public class MainGridAdapter extends BaseAdapter
-    {
+    public class MainGridAdapter extends BaseAdapter {
         private List<GridAppID> mList;
 
-        public MainGridAdapter()
-        {
-            this.mList= ConfigHelper.GetGridIDList(requireContext());
+        public MainGridAdapter() {
+            this.mList = ConfigHelper.GetGridIDList(requireContext());
         }
 
         public void showallgriditems() {
-            ArrayList<GridAppID> gai =ConfigHelper.GetGridIDList(requireActivity());
+            ArrayList<GridAppID> gai = ConfigHelper.GetGridIDList(requireActivity());
             gai.add(new GridAppID(-1));
             mList = gai;
             notifyDataSetChanged();
@@ -103,6 +97,7 @@ public class HomeFragment extends Fragment {
         public long getItemId(int position) {
             return position;
         }
+
         @SuppressLint({"InflateParams", "SetTextI18n"})
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -111,8 +106,8 @@ public class HomeFragment extends Fragment {
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.main_grid_item, null);
                 // 实例化一个封装类GridItemView，并实例化它的域
                 gridItemView = new GridItemView();
-                gridItemView.Icon=convertView.findViewById(R.id.main_grid_icon);
-                gridItemView.Name=convertView.findViewById(R.id.main_grid_name);
+                gridItemView.Icon = convertView.findViewById(R.id.main_grid_icon);
+                gridItemView.Name = convertView.findViewById(R.id.main_grid_name);
                 // 将GridItemView对象传递给convertView
                 convertView.setTag(gridItemView);
             } else {
@@ -122,21 +117,18 @@ public class HomeFragment extends Fragment {
 
             // 获取到mList中指定索引位置的资源
             int id = mList.get(position).getId();
-            if(id!=-1)
-            {
+            if (id != -1) {
                 convertView.setOnClickListener(v -> {
-                    Intent intent=new Intent(requireContext(), BrowserActivity.class);
-                    intent.putExtra("App_ID",String.valueOf(id));
+                    Intent intent = new Intent(requireContext(), BrowserActivity.class);
+                    intent.putExtra("App_ID", String.valueOf(id));
                     startActivity(intent);
                 });
                 // 将资源传递给GridItemView的两个域对象
                 Glide.with(requireActivity()).load(ConfigHelper.getmlist(requireContext()).get(id).getIcon()).into(gridItemView.Icon);
                 gridItemView.Name.setText(ConfigHelper.getmlist(requireContext()).get(id).getAppName());
-            }
-            else
-            {
+            } else {
                 convertView.setOnClickListener(v -> {
-                    Intent intent=new Intent(requireContext(), AppGridManageActivity.class);
+                    Intent intent = new Intent(requireContext(), AppGridManageActivity.class);
                     startActivity(intent);
                 });
                 Glide.with(requireActivity()).load(R.drawable.app_center_pre).into(gridItemView.Icon);
@@ -154,8 +146,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(adapter!=null)
-        {
+        if (adapter != null) {
             adapter.showallgriditems();
         }
     }

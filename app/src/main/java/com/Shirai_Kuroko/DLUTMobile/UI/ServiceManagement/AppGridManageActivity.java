@@ -28,10 +28,11 @@ public class AppGridManageActivity extends AppCompatActivity {
     private RecyclerViewAdapter mAdapter;
     private ArrayList<GridAppID> mDatas = new ArrayList<>();
     private Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext=this;
+        mContext = this;
         setContentView(R.layout.activity_app_grid_manage);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -41,6 +42,7 @@ public class AppGridManageActivity extends AppCompatActivity {
         }
         init();
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -53,7 +55,7 @@ public class AppGridManageActivity extends AppCompatActivity {
     private void init() {
         Button btn = requireViewById(R.id.add_more);
         btn.setOnClickListener(v -> {
-            Intent intent =new Intent(mContext, AppcenterActivity.class);
+            Intent intent = new Intent(mContext, AppcenterActivity.class);
             startActivity(intent);
         });
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.ManageGrid);
@@ -79,7 +81,7 @@ public class AppGridManageActivity extends AppCompatActivity {
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 int fromPosition = viewHolder.getAdapterPosition();//得到拖动ViewHolder的position
                 int toPosition = target.getAdapterPosition();//得到目标ViewHolder的position
-                mDatas=ConfigHelper.GetGridIDList(mContext);
+                mDatas = ConfigHelper.GetGridIDList(mContext);
                 if (fromPosition < toPosition) {
                     for (int i = fromPosition; i < toPosition; i++) {
                         Collections.swap(mDatas, i, i + 1);
@@ -91,7 +93,7 @@ public class AppGridManageActivity extends AppCompatActivity {
                 }
                 mAdapter.notifyItemMoved(fromPosition, toPosition);
                 String json = JSON.toJSONString(mDatas);
-                ConfigHelper.SaveGridPrefJson(ContextHelper.getContext(),json);
+                ConfigHelper.SaveGridPrefJson(ContextHelper.getContext(), json);
                 return true;
             }
 

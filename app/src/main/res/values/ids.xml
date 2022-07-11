@@ -130,4 +130,38 @@
     <item name="tv_item_title4" type="id" />
     <item name="tv_item_txt4" type="id" />
     <item name="iv_item_gift_arrow4" type="id" />
+    <item name="dialog" type="id" />
+    <item name="msg" type="id" />
+    <item name="divider" type="id" />
+    <item name="ok" type="id" />
+    <item name="cancel" type="id" />
+    <item name="btn_delete_selected" type="id" />
+    <item name="btn_delete_text" type="id" />
+    <item name="rv_notice_list" type="id" />
+    <item name="refreshLayout" type="id" />
+    <item name="tv_chat_unread_tip" type="id" />
+    <item name="tv_tips_unread_new_msg" type="id" />
+    <item name="chat_list_info_panel" type="id" />
+    <item name="tv_notice_title" type="id" />
+    <item name="ll_flag_panel" type="id" />
+    <item name="file_sign" type="id" />
+    <item name="img_sign" type="id" />
+    <item name="receipt_sign" type="id" />
+    <item name="activity_location_time_panel" type="id" />
+    <item name="activity_time" type="id" />
+    <item name="activity_location" type="id" />
+    <item name="activity_location_plus" type="id" />
+    <item name="signature_panel" type="id" />
+    <item name="tv_notice_signature" type="id" />
+    <item name="tv_user_name" type="id" />
+    <item name="tv_datetime" type="id" />
+    <item name="v_list_item_divider" type="id" />
+    <item name="tv_time_bar" type="id" />
+    <item name="v_app_msg_flag" type="id" />
+    <item name="tv_notice_time" type="id" />
+    <item name="item_container" type="id" />
+    <item name="card_view_check_box" type="id" />
+    <item name="popup_base_view" type="id" />
+    <item name="iv_notice_big" type="id" />
+    <item name="tv_notice_desc" type="id" />
 </resources>

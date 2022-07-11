@@ -52,15 +52,15 @@ public class PersonalInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info);
         TextView Return = requireViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
-        MobileUtils.InitializePersonalInfo(this,requireViewById(R.id.InfoScrollView));
+        MobileUtils.InitializePersonalInfo(this, requireViewById(R.id.InfoScrollView));
         RelativeLayout head_panel = findViewById(R.id.head_panel);
         ImageView user_head = findViewById(R.id.user_head);
-        head_panel.setOnClickListener(view -> showPop(user_head,this));
+        head_panel.setOnClickListener(view -> showPop(user_head, this));
     }
 
     private PopupWindow pop;
 
-    private void showPop(ImageView head,Context context) {
+    private void showPop(ImageView head, Context context) {
         View bottomView = View.inflate(context, R.layout.layout_bottom_dialog, null);
         TextView mAlbum = bottomView.findViewById(R.id.tv_album);
         TextView mCamera = bottomView.findViewById(R.id.tv_camera);
@@ -99,25 +99,25 @@ public class PersonalInfoActivity extends AppCompatActivity {
                     Log.i(TAG, "沙盒路径:" + media.getSandboxPath());
                     Log.i(TAG, "裁剪宽高: " + media.getCropImageWidth() + "x" + media.getCropImageHeight());
                     Log.i(TAG, "文件大小: " + media.getSize());
-                    BackendUtils.UploadNewHead(context,head,media.getSandboxPath());
+                    BackendUtils.UploadNewHead(context, head, media.getSandboxPath());
                 }
             }
 
             @Override
             public void onCancel() {
-                Toast.makeText(context,"取消",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "取消", Toast.LENGTH_SHORT).show();
             }
         };
 
         @SuppressLint("NonConstantResourceId") View.OnClickListener clickListener = view -> {
-            String path = context.getExternalFilesDir(null).getAbsolutePath()+"/Crop";
+            String path = context.getExternalFilesDir(null).getAbsolutePath() + "/Crop";
             File dirFile = new File(path);
             if (!dirFile.exists()) {
                 //noinspection ResultOfMethodCallIgnored
                 dirFile.mkdirs();
             }
-            String Date =new Date().toLocaleString().replace(" ","");
-            String FilePath = path+"/"+Date+".jpg";
+            String Date = new Date().toLocaleString().replace(" ", "");
+            String FilePath = path + "/" + Date + ".jpg";
             Uri contentUri = FileProvider.getUriForFile(context, "com.Shirai_Kuroko.DLUTMobile.fileProvider", new File(FilePath));
             UCrop.Options options = new UCrop.Options();
             //设置压缩质量
@@ -125,7 +125,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
             //设置位图最大大小
             options.setMaxBitmapSize(1000);
             //宽高比
-            options.withAspectRatio(1,1);
+            options.withAspectRatio(1, 1);
             options.setToolbarTitle("裁剪头像图片");
             options.setFreeStyleCropEnabled(false);
             options.setCropOutputPathDir(path);
@@ -135,7 +135,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
             options.setRootViewBackgroundColor(getColor(R.color.main_theme_color));
             options.setStatusBarColor(getColor(R.color.main_theme_color));
             options.setCropOutputPathDir(path);
-            options.setAllowedGestures(UCropActivity.SCALE,UCropActivity.ROTATE,UCropActivity.NONE);
+            options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.ROTATE, UCropActivity.NONE);
             options.setShowCropGrid(false);
             options.setShowCropFrame(false);
             switch (view.getId()) {
@@ -151,7 +151,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
                                 // 注意* 如果你实现自己的裁剪库，需要在Activity的.setResult();
                                 // Intent中需要给MediaStore.EXTRA_OUTPUT，塞入裁剪后的路径；如果有额外数据也可以通过CustomIntentKey.EXTRA_CUSTOM_EXTRA_DATA字段存入；
 
-                                UCrop uCrop = UCrop.of(Uri.parse(dataSource.get(0).getPath()),contentUri);
+                                UCrop uCrop = UCrop.of(Uri.parse(dataSource.get(0).getPath()), contentUri);
                                 uCrop.setImageEngine(new UCropImageEngine() {
                                     @Override
                                     public void loadImage(Context context, String url, ImageView imageView) {
@@ -175,7 +175,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
                             .setCropEngine((fragment, currentLocalMedia, dataSource, requestCode) -> {
                                 // 注意* 如果你实现自己的裁剪库，需要在Activity的.setResult();
                                 // Intent中需要给MediaStore.EXTRA_OUTPUT，塞入裁剪后的路径；如果有额外数据也可以通过CustomIntentKey.EXTRA_CUSTOM_EXTRA_DATA字段存入；
-                                UCrop uCrop = UCrop.of(Uri.parse(dataSource.get(0).getPath()),contentUri);
+                                UCrop uCrop = UCrop.of(Uri.parse(dataSource.get(0).getPath()), contentUri);
                                 uCrop.setImageEngine(new UCropImageEngine() {
                                     @Override
                                     public void loadImage(Context context, String url, ImageView imageView) {

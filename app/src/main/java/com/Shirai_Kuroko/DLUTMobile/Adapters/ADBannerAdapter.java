@@ -2,7 +2,6 @@ package com.Shirai_Kuroko.DLUTMobile.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -19,6 +18,7 @@ import java.util.List;
 public class ADBannerAdapter extends BannerAdapter<ADBannerBean, ADBannerAdapter.BannerViewHolder> {
 
     private Context mContext;
+
     public ADBannerAdapter(List<ADBannerBean> mDatas, Context mContext) {
         //设置数据，也可以调用banner提供的方法,或者自己在adapter中实现
         super(mDatas);
@@ -40,14 +40,11 @@ public class ADBannerAdapter extends BannerAdapter<ADBannerBean, ADBannerAdapter
     @Override
     public void onBindView(BannerViewHolder holder, ADBannerBean data, int position, int size) {
         Glide.with(mContext).load(data.getPicUrl()).into(holder.imageView);
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(mContext, PureBrowserActivity.class);
-                intent.putExtra("Name","");
-                intent.putExtra("Url",data.getUrl());
-                mContext.startActivity(intent);
-            }
+        holder.imageView.setOnClickListener(view -> {
+            Intent intent = new Intent(mContext, PureBrowserActivity.class);
+            intent.putExtra("Name", "");
+            intent.putExtra("Url", data.getUrl());
+            mContext.startActivity(intent);
         });
     }
 

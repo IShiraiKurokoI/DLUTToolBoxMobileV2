@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="?attr/actionBarSize"
+    android:orientation="vertical"
     tools:context=".UI.MainPageFragments.NotificationsFragment">
+
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="fill_parent"
@@ -22,8 +25,89 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="18sp"
+            android:text="@string/title_notifications"
             android:textColor="@color/white"
-            android:text="@string/title_notifications"/>
+            android:textSize="18sp" />
     </RelativeLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relativeLayout2">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@id/rv_notice_list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@android:color/transparent"
+            android:overScrollMode="never"
+            android:scrollbarDefaultDelayBeforeFade="1"
+            android:scrollbars="vertical" />
+
+        <TextView
+            android:id="@id/tv_chat_unread_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/rv_notice_list"
+            android:layout_marginVertical="20dp"
+            android:layout_marginBottom="12.0dip"
+            android:layout_alignEnd="@id/rv_notice_list"
+            android:background="@drawable/tips_unread_new_msg_sel"
+            android:drawablePadding="2.0dip"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:paddingEnd="8.0dip"
+            android:text="10条新消息"
+            android:textColor="#ff0073bd"
+            android:textSize="12.0sp"
+            android:visibility="gone"
+            app:drawableStartCompat="@drawable/icon_new_msg_down"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <TextView
+            android:id="@id/tv_tips_unread_new_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/rv_notice_list"
+            android:layout_alignEnd="@id/rv_notice_list"
+            android:layout_marginVertical="20dp"
+            android:layout_marginTop="24.0dip"
+            android:background="@drawable/tips_unread_new_msg_sel"
+            android:drawablePadding="2.0dip"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:paddingEnd="8.0dip"
+            android:text="10条未读消息"
+            android:textColor="#ff0073bd"
+            android:textSize="12.0sp"
+            android:visibility="gone"
+            app:drawableStartCompat="@drawable/icon_new_msg_up"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/NoticeEmptyView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/icon_my_received_notice_empty"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:text="@string/NoNoticeYet" />
+    </LinearLayout>
+</RelativeLayout>

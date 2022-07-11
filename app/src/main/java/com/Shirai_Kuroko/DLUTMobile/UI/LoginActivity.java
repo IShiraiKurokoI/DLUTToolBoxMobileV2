@@ -1,6 +1,5 @@
 package com.Shirai_Kuroko.DLUTMobile.UI;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,29 +41,30 @@ public class LoginActivity extends AppCompatActivity {
     ImageView PasswordClear;
     TextView FindPassword;
     TextView PrivacyText;
-    boolean usr=false;
-    boolean pwd=false;
-    boolean pry=false;
+    boolean usr = false;
+    boolean pwd = false;
+    boolean pry = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext=this;
+        mContext = this;
         setContentView(R.layout.activity_login);
-        ActionBar actionBar =getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle("统一身份认证");
         }
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String Un = prefs.getString("Username","");
-        UserName=findViewById(R.id.et_login_user_name);
-        Password=findViewById(R.id.et_login_pwd);
-        Privacy= findViewById(R.id.PrivacyCheckbox);
-        Login=findViewById(R.id.btn_login);
-        UserNameClear=findViewById(R.id.iv_login_et_num_clear);
-        LoginInfo=findViewById(R.id.iv_login_i);
-        PasswordClear=findViewById(R.id.iv_login_et_pwd_clear);
-        FindPassword=findViewById(R.id.tv_login_find_pwd);
-        PrivacyText=findViewById(R.id.txt_privacy);
+        String Un = prefs.getString("Username", "");
+        UserName = findViewById(R.id.et_login_user_name);
+        Password = findViewById(R.id.et_login_pwd);
+        Privacy = findViewById(R.id.PrivacyCheckbox);
+        Login = findViewById(R.id.btn_login);
+        UserNameClear = findViewById(R.id.iv_login_et_num_clear);
+        LoginInfo = findViewById(R.id.iv_login_i);
+        PasswordClear = findViewById(R.id.iv_login_et_pwd_clear);
+        FindPassword = findViewById(R.id.tv_login_find_pwd);
+        PrivacyText = findViewById(R.id.txt_privacy);
         UserName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -78,12 +78,10 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                usr= s.length() != 0;
-                if(s.length()!=0)
-                {
+                usr = s.length() != 0;
+                if (s.length() != 0) {
                     UserNameClear.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     UserNameClear.setVisibility(View.INVISIBLE);
                 }
                 CheckState();
@@ -102,60 +100,57 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                pwd= s.length() != 0;
-                if(s.length()!=0)
-                {
+                pwd = s.length() != 0;
+                if (s.length() != 0) {
                     PasswordClear.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     PasswordClear.setVisibility(View.INVISIBLE);
                 }
                 CheckState();
             }
         });
         Privacy.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            pry=isChecked;
+            pry = isChecked;
             CheckState();
         });
-        LoginInfo.setOnClickListener(v -> Toast.makeText(mContext,"请使用统一身份认证系统中的职工号/学号和密码进行登陆",Toast.LENGTH_LONG).show());
+        LoginInfo.setOnClickListener(v -> Toast.makeText(mContext, "请使用统一身份认证系统中的职工号/学号和密码进行登陆", Toast.LENGTH_LONG).show());
         UserNameClear.setOnClickListener(v -> UserName.setText(""));
         PasswordClear.setOnClickListener(v -> Password.setText(""));
         Login.setOnClickListener(v -> {
-            if(Privacy.isChecked())
-            {
-                loading = new LoadingView(mContext,R.style.CustomDialog);
+            if (Privacy.isChecked()) {
+                loading = new LoadingView(mContext, R.style.CustomDialog);
                 loading.show();
-                prefs.edit().putString("Username",UserName.getText().toString()).apply();
-                prefs.edit().putString("Password",Password.getText().toString()).apply();
-                BackendUtils.LoginForLogin(this,UserName.getText().toString(),Password.getText().toString(),this,loading);
+                prefs.edit().putString("Username", UserName.getText().toString()).apply();
+                prefs.edit().putString("Password", Password.getText().toString()).apply();
+                BackendUtils.LoginForLogin(this, UserName.getText().toString(), Password.getText().toString(), this, loading);
             }
         });
         FindPassword.setOnClickListener(v -> {
-            Intent intent=new Intent(mContext, PureBrowserActivity.class);
-            intent.putExtra("Name","找回密码");
-            intent.putExtra("Url","https://sso.dlut.edu.cn/cas/pwd?ip=service.m.dlut.edu.cn&verify=null");
+            Intent intent = new Intent(mContext, PureBrowserActivity.class);
+            intent.putExtra("Name", "找回密码");
+            intent.putExtra("Url", "https://sso.dlut.edu.cn/cas/pwd?ip=service.m.dlut.edu.cn&verify=null");
             startActivity(intent);
         });
         PrivacyText.setText("已阅读并同意");
-        SpannableString spannableString1=new SpannableString("隐私政策");
+        SpannableString spannableString1 = new SpannableString("隐私政策");
         spannableString1.setSpan(new ClickableSpan() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(mContext, PureBrowserActivity.class);
-                intent.putExtra("Name","隐私政策");
-                intent.putExtra("Url","https://its.dlut.edu.cn/upload/app/privacy/index.html");
+                Intent intent = new Intent(mContext, PureBrowserActivity.class);
+                intent.putExtra("Name", "隐私政策");
+                intent.putExtra("Url", "https://its.dlut.edu.cn/upload/app/privacy/index.html");
                 startActivity(intent);
             }
         }, 0, spannableString1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         PrivacyText.append(spannableString1);
         PrivacyText.append("、");
-        SpannableString spannableString2=new SpannableString("服务协议");
+        SpannableString spannableString2 = new SpannableString("服务协议");
         spannableString2.setSpan(new ClickableSpan() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(mContext, PureBrowserActivity.class);
-                intent.putExtra("Name","服务协议");
-                intent.putExtra("Url","https://its.dlut.edu.cn/upload/app/agreements/index.html");
+                Intent intent = new Intent(mContext, PureBrowserActivity.class);
+                intent.putExtra("Name", "服务协议");
+                intent.putExtra("Url", "https://its.dlut.edu.cn/upload/app/agreements/index.html");
                 startActivity(intent);
             }
         }, 0, spannableString2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -164,10 +159,10 @@ public class LoginActivity extends AppCompatActivity {
         UserName.setText(Un);
     }
 
-    public void CheckState()
-    {
-        Login.setEnabled(usr&&pwd&&pry);
+    public void CheckState() {
+        Login.setEnabled(usr && pwd && pry);
     }
+
     /**
      * 禁止系统显示缩放
      */

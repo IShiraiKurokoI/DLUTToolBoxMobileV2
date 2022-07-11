@@ -706,7 +706,7 @@
     "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
     "describe": "教务系统的选课界面",
     "popularity": "16060060",
-    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login ",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
   },
   {
@@ -716,7 +716,7 @@
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/7B/ynZM2Vn7QI6AOQVDAAAZa-V0lMA6705172",
     "describe": "教务系统的考试信息",
     "popularity": "16060060",
-    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login ",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
   },
   {
@@ -726,7 +726,7 @@
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/08/ynZM2VkeVL2AGt4BAAAYlzvpSVo6550599",
     "describe": "教务系统主页",
     "popularity": "16060060",
-    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login ",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
   },
   {
@@ -736,7 +736,7 @@
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2VlUWLqADKhKAAAUi-vic4E4521607",
     "describe": "教务系统的成绩信息",
     "popularity": "16060060",
-    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login ",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
   },
   {
@@ -746,7 +746,7 @@
     "icon": "https://my.m.dlut.edu.cn/images/appicon/shejiao.png",
     "describe": "教务系统的评教系统",
     "popularity": "16060060",
-    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login ",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
   },
   {
@@ -756,7 +756,7 @@
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU-IiAPBCnAAAamt9Ip481490708",
     "describe": "教务系统的详细课表",
     "popularity": "16060060",
-    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login ",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
   },
   {
@@ -766,7 +766,7 @@
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU-IiAPBCnAAAamt9Ip481490708",
     "describe": "教务系统的班级课表",
     "popularity": "16060060",
-    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login ",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
   },
   {
@@ -776,7 +776,7 @@
     "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
     "describe": "教务系统的培养方案",
     "popularity": "16060060",
-    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
   },
   {
@@ -796,7 +796,7 @@
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/8D/ynZM2VomenWAeOXkAAANqO47Geg0182891",
     "describe": "开课信息查询（教务系统）",
     "popularity": "16060060",
-    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
   },
   {

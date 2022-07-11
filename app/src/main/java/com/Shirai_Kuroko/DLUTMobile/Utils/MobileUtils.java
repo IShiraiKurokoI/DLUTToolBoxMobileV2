@@ -1,6 +1,7 @@
 package com.Shirai_Kuroko.DLUTMobile.Utils;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -137,7 +138,7 @@ public class MobileUtils {
                 super.handleMessage(msg);
                 Toast.makeText(context,"发现新版本！",Toast.LENGTH_LONG).show();
                 ArrayList<String> list = (ArrayList<String>) msg.obj;   //实例化对接收数据
-                ShowUpdateDialog(context,list.get(0),list.get(1),list.get(2),list.get(3));//自定义的方法，真正需要参数的地方
+                ShowUpdateDialog(context,list.get(0),list.get(1),list.get(2),list.get(3),(Activity) context);//自定义的方法，真正需要参数的地方
             }
         };
         Layouthandler = new Handler() {
@@ -211,13 +212,13 @@ public class MobileUtils {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 ArrayList<String> list = (ArrayList<String>) msg.obj;   //实例化对接收数据
-                ShowUpdateDialog(context,list.get(0),list.get(1),list.get(2),list.get(3));//自定义的方法，真正需要参数的地方
+                ShowUpdateDialog(context,list.get(0),list.get(1),list.get(2),list.get(3),(Activity)context );//自定义的方法，真正需要参数的地方
             }
         };
     }
 
     @SuppressLint("SetTextI18n")
-    public static void ShowUpdateDialog(Context context, String version, String size, String content, String downloadUrl)
+    public static void ShowUpdateDialog(Context context, String version, String size, String content, String downloadUrl,Activity activity)
     {
         Dialog UpdateDialog =new Dialog(context, R.style.CustomDialog);
         @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(
@@ -246,6 +247,14 @@ public class MobileUtils {
         window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT,
                 android.view.WindowManager.LayoutParams.WRAP_CONTENT);
         UpdateDialog.setCanceledOnTouchOutside(false);
+        WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
+        lp.alpha = 0.5f;
+        activity.getWindow().setAttributes(lp);
+        UpdateDialog.setOnDismissListener(dialogInterface -> {
+            WindowManager.LayoutParams lp1 = activity.getWindow().getAttributes();
+            lp1.alpha = 1f;
+            activity.getWindow().setAttributes(lp1);
+        });
         UpdateDialog.show();
     }
 

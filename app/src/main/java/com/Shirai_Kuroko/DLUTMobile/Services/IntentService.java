@@ -1,9 +1,13 @@
 package com.Shirai_Kuroko.DLUTMobile.Services;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
+import androidx.preference.PreferenceManager;
+
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
+import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.igexin.sdk.GTIntentService;
 import com.igexin.sdk.message.GTCmdMessage;
 import com.igexin.sdk.message.GTTransmitMessage;
@@ -23,37 +27,35 @@ public class IntentService extends GTIntentService {
         final byte[] payload = msg.getPayload();
         if (payload != null) {
             final String str = new String(payload);
-            Log.i("个推", "收到推送信息"+str);
-            ConfigHelper.SaveDebugInfoPrefJson(context,str);
+            Log.i("个推SDK", "收到推送信息  " + str);
+            ConfigHelper.SaveDebugInfoPrefJson(context, str);
             try {
-                ConfigHelper.AddToNotificationHistoryList(context,str);
+                ConfigHelper.AddToNotificationHistoryList(context, str);
+            } catch (Exception e) {
+                Log.e("个推SDK", "Payload处理错误: ", e);
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+                prefs.edit().putString("Debuger", str).apply();
             }
-            catch (Exception e)
-            {
-                Log.e("Payload处理错误", ": ",e);
-            }
-        }
-        else
-        {
-            Log.i("个推", "收到空推送信息！");
+        } else {
+            Log.i("个推SDK", "收到空推送信息！");
         }
     }
 
     // 接收 cid
     @Override
     public void onReceiveClientId(Context context, String clientid) {
-        Log.i(TAG, "onReceiveClientId -> " + "clientid = " + clientid);
+        Log.i("个推SDK", "收到Clientid  " + clientid);
+        BackendUtils.SetClientID(context, clientid);
     }
 
     // cid 离线上线通知
     @Override
     public void onReceiveOnlineState(Context context, boolean online) {
-        Log.i(TAG, "receive online state changed --> isOnline = " + online);
+        Log.i("个推SDK", "在线状态变化  " + online);
     }
 
     // 各种事件处理回执
     @Override
     public void onReceiveCommandResult(Context context, GTCmdMessage cmdMessage) {
     }
-
 }

@@ -34,19 +34,19 @@ import java.util.List;
 
 public class ServiceCenterFragment extends Fragment {
 
-    private boolean nobar=false;
+    private boolean nobar = false;
 
     public ServiceCenterFragment() {
     }
 
     public ServiceCenterFragment(int id) {
-        if(id==1)
-        {
+        if (id == 1) {
             nobar = true;
         }
     }
 
     MainListViewAdapter adapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,12 +64,11 @@ public class ServiceCenterFragment extends Fragment {
         UIInitialize();
     }
 
-    private String catagoryfilter="";
-    public int CatagorySelected = Color.argb(140,228,245,255);
+    private String catagoryfilter = "";
+    public int CatagorySelected = Color.argb(140, 228, 245, 255);
 
     @SuppressLint("ResourceAsColor")
-    public void UIInitialize()
-    {
+    public void UIInitialize() {
         ListView mListView = requireView().findViewById(R.id.applistview);
         final LayoutInflater inflater = LayoutInflater.from(requireActivity());
         @SuppressLint("InflateParams")
@@ -80,9 +79,8 @@ public class ServiceCenterFragment extends Fragment {
         mListView.setEmptyView(emptyView);
         TextView Return = requireView().findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> getActivity().finish());
-        if(nobar)
-        {
-            mListView.setPadding(0,0,0,0);
+        if (nobar) {
+            mListView.setPadding(0, 0, 0, 0);
             Return.setVisibility(View.VISIBLE);
         }
         mListView.setAdapter(adapter);
@@ -90,11 +88,9 @@ public class ServiceCenterFragment extends Fragment {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 androidx.appcompat.widget.SearchView search;
-                search= requireActivity().findViewById(R.id.search);
-                if(search!=null)
-                {
-                    if(search.hasFocus())
-                    {
+                search = requireActivity().findViewById(R.id.search);
+                if (search != null) {
+                    if (search.hasFocus()) {
                         search.clearFocus();
                     }
                 }
@@ -105,7 +101,7 @@ public class ServiceCenterFragment extends Fragment {
             }
         });
         androidx.appcompat.widget.SearchView search;
-        search= requireActivity().findViewById(R.id.search);
+        search = requireActivity().findViewById(R.id.search);
         search.setIconifiedByDefault(false);
         search.setSubmitButtonEnabled(true);
         search.setQueryHint("查找");
@@ -113,26 +109,27 @@ public class ServiceCenterFragment extends Fragment {
             //            单击搜索按钮时激发该方法
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if (TextUtils.isEmpty(query)){
+                if (TextUtils.isEmpty(query)) {
                     adapter.showAllProduct();
-                }else {
+                } else {
                     adapter.getFilter().filter(query);
                 }
                 cleanbg();
-                LinearLayout l1 =requireActivity().findViewById(R.id.CatagoryLinear1);
+                LinearLayout l1 = requireActivity().findViewById(R.id.CatagoryLinear1);
                 l1.setBackgroundColor(CatagorySelected);
 //                search.clearFocus();
                 return true;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (TextUtils.isEmpty(newText)){
+                if (TextUtils.isEmpty(newText)) {
                     adapter.showAllProduct();
-                }else {
+                } else {
                     adapter.getFilter().filter(newText);
                 }
                 cleanbg();
-                LinearLayout l1 =requireActivity().findViewById(R.id.CatagoryLinear1);
+                LinearLayout l1 = requireActivity().findViewById(R.id.CatagoryLinear1);
                 l1.setBackgroundColor(CatagorySelected);
                 return true;
             }
@@ -144,40 +141,39 @@ public class ServiceCenterFragment extends Fragment {
         LinearLayout l5 = requireActivity().findViewById(R.id.CatagoryLinear5);
         LinearLayout l6 = requireActivity().findViewById(R.id.CatagoryLinear6);
         l1.setBackgroundColor(CatagorySelected);
-        l1.setOnClickListener(l->{
+        l1.setOnClickListener(l -> {
             adapter.getCatagoryFilter().filter("");
             cleanbg();
             l1.setBackgroundColor(CatagorySelected);
         });
-        l2.setOnClickListener(l->{
+        l2.setOnClickListener(l -> {
             adapter.getCatagoryFilter().filter("study");
             cleanbg();
             l2.setBackgroundColor(CatagorySelected);
         });
-        l3.setOnClickListener(l->{
+        l3.setOnClickListener(l -> {
             adapter.getCatagoryFilter().filter("office");
             cleanbg();
             l3.setBackgroundColor(CatagorySelected);
         });
-        l4.setOnClickListener(l->{
+        l4.setOnClickListener(l -> {
             adapter.getCatagoryFilter().filter("life");
             cleanbg();
             l4.setBackgroundColor(CatagorySelected);
         });
-        l5.setOnClickListener(l->{
+        l5.setOnClickListener(l -> {
             adapter.getCatagoryFilter().filter("social");
             cleanbg();
             l5.setBackgroundColor(CatagorySelected);
         });
-        l6.setOnClickListener(l->{
+        l6.setOnClickListener(l -> {
             adapter.getCatagoryFilter().filter("game");
             cleanbg();
             l6.setBackgroundColor(CatagorySelected);
         });
     }
 
-    private void cleanbg()
-    {
+    private void cleanbg() {
         LinearLayout l1 = requireActivity().findViewById(R.id.CatagoryLinear1);
         LinearLayout l2 = requireActivity().findViewById(R.id.CatagoryLinear2);
         LinearLayout l3 = requireActivity().findViewById(R.id.CatagoryLinear3);
@@ -196,9 +192,9 @@ public class ServiceCenterFragment extends Fragment {
 
         private List<ApplicationConfig> mList;
         private List<ApplicationConfig> mSearchList;
-        public MainListViewAdapter()
-        {
-            this.mList= ConfigHelper.getmlist(getActivity());
+
+        public MainListViewAdapter() {
+            this.mList = ConfigHelper.getmlist(getActivity());
             this.mSearchList = new ArrayList<>(mList);
         }
 
@@ -225,6 +221,7 @@ public class ServiceCenterFragment extends Fragment {
         public Filter getFilter() {
             return mFilter;
         }
+
         public Filter getCatagoryFilter() {
             return mCatagoryFilter;
         }
@@ -236,15 +233,15 @@ public class ServiceCenterFragment extends Fragment {
                 String str = constraint.toString().toLowerCase();
                 FilterResults results = new FilterResults();
                 List<ApplicationConfig> list = new ArrayList<>();
-                mList= ConfigHelper.getmlist(getActivity());
-                for(ApplicationConfig p : mList) {
-                    if(p.getAppName().contains(str)) {
+                mList = ConfigHelper.getmlist(getActivity());
+                for (ApplicationConfig p : mList) {
+                    if (p.getAppName().contains(str)) {
                         list.add(p);
                     }
                 }
                 results.values = list;
                 results.count = list.size();
-                Log.i("Debug", str+" 搜索结果数量"+results.count);
+                Log.i("Debug", str + " 搜索结果数量" + results.count);
                 return results;
             }
 
@@ -253,7 +250,7 @@ public class ServiceCenterFragment extends Fragment {
             protected void publishResults(CharSequence constraint,
                                           FilterResults results) {
                 mSearchList.clear();
-                mSearchList.addAll((ArrayList<ApplicationConfig>)results.values);
+                mSearchList.addAll((ArrayList<ApplicationConfig>) results.values);
                 if (results.count > 0) {
                     notifyDataSetChanged();
                 } else {
@@ -269,22 +266,20 @@ public class ServiceCenterFragment extends Fragment {
                 String str = constraint.toString().toLowerCase();
                 FilterResults results = new FilterResults();
                 List<ApplicationConfig> list = new ArrayList<>();
-                mList= ConfigHelper.getmlist(getActivity());
-                catagoryfilter=str;
-                if(str.equals(""))
-                {
-                    list=mList;
-                }
-                else {
-                    for(ApplicationConfig p : mList) {
-                        if(p.getCategory().equals(str)) {
+                mList = ConfigHelper.getmlist(getActivity());
+                catagoryfilter = str;
+                if (str.equals("")) {
+                    list = mList;
+                } else {
+                    for (ApplicationConfig p : mList) {
+                        if (p.getCategory().equals(str)) {
                             list.add(p);
                         }
                     }
                 }
                 results.values = list;
                 results.count = list.size();
-                Log.i("Debug", str+" 分类结果数量"+results.count);
+                Log.i("Debug", str + " 分类结果数量" + results.count);
                 return results;
             }
 
@@ -293,7 +288,7 @@ public class ServiceCenterFragment extends Fragment {
             protected void publishResults(CharSequence constraint,
                                           FilterResults results) {
                 mSearchList.clear();
-                mSearchList.addAll((ArrayList<ApplicationConfig>)results.values);
+                mSearchList.addAll((ArrayList<ApplicationConfig>) results.values);
                 if (results.count > 0) {
                     notifyDataSetChanged();
                 } else {
@@ -313,12 +308,12 @@ public class ServiceCenterFragment extends Fragment {
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.items, null);
                 // 实例化一个封装类ListItemView，并实例化它的域
                 listItemView = new ListItemView();
-                listItemView.Position_Num=convertView.findViewById(R.id.Position_Num);
+                listItemView.Position_Num = convertView.findViewById(R.id.Position_Num);
                 listItemView.App_ID = convertView.findViewById(R.id.App_ID);
                 listItemView.App_Icon = convertView.findViewById(R.id.App_Icon);
                 listItemView.App_Name = convertView.findViewById(R.id.App_Name);
                 listItemView.App_Describe = convertView.findViewById(R.id.App_Describe);
-                listItemView.Btn_Add_Remove=convertView.findViewById(R.id.Btn_Add_Remove);
+                listItemView.Btn_Add_Remove = convertView.findViewById(R.id.Btn_Add_Remove);
                 // 将ListItemView对象传递给convertView
                 convertView.setTag(listItemView);
             } else {
@@ -334,27 +329,22 @@ public class ServiceCenterFragment extends Fragment {
             // 将资源传递给ListItemView的两个域对象
             Glide.with(requireActivity()).load(mSearchList.get(position).getIcon()).into(listItemView.App_Icon);
             listItemView.App_Name.setText(title);
-            listItemView.Position_Num.setText(String.valueOf(position+1));
+            listItemView.Position_Num.setText(String.valueOf(position + 1));
             listItemView.App_ID.setText(Integer.toString(id));
             listItemView.App_Describe.setText(desc);
-            if(mSearchList.get(position).getIssubscription()==1)
-            {
+            if (mSearchList.get(position).getIssubscription() == 1) {
                 listItemView.Btn_Add_Remove.setBackgroundResource(R.drawable.btn_cancel_app);
-            }
-            else
-            {
+            } else {
                 listItemView.Btn_Add_Remove.setBackgroundResource(R.drawable.btn_add_app);
             }
             listItemView.Btn_Add_Remove.setOnClickListener(v -> {
                 TextView tv;
                 tv = listItemView.App_ID.findViewById(R.id.App_ID);
                 int App_ID = Integer.parseInt(tv.getText().toString());
-                if(ConfigHelper.getmlist(requireActivity()).get(App_ID).getIssubscription()==0)
-                {
-                    ConfigHelper.addsubscription(requireActivity(),App_ID);
-                }
-                else {
-                    ConfigHelper.removesubscription(requireActivity(),App_ID);
+                if (ConfigHelper.getmlist(requireActivity()).get(App_ID).getIssubscription() == 0) {
+                    ConfigHelper.addsubscription(requireActivity(), App_ID);
+                } else {
+                    ConfigHelper.removesubscription(requireActivity(), App_ID);
                 }
                 Refresh();
             });
@@ -363,34 +353,29 @@ public class ServiceCenterFragment extends Fragment {
     }
 
     public void onClick(View v) {
-        SearchView search= requireActivity().findViewById(R.id.search);
+        SearchView search = requireActivity().findViewById(R.id.search);
         search.clearFocus();
         TextView tv;
         tv = v.findViewById(R.id.App_ID);
         int App_ID = Integer.parseInt(tv.getText().toString());
-        Intent intent=new Intent(getActivity(), AppDetailActivity.class);
+        Intent intent = new Intent(getActivity(), AppDetailActivity.class);
         intent.putExtra("App_ID", App_ID);
         startActivity(intent);
     }
 
-    public void Refresh()
-    {
+    public void Refresh() {
         androidx.appcompat.widget.SearchView search;
-        search= requireActivity().findViewById(R.id.search);
+        search = requireActivity().findViewById(R.id.search);
         String query = search.getQuery().toString();
-        if (!TextUtils.isEmpty(query)){
+        if (!TextUtils.isEmpty(query)) {
             cleanbg();
-            LinearLayout l1 =requireActivity().findViewById(R.id.CatagoryLinear1);
+            LinearLayout l1 = requireActivity().findViewById(R.id.CatagoryLinear1);
             l1.setBackgroundColor(CatagorySelected);
             adapter.getFilter().filter(query);
-        }
-        else {
-            if(catagoryfilter.equals(""))
-            {
+        } else {
+            if (catagoryfilter.equals("")) {
                 adapter.showAllProduct();
-            }
-            else
-            {
+            } else {
                 adapter.getCatagoryFilter().filter(catagoryfilter);
             }
         }

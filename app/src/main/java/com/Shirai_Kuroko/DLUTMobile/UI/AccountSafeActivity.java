@@ -34,21 +34,22 @@ public class AccountSafeActivity extends AppCompatActivity {
     private WebView webView;
     private LoadingView loadingView;
     private Context context;
+
     @SuppressLint({"SetJavaScriptEnabled", "NewApi"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_safe);
-        context=this;
+        context = this;
         TextView Return = requireViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
-        loadingView= new LoadingView(this,R.style.CustomDialog);
+        loadingView = new LoadingView(this, R.style.CustomDialog);
         loadingView.show();
         webView = findViewById(R.id.SecurityWebView);
-        webView.addJavascriptInterface(this,"android");//添加js监听 这样html就能调用客户端
+        webView.addJavascriptInterface(this, "android");//添加js监听 这样html就能调用客户端
         webView.setWebChromeClient(webChromeClient);
         webView.setWebViewClient(webViewClient);
-        WebSettings webSettings=webView.getSettings();
+        WebSettings webSettings = webView.getSettings();
         if (ConfigHelper.GetThemeType(this)) { //判断如果系统是深色主题
             webSettings.setForceDark(WebSettings.FORCE_DARK_ON);//强制开启webview深色主题模式
         } else {
@@ -69,14 +70,12 @@ public class AccountSafeActivity extends AppCompatActivity {
         webView.loadUrl("https://portal.dlut.edu.cn/tp_core/h5?act=sys/uacm/profileResetPwd");
     }
 
-    public void SyncCookie(Context context)
-    {
+    public void SyncCookie(Context context) {
         try {
             final CookieManager instance = CookieManager.getInstance();
             instance.setAcceptCookie(true);
             LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
-            if(UserBean == null)
-            {
+            if (UserBean == null) {
                 return;
             }
             LoginResponseBean.DataDTO.MyInfoDTO infoDTO = UserBean.getData().getMy_info();
@@ -100,48 +99,39 @@ public class AccountSafeActivity extends AppCompatActivity {
             instance.setCookie("webvpn.dlut.edu.cn", sb3.toString());
             instance.setCookie("sso.dlut.edu.cn", sb3.toString());
             instance.flush();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     //WebViewClient主要帮助WebView处理各种通知、请求事件
-    private final WebViewClient webViewClient=new WebViewClient(){
+    private final WebViewClient webViewClient = new WebViewClient() {
         @Override
         public void onPageFinished(WebView view, String url) {//页面加载完成
             Log.i("加载完成", url);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-            String Un = prefs.getString("Username","");
-            String Pd = prefs.getString("Password","");
-            if(url.contains("https://sso.dlut.edu.cn/cas/login?service="))
-            {
-                if(Un.length()*Pd.length()!=0)
-                {
-                    Toast.makeText(getBaseContext(),"正在执行认证，请稍候喵",Toast.LENGTH_SHORT).show();
-                    view.evaluateJavascript("un.value='"+Un+"';pd.value='"+Pd+"';login()", value -> {
+            String Un = prefs.getString("Username", "");
+            String Pd = prefs.getString("Password", "");
+            if (url.contains("https://sso.dlut.edu.cn/cas/login?service=")) {
+                if (Un.length() * Pd.length() != 0) {
+                    Toast.makeText(getBaseContext(), "正在执行认证，请稍候喵", Toast.LENGTH_SHORT).show();
+                    view.evaluateJavascript("un.value='" + Un + "';pd.value='" + Pd + "';login()", value -> {
                     });
-                }
-                else
-                {
+                } else {
                     AlertDialog.Builder localBuilder = new AlertDialog.Builder(webView.getContext());
-                    localBuilder.setMessage("个人信息未配置完全，集成认证失败，请手动认证").setPositiveButton("确定",null);
+                    localBuilder.setMessage("个人信息未配置完全，集成认证失败，请手动认证").setPositiveButton("确定", null);
                     localBuilder.setCancelable(false);
                     localBuilder.create().show();
                 }
-            }
-            else
-            {
-                    loadingView.dismiss();
+            } else {
+                loadingView.dismiss();
             }
         }
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
 
-            if (request.getUrl().toString().contains("https://portal.dlut.edu.cn/tp_core/view?m=up#act=portal/viewhome"))
-            {
+            if (request.getUrl().toString().contains("https://portal.dlut.edu.cn/tp_core/view?m=up#act=portal/viewhome")) {
                 return true;
             }
             return super.shouldOverrideUrlLoading(view, request);
@@ -155,12 +145,12 @@ public class AccountSafeActivity extends AppCompatActivity {
     };
 
     //WebChromeClient主要辅助WebView处理Javascript的对话框、网站图标、网站title、加载进度等
-    private final WebChromeClient webChromeClient=new WebChromeClient(){
+    private final WebChromeClient webChromeClient = new WebChromeClient() {
         //不支持js的alert弹窗，需要自己监听然后通过dialog弹窗
         @Override
         public boolean onJsAlert(WebView webView, String url, String message, JsResult result) {
             AlertDialog.Builder localBuilder = new AlertDialog.Builder(webView.getContext());
-            localBuilder.setMessage(message).setPositiveButton("确定",null);
+            localBuilder.setMessage(message).setPositiveButton("确定", null);
             localBuilder.setCancelable(false);
             localBuilder.create().show();
             //注意:
@@ -188,7 +178,7 @@ public class AccountSafeActivity extends AppCompatActivity {
      * JS调用android的方法
      */
     @JavascriptInterface //仍然必不可少
-    public void  getClient(String str){
+    public void getClient(String str) {
 
     }
 
@@ -198,8 +188,9 @@ public class AccountSafeActivity extends AppCompatActivity {
         //释放资源
         webView.destroy();
         BackendUtils.ReSendUserInfo(getBaseContext());
-        webView=null;
+        webView = null;
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -212,7 +203,7 @@ public class AccountSafeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if (webView.canGoBack()){//点击返回按钮的时候判断有没有上一页
+        if (webView.canGoBack()) {//点击返回按钮的时候判断有没有上一页
             webView.goBack(); // goBack()表示返回webView的上一页面
         }
         super.onBackPressed();

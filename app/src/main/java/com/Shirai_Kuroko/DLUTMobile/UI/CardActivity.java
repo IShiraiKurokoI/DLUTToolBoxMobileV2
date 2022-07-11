@@ -26,6 +26,7 @@ public class CardActivity extends AppCompatActivity {
     private Context context;
     private Handler handler = new Handler();
     private Runnable runnable;
+
     @SuppressLint({"SetTextI18n", "SetJavaScriptEnabled"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {

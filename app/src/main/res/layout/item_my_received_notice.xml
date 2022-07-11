@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/background_color_fb">
+
+    <RelativeLayout
+        android:id="@id/container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_item_bg">
+
+        <LinearLayout
+            android:id="@id/chat_list_info_panel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12.0dip"
+            android:layout_marginEnd="16.0dip"
+            android:layout_marginBottom="12.0dip"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@id/unread_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="4.0dip"
+                    android:src="@drawable/chat_list_unread_bg_red"
+                    android:visibility="visible"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@id/tv_notice_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="16.0dip"
+                    android:layout_marginEnd="12.0dip"
+                    android:layout_toStartOf="@id/ll_flag_panel"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:tag="cowork"
+                    android:textColor="@color/text_color_50"
+                    android:textSize="14.0sp" />
+
+                <LinearLayout
+                    android:id="@id/ll_flag_panel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/tv_notice_title"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingTop="3.0dip">
+
+                    <ImageView
+                        android:id="@id/file_sign"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_notice_file"
+                        tools:ignore="ContentDescription" />
+
+                    <ImageView
+                        android:id="@id/img_sign"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8.0dip"
+                        android:src="@drawable/icon_notice_img"
+                        tools:ignore="ContentDescription" />
+
+                    <ImageView
+                        android:id="@id/receipt_sign"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8.0dip"
+                        android:src="@drawable/icon_notice_receipt"
+                        tools:ignore="ContentDescription" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@id/activity_location_time_panel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16.0dip"
+                android:layout_marginTop="6.0dip">
+
+                <TextView
+                    android:id="@id/activity_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6.0dip"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/text_color_597d79"
+                    android:textSize="12.0sp" />
+
+                <TextView
+                    android:id="@id/activity_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/activity_time"
+                    android:ellipsize="end"
+                    android:paddingEnd="3.0dip"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/text_color_597d79"
+                    android:textSize="12.0sp"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:id="@id/activity_location_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@id/activity_location"
+                    android:text="]"
+                    android:textColor="@color/text_color_597d79"
+                    android:textSize="12.0sp"
+                    tools:ignore="HardcodedText" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@id/signature_panel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16.0dip"
+                android:paddingTop="8.0dip">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:id="@id/tv_notice_signature"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="12.0dip"
+                        android:layout_toStartOf="@id/tv_datetime"
+                        android:ellipsize="none"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:tag="cowork"
+                        android:textColor="@color/text_color_66"
+                        android:textSize="12.0sp" />
+
+                    <View
+                        android:layout_width="12.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/tv_notice_signature"
+                        android:layout_alignEnd="@id/tv_notice_signature"
+                        android:layout_alignBottom="@id/tv_notice_signature"
+                        android:background="@drawable/sel_shape_notice_signature_plus_gradient" />
+
+                    <TextView
+                        android:id="@id/tv_datetime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:includeFontPadding="false"
+                        android:text="日期"
+                        android:textColor="@color/text_color_66"
+                        android:textSize="10.0sp"
+                        android:visibility="visible"
+                        tools:ignore="HardcodedText,SmallSp" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@id/v_list_item_divider"
+            android:layout_width="fill_parent"
+            android:layout_height="1.0px"
+            android:layout_below="@id/chat_list_info_panel"
+            android:background="@drawable/center_horizontal_divider"
+            tools:ignore="PxUsage" />
+    </RelativeLayout>
+</FrameLayout>

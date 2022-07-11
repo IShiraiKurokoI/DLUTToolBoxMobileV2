@@ -1,22 +1,28 @@
 package com.Shirai_Kuroko.DLUTMobile.Adapters;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
+import com.Shirai_Kuroko.DLUTMobile.Entities.GridAppID;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ContextHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
-import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
-import com.Shirai_Kuroko.DLUTMobile.Entities.GridAppID;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -30,8 +36,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         mDatas = datas;
     }
 
-    public void datarefresh()
-    {
+    @SuppressLint("NotifyDataSetChanged")
+    public void datarefresh() {
         mDatas = ConfigHelper.GetGridIDList(mContext);
         notifyDataSetChanged();
     }
@@ -43,30 +49,50 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         if (viewHolder instanceof ViewHolder) {
-            ViewHolder holder = (ViewHolder)viewHolder;
-            ApplicationConfig ac =ConfigHelper.getmlist(ContextHelper.getContext()).get(mDatas.get(position).getId());
+            ViewHolder holder = (ViewHolder) viewHolder;
+            ApplicationConfig ac = ConfigHelper.getmlist(ContextHelper.getContext()).get(mDatas.get(position).getId());
+            Activity activity = (Activity) mContext;
             holder.name.setText(ac.getAppName());
             Glide.with(ContextHelper.getContext()).load(ac.getIcon()).into(holder.icon);
             holder.delete.setOnClickListener(v -> {
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext,R.style.AlertDialogCustom);
-                builder.setTitle("是否移除"+ac.getAppName()+"?");
-                builder.setPositiveButton("确定移除", (dialog, which) -> {
-                        ConfigHelper.removesubscription(mContext, ac.getId());
-                        mDatas = ConfigHelper.GetGridIDList(mContext);
-                        notifyItemRemoved(viewHolder.getAdapterPosition());
+                Dialog Dialog = new Dialog(activity, R.style.CustomDialog);
+                @SuppressLint("InflateParams") View view = LayoutInflater.from(activity).inflate(
+                        R.layout.dialog_confirm_center, null);
+                final TextView title = view.findViewById(R.id.title);
+                title.setText("请确认");
+                final TextView msg = view.findViewById(R.id.msg);
+                msg.setText("是否移除" + ac.getAppName() + "?");
+                final Button ok = view.findViewById(R.id.ok);
+                ok.setOnClickListener(view1 -> {
+                    ConfigHelper.removesubscription(mContext, ac.getId());
+                    mDatas = ConfigHelper.GetGridIDList(mContext);
+                    notifyItemRemoved(viewHolder.getAdapterPosition());
+                    Dialog.dismiss();
                 });
-                builder.setNegativeButton("取消", (dialog, which) -> {
-
+                final Button cancel = view.findViewById(R.id.cancel);
+                cancel.setOnClickListener(view12 -> Dialog.dismiss());
+                Window window = Dialog.getWindow();
+                window.setContentView(view);
+                window.setGravity(Gravity.CENTER);
+                window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT,
+                        android.view.WindowManager.LayoutParams.WRAP_CONTENT);
+                Dialog.setCanceledOnTouchOutside(false);
+                WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
+                lp.alpha = 0.5f;
+                activity.getWindow().setAttributes(lp);
+                Dialog.setOnDismissListener(dialogInterface -> {
+                    WindowManager.LayoutParams lp1 = activity.getWindow().getAttributes();
+                    lp1.alpha = 1f;
+                    activity.getWindow().setAttributes(lp1);
                 });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                Dialog.show();
             });
         }
     }
-
 
 
     @Override
@@ -78,6 +104,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         TextView name;
         ImageView icon;
         ImageButton delete;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.name = itemView.findViewById(R.id.name_tv);

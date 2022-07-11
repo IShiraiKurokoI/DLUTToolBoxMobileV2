@@ -29,14 +29,15 @@ import com.Shirai_Kuroko.DLUTMobile.R;
 
 public class FeedbackActivity extends AppCompatActivity {
 
-    private String Contact="";
-    private String Content="";
+    private String Contact = "";
+    private String Content = "";
     private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
-        context =this;
+        context = this;
         TextView Return = requireViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
         Button Submit = requireViewById(R.id.Submit);
@@ -50,9 +51,13 @@ public class FeedbackActivity extends AppCompatActivity {
         EditText number_et = requireViewById(R.id.number_et);
         number_et.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
             @Override
             public void afterTextChanged(Editable editable) {
                 Contact = editable.toString();
@@ -62,14 +67,18 @@ public class FeedbackActivity extends AppCompatActivity {
         TextView comment_words_limit = requireViewById(R.id.comment_words_limit);
         content_et.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
             @Override
             public void afterTextChanged(Editable editable) {
-                Content=editable.toString();
-                Submit.setEnabled(editable.length()>4);
-                comment_words_limit.setText(String.valueOf(140-Content.length()));
+                Content = editable.toString();
+                Submit.setEnabled(editable.length() > 4);
+                comment_words_limit.setText(String.valueOf(140 - Content.length()));
             }
         });
         Submit.setOnClickListener(view -> MailFeedBack(context));
@@ -82,7 +91,7 @@ public class FeedbackActivity extends AppCompatActivity {
             View v = getCurrentFocus();
             if (isShouldHideInput(v, ev)) {
                 //根据判断关闭软键盘
-                InputMethodManager imm = (InputMethodManager)getSystemService(
+                InputMethodManager imm = (InputMethodManager) getSystemService(
                         Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
@@ -92,7 +101,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
     private boolean isShouldHideInput(View v, MotionEvent event) {
         if ((v instanceof EditText)) {
-            int[] l = { 0, 0 };
+            int[] l = {0, 0};
             v.getLocationInWindow(l);
             int left = l[0], top = l[1], bottom = top + v.getHeight(), right = left
                     + v.getWidth();
@@ -103,19 +112,18 @@ public class FeedbackActivity extends AppCompatActivity {
         return false;
     }
 
-    public void MailFeedBack(Context context)
-    {
-        String Version ="程序版本: "+ getAppVersionName(context);
-        String OSVersion = "\nAndroid系统版本: " +getSdkVersion();
+    public void MailFeedBack(Context context) {
+        String Version = "程序版本: " + getAppVersionName(context);
+        String OSVersion = "\nAndroid系统版本: " + getSdkVersion();
         Intent email = new Intent(android.content.Intent.ACTION_SEND);
         email.setType("plain/text");
         String[] emailReciver = new String[]{"ishirai_kurokoi@foxmail.com"};
-        String  emailTitle = "i大工+使用反馈";
-        String emailContent = Version+OSVersion+"\n联系方式： "+Contact+"\n\n"+Content;
+        String emailTitle = "i大工+使用反馈";
+        String emailContent = Version + OSVersion + "\n联系方式： " + Contact + "\n\n" + Content;
         email.putExtra(android.content.Intent.EXTRA_EMAIL, emailReciver);
         email.putExtra(android.content.Intent.EXTRA_SUBJECT, emailTitle);
         email.putExtra(android.content.Intent.EXTRA_TEXT, emailContent);
-        Dialog Dialog =new Dialog(context, R.style.CustomDialog);
+        Dialog Dialog = new Dialog(context, R.style.CustomDialog);
         @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(
                 R.layout.dialog_custom, null);
         final TextView dialog_custom_title = view.findViewById(R.id.dialog_custom_title);
@@ -129,7 +137,7 @@ public class FeedbackActivity extends AppCompatActivity {
             startActivity(Intent.createChooser(email, "请选择邮件发送软件"));
             Dialog.dismiss();
         });
-        Window window =Dialog.getWindow();
+        Window window = Dialog.getWindow();
         window.setContentView(view);
         window.setGravity(Gravity.CENTER);
         window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT,

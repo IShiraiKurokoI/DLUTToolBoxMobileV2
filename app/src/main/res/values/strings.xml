@@ -28,7 +28,7 @@
 
     <!-- Other Preferences -->
     <string name="Mode_title">登录认证模式</string>
-    <string name="Theme_title">暗色模式</string>
+    <string name="Theme_title">强制深色模式</string>
     <string name="login_title">尝试自动登录校园网</string>
     <string name="login_on">在检测到连接到校园网且需要登陆的时候自动执行登录（开发区）</string>
     <string name="login_off">不执行自动登录</string>
@@ -97,4 +97,5 @@
     <string name="outcome">本月支出</string>
     <string name="xxxx">- -</string>
     <string name="income">本月收入</string>
+    <string name="NoNoticeYet">您还没有收到任何消息</string>
 </resources>

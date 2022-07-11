@@ -1,9 +1,19 @@
 package com.Shirai_Kuroko.DLUTMobile.UI;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,8 +26,9 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreferenceCompat;
 
-import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.Managers.CacheManager;
+import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.Services.BackgroudWIFIMonitorService;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -49,16 +60,16 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
 
-
     public static class SettingsFragment extends PreferenceFragmentCompat {
         @NonNull
-        private String setAsterisks ( int length){
+        private String setAsterisks(int length) {
             StringBuilder sb = new StringBuilder();
             for (int s = 0; s < length; s++) {
                 sb.append("*");
             }
             return sb.toString();
         }
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
@@ -130,14 +141,14 @@ public class SettingsActivity extends AppCompatActivity {
                     boolean ThemeType = prefs.getBoolean("Dark", false);
                     if (ThemeType) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                        return "深色模式已开启";
+                        return "强制深色模式已开启";
                     } else {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                        return "深色模式已关闭";
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                        return "深色模式将会跟随系统";
                     }
                 });
                 DarkPreference.setOnPreferenceClickListener(preference -> {
-                    Toast.makeText(getActivity(),"设置成功！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "设置成功！", Toast.LENGTH_SHORT).show();
                     return false;
                 });
             }
@@ -145,14 +156,53 @@ public class SettingsActivity extends AppCompatActivity {
             SwitchPreferenceCompat AutoLoginPreference = findPreference("AutoLogin");
             if (AutoLoginPreference != null) {
                 AutoLoginPreference.setOnPreferenceClickListener(preference -> {
-                    Toast.makeText(getActivity(),"设置成功！", Toast.LENGTH_SHORT).show();
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
+                    boolean Autologin = prefs.getBoolean("AutoLogin", false);
+                    if (Autologin) {
+                        if (prefs.getString("NetworkPassword", "").equals("")) {
+                            Toast.makeText(getContext(), "请不要忘记配置校园网密码哦", Toast.LENGTH_LONG).show();
+                        }
+                        Dialog Dialog = new Dialog(requireContext(), R.style.CustomDialog);
+                        @SuppressLint("InflateParams") View view = LayoutInflater.from(requireContext()).inflate(
+                                R.layout.dialog_center_single_btn, null);
+                        final TextView title = view.findViewById(R.id.title);
+                        title.setText("⚠请注意⚠");
+                        final TextView msg = view.findViewById(R.id.msg);
+                        msg.setText("请手动为i大工+打开后台运行和开机启动权限\n举例：华为系统在应用启动管理中调整i大工+为手动管理并允许自启动，关联启动和后台活动,并且添加至内存清理白名单\n否则此功能无法正常使用");
+                        final Button ok = view.findViewById(R.id.ok);
+                        ok.setText("知道了");
+                        ok.setOnClickListener(v -> Dialog.dismiss());
+                        Window window = Dialog.getWindow();
+                        window.setContentView(view);
+                        window.setGravity(Gravity.CENTER);
+                        window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT,
+                                android.view.WindowManager.LayoutParams.WRAP_CONTENT);
+                        Dialog.setCanceledOnTouchOutside(false);
+                        WindowManager.LayoutParams lp = requireActivity().getWindow().getAttributes();
+                        lp.alpha = 0.5f;
+                        requireActivity().getWindow().setAttributes(lp);
+                        Dialog.setOnDismissListener(dialogInterface -> {
+                            WindowManager.LayoutParams lp1 = requireActivity().getWindow().getAttributes();
+                            lp1.alpha = 1f;
+                            requireActivity().getWindow().setAttributes(lp1);
+                        });
+                        Dialog.show();
+                        Intent ServiceIntent = new Intent(getContext(), BackgroudWIFIMonitorService.class);
+                        requireContext().startForegroundService(ServiceIntent);
+                    } else {
+                        Intent ServiceIntent = new Intent(getContext(), BackgroudWIFIMonitorService.class);
+                        requireContext().stopService(ServiceIntent);
+                    }
+                    Toast.makeText(getActivity(), "设置成功！", Toast.LENGTH_SHORT).show();
                     return false;
                 });
             }
 
-            Preference Clean_Cache= findPreference("Clean_Cache");
+            Preference Clean_Cache = findPreference("Clean_Cache");
             try {
-                Clean_Cache.setSummary(CacheManager.getTotalCacheSize(requireContext()));
+                if (Clean_Cache != null) {
+                    Clean_Cache.setSummary(CacheManager.getTotalCacheSize(requireContext()));
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -160,7 +210,7 @@ public class SettingsActivity extends AppCompatActivity {
                 Clean_Cache.setOnPreferenceClickListener(preference -> {
                     new CacheManager.ClearCache().run();
                     try {
-                    preference.setSummary(CacheManager.getTotalCacheSize(requireContext()));
+                        preference.setSummary(CacheManager.getTotalCacheSize(requireContext()));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
