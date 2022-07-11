@@ -17,15 +17,11 @@ android {
     signingConfigs {
         debug {
             storeFile file('D:\\ApkSignKey.jks')
-            storePassword '1261411'
             keyAlias 'Shirai_Kuroko'
-            keyPassword '1261411'
         }
         release {
             storeFile file('D:\\ApkSignKey.jks')
-            storePassword '1261411'
             keyAlias 'Shirai_Kuroko'
-            keyPassword '1261411'
         }
     }
 
