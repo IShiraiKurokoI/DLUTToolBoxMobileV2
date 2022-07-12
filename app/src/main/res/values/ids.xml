@@ -164,4 +164,20 @@
     <item name="popup_base_view" type="id" />
     <item name="iv_notice_big" type="id" />
     <item name="tv_notice_desc" type="id" />
+    <item name="rg_parent" type="id" />
+    <item name="btn_received_gifts" type="id" />
+    <item name="btn_sent_gifts" type="id" />
+    <item name="viewpager" type="id" />
+    <item name="iv_top" type="id" />
+    <item name="tv_count" type="id" />
+    <item name="user_org" type="id" />
+    <item name="user_name" type="id" />
+    <item name="tv_top" type="id" />
+    <item name="RankList" type="id" />
+    <item name="btn_to_get" type="id" />
+    <item name="btn_geted" type="id" />
+    <item name="RecordList" type="id" />
+    <item name="btn_in" type="id" />
+    <item name="btn_out" type="id" />
+    <item name="DetailList" type="id" />
 </resources>

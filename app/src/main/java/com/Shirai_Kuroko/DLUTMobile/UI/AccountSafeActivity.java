@@ -67,7 +67,7 @@ public class AccountSafeActivity extends AppCompatActivity {
         webSettings.setSupportZoom(true);
         webSettings.setBuiltInZoomControls(true);
         SyncCookie(this);
-        webView.loadUrl("https://portal.dlut.edu.cn/tp_core/h5?act=sys/uacm/profileResetPwd");
+        webView.loadUrl("https://portal.dlut.edu.cn/tp_core/h5?act=sys/uacm/profileResetPwd&filter=app&from=rj");
     }
 
     public void SyncCookie(Context context) {
@@ -112,20 +112,53 @@ public class AccountSafeActivity extends AppCompatActivity {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
             String Un = prefs.getString("Username", "");
             String Pd = prefs.getString("Password", "");
-            if (url.contains("https://sso.dlut.edu.cn/cas/login?service=")) {
-                if (Un.length() * Pd.length() != 0) {
+            final boolean b = Un.length() * Pd.length() != 0;
+            if (url.contains("sso.dlut.edu.cn/cas/login?service=") || url.contains("webvpn.dlut.edu.cn%2Flogin%3Fcas_login%3Dtrue"))//sso自动认证
+            {
+                if (b) {
                     Toast.makeText(getBaseContext(), "正在执行认证，请稍候喵", Toast.LENGTH_SHORT).show();
-                    view.evaluateJavascript("un.value='" + Un + "';pd.value='" + Pd + "';login()", value -> {
+                    view.evaluateJavascript("$(\"#un\").val('" + Un + "');$(\"#pd\").val('" + Pd + "');login()", value -> {
                     });
                 } else {
                     AlertDialog.Builder localBuilder = new AlertDialog.Builder(webView.getContext());
-                    localBuilder.setMessage("个人信息未配置完全，集成认证失败，请手动认证").setPositiveButton("确定", null);
+                    localBuilder.setMessage("个人信息未配置完全，集成认证失败，请手动认证并前往设置界面补全信息！").setPositiveButton("确定", null);
                     localBuilder.setCancelable(false);
                     localBuilder.create().show();
                 }
-            } else {
+                return;
+            }
+            if (url.contains("api.m.dlut.edu.cn/login?client_id="))//api自动认证
+            {
+                LoginResponseBean.DataDTO.MyInfoDTO myInfoDTO = ConfigHelper.GetUserBean(getBaseContext()).getData().getMy_info();
+                if (myInfoDTO != null) {
+                    if (myInfoDTO.getSkey() != null) {
+                        view.evaluateJavascript("getSsoKey('" + myInfoDTO.getSkey().replace("%3D", "") + "')", value -> {
+                        });
+                    }
+                } else {
+                    if (b) {
+                        Toast.makeText(getBaseContext(), "正在执行认证，请稍候喵", Toast.LENGTH_SHORT).show();
+                        view.evaluateJavascript("username.value='" + Un + "';password.value='" + Pd + "';submit.disabled='';submit.click()", value -> {
+                        });
+                    } else {
+                        AlertDialog.Builder localBuilder = new AlertDialog.Builder(webView.getContext());
+                        localBuilder.setMessage("个人信息未配置完全，集成认证失败，请手动认证并前往设置界面补全信息！").setPositiveButton("确定", null);
+                        localBuilder.setCancelable(false);
+                        localBuilder.create().show();
+                    }
+                }
+                return;
+            }
+            if (url.contains("webvpn.dlut.edu.cn/login"))//webvpn跳转处理
+            {
+                view.evaluateJavascript("document.getElementById('cas-login').click()", value -> {
+                });
+            }
+            if(url.contains("https://portal.dlut.edu.cn/tp_core/h5?act=sys/uacm/profileResetPwd&filter=app&from=rj#act=sys/uacm/profileResetPwd"))
+            {
                 loadingView.dismiss();
             }
+            loadingView.dismiss();
         }
 
         @Override

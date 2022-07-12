@@ -1,9 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.ScoreDetailActivity">
+    tools:context=".UI.ScoreDetailActivity"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="56.0dip"
+        android:background="@color/main_theme_color"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="16.0dip"
+            android:paddingRight="16.0dip"
+            android:text="@string/back_to"
+            android:textColor="@color/white"
+            app:drawableStartCompat="@drawable/notice_detail_back_sel" />
+
+        <TextView
+            android:id="@id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="积分明细"
+            android:textColor="@color/white"
+            android:textSize="18.0sp"
+            tools:ignore="HardcodedText" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/idg_theme_color"
+        android:paddingTop="6.0dip"
+        android:paddingBottom="10.0dip">
+
+        <LinearLayout
+            android:id="@id/rg_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="30.0dip"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/shape_tab_bg"
+            android:orientation="horizontal"
+            android:padding="3.0px"
+            tools:ignore="PxUsage">
+
+            <TextView
+                android:id="@id/btn_in"
+                android:layout_width="164.0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:text="收入"
+                android:textColor="@color/black"
+                android:background="@drawable/round_edge"
+                android:textSize="14.0sp"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@id/btn_out"
+                android:layout_width="164.0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:button="@null"
+                android:gravity="center"
+                android:text="支出"
+                android:textColor="@color/score_header_text_color"
+                android:textSize="14.0sp"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1.0px"
+        android:background="@color/background_color_dc"
+        tools:ignore="PxUsage" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@id/DetailList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"/>
+</LinearLayout>

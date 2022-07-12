@@ -2,5 +2,5 @@
 <selector
   xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_selected="true" android:drawable="@drawable/icon_tab_service_pre" />
-    <item android:drawable="@drawable/icon_tab_service_nor" />
+    <item android:drawable="@drawable/icon_tab_service_nor"/>
 </selector>

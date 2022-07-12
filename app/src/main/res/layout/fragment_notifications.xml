@@ -38,10 +38,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@id/rv_notice_list"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:overScrollMode="never"
-            android:scrollbarDefaultDelayBeforeFade="1"
+            android:fadeScrollbars="false"
+            android:scrollbarSize="4dp"
             android:scrollbars="vertical" />
 
         <TextView

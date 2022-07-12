@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +30,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class NotificationsFragment extends Fragment {
+
+    private static boolean scroll=true;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -97,10 +99,18 @@ public class NotificationsFragment extends Fragment {
 
             recyclerView.setVisibility(View.VISIBLE);
             NoticeEmptyView.setVisibility(View.GONE);
-            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
             NotificationListAdapter notificationListAdapter = new NotificationListAdapter(getContext(), notificationPayloadhistoryList);
             recyclerView.setAdapter(notificationListAdapter);
-            recyclerView.scrollToPosition(notificationListAdapter.getItemCount() - 1);
+            if(scroll)
+            {
+                recyclerView.scrollToPosition(notificationListAdapter.getItemCount() - 1);
+                scroll=false;
+            }
+            if(unreadcount>0)
+            {
+                recyclerView.scrollToPosition(notificationListAdapter.getItemCount() - 1);
+            }
         }
     }
 

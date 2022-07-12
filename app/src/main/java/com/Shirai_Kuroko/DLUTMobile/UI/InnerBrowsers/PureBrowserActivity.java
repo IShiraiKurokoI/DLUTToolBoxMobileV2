@@ -265,7 +265,6 @@ public class PureBrowserActivity extends AppCompatActivity {
         super.onDestroy();
         //释放资源
         webView.destroy();
-        webView.clearHistory();
         CookieManager.getInstance().removeAllCookies(null);
         CookieManager.getInstance().flush();
         webView = null;

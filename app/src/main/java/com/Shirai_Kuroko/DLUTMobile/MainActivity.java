@@ -13,6 +13,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
         LocalReceiver localReceiver = new LocalReceiver();
         LocalBroadcastManager.getInstance(this)
                 .registerReceiver(localReceiver, new IntentFilter("com.Shirai_Kuroko.DLUTMobile.ReceivedNew"));
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setNavigationBarColor(getResources().getColor(R.color.main_theme_color));
         com.Shirai_Kuroko.DLUTMobile.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
@@ -65,9 +70,10 @@ public class MainActivity extends AppCompatActivity {
             Log.i("", "重收信息");
             BackendUtils.ReSendUserInfo(this);
         }
+        ConfigHelper.MakeupNotificationList(this);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         if (prefs.getBoolean("unread", false)) {
-            BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
             BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(bottomNavigationView.getMenu().getItem(1).getItemId());
             badgeDrawable.setBackgroundColor(Color.RED);
             badgeDrawable.setVisible(true);
