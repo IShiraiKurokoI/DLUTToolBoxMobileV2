@@ -204,4 +204,6 @@
     <item name="tv_gift_store_count" type="id" />
     <item name="tv_gift_intro" type="id" />
     <item name="btn_exchange" type="id" />
+    <item name="btn_start_qr" type="id" />
+    <item name="btn_start_virtual_card" type="id" />
 </resources>

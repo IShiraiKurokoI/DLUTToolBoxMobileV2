@@ -9,22 +9,21 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Managers.GlideEngine;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
-import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 import com.bumptech.glide.Glide;
 import com.luck.picture.lib.basic.PictureSelector;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -42,19 +41,24 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class PersonalInfoActivity extends AppCompatActivity {
+public class HeadActivity extends AppCompatActivity {
 
-    @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info);
+        setContentView(R.layout.activity_head);
         TextView Return = requireViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
-        MobileUtils.InitializePersonalInfo(this, requireViewById(R.id.InfoScrollView));
-        RelativeLayout head_panel = findViewById(R.id.head_panel);
-        ImageView user_head = findViewById(R.id.user_head);
-        head_panel.setOnClickListener(view -> showPop(user_head, this));
+        ImageView head = requireViewById(R.id.headview);
+        try {
+            Glide.with(this).load(ConfigHelper.GetUserBean(this).getData().getMy_info().getHead()).into(head);
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(this, "加载出错，请重新打开此页面", Toast.LENGTH_SHORT).show();
+        }
+        Button Btn_Modify = requireViewById(R.id.Btn_Modify);
+        Btn_Modify.setOnClickListener(view -> showPop(head, this));
     }
 
     private PopupWindow pop;
@@ -157,7 +161,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
                                     }
 
                                     @Override
-                                    public void loadImage(Context context, Uri url, int maxWidth, int maxHeight, OnCallbackListener<Bitmap> call) {
+                                    public void loadImage(Context context, Uri url, int maxWidth, int maxHeight, UCropImageEngine.OnCallbackListener<Bitmap> call) {
 
                                     }
                                 });
@@ -205,19 +209,5 @@ public class PersonalInfoActivity extends AppCompatActivity {
             pop.dismiss();
             pop = null;
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 }

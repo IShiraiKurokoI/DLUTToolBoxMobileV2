@@ -2,6 +2,8 @@ package com.Shirai_Kuroko.DLUTMobile.UI.MainPageFragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +23,8 @@ import com.Shirai_Kuroko.DLUTMobile.Entities.GridAppID;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.BrowserActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.OpenVirtualCardActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.ScanQRCodeActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.ServiceManagement.AppGridManageActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.ServiceManagement.AppcenterActivity;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
@@ -43,6 +48,7 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
     }
 
+    @SuppressWarnings("ALL")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -63,7 +69,31 @@ public class HomeFragment extends Fragment {
             Intent intent = new Intent(requireActivity(), AppcenterActivity.class);
             startActivity(intent);
         });
+        ImageView iv_more = requireView().findViewById(R.id.iv_more);
+        iv_more.setOnClickListener(this::showPopupWindow);
     }
+
+    public void showPopupWindow(View view) {
+        @SuppressLint("InflateParams")
+        View v = LayoutInflater.from(getActivity()).inflate(R.layout.popup_main_right_more, null);
+        PopupWindow window = new PopupWindow(v, 360, 300, true);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        window.setOutsideTouchable(true);
+        window.setTouchable(true);
+        window.setAnimationStyle(R.style.main_more_anim);
+        window.showAsDropDown(view, 0, 0);
+        v.findViewById(R.id.btn_start_qr).setOnClickListener(v1 -> {
+            Intent intent = new Intent(requireContext(), ScanQRCodeActivity.class);
+            startActivity(intent);
+            window.dismiss(); //控制弹窗消失
+        });
+        v.findViewById(R.id.btn_start_virtual_card).setOnClickListener(v12 -> {
+            Intent intent = new Intent(requireContext(), OpenVirtualCardActivity.class);
+            startActivity(intent);
+            window.dismiss();
+        });
+    }
+
 
 
     public class MainGridAdapter extends BaseAdapter {

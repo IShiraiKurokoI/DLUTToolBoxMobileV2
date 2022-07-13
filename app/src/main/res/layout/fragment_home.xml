@@ -25,14 +25,16 @@
             android:gravity="center_vertical"
             android:paddingLeft="16.0dip"
             android:paddingRight="16.0dip"
-            android:src="@drawable/search_btn_sel"/>
+            android:src="@drawable/search_btn_sel"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@id/iv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/icon_first_page_logo" />
+            android:src="@drawable/icon_first_page_logo"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@id/iv_more"
@@ -40,8 +42,9 @@
             android:layout_height="fill_parent"
             android:layout_alignParentEnd="true"
             android:paddingLeft="16.0dip"
-            android:paddingRight="16.0dip"/>
-<!--        ToDO:增加右边的更多按钮-->
+            android:paddingRight="16.0dip"
+            android:src="@drawable/ic_main_right_add"
+            tools:ignore="ContentDescription" />
     </RelativeLayout>
     <com.youth.banner.Banner
         android:id="@+id/banner"

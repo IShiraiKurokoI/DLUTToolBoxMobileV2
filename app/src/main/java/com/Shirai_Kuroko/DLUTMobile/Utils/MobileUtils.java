@@ -48,6 +48,7 @@ import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Managers.CacheManager;
 import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.UI.HeadActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.PersonalInfoActivity;
 import com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView;
 import com.alibaba.fastjson.JSON;
@@ -570,7 +571,7 @@ public class MobileUtils {
         LoginResponseBean.DataDTO.MyInfoDTO infoDTO = UserBean.getData().getMy_info();
         Glide.with(context).load(infoDTO.getHead()).into(StudentHeader);
         StudentHeader.setOnClickListener(view -> {
-            Intent intent = new Intent(context, PersonalInfoActivity.class);
+            Intent intent = new Intent(context, HeadActivity.class);
             context.startActivity(intent);
         });
         StudentName.setText(infoDTO.getName());
