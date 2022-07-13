@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".UI.ParentBindActivity">
+
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="fill_parent"
@@ -26,7 +28,8 @@
             android:paddingRight="16.0dip"
             android:text="@string/back_to"
             android:textColor="@color/white"
-            app:drawableStartCompat="@drawable/notice_detail_back_sel" />
+            app:drawableStartCompat="@drawable/notice_detail_back_sel"
+            tools:ignore="RelativeOverlap" />
 
         <TextView
             android:id="@id/tv_title"
@@ -37,5 +40,46 @@
             android:textColor="@color/white"
             android:textSize="18.0sp"
             tools:ignore="HardcodedText" />
+
+
+        <TextView
+            android:id="@id/tv_intro"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:paddingLeft="16.0dip"
+            android:paddingRight="16.0dip"
+            android:text="说明"
+            android:textColor="@color/white"
+            tools:ignore="HardcodedText" />
     </RelativeLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_parent_invite"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@id/tv_activated_wording"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55.0dip"
+        android:gravity="center"
+        android:textColor="#ff505050"
+        android:textSize="14.0sp"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@id/tv_activated_time"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16.0dip"
+        android:gravity="center"
+        android:textColor="#ff888888"
+        android:textSize="12.0sp"
+        tools:ignore="HardcodedText" />
+</LinearLayout>

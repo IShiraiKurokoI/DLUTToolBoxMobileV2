@@ -133,4 +133,16 @@
     <style name="iv_notice_big_special" parent="@style/iv_notice_big">
         <item name="android:layout_marginBottom">10.0dip</item>
     </style>
+
+    <style name="gift_score_gift_name_style">
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingLeft">8.0dip</item>
+        <item name="android:paddingRight">8.0dip</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">6.0dip</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
 </resources>

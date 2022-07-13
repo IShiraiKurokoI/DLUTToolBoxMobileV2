@@ -180,4 +180,28 @@
     <item name="btn_in" type="id" />
     <item name="btn_out" type="id" />
     <item name="DetailList" type="id" />
+    <item name="task_name" type="id" />
+    <item name="task_time" type="id" />
+    <item name="task_in_out" type="id" />
+    <item name="tv_activated_wording" type="id" />
+    <item name="tv_activated_time" type="id" />
+    <item name="tv_not_active_wording" type="id" />
+    <item name="header_panel" type="id" />
+    <item name="iv_score" type="id" />
+    <item name="tv_score_hint" type="id" />
+    <item name="tv_user_points" type="id" />
+    <item name="ll_sort_panel" type="id" />
+    <item name="tv_order" type="id" />
+    <item name="tv_type" type="id" />
+    <item name="tv_range" type="id" />
+    <item name="cb_store_type" type="id" />
+    <item name="iv_gift_pic" type="id" />
+    <item name="mask_out_of_stock" type="id" />
+    <item name="tv_gift_name" type="id" />
+    <item name="tv_gift_price" type="id" />
+    <item name="back" type="id" />
+    <item name="tv_gift_score" type="id" />
+    <item name="tv_gift_store_count" type="id" />
+    <item name="tv_gift_intro" type="id" />
+    <item name="btn_exchange" type="id" />
 </resources>

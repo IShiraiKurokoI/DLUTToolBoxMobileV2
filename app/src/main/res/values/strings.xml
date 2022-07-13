@@ -98,4 +98,5 @@
     <string name="xxxx">- -</string>
     <string name="income">本月收入</string>
     <string name="NoNoticeYet">您还没有收到任何消息</string>
+    <string name="norecord">暂无记录</string>
 </resources>

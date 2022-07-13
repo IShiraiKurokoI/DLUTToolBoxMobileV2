@@ -1,5 +1,7 @@
 package com.Shirai_Kuroko.DLUTMobile.Helpers;
 
+import android.annotation.SuppressLint;
+import android.app.UiModeManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
@@ -28,8 +30,8 @@ import java.util.Objects;
 
 public class ConfigHelper {
 
-    public static ArrayList<ApplicationConfig> getmlist(Context context) {
-        String defconfig = getdefconfigString(context);
+    public static ArrayList<ApplicationConfig> Getmlist(Context context) {
+        String defconfig = GetDefaultConfigString(context);
         ArrayList<ApplicationConfig> mList;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String acfjson = prefs.getString("APPCONFIG", defconfig);
@@ -39,7 +41,7 @@ public class ConfigHelper {
         return mList;
     }
 
-    public static String getdefconfigString(Context context) {
+    public static String GetDefaultConfigString(Context context) {
         StringBuilder termsString = new StringBuilder();
         BufferedReader reader;
         try {
@@ -60,21 +62,21 @@ public class ConfigHelper {
     }
 
     public static void addsubscription(Context context, int appnumid) {
-        ArrayList<ApplicationConfig> mlist = getmlist(context);
+        ArrayList<ApplicationConfig> mlist = Getmlist(context);
         mlist.get(appnumid).setIssubscription(1);
         String json = JSON.toJSONString(mlist);
         SavePrefJson(context, json);
         AddtoGrid(context, appnumid);
-        Toast.makeText(context, getmlist(context).get(appnumid).getAppName() + "添加成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, Getmlist(context).get(appnumid).getAppName() + "添加成功", Toast.LENGTH_SHORT).show();
     }
 
     public static void removesubscription(Context context, int appnumid) {
-        ArrayList<ApplicationConfig> mlist = getmlist(context);
+        ArrayList<ApplicationConfig> mlist = Getmlist(context);
         mlist.get(appnumid).setIssubscription(0);
         String json = JSON.toJSONString(mlist);
         SavePrefJson(context, json);
         DeleteFromGrid(context, appnumid);
-        Toast.makeText(context, getmlist(context).get(appnumid).getAppName() + "移除成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, Getmlist(context).get(appnumid).getAppName() + "移除成功", Toast.LENGTH_SHORT).show();
     }
 
     public static void SavePrefJson(Context context, String json) {
@@ -95,6 +97,13 @@ public class ConfigHelper {
             return false;
         } else if (app == 2) {
             return true;
+        }
+        if(app==-1)
+        {
+            UiModeManager uiModeManager = (UiModeManager) context.getSystemService(Context.UI_MODE_SERVICE);
+            if (uiModeManager.getNightMode()==UiModeManager.MODE_NIGHT_YES) {
+                return true;
+            }
         }
         return pref;
     }
@@ -152,9 +161,7 @@ public class ConfigHelper {
             NotificationPayload notificationPayload = notificationPayloadList.get(i);
             String str = notificationPayload.getPayload().getBody().getCustom().getContent();
             if (JSON.parseObject(str, DLUTNoticeContentBean.class).getDescription().equals(" ")) {
-                new Thread(() -> {
-                    BackendUtils.GetMsgDetailInfo(context, notificationPayload.getPayload().getBody().getCustom().getMsg_id(), Long.valueOf(notificationPayload.getTimestamp()));
-                }).start();
+                new Thread(() -> BackendUtils.GetMsgDetailInfo(context, notificationPayload.getPayload().getBody().getCustom().getMsg_id(), Long.valueOf(notificationPayload.getTimestamp()))).start();
             }
         }
     }
@@ -164,7 +171,7 @@ public class ConfigHelper {
         prefs.edit().putString("DebugInfo", json + prefs.getString("DebugInfo", "DebugInfo:")).apply();
     }
 
-    public static String getcatogoryname(String cat) {
+    public static String GetCatogoryName(String cat) {
         if (cat.equals("study")) {
             return "学习类";
         }
@@ -183,6 +190,7 @@ public class ConfigHelper {
         return "未知分类";
     }
 
+    @SuppressLint("ApplySharedPref")
     public static void SaveLoginResultToPref(String result, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         prefs.edit().putString("UserBean", result).apply();
@@ -190,11 +198,7 @@ public class ConfigHelper {
 
     public static Boolean NeedLogin(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        if (Objects.equals(prefs.getString("UserBean", ""), "")) {
-            return true;
-        } else {
-            return false;
-        }
+        return Objects.equals(prefs.getString("UserBean", ""), "");
     }
 
     public static LoginResponseBean GetUserBean(Context context) {

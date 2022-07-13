@@ -54,7 +54,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         if (viewHolder instanceof ViewHolder) {
             ViewHolder holder = (ViewHolder) viewHolder;
-            ApplicationConfig ac = ConfigHelper.getmlist(ContextHelper.getContext()).get(mDatas.get(position).getId());
+            ApplicationConfig ac = ConfigHelper.Getmlist(ContextHelper.getContext()).get(mDatas.get(position).getId());
             Activity activity = (Activity) mContext;
             holder.name.setText(ac.getAppName());
             Glide.with(ContextHelper.getContext()).load(ac.getIcon()).into(holder.icon);

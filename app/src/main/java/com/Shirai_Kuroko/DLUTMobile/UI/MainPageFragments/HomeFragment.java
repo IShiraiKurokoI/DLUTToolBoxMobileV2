@@ -59,12 +59,9 @@ public class HomeFragment extends Fragment {
             MobileUtils.GetGalllery(requireActivity(), banner);
         }
         ImageView imageView = requireView().findViewById(R.id.iv_search);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(requireActivity(), AppcenterActivity.class);
-                startActivity(intent);
-            }
+        imageView.setOnClickListener(view1 -> {
+            Intent intent = new Intent(requireActivity(), AppcenterActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -124,8 +121,8 @@ public class HomeFragment extends Fragment {
                     startActivity(intent);
                 });
                 // 将资源传递给GridItemView的两个域对象
-                Glide.with(requireActivity()).load(ConfigHelper.getmlist(requireContext()).get(id).getIcon()).into(gridItemView.Icon);
-                gridItemView.Name.setText(ConfigHelper.getmlist(requireContext()).get(id).getAppName());
+                Glide.with(requireActivity()).load(ConfigHelper.Getmlist(requireContext()).get(id).getIcon()).into(gridItemView.Icon);
+                gridItemView.Name.setText(ConfigHelper.Getmlist(requireContext()).get(id).getAppName());
             } else {
                 convertView.setOnClickListener(v -> {
                     Intent intent = new Intent(requireContext(), AppGridManageActivity.class);

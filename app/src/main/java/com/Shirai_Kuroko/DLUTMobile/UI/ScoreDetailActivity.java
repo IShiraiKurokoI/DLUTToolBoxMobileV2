@@ -1,6 +1,7 @@
 package com.Shirai_Kuroko.DLUTMobile.UI;
 
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,10 +9,14 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.Shirai_Kuroko.DLUTMobile.Adapters.ScoreDetailAdapter;
 import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.Shirai_Kuroko.DLUTMobile.Widgets.LoadingView;
 
 public class ScoreDetailActivity extends AppCompatActivity {
+
+    private int type=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,30 +28,40 @@ public class ScoreDetailActivity extends AppCompatActivity {
         TextView btn_out = requireViewById(R.id.btn_out);
         RecyclerView recyclerView = requireViewById(R.id.DetailList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        //ToDo:设置适配器
-
+        LinearLayout emptyview = requireViewById(R.id.RecordEmptyView);
+        ScoreDetailAdapter scoreDetailAdapter = new ScoreDetailAdapter(this,null,recyclerView,emptyview);
+        recyclerView.setAdapter(scoreDetailAdapter);
         LoadingView loadingView = new LoadingView(this, R.style.CustomDialog);
         loadingView.show();
-        loadingView.dismiss();
+        BackendUtils.GetScoreDetail(this,"1",scoreDetailAdapter,loadingView);
         //初始化数据
         btn_in.setOnClickListener(view -> {
+            if(type==1)
+            {
+                return;
+            }
+            type=1;
             btn_out.setTextColor(getColor(R.color.score_header_text_color));
             btn_out.setBackground(null);
             btn_in.setTextColor(getColor(R.color.black));
             btn_in.setBackground(AppCompatResources.getDrawable(getBaseContext(), R.drawable.round_edge));
             loadingView.show();
-            //ToDo:加载数据
-            loadingView.dismiss();
+            scoreDetailAdapter.setPrefix("+");
+            BackendUtils.GetScoreDetail(this,"1",scoreDetailAdapter,loadingView);
         });
         btn_out.setOnClickListener(view -> {
+            if(type==2)
+            {
+                return;
+            }
+            type=2;
             btn_in.setTextColor(getColor(R.color.score_header_text_color));
             btn_in.setBackground(null);
             btn_out.setTextColor(getColor(R.color.black));
             btn_out.setBackground(AppCompatResources.getDrawable(getBaseContext(), R.drawable.round_edge));
             loadingView.show();
-            //ToDo:加载数据
-            loadingView.dismiss();
+            scoreDetailAdapter.setPrefix("-");
+            BackendUtils.GetScoreDetail(this,"2",scoreDetailAdapter,loadingView);
         });
     }
 }

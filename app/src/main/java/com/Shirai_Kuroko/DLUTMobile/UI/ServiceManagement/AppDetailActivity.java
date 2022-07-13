@@ -35,7 +35,7 @@ public class AppDetailActivity extends AppCompatActivity {
         numid = intent.getIntExtra("App_ID", 0);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         ThemeType = prefs.getBoolean("Dark", false);
-        thisapp = ConfigHelper.getmlist(this).get(numid);
+        thisapp = ConfigHelper.Getmlist(this).get(numid);
         TextView Return = requireViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
         TextView title = requireViewById(R.id.tv_title);
@@ -49,7 +49,7 @@ public class AppDetailActivity extends AppCompatActivity {
         dd.setTextColor(Color.GRAY);
         Button bo = findViewById(R.id.open);
         TextView tdc = findViewById(R.id.detailcatagory);
-        tdc.setText(ConfigHelper.getcatogoryname(thisapp.getCategory()));
+        tdc.setText(ConfigHelper.GetCatogoryName(thisapp.getCategory()));
         if (ThemeType) {
             bo.setTextColor(Color.WHITE);
         } else {
@@ -76,12 +76,12 @@ public class AppDetailActivity extends AppCompatActivity {
 
     public void onAddClick(View v) {
         int App_ID = thisapp.getId();
-        if (ConfigHelper.getmlist(this).get(App_ID).getIssubscription() == 0) {
+        if (ConfigHelper.Getmlist(this).get(App_ID).getIssubscription() == 0) {
             ConfigHelper.addsubscription(this, App_ID);
         } else {
             ConfigHelper.removesubscription(this, App_ID);
         }
-        thisapp = ConfigHelper.getmlist(this).get(App_ID);
+        thisapp = ConfigHelper.Getmlist(this).get(App_ID);
         ImageButton ba = v.findViewById(R.id.add);
         if (thisapp.getIssubscription() == 1) {
             ba.setBackgroundResource(R.drawable.btn_cancel_app);

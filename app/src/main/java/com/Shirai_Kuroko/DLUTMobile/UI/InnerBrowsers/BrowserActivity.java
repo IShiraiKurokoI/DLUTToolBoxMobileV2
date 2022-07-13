@@ -55,7 +55,7 @@ public class BrowserActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String id = intent.getStringExtra("App_ID");
         numid = Integer.parseInt(id);
-        thisapp = ConfigHelper.getmlist(this).get(numid);
+        thisapp = ConfigHelper.Getmlist(this).get(numid);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);

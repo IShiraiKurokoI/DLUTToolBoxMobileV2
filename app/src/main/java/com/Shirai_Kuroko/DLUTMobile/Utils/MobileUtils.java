@@ -511,9 +511,9 @@ public class MobileUtils {
     public static void CheckConfigUpdates(Context context)
     {
         try {
-            ArrayList<ApplicationConfig> ConfigNow = ConfigHelper.getmlist(context);
+            ArrayList<ApplicationConfig> ConfigNow = ConfigHelper.Getmlist(context);
             ArrayList<ApplicationConfig> DefaultList;
-            List<ApplicationConfig> jsonlist = JSON.parseArray(ConfigHelper.getdefconfigString(context),ApplicationConfig.class);
+            List<ApplicationConfig> jsonlist = JSON.parseArray(ConfigHelper.GetDefaultConfigString(context),ApplicationConfig.class);
             ApplicationConfig[] acfs = new ApplicationConfig[0];
             if (jsonlist != null) {
                 acfs = jsonlist.toArray(new ApplicationConfig[0]);

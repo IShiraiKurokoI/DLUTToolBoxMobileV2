@@ -194,7 +194,7 @@ public class ServiceCenterFragment extends Fragment {
         private List<ApplicationConfig> mSearchList;
 
         public MainListViewAdapter() {
-            this.mList = ConfigHelper.getmlist(getActivity());
+            this.mList = ConfigHelper.Getmlist(getActivity());
             this.mSearchList = new ArrayList<>(mList);
         }
 
@@ -209,7 +209,7 @@ public class ServiceCenterFragment extends Fragment {
         }
 
         public void showAllProduct() {
-            mSearchList = new ArrayList<>(ConfigHelper.getmlist(requireActivity()));
+            mSearchList = new ArrayList<>(ConfigHelper.Getmlist(requireActivity()));
             notifyDataSetChanged();
         }
 
@@ -233,7 +233,7 @@ public class ServiceCenterFragment extends Fragment {
                 String str = constraint.toString().toLowerCase();
                 FilterResults results = new FilterResults();
                 List<ApplicationConfig> list = new ArrayList<>();
-                mList = ConfigHelper.getmlist(getActivity());
+                mList = ConfigHelper.Getmlist(getActivity());
                 for (ApplicationConfig p : mList) {
                     if (p.getAppName().contains(str)) {
                         list.add(p);
@@ -266,7 +266,7 @@ public class ServiceCenterFragment extends Fragment {
                 String str = constraint.toString().toLowerCase();
                 FilterResults results = new FilterResults();
                 List<ApplicationConfig> list = new ArrayList<>();
-                mList = ConfigHelper.getmlist(getActivity());
+                mList = ConfigHelper.Getmlist(getActivity());
                 catagoryfilter = str;
                 if (str.equals("")) {
                     list = mList;
@@ -341,7 +341,7 @@ public class ServiceCenterFragment extends Fragment {
                 TextView tv;
                 tv = listItemView.App_ID.findViewById(R.id.App_ID);
                 int App_ID = Integer.parseInt(tv.getText().toString());
-                if (ConfigHelper.getmlist(requireActivity()).get(App_ID).getIssubscription() == 0) {
+                if (ConfigHelper.Getmlist(requireActivity()).get(App_ID).getIssubscription() == 0) {
                     ConfigHelper.addsubscription(requireActivity(), App_ID);
                 } else {
                     ConfigHelper.removesubscription(requireActivity(), App_ID);

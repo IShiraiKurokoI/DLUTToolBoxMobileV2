@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/GiftContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.0"
+        android:orientation="vertical"
+        android:paddingTop="16.0dip">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Gift_pic_container"
+            android:layout_centerHorizontal="true"
+            app:cardCornerRadius="35dp">
+
+            <ImageView
+                android:id="@id/iv_gift_pic"
+                android:layout_width="70.0dip"
+                android:layout_height="70.0dip"
+                android:layout_centerHorizontal="true"
+                android:foreground="@drawable/shape_gift_circle_icon_bg"
+                android:scaleType="centerCrop"
+                tools:ignore="ContentDescription" />
+
+            <include
+                android:id="@id/mask_out_of_stock"
+                layout="@layout/item_gift_out_of_stock"
+                android:layout_width="70.0dip"
+                android:layout_height="70.0dip"
+                android:layout_centerHorizontal="true" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@id/tv_gift_name"
+            style="@style/gift_score_gift_name_style"
+            android:layout_below="@id/Gift_pic_container"
+            android:layout_centerHorizontal="true"
+            android:text="礼物名称"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@id/tv_gift_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_gift_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="6.0dip"
+            android:drawablePadding="6.0dip"
+            android:includeFontPadding="false"
+            android:singleLine="true"
+            android:text="礼物价格"
+            android:textColor="@color/text_color_ffb80c"
+            app:drawableStartCompat="@drawable/gold_coins"
+            tools:ignore="HardcodedText" />
+    </RelativeLayout>
+</LinearLayout>

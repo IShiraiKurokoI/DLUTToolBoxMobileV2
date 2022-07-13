@@ -162,7 +162,17 @@ public class LoginResponseBean {
             @JsonProperty("l_title")
             private Object l_title;
             @JsonProperty("orgPath")
+
             private List<OrgPathDTO> orgPath;
+
+            public String getParent_active() {
+                return parent_active;
+            }
+
+
+            public String getParent_activetime() {
+                return parent_activetime;
+            }
 
             public String getName() {
                 return name;

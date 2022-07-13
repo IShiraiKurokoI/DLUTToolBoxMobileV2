@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@id/container"
+        android:layout_width="fill_parent"
+        android:layout_height="72.0dip"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="16.0dip"
+        android:paddingRight="16.0dip"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16.0dip"
+            android:layout_weight="1.0"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@id/task_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:textSize="16.0sp" />
+
+            <TextView
+                android:id="@id/task_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10.0dip"
+                android:includeFontPadding="false"
+                android:textColor="@color/text_color_88"
+                android:textSize="12.0sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@id/task_in_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="4.0dip"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:textColor="@color/text_color_fbb700"
+            android:textSize="12.0sp"
+            app:drawableStartCompat="@drawable/gold_coins" />
+    </LinearLayout>
+</RelativeLayout>
