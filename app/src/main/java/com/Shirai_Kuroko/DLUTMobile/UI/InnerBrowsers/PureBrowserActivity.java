@@ -78,6 +78,8 @@ public class PureBrowserActivity extends AppCompatActivity {
         //混合内容加载
         webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         webSettings.setDomStorageEnabled(true);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.setSupportMultipleWindows(false);
         //禁止系统缩放字体
         webSettings.setTextZoom(100);
         webView.setDrawingCacheEnabled(true);

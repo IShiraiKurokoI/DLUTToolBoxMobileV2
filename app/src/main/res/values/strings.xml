@@ -91,7 +91,7 @@
     <string name="user_head">头像</string>
     <string name="friend_info_name">姓名</string>
     <string name="my_card_refresh_tips">每5分钟自动更新</string>
-    <string name="feedback_comment_et_hint">感谢您的宝贵建议...</string>
+    <string name="feedback_comment_et_hint">感谢您的宝贵建议…</string>
     <string name="talk_comment_limit">140</string>
     <string name="wodejifen">我的积分</string>
     <string name="outcome">本月支出</string>
@@ -99,4 +99,11 @@
     <string name="income">本月收入</string>
     <string name="NoNoticeYet">您还没有收到任何消息</string>
     <string name="norecord">暂无记录</string>
+    <string name="cancel_login">取消登录</string>
+    <string name="confirm_login">确认登录</string>
+    <string name="qrcode">二维码</string>
+    <string name="qrcode_decode_failed">二维码获取失败，请重试</string>
+    <string name="qrcode_decode_hint">将二维码/条码放入框内，即可自动扫描</string>
+    <string name="qrcode_decoding">解析中，请稍后...</string>
+    <string name="qrcode_disable">二维码已失效，请重试</string>
 </resources>

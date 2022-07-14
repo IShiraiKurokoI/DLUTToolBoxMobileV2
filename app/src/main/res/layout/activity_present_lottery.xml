@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".UI.ScanQRCodeActivity"
+    tools:context=".UI.PresentLotteryActivity"
     android:orientation="vertical">
     <RelativeLayout
         android:id="@+id/relativeLayout2"
@@ -29,15 +29,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="扫一扫"
+            android:text="积分抽奖"
             android:textColor="@color/white"
             android:textSize="18.0sp"
             tools:ignore="HardcodedText" />
     </RelativeLayout>
-    <com.journeyapps.barcodescanner.DecoratedBarcodeView
-        android:id="@+id/dbv_custom"
+    <WebView
+        android:id="@+id/LoteryWebview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:zxing_preview_scaling_strategy="fitXY" />
-
+        android:layout_height="match_parent" />
 </LinearLayout>

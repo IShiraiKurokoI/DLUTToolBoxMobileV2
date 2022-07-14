@@ -143,8 +143,8 @@
 
                 <WebView
                     android:id="@id/tv_gift_intro"
-                    android:layout_width="fill_parent"
-                    android:layout_height="500dp"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

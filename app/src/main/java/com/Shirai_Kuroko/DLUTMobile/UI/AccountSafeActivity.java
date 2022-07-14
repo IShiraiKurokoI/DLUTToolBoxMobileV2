@@ -66,6 +66,8 @@ public class AccountSafeActivity extends AppCompatActivity {
         //支持屏幕缩放
         webSettings.setSupportZoom(true);
         webSettings.setBuiltInZoomControls(true);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.setSupportMultipleWindows(false);
         SyncCookie(this);
         webView.loadUrl("https://portal.dlut.edu.cn/tp_core/h5?act=sys/uacm/profileResetPwd&filter=app&from=rj");
     }

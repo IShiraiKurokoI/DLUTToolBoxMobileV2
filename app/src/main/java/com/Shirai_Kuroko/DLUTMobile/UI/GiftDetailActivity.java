@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -50,6 +51,14 @@ public class GiftDetailActivity extends AppCompatActivity {
         WebView tv_gift_intro = requireViewById(R.id.tv_gift_intro);
         tv_gift_intro.getSettings().setTextZoom(100);
         tv_gift_intro.setForceDarkAllowed(true);
+        tv_gift_intro.getSettings().setDisabledActionModeMenuItems(DEFAULT_KEYS_DISABLE);
+        tv_gift_intro.setLongClickable(true);
+        tv_gift_intro.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return true;
+            }
+        });
         if (ConfigHelper.GetThemeType(this)) { //判断如果系统是深色主题
             tv_gift_intro.getSettings().setForceDark(WebSettings.FORCE_DARK_ON);//强制开启webview深色主题模式
         } else {

@@ -206,4 +206,8 @@
     <item name="btn_exchange" type="id" />
     <item name="btn_start_qr" type="id" />
     <item name="btn_start_virtual_card" type="id" />
+    <item name="webView" type="id" />
+    <item name="tv_qrcode_login_cancel" type="id" />
+    <item name="btn_login_qrcode" type="id" />
+    <item name="tv_qrcode_login_failed_tips" type="id" />
 </resources>

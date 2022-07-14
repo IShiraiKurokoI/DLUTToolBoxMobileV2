@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -64,7 +63,10 @@ public class GiftActivity extends AppCompatActivity {
             startActivity(intent);
         });
         RelativeLayout Score_lottery = findViewById(R.id.Score_lottery);
-        Score_lottery.setOnClickListener(view -> Toast.makeText(getBaseContext(), "虽然但是，这个功能好像原版就没用？", Toast.LENGTH_LONG).show());
+        Score_lottery.setOnClickListener(view -> {
+            Intent intent = new Intent(GiftActivity.this, PresentLotteryActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override

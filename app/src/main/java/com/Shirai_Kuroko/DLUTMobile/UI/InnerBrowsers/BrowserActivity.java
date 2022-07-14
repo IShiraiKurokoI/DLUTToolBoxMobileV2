@@ -105,6 +105,8 @@ public class BrowserActivity extends AppCompatActivity {
         webSettings.setDatabaseEnabled(true);
         webSettings.setAllowFileAccessFromFileURLs(true);
         webSettings.setAllowUniversalAccessFromFileURLs(true);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.setSupportMultipleWindows(false);
         if (ConfigHelper.GetThemeType(this)) { //判断如果系统是深色主题
             webSettings.setForceDark(WebSettings.FORCE_DARK_ON);//强制开启webview深色主题模式
         } else {
