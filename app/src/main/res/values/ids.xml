@@ -210,4 +210,8 @@
     <item name="tv_qrcode_login_cancel" type="id" />
     <item name="btn_login_qrcode" type="id" />
     <item name="tv_qrcode_login_failed_tips" type="id" />
+    <item name="iv_out_date" type="id" />
+    <item name="icon_gift" type="id" />
+    <item name="gift_name" type="id" />
+    <item name="record_time" type="id" />
 </resources>

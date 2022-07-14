@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.ExchangeRecordActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".UI.ExchangeRecordActivity">
+
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="fill_parent"
@@ -39,6 +40,7 @@
             android:textSize="18.0sp"
             tools:ignore="HardcodedText" />
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -61,12 +63,12 @@
                 android:layout_width="164.0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1.0"
+                android:background="@drawable/round_edge"
                 android:button="@null"
                 android:checked="true"
                 android:gravity="center"
                 android:text="待领取"
                 android:textColor="@color/black"
-                android:background="@drawable/round_edge"
                 android:textSize="14.0sp"
                 tools:ignore="HardcodedText" />
 
@@ -94,5 +96,30 @@
         android:id="@id/RecordList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never"/>
+        android:overScrollMode="never" />
+
+    <LinearLayout
+        android:id="@+id/RecordEmptyView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/icon_connect_book_or_search_result_empty"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:text="@string/norecord" />
+    </LinearLayout>
 </LinearLayout>

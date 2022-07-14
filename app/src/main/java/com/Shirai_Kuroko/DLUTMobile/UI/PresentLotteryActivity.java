@@ -59,7 +59,7 @@ public class PresentLotteryActivity extends AppCompatActivity {
         } else {
             webSettings.setForceDark(WebSettings.FORCE_DARK_OFF);
         }
-        String url ="https://lightapp.m.dlut.edu.cn/lottery/?score="+ConfigHelper.GetUserScoreBean(this).getData().getUser_points();
+        String url ="https://lightapp.m.dlut.edu.cn/lottery";
         synCookies(url);
         webView.setWebViewClient(this.webViewClient);
         webView.loadUrl(url);

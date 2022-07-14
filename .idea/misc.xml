@@ -51,6 +51,7 @@
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/shape_album.xml" value="0.184" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/shape_bg_btn_common_rect_def.xml" value="0.121" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/shape_bg_btn_login_disable.xml" value="0.181" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/shape_bg_gift_icon.xml" value="0.121" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/shape_bg_message_card_view.xml" value="0.171" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/shape_bg_school_card.xml" value="0.1025" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/shape_dialog_bg.xml" value="0.1" />
@@ -115,6 +116,7 @@
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/gridview_behind_itemview.xml" value="0.12583668005354753" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/item_gift_out_of_stock.xml" value="0.1" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/item_gift_store.xml" value="0.264" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/item_list_exchange_gifts_record.xml" value="0.39595959595959596" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/item_list_score.xml" value="0.1" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/item_my_received_notice.xml" value="0.4" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/item_notice_layout.xml" value="0.5873287671232876" />
