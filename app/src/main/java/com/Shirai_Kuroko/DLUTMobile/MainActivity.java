@@ -54,20 +54,20 @@ public class MainActivity extends AppCompatActivity {
         MobileUtils.CheckUpDateOnStartUp(this);
         MobileUtils.CheckConfigUpdates(this);
         if (ConfigHelper.NeedLogin(this)) {
-            Log.i("", "需要登陆");
+            Log.i("无法认证", "需要登陆");
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
             String Un = prefs.getString("Username", "");
             String Pd = prefs.getString("Password", "");
             if (Un.length() * Pd.length() != 0) {
-                Log.i("", "静默登陆");
+                Log.i("认证失败", "静默登陆");
                 BackendUtils.Login(this, Un, Pd);
             } else {
-                Log.i("", "弹出登陆");
+                Log.i("认证信息为空", "弹出登陆");
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
             }
         } else {
-            Log.i("", "重收信息");
+            Log.i("启动初始化", "刷新用户数据");
             BackendUtils.ReSendUserInfo(this);
         }
         ConfigHelper.MakeupNotificationList(this);

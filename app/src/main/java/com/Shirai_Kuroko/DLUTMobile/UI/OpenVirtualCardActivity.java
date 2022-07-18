@@ -120,10 +120,9 @@ public class OpenVirtualCardActivity extends AppCompatActivity {
                         view.evaluateJavascript("username.value='" + Un + "';password.value='" + Pd + "';submit.disabled='';submit.click()", value -> {
                         });
                     } else {
-                        AlertDialog.Builder localBuilder = new AlertDialog.Builder(webView.getContext());
-                        localBuilder.setMessage("个人信息未配置完全，集成认证失败，请手动认证并前往设置界面补全信息！").setPositiveButton("确定", null);
-                        localBuilder.setCancelable(false);
-                        localBuilder.create().show();
+                        Log.i("认证信息为空", "弹出登陆");
+                        Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+                        startActivity(intent);
                     }
                 }
                 return;

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/widget_item_container"
+    android:layout_width="fill_parent"
+    android:layout_height="98.0dip"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@id/empty_wording"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30.0dip"
+        android:layout_marginBottom="50.0dip"
+        android:text="今日无课"
+        android:textColor="#ff999999"
+        android:textSize="14.0sp"
+        tools:ignore="HardcodedText" />
+</LinearLayout>

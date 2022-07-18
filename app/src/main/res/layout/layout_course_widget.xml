@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/root_container"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@id/top_panel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_bg_app_widget_full"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="42.0dip"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="26.0dip"
+                android:layout_height="26.0dip"
+                android:layout_marginStart="16.0dip"
+                android:src="@mipmap/ic_launcher_foreground"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8.0dip"
+                android:layout_weight="1.0"
+                android:text="i大工+"
+                android:textColor="#ff333333"
+                android:textSize="14.0sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:id="@id/btn_refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12.0dip"
+                android:paddingLeft="16.0dip"
+                android:paddingTop="10.0dip"
+                android:paddingRight="16.0dip"
+                android:paddingBottom="10.0dip"
+                android:src="@drawable/ic_app_widget_refresh"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="1.0px"
+            android:background="#ffd8d8d8"
+            tools:ignore="PxUsage" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14.0dip"
+            android:layout_marginBottom="14.0dip"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@id/btn_start_qr_scan"
+                android:layout_width="130.0dip"
+                android:layout_height="44.0dip"
+                android:background="@drawable/bg_btn_app_widget"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="14.0dip"
+                    android:layout_height="14.0dip"
+                    android:layout_marginTop="13.0dip"
+                    android:layout_marginEnd="8.0dip"
+                    android:src="@drawable/ic_app_widget_qrscan"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12.0dip"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="扫一扫"
+                    android:textColor="#ffffffff"
+                    android:textSize="14.0sp"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@id/btn_start_virtual_card"
+                android:layout_width="130.0dip"
+                android:layout_height="44.0dip"
+                android:layout_marginStart="20.0dip"
+                android:background="@drawable/bg_btn_app_widget"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="15.0dip"
+                    android:layout_height="14.0dip"
+                    android:layout_marginTop="13.0dip"
+                    android:layout_marginEnd="8.0dip"
+                    android:src="@drawable/ic_app_widget_vcard"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12.0dip"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="虚拟卡"
+                    android:textColor="#ffffffff"
+                    android:textSize="14.0sp"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@id/list_panel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_bottom_bg_app_widget"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@id/content_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <ListView
+            android:id="@id/list_course"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"
+            android:scrollbars="vertical" />
+    </LinearLayout>
+</LinearLayout>

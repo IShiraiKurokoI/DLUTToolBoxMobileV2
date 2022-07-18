@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/un_login_panel"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30.0dip"
+        android:text="请登录后查看课程表"
+        android:textColor="#ff999999"
+        android:textSize="14.0sp"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@id/btn_login"
+        android:layout_width="80.0dip"
+        android:layout_height="30.0dip"
+        android:layout_marginTop="18.0dip"
+        android:layout_marginBottom="50.0dip"
+        android:background="@drawable/shape_bg_app_widget_btn_login"
+        android:gravity="center"
+        android:text="去登录"
+        android:textColor="@color/idg_theme_color"
+        android:textSize="14.0sp"
+        tools:ignore="HardcodedText" />
+</LinearLayout>

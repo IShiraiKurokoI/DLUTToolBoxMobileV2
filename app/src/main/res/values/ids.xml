@@ -214,4 +214,14 @@
     <item name="icon_gift" type="id" />
     <item name="gift_name" type="id" />
     <item name="record_time" type="id" />
+    <item name="un_login_panel" type="id" />
+    <item name="widget_item_container" type="id" />
+    <item name="empty_wording" type="id" />
+    <item name="root_container" type="id" />
+    <item name="top_panel" type="id" />
+    <item name="btn_refresh" type="id" />
+    <item name="btn_start_qr_scan" type="id" />
+    <item name="list_panel" type="id" />
+    <item name="content_container" type="id" />
+    <item name="list_course" type="id" />
 </resources>

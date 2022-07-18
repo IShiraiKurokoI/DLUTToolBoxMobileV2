@@ -1,12 +1,19 @@
 package com.Shirai_Kuroko.DLUTMobile.UI;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +22,7 @@ import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 
 public class LoginConfirmActivity extends AppCompatActivity {
 
+    private Button a;
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +30,16 @@ public class LoginConfirmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_confirm);
         String URL = getIntent().getStringExtra("UUID");
         Log.i("二维码地址", URL);
-        WebView webView = requireViewById(R.id.webView);
-        WebSettings settings = webView.getSettings();
-        settings.setUserAgentString(getString(R.string.UserAgent));//设置默认UA
-        settings.setJavaScriptEnabled(true);
+        WebView d1 = requireViewById(R.id.webView);
+        Button btn_login_qrcode =requireViewById(R.id.btn_login_qrcode);
+        a=btn_login_qrcode;
+        btn_login_qrcode.setOnClickListener(view -> BackendUtils.QRLogin(this,URL));
+        TextView tv_qrcode_login_cancel =requireViewById(R.id.tv_qrcode_login_cancel);
+        tv_qrcode_login_cancel.setOnClickListener(view -> finish());
+        d1.setWebChromeClient((WebChromeClient) new initWebView$1());
+        d1.setWebViewClient((WebViewClient) new initWebView$2(this));
+        final WebSettings settings = d1.getSettings();
+        settings.setUserAgentString(getString(R.string.UserAgent));
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setPluginState(WebSettings.PluginState.ON);
         settings.setAllowFileAccess(true);
@@ -40,11 +54,36 @@ public class LoginConfirmActivity extends AppCompatActivity {
         settings.setDomStorageEnabled(true);
         settings.setAppCacheEnabled(true);
         settings.setTextZoom(100);
-        settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        webView.loadUrl(URL);
-        Button btn_login_qrcode =requireViewById(R.id.btn_login_qrcode);
-        btn_login_qrcode.setOnClickListener(view -> BackendUtils.QRLogin(this,URL));
-        TextView tv_qrcode_login_cancel =requireViewById(R.id.tv_qrcode_login_cancel);
-        tv_qrcode_login_cancel.setOnClickListener(view -> finish());
+        settings.setMixedContentMode(0);
+        d1.loadUrl(URL);
+    }
+
+    public static final class initWebView$1 extends WebChromeClient {}
+
+    public static final class initWebView$2 extends WebViewClient {
+        public final LoginConfirmActivity a;
+        public initWebView$2(LoginConfirmActivity paramQRSsoLoginActivity) {
+            a = paramQRSsoLoginActivity;
+        }
+        public void onPageFinished(WebView paramWebView, String paramString) {
+            super.onPageFinished(paramWebView, paramString);
+            Button button = this.a.a;
+            if (button != null) {
+                button.setVisibility(View.VISIBLE);
+            }
+        }
+
+        public void onPageStarted(WebView paramWebView, String paramString, Bitmap paramBitmap) {
+            super.onPageStarted(paramWebView, paramString, paramBitmap);
+        }
+
+        public void onReceivedError(WebView paramWebView, WebResourceRequest paramWebResourceRequest, WebResourceError paramWebResourceError) {
+            super.onReceivedError(paramWebView, paramWebResourceRequest, paramWebResourceError);
+            Toast.makeText(a, "错误"+paramWebResourceError.toString(), Toast.LENGTH_SHORT).show();
+        }
+
+        public boolean shouldOverrideUrlLoading(WebView paramWebView, WebResourceRequest paramWebResourceRequest) {
+            return super.shouldOverrideUrlLoading(paramWebView, paramWebResourceRequest);
+        }
     }
 }

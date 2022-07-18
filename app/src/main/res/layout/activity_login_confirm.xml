@@ -41,7 +41,7 @@
         android:layout_marginStart="24.0dip"
         android:layout_marginEnd="24.0dip"
         android:text="@string/confirm_login"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/tv_qrcode_login_cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

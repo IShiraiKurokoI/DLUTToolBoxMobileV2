@@ -13,8 +13,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.CookieManager;
-import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -25,7 +25,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
@@ -33,20 +32,23 @@ import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.QRCodeHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.BaseActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.BrowserProxy;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 import com.Shirai_Kuroko.DLUTMobile.Widgets.LoadingView;
 
 import java.util.Objects;
 
-public class BrowserActivity extends AppCompatActivity {
+public class BrowserActivity extends BaseActivity {
 
-
+    public ValueCallback<Uri[]> mFilePathCallbacks;
     int numid = 0;
     ApplicationConfig thisapp;
     private WebView webView;
     private LoadingView loading;
+    private BrowserProxy proxy;
 
-    @SuppressLint({"SetJavaScriptEnabled", "NewApi"})
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +70,8 @@ public class BrowserActivity extends AppCompatActivity {
         if (!thisapp.getUrl().contains("rj")) {
             loading.show();
         }
-        webView.addJavascriptInterface(this, "WhistleBrowser");//添加js监听 这样html就能调用客户端
+        BrowserProxy browserProxy = new BrowserProxy(this, webView);
+        webView.addJavascriptInterface(browserProxy, "__nativeWhistleProxy");
         webView.setWebChromeClient(this.webChromeClient);
         webView.setWebViewClient(this.webViewClient);
         WebSettings webSettings = webView.getSettings();
@@ -455,27 +458,12 @@ public class BrowserActivity extends AppCompatActivity {
             result.confirm();
             return true;
         }
-
-        //获取网页标题
         @Override
-        public void onReceivedTitle(WebView view, String title) {
-            super.onReceivedTitle(view, title);
-        }
-
-        //加载进度回调
-        @Override
-        public void onProgressChanged(WebView view, int newProgress) {
-
+        public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
+            //ToDo:文件选择器
+            return super.onShowFileChooser(webView, filePathCallback, fileChooserParams);
         }
     };
-
-    /**
-     * JS调用android的方法
-     */
-    @JavascriptInterface //仍然必不可少
-    public void getClient(String str) {
-
-    }
 
     @Override
     protected void onDestroy() {
@@ -507,7 +495,7 @@ public class BrowserActivity extends AppCompatActivity {
                 return true;
             }
             case 1: {
-                if (webView.getOriginalUrl().contains("file")) {
+                if (webView.getOriginalUrl().startsWith("file")) {
                     Toast.makeText(this, "此页面无法在浏览器内打开", Toast.LENGTH_SHORT).show();
                     return false;
                 }
@@ -525,8 +513,10 @@ public class BrowserActivity extends AppCompatActivity {
                 Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);//设置相应的图片质量
                 Canvas canvas = new Canvas(bitmap);
                 webView.draw(canvas);
-                Bitmap qr = QRCodeHelper.createQRCodeBitmap(webView.getOriginalUrl(), 200, 200, "UTF-8", "H", "0", Color.BLACK, Color.WHITE);
-                canvas.drawBitmap(qr, bitmap.getWidth() - 210, bitmap.getHeight() - 210, null);
+                if (!webView.getOriginalUrl().startsWith("file")) {
+                    Bitmap qr = QRCodeHelper.createQRCodeBitmap(webView.getOriginalUrl(), 200, 200, "UTF-8", "H", "0", Color.BLACK, Color.WHITE);
+                    canvas.drawBitmap(qr, bitmap.getWidth() - 210, bitmap.getHeight() - 210, null);
+                }
                 return MobileUtils.BrowserSharePictureToFriend(this, webView, thisapp, bitmap);
             }
         }
@@ -542,4 +532,5 @@ public class BrowserActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
 }
