@@ -8,12 +8,12 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.BrowserProxy;
 
 public class PresentLotteryActivity extends AppCompatActivity {
 
@@ -26,6 +26,7 @@ public class PresentLotteryActivity extends AppCompatActivity {
         TextView Return = requireViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
         webView = requireViewById(R.id.LoteryWebview);
+        webView.addJavascriptInterface(new BrowserProxy(this,webView), "__nativeWhistleProxy");
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);//允许使用js
         webSettings.setUserAgentString(getString(R.string.UserAgent));//设置默认UA
@@ -63,7 +64,6 @@ public class PresentLotteryActivity extends AppCompatActivity {
         synCookies(url);
         webView.setWebViewClient(this.webViewClient);
         webView.loadUrl(url);
-        Toast.makeText(this, "嘶。。。。这个页面还没做完", Toast.LENGTH_SHORT).show();
     }
 
     public final WebViewClient webViewClient = new WebViewClient(){

@@ -1,6 +1,7 @@
 package com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK;
 
 import android.content.Intent;
+import android.util.Log;
 
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.BrowserActivity;
 
@@ -32,6 +33,7 @@ public class ScanQRCodeCommand {
                 if (intent1.getIntExtra("resultcode", -1) == 1) {//succeed
                     final JSONObject jsonObject1 = new JSONObject();
                     try {
+                        Log.i("扫码返回内容", intent1.getStringExtra("content"));
                         jsonObject1.put("resultStr", URLEncoder.encode(intent1.getStringExtra("content").replaceAll("\n", "%5cn").replaceAll("\r", "%5cr").replaceAll("\t", "%5ct").replaceAll("\\\\", "%5c")));
                         jsonObject1.put("type", "raw");
                     } catch (JSONException e) {
@@ -41,7 +43,8 @@ public class ScanQRCodeCommand {
                     this.sendSucceedResult(jsonObject1);
                     return true;
                 } else if (intent1.getIntExtra("resultcode", -1) == 0) {
-                    this.sendFailedResult("NULL Result");
+                    this.sendCancelResult();
+//                    this.sendFailedResult("用户已取消操作");
                     return false;
                 } else {
                     this.sendCancelResult();

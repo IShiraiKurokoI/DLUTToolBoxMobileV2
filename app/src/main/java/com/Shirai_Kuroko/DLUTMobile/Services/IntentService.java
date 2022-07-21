@@ -23,6 +23,7 @@ import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.alibaba.fastjson.JSON;
 import com.igexin.sdk.GTIntentService;
 import com.igexin.sdk.message.GTCmdMessage;
+import com.igexin.sdk.message.GTNotificationMessage;
 import com.igexin.sdk.message.GTTransmitMessage;
 
 /**
@@ -102,5 +103,10 @@ public class IntentService extends GTIntentService {
     // 各种事件处理回执
     @Override
     public void onReceiveCommandResult(Context context, GTCmdMessage cmdMessage) {
+    }
+
+    @Override
+    public void onNotificationMessageArrived(Context context, GTNotificationMessage gtNotificationMessage) {
+        super.onNotificationMessageArrived(context, gtNotificationMessage);
     }
 }

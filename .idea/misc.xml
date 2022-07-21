@@ -9,6 +9,7 @@
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable-xxhdpi/dialog_center_single_btn_sel.xml" value="0.1565" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable-xxhdpi/shape_bottom_bg_app_widget.xml" value="0.121" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/album_list_item_arrow_sel.xml" value="0.197" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/bg_notice_publish_advance.xml" value="0.1155" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/borderline.xml" value="0.1" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/btn_delete_selected_item_bg.xml" value="0.1575" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/cb_sort_sel.xml" value="0.121" />
@@ -104,6 +105,7 @@
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/content_app_detail.xml" value="0.6088709677419355" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/content_scrolling.xml" value="0.11372847011144883" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/content_security.xml" value="0.1" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/core_dialog_show_privacy_fragment.xml" value="0.2" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/dialog_center_single_btn.xml" value="0.1" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/dialog_confirm_center.xml" value="0.1" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/dialog_custom.xml" value="0.536" />

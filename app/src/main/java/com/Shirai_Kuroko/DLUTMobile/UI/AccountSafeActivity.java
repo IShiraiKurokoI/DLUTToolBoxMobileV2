@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.webkit.CookieManager;
-import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -26,6 +25,7 @@ import androidx.preference.PreferenceManager;
 import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.BrowserProxy;
 import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.Shirai_Kuroko.DLUTMobile.Widgets.LoadingView;
 
@@ -46,7 +46,7 @@ public class AccountSafeActivity extends AppCompatActivity {
         loadingView = new LoadingView(this, R.style.CustomDialog);
         loadingView.show();
         webView = findViewById(R.id.SecurityWebView);
-        webView.addJavascriptInterface(this, "android");//添加js监听 这样html就能调用客户端
+        webView.addJavascriptInterface(new BrowserProxy(this,webView), "__nativeWhistleProxy");//添加js监听 这样html就能调用客户端
         webView.setWebChromeClient(webChromeClient);
         webView.setWebViewClient(webViewClient);
         WebSettings webSettings = webView.getSettings();
@@ -166,7 +166,7 @@ public class AccountSafeActivity extends AppCompatActivity {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
 
-            if (request.getUrl().toString().contains("https://portal.dlut.edu.cn/tp_core/view?m=up#act=portal/viewhome")) {
+            if (request.getUrl().toString().contains("https://portal.dlut.edu.cn/tp_core/view?m=up")) {
                 return true;
             }
             return super.shouldOverrideUrlLoading(view, request);
@@ -208,14 +208,6 @@ public class AccountSafeActivity extends AppCompatActivity {
 
         }
     };
-
-    /**
-     * JS调用android的方法
-     */
-    @JavascriptInterface //仍然必不可少
-    public void getClient(String str) {
-
-    }
 
     @Override
     protected void onDestroy() {

@@ -1,6 +1,8 @@
 package com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,6 +36,7 @@ import com.Shirai_Kuroko.DLUTMobile.Helpers.QRCodeHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.BaseActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.BrowserProxy;
+import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.WebDownloadListener;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 import com.Shirai_Kuroko.DLUTMobile.Widgets.LoadingView;
 
@@ -68,6 +71,7 @@ public class PureBrowserActivity extends BaseActivity {
         loading.show();
         webView.setWebChromeClient(this.webChromeClient);
         webView.setWebViewClient(this.webViewClient);
+        webView.setDownloadListener(new WebDownloadListener(this));
         webView.addJavascriptInterface(new BrowserProxy(this, webView), "__nativeWhistleProxy");
         WebSettings webSettings = webView.getSettings();
         webSettings.setUserAgentString(getString(R.string.UserAgent));//设置默认UA
@@ -251,8 +255,33 @@ public class PureBrowserActivity extends BaseActivity {
 
         @Override
         public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
-            //ToDo:文件选择器
-            return super.onShowFileChooser(webView, filePathCallback, fileChooserParams);
+            Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+            i.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+            i.setType("*/*"); // 设置文件类型
+            String[] mimeTypes = fileChooserParams.getAcceptTypes();
+            i.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes); // 设置多种类型
+            i.addCategory(Intent.CATEGORY_OPENABLE);
+            startActivityForResultHere(Intent.createChooser(i, "Image Chooser"), 2, (requestCode, resultCode, intent) -> {
+                Uri[] results = null;
+                if (resultCode == Activity.RESULT_OK) {
+                    if (intent != null) {
+                        String dataString = intent.getDataString();
+                        ClipData clipData = intent.getClipData();
+                        if (clipData != null) {
+                            results = new Uri[clipData.getItemCount()];
+                            for (int i1 = 0; i1 < clipData.getItemCount(); i1++) {
+                                ClipData.Item item = clipData.getItemAt(i1);
+                                results[i1] = item.getUri();
+                            }
+                        }
+                        if (dataString != null)
+                            results = new Uri[]{Uri.parse(dataString)};
+                    }
+                }
+                filePathCallback.onReceiveValue(results);
+                return false;
+            });
+            return true;
         }
     };
 
@@ -300,13 +329,12 @@ public class PureBrowserActivity extends BaseActivity {
             case 2: {
                 float scale = webView.getScale();
                 int width = webView.getWidth();
-                int height = (int) (webView.getContentHeight() * scale + 0.5);
+                int height = (int) (webView.getContentHeight() * scale + 200);
                 Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);//设置相应的图片质量
                 Canvas canvas = new Canvas(bitmap);
                 webView.draw(canvas);
-                if (!webView.getOriginalUrl().startsWith("file"))
-                {
-                    Bitmap qr = QRCodeHelper.createQRCodeBitmap(webView.getOriginalUrl(), 200, 200, "UTF-8", "H", "0", Color.BLACK, Color.WHITE);
+                if (!webView.getOriginalUrl().startsWith("file")) {
+                    Bitmap qr = QRCodeHelper.createQRCodeBitmap(webView.getOriginalUrl(), 200, 200, "UTF-8", "L", "0", Color.BLACK, Color.WHITE);
                     canvas.drawBitmap(qr, bitmap.getWidth() - 210, bitmap.getHeight() - 210, null);
                 }
                 return MobileUtils.PureBrowserSharePictureToFriend(this, webView, bitmap);

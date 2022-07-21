@@ -95,4 +95,6 @@
     <color name="background_color_ff_alpha_50">#7fffffff</color>
     <color name="background_color_fffcf1">#fffffcf1</color>
     <color name="bg_color_f0">#fff0f0f0</color>
+    <color name="base_line_color_1">#ffe0e0e0</color>
+    <color name="base_line_color_2">#ffe6e6e6</color>
 </resources>

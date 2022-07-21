@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -69,6 +70,7 @@ public class BrowserProxy{
         }
         catch (ClassNotFoundException | InstantiationException | InvocationTargetException | IllegalAccessException | NoSuchMethodException e)
         {
+            Toast.makeText(context, "方法暂未实现"+s, Toast.LENGTH_SHORT).show();
             Log.e(TAG, "issueCommand: ", e);
         }
     }
@@ -88,13 +90,14 @@ public class BrowserProxy{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        String sb2 = "javascript:Whistle.__onCommandCancelCallback('" +
+        String sb2 = "Whistle.__onCommandCancelCallback('" +
                 s +
                 "', '" +
                 jsonObject +
                 "');";
         Log.i(TAG, "sendSucceedResult: " +sb2);
-        this.runOnUiThread(() -> webview.loadUrl(sb2));
+        this.runOnUiThread(() -> webview.evaluateJavascript(sb2, s1 -> {
+        }));
     }
 
     @SuppressWarnings("ALL")
@@ -112,13 +115,14 @@ public class BrowserProxy{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        String sb = "javascript:Whistle.__onCommandFailCallback('" +
+        String sb = "Whistle.__onCommandFailCallback('" +
                 s +
                 "', '" +
                 _s2 +
                 "');";
         Log.i(TAG, "sendFailedResult: "+sb);
-        this.runOnUiThread(() -> webview.loadUrl(sb));
+        this.runOnUiThread(() -> webview.evaluateJavascript(sb, s1 -> {
+        }));
     }
 
     @SuppressWarnings("ALL")
@@ -131,13 +135,14 @@ public class BrowserProxy{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        String sb2 = "javascript:Whistle.__onCommandSuccessCallback('" +
+        String sb2 = "Whistle.__onCommandSuccessCallback('" +
                 s +
                 "', '" +
                 jsonObject +
                 "');";
         Log.i(TAG, "sendSucceedResult: " +sb2);
-        this.runOnUiThread(() -> webview.loadUrl(sb2));
+        this.runOnUiThread(() -> webview.evaluateJavascript(sb2, s1 -> {
+        }));
     }
 
     public void sendFailedResult(final String s, final String s2, final String s3) {
@@ -146,10 +151,11 @@ public class BrowserProxy{
 
     @SuppressWarnings("ALL")
     public void onScanResult(final JSONObject jsonObject) {
-        String sb = "javascript:Whistle.__onScanCallback('" +
+        String sb = "Whistle.__onScanCallback('" +
                 jsonObject +
                 "');";
         Log.i(TAG, "sendSucceedResult: " +sb);
-        this.runOnUiThread(() -> webview.loadUrl(sb));
+        this.runOnUiThread(() -> webview.evaluateJavascript(sb, s1 -> {
+        }));
     }
 }

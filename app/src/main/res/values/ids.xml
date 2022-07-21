@@ -224,4 +224,10 @@
     <item name="list_panel" type="id" />
     <item name="content_container" type="id" />
     <item name="list_course" type="id" />
+    <item name="txt_title" type="id" />
+    <item name="line_one" type="id" />
+    <item name="txt_content" type="id" />
+    <item name="txt_privacy_span" type="id" />
+    <item name="btn_reject" type="id" />
+    <item name="btn_agree" type="id" />
 </resources>

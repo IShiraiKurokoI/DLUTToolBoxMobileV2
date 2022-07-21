@@ -59,6 +59,7 @@ public class BackgroudWIFIMonitorService extends Service {
         Notification notification = new Notification.Builder(this, CHANNEL_ONE_ID).setChannelId(CHANNEL_ONE_ID)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle("正在后台监测校园网网络连接")
+                .setShowWhen(false)
                 .setContentIntent(pendingIntent)
                 .build();
 

@@ -49,7 +49,6 @@ import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Managers.CacheManager;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.HeadActivity;
-import com.Shirai_Kuroko.DLUTMobile.UI.PersonalInfoActivity;
 import com.Shirai_Kuroko.DLUTMobile.Widgets.PreferenceRightDetailView;
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
@@ -701,6 +700,12 @@ public class MobileUtils {
         {
             List<ADBannerBean> CacheGallery = JSON.parseArray(Cache,ADBannerBean.class);
             banner.setAdapter(new ADBannerAdapter(CacheGallery,context));
+            banner.addBannerLifecycleObserver((FragmentActivity)context);
+            banner.setIndicator(new RectangleIndicator(context));
+        }
+        else
+        {
+            banner.setAdapter(new ADBannerAdapter(null,context));
             banner.addBannerLifecycleObserver((FragmentActivity)context);
             banner.setIndicator(new RectangleIndicator(context));
         }

@@ -35,8 +35,15 @@ public class ConfigHelper {
         ArrayList<ApplicationConfig> mList;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String acfjson = prefs.getString("APPCONFIG", defconfig);
+        if (Objects.equals(acfjson, ""))
+        {
+            acfjson=defconfig;
+        }
         List<ApplicationConfig> jsonlist = JSON.parseArray(acfjson, ApplicationConfig.class);
-        ApplicationConfig[] acfs = jsonlist.toArray(new ApplicationConfig[0]);
+        ApplicationConfig[] acfs = new ApplicationConfig[0];
+        if (jsonlist != null) {
+            acfs = jsonlist.toArray(new ApplicationConfig[0]);
+        }
         mList = new ArrayList<>(Arrays.asList(acfs));
         return mList;
     }
@@ -233,5 +240,17 @@ public class ConfigHelper {
     public static void SaveIDPhoto(Context context, String json) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         prefs.edit().putString("IDPhotoResult", json).apply();
+    }
+
+    public static boolean FPStatus(Context context)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean("FP", false);
+    }
+
+    public static void AgreeFP(Context context)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.edit().putBoolean("FP",true).apply();
     }
 }

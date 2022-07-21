@@ -48,15 +48,8 @@
     <string name="game">游戏类</string>
     <string name="UserAgent">Mozilla/5.0 (Linux; Android 10; EBG Build/HUAWEIEBG; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.93 Mobile Safari/537.36 weishao(3.2.7.74623)</string>
     <string name="PCUserAgent">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.124 Safari/537.36 Edg/102.0.1245.44</string>
+    <string name="CPUserAgent">Mozilla/5.0 (Linux; Android 8.1.0; Pixel Build/OPM4.171019.021.D1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.109 Mobile Safari/537.36 EdgA/42.0.0.2057</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
     <string name="clean_cache">清除缓存</string>
     <string name="my_service">我的服务</string>
     <string name="add_more">前往服务大厅，添加更多</string>
@@ -104,6 +97,18 @@
     <string name="qrcode">二维码</string>
     <string name="qrcode_decode_failed">二维码获取失败，请重试</string>
     <string name="qrcode_decode_hint">将二维码/条码放入框内，即可自动扫描</string>
-    <string name="qrcode_decoding">解析中，请稍后...</string>
+    <string name="qrcode_decoding">解析中，请稍后…</string>
     <string name="qrcode_disable">二维码已失效，请重试</string>
+    <string name="privacy_agree_button_text">同意</string>
+    <string name="privacy_policy">隐私政策</string>
+    <string name="privacy_reject_button_text">不同意</string>
+    <string name="privacy_update">本协议内容有更新，请您充分理解并同意后再开始使用</string>
+    <string name="privacy_update_time">修订时间：%1$s</string>
+    <string name="private_msg_not_null">私信内容不能为空</string>
+    <string name="private_msg_title">【私信】</string>
+    <string name="publish_notice">发通知</string>
+    <string name="publish_notice_location">添加地点</string>
+    <string name="PrivacyContent">为了更好地保护您的权益，我们依据最新的监管要求更新了 i 大工+的《隐私政策》，特向你说明如下：\n
+1、为保证 APP 稳定运行或提供服务，i 大工+需要向您申请必要的手机权限，包括读取电话状态权限（用于设备识别以便完成安全风拉）、存储权限（用于保存图片、下载附件、上传附件、头像设置等功能）以及隐私政策中所列举的其他使用具体功能时所需要申请的权限类型。您有权拒绝开启或提供，但这将导致你无法使用相关功能。\n
+2、未经您的投权，我们不会从第三方处获取或者向第三方共享或提供您的信息，我们尊重您的选择权，你可以访问、更正、删除你的个人信息。</string>
 </resources>

@@ -306,7 +306,7 @@
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/AE/ynZM2Vsjs_WAbKVBAAAUZ1O0wWU349.png",
     "describe": "大连理工大学高清视频平台，平台需在校园网环境下使用，属于校内流量，免流量费。",
     "popularity": "179072",
-    "url": "https://sso.dlut.edu.cn/cas/login?service=http://video.dlut.edu.cn/dlut-cas?from=rj",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421e6fe4599287e6c5c6b1cc7a99c406d36af/show?filter=app&from=rj",
     "issubscription": 0
   },
   {
