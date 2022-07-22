@@ -7,7 +7,7 @@ import static com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils.GetHeaderForVersio
 import static com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils.GetHeaderValueFora;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
+import android.widget.Toast;
 
 import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
@@ -26,6 +26,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+@SuppressWarnings("ALL")
 public class HttpRequestDataCommand
 {
     public String cmdName;
@@ -67,7 +68,7 @@ public class HttpRequestDataCommand
                         final JSONObject jsonObject2 = jsonObject.getJSONObject("requestParams");
                         final Iterator<String> keys = jsonObject2.keys();
                         while (keys.hasNext()) {
-                            final String key = (String) keys.next();
+                            final String key = keys.next();
                             hashMap.put(key, jsonObject2.getString(key));
                         }
                     }
@@ -123,7 +124,6 @@ public class HttpRequestDataCommand
                                         .header("timestamp", Timestamp)
                                         .header("Connection", "Keep-Alive")
                                         .build();//创建Request 对象
-                                Log.i("TAG", "execute: "+request.url());
                                 Response response;
                                 try {
                                     response = client.newCall(request).execute();
@@ -137,7 +137,7 @@ public class HttpRequestDataCommand
                                         String encode;
                                         encode = URLEncoder.encode(URLEncoder.encode(ResponseBody).replaceAll("\\+", "%20"));
                                         try {
-                                            jsonObject3.put("responseData", (Object)encode);
+                                            jsonObject3.put("responseData", encode);
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                             String sb = "JSONException : " +
@@ -156,6 +156,7 @@ public class HttpRequestDataCommand
                         }
                         case "POST":
                         {
+                            Toast.makeText(proxy.context, "抱歉，此POST功能暂未实现", Toast.LENGTH_SHORT).show();
                             break;
                         }
                     }

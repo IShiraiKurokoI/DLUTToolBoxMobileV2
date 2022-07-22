@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+@SuppressWarnings("ALL")
 public class BrowserProxy{
     public Activity context;
     private boolean isAuthed;

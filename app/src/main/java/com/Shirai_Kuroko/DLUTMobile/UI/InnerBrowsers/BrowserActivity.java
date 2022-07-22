@@ -42,6 +42,7 @@ import com.Shirai_Kuroko.DLUTMobile.Widgets.LoadingView;
 
 import java.util.Objects;
 
+@SuppressWarnings("ALL")
 public class BrowserActivity extends BaseActivity {
 
     int numid = 0;

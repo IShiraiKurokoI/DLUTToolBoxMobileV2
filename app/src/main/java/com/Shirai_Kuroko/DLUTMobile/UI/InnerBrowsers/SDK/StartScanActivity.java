@@ -33,8 +33,8 @@ public class StartScanActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        Intent intent = new Intent();
         if (result != null) {
-            Intent intent = new Intent();
             if (result.getContents() == null) {
                 intent.putExtra("resultcode", 0);
             } else {
@@ -66,7 +66,6 @@ public class StartScanActivity extends AppCompatActivity {
             this.setResult(RESULT_OK, intent);
             this.finish();
         } else {
-            Intent intent = new Intent();
             intent.putExtra("resultcode", 0);
             this.setResult(RESULT_OK, intent);
             this.finish();
