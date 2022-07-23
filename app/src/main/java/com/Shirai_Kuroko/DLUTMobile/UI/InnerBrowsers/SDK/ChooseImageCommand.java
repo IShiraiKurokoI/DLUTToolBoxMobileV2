@@ -49,7 +49,7 @@ public class ChooseImageCommand {
             count = jsonObject.getInt("count");
         } catch (JSONException e) {
             e.printStackTrace();
-            Toast.makeText(proxy.context, "出现错误"+e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(proxy.context, "出现错误" + e.getMessage(), Toast.LENGTH_SHORT).show();
             sendCancelResult();
             return;
         }
@@ -71,30 +71,27 @@ public class ChooseImageCommand {
                     uris.add(media.getRealPath());
                 }
 
-                if(jsonObject.toString().contains("compressed"))
-                {
+                if (jsonObject.toString().contains("compressed")) {
                     final JSONObject jsonObject = new JSONObject();
                     final JSONArray jsonArray = new JSONArray(uris);
                     try {
-                        jsonObject.put("localIds",jsonArray);
-                        jsonObject.put("compressedIds",jsonArray);
+                        jsonObject.put("localIds", jsonArray);
+                        jsonObject.put("compressedIds", jsonArray);
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Toast.makeText(proxy.context, "出现错误"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(proxy.context, "出现错误" + e.getMessage(), Toast.LENGTH_SHORT).show();
                         sendCancelResult();
                         return;
                     }
                     sendSucceedResult(jsonObject);
-                }
-                else
-                {
+                } else {
                     final JSONObject jsonObject = new JSONObject();
                     final JSONArray jsonArray = new JSONArray(uris);
                     try {
-                        jsonObject.put("localIds",jsonArray);
-                        jsonObject.put("uncompressIds",jsonArray);
+                        jsonObject.put("localIds", jsonArray);
+                        jsonObject.put("uncompressIds", jsonArray);
                     } catch (JSONException e) {
-                        Toast.makeText(proxy.context, "出现错误"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(proxy.context, "出现错误" + e.getMessage(), Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                         sendCancelResult();
                         return;
@@ -102,17 +99,18 @@ public class ChooseImageCommand {
                     sendSucceedResult(jsonObject);
                 }
             }
+
             @Override
             public void onCancel() {
                 sendCancelResult();
             }
         };
-        proxy.context.runOnUiThread(() -> showPop(resultCallbackListener, proxy.context,_count));
+        proxy.context.runOnUiThread(() -> showPop(resultCallbackListener, proxy.context, _count));
     }
 
     private PopupWindow pop;
 
-    private void showPop(OnResultCallbackListener<LocalMedia> resultCallbackListener, Context context,int count) {
+    private void showPop(OnResultCallbackListener<LocalMedia> resultCallbackListener, Context context, int count) {
         View bottomView = View.inflate(context, R.layout.layout_bottom_dialog, null);
         TextView mAlbum = bottomView.findViewById(R.id.tv_album);
         TextView mCamera = bottomView.findViewById(R.id.tv_camera);
