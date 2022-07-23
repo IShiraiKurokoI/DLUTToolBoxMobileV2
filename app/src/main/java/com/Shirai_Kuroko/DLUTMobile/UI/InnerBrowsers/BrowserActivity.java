@@ -222,9 +222,6 @@ public class BrowserActivity extends BaseActivity {
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {//页面开始加载
-            if (!url.contains("https://api.m.dlut.edu.cn/login?")) {
-                loading.show();//显示加载条
-            }
             Log.i("开始加载", url);//日志记录加载了什么页面
             switch (thisapp.getId()) {
                 case 70://选课系统自动跳转
@@ -299,6 +296,9 @@ public class BrowserActivity extends BaseActivity {
                 }
                 default://默认加载完成隐藏加载条
                 {
+                    if (!url.contains("https://api.m.dlut.edu.cn/login?")) {
+                        loading.show();//显示加载条
+                    }
                     break;
                 }
             }

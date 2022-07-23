@@ -38,14 +38,13 @@ public class CourseWidget extends AppWidgetProvider {
             PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, 0);
             views.setOnClickPendingIntent(R.id.btn_start_virtual_card, pendingIntent1);
 
-            Intent intent2 = new Intent("android.appwidget.action.APPWIDGET_UPDATE");
+            Intent intent2 = new Intent("com.Shirai_Kuroko.DLUTMobile.RefreshWidget");
             PendingIntent pendingIntent2 = PendingIntent.getActivity(context, 0, intent2, 0);
             views.setOnClickPendingIntent(R.id.btn_refresh, pendingIntent2);
 
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
     }
-
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
