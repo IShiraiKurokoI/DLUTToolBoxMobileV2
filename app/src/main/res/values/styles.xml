@@ -49,6 +49,19 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="appDetailItemTitleStyle">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">@color/text_color_88</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="appDetailItemStyle">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">@color/text_color_50</item>
+        <item name="android:layout_marginLeft">16.0dip</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
     <style name="tv_gift_detail">
         <item name="android:textSize">14.0sp</item>
         <item name="android:textColor">#ff505050</item>

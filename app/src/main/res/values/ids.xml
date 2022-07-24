@@ -230,4 +230,12 @@
     <item name="txt_privacy_span" type="id" />
     <item name="btn_reject" type="id" />
     <item name="btn_agree" type="id" />
+    <item name="app_rating" type="id" />
+    <item name="DetailImage" type="id" />
+    <item name="DetailName" type="id" />
+    <item name="app_introduction" type="id" />
+    <item name="app_detail_panel" type="id" />
+    <item name="app_author" type="id" />
+    <item name="app_style" type="id" />
+    <item name="app_hot" type="id" />
 </resources>

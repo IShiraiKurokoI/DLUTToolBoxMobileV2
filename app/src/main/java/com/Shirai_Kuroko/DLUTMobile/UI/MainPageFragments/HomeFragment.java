@@ -32,7 +32,6 @@ import com.bumptech.glide.Glide;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.youth.banner.Banner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -54,7 +53,9 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         GridView mgv = requireView().findViewById(R.id.main_grid);
-        adapter = new MainGridAdapter();
+        List<GridAppID> gridAppIDS = ConfigHelper.GetGridIDList(requireContext());
+        gridAppIDS.add(new GridAppID(-1));
+        adapter = new MainGridAdapter(gridAppIDS);
         if (mgv != null) {
             mgv.setAdapter(adapter);
         } else {
@@ -65,11 +66,13 @@ public class HomeFragment extends Fragment {
         if (banner != null) {
             MobileUtils.GetGalllery(requireActivity(), banner);
         }
+
         ImageView imageView = requireView().findViewById(R.id.iv_search);
         imageView.setOnClickListener(view1 -> {
             Intent intent = new Intent(requireActivity(), AppcenterActivity.class);
             startActivity(intent);
         });
+
         ImageView iv_more = requireView().findViewById(R.id.iv_more);
         iv_more.setOnClickListener(this::showPopupWindow);
     }
@@ -106,14 +109,12 @@ public class HomeFragment extends Fragment {
     public class MainGridAdapter extends BaseAdapter {
         private List<GridAppID> mList;
 
-        public MainGridAdapter() {
-            this.mList = ConfigHelper.GetGridIDList(requireContext());
+        public MainGridAdapter(List<GridAppID> List) {
+            this.mList = List;
         }
 
-        public void showallgriditems() {
-            ArrayList<GridAppID> gai = ConfigHelper.GetGridIDList(requireActivity());
-            gai.add(new GridAppID(-1));
-            mList = gai;
+        public void showallgriditems(List<GridAppID> List) {
+            mList = List;
             notifyDataSetChanged();
         }
 
@@ -181,7 +182,9 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (adapter != null) {
-            adapter.showallgriditems();
+            List<GridAppID> gridAppIDS = ConfigHelper.GetGridIDList(requireContext());
+            gridAppIDS.add(new GridAppID(-1));
+            adapter.showallgriditems(gridAppIDS);
         }
     }
 }

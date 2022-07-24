@@ -38,18 +38,30 @@ public class AppDetailActivity extends AppCompatActivity {
         thisapp = ConfigHelper.Getmlist(this).get(numid);
         TextView Return = requireViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
-        TextView title = requireViewById(R.id.tv_title);
-        title.setText(thisapp.getAppName());
         ImageView di = findViewById(R.id.DetailImage);
         Glide.with(this).load(thisapp.getIcon()).into(di);
         TextView dt = findViewById(R.id.DetailName);
         dt.setText(thisapp.getAppName());
-        TextView dd = findViewById(R.id.DetailDescription);
+        TextView dd = findViewById(R.id.app_introduction);
         dd.setText(thisapp.getDescribe());
         dd.setTextColor(Color.GRAY);
         Button bo = findViewById(R.id.open);
-        TextView tdc = findViewById(R.id.detailcatagory);
+        TextView tdc = findViewById(R.id.app_style);
         tdc.setText(ConfigHelper.GetCatogoryName(thisapp.getCategory()));
+
+        TextView tdh = findViewById(R.id.app_hot);
+        tdh.setText(String.valueOf(thisapp.getPopularity()));
+
+        TextView tda = findViewById(R.id.app_author);
+
+        if(thisapp.getId()<70)
+        {
+            tda.setText("校方应用");
+        }
+        else
+        {
+            tda.setText("自制应用");
+        }
         if (ThemeType) {
             bo.setTextColor(Color.WHITE);
         } else {

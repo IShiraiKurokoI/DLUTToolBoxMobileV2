@@ -20,7 +20,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
@@ -78,7 +77,7 @@ public class ServiceCenterFragment extends Fragment {
         View emptyView = requireView().findViewById(R.id.emptyview);
         mListView.setEmptyView(emptyView);
         TextView Return = requireView().findViewById(R.id.iv_back);
-        Return.setOnClickListener(v -> getActivity().finish());
+        Return.setOnClickListener(v -> requireActivity().finish());
         if (nobar) {
             mListView.setPadding(0, 0, 0, 0);
             Return.setVisibility(View.VISIBLE);
@@ -309,7 +308,6 @@ public class ServiceCenterFragment extends Fragment {
                 // 实例化一个封装类ListItemView，并实例化它的域
                 listItemView = new ListItemView();
                 listItemView.Position_Num = convertView.findViewById(R.id.Position_Num);
-                listItemView.App_ID = convertView.findViewById(R.id.App_ID);
                 listItemView.App_Icon = convertView.findViewById(R.id.App_Icon);
                 listItemView.App_Name = convertView.findViewById(R.id.App_Name);
                 listItemView.App_Describe = convertView.findViewById(R.id.App_Describe);
@@ -321,16 +319,23 @@ public class ServiceCenterFragment extends Fragment {
                 listItemView = (ListItemView) convertView.getTag();
             }
 
-            convertView.setOnClickListener(ServiceCenterFragment.this::onClick);
+
+            View.OnClickListener onClickListener = view -> {
+                int App_ID = mSearchList.get(position).getId();
+                Intent intent = new Intent(getActivity(), AppDetailActivity.class);
+                intent.putExtra("App_ID", App_ID);
+                startActivity(intent);
+            };
+
+            convertView.setOnClickListener(onClickListener);
+
             // 获取到mList中指定索引位置的资源
             String title = mSearchList.get(position).getAppName();
-            int id = (mSearchList.get(position).getId());
             String desc = mSearchList.get(position).getDescribe();
             // 将资源传递给ListItemView的两个域对象
             Glide.with(requireActivity()).load(mSearchList.get(position).getIcon()).into(listItemView.App_Icon);
             listItemView.App_Name.setText(title);
             listItemView.Position_Num.setText(String.valueOf(position + 1));
-            listItemView.App_ID.setText(Integer.toString(id));
             listItemView.App_Describe.setText(desc);
             if (mSearchList.get(position).getIssubscription() == 1) {
                 listItemView.Btn_Add_Remove.setBackgroundResource(R.drawable.btn_cancel_app);
@@ -338,9 +343,7 @@ public class ServiceCenterFragment extends Fragment {
                 listItemView.Btn_Add_Remove.setBackgroundResource(R.drawable.btn_add_app);
             }
             listItemView.Btn_Add_Remove.setOnClickListener(v -> {
-                TextView tv;
-                tv = listItemView.App_ID.findViewById(R.id.App_ID);
-                int App_ID = Integer.parseInt(tv.getText().toString());
+                int App_ID = mSearchList.get(position).getId();
                 if (ConfigHelper.Getmlist(requireActivity()).get(App_ID).getIssubscription() == 0) {
                     ConfigHelper.addsubscription(requireActivity(), App_ID);
                 } else {
@@ -350,17 +353,6 @@ public class ServiceCenterFragment extends Fragment {
             });
             return convertView;
         }
-    }
-
-    public void onClick(View v) {
-        SearchView search = requireActivity().findViewById(R.id.search);
-        search.clearFocus();
-        TextView tv;
-        tv = v.findViewById(R.id.App_ID);
-        int App_ID = Integer.parseInt(tv.getText().toString());
-        Intent intent = new Intent(getActivity(), AppDetailActivity.class);
-        intent.putExtra("App_ID", App_ID);
-        startActivity(intent);
     }
 
     public void Refresh() {
@@ -389,7 +381,6 @@ public class ServiceCenterFragment extends Fragment {
 
     static class ListItemView {
         TextView Position_Num;
-        TextView App_ID;
         ImageView App_Icon;
         TextView App_Name;
         TextView App_Describe;
