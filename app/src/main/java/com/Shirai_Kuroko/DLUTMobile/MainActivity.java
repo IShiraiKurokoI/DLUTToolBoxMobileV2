@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PermissionHelper.GetAllPermission(this);
         LocalReceiver localReceiver = new LocalReceiver();
         LocalBroadcastManager.getInstance(this)
                 .registerReceiver(localReceiver, new IntentFilter("com.Shirai_Kuroko.DLUTMobile.ReceivedNew"));
@@ -50,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupWithNavController(binding.navView, navController);
-        PermissionHelper.GetAllPermission(this);
         MobileUtils.CheckUpDateOnStartUp(this);
         MobileUtils.CheckConfigUpdates(this);
         if (ConfigHelper.NeedLogin(this)) {
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             Log.i("启动初始化", "刷新用户数据");
             BackendUtils.ReSendUserInfo(this);
         }
-        ConfigHelper.MakeupNotificationList(this);
+        //ConfigHelper.MakeupNotificationList(this);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         if (prefs.getBoolean("unread", false)) {
@@ -134,5 +134,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public Resources getResources() {
         return MobileUtils.getResources(super.getResources());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

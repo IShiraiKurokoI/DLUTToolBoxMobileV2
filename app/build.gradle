@@ -36,8 +36,14 @@ android {
         minSdk 29
         targetSdk 31
         versionCode 1
-        versionName "1.4.3"
+        versionName "1.4.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders =[
+                PUSH_APPID:"EM2xtY6UCM64MPEoE4cEZ1",
+                GETUI_APPID:"EM2xtY6UCM64MPEoE4cEZ1",
+                PUSH_APPKEY:"qyHeANMVWK8aRWb4yNJ2m8",
+                PUSH_APPSECRET:"s1YSs8vQgP8umvUm36QeuA"
+        ]
     }
 
     buildTypes {

@@ -1,7 +1,6 @@
 package com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.text.TextUtils;
 
 import org.json.JSONException;
@@ -50,13 +49,7 @@ public class GetVersionCommand {
     }
 
     public static String D(final Context context) {
-        final PackageManager packageManager = context.getPackageManager();
-        try {
-            return packageManager.getPackageInfo(context.getPackageName(), PackageManager.GET_CONFIGURATIONS).versionName;
-        } catch (PackageManager.NameNotFoundException ex) {
-            ex.printStackTrace();
-            return null;
-        }
+            return "3.2.7.74625";
     }
 
     public void sendCancelResult() {

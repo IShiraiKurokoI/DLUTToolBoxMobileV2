@@ -44,7 +44,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         TextView Version = requireViewById(R.id.Version);
         Version.setText("Version " + MobileUtils.GetAppVersion(this));
-
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean Autologin = prefs.getBoolean("AutoLogin", false);
         if (Autologin) {

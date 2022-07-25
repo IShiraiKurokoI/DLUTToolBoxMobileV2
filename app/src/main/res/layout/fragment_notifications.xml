@@ -31,17 +31,19 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/relativeLayout2">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/relativeLayout2"
+        android:forceHasOverlappingRendering="true">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@id/rv_notice_list"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
             android:background="@android:color/transparent"
-            android:overScrollMode="never"
             android:fadeScrollbars="false"
+            android:overScrollMode="never"
             android:scrollbarSize="4dp"
             android:scrollbars="vertical" />
 
@@ -49,10 +51,10 @@
             android:id="@id/tv_chat_unread_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/rv_notice_list"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginVertical="20dp"
             android:layout_marginBottom="12.0dip"
-            android:layout_alignEnd="@id/rv_notice_list"
             android:background="@drawable/tips_unread_new_msg_sel"
             android:drawablePadding="2.0dip"
             android:gravity="center"
@@ -69,8 +71,8 @@
             android:id="@id/tv_tips_unread_new_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/rv_notice_list"
-            android:layout_alignEnd="@id/rv_notice_list"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginVertical="20dp"
             android:layout_marginTop="24.0dip"
             android:background="@drawable/tips_unread_new_msg_sel"

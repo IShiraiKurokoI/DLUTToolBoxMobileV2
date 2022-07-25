@@ -16,40 +16,52 @@ public class MsgHistoryManager {
         db = sql.getReadableDatabase();
     }
 
-    public void insert(Long timestamp,String content) {
+    public void insert(Long timestamp, String content) {
         String sql = "insert into MsgHistory values(?,?)";
         db.beginTransaction();
-        db.execSQL(sql, new Object[]{timestamp,content});
+        db.execSQL(sql, new Object[]{timestamp, content});
         db.setTransactionSuccessful();
         db.endTransaction();
+        db.close();
+    }
+
+    public void closedb() {
+        db.close();
     }
 
     //删除
     public void Remove(Long timestamp) {
         String sql = "delete from MsgHistory where timestamp=?";
         db.execSQL(sql, new Object[]{timestamp});
+        db.close();
     }
 
     @SuppressLint("Range")
     public String query(Long timestamp) {
         String sql = "select * from MsgHistory";
         Cursor cursor = db.rawQuery(sql, null);
-        List<String> strings = new ArrayList<>();
         if (cursor != null) {
             while (cursor.moveToNext()) {
-                if(cursor.getLong(cursor.getColumnIndex("timestamp"))==timestamp)
-                {
+                if (cursor.getLong(cursor.getColumnIndex("timestamp")) == timestamp) {
+                    db.close();
                     return cursor.getString(cursor.getColumnIndex("content"));
                 }
             }
+            cursor.close();
         }
+        db.close();
         return null;
     }
 
     //修改
-    public void update(Long timestamp,String content) {
-        String sql = "update MsgHistory set content=? where timestamp=?";
-        db.execSQL(sql, new Object[]{content, timestamp});
+    public void update(Long timestamp, String content) {
+        try {
+            String sql = "update MsgHistory set content=? where timestamp=?";
+            db.execSQL(sql, new Object[]{content, timestamp});
+            db.close();
+        } catch (Exception e) {
+            db.close();
+        }
     }
 
     //查询
@@ -62,7 +74,9 @@ public class MsgHistoryManager {
                 @SuppressLint("Range") String content = cursor.getString(cursor.getColumnIndex("content"));
                 strings.add(content);
             }
+            cursor.close();
         }
+        db.close();
         return strings;
     }
 }

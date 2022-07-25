@@ -6,12 +6,12 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.OpenVirtualCardActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.WidgetQRLauncherActivity;
+import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 
 public class CourseWidget extends AppWidgetProvider {
     @Override
@@ -23,7 +23,7 @@ public class CourseWidget extends AppWidgetProvider {
     @SuppressLint("UnspecifiedImmutableFlag")
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
-        Log.i("onUpdate", "");
+        BackendUtils.GainScore(context);
         // Perform this loop procedure for each App Widget that belongs to this provider
         for (int appWidgetId : appWidgetIds) {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.layout_course_widget);

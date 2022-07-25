@@ -69,7 +69,6 @@ public class NotificationPayload implements Serializable
 
     public static class Body implements Serializable
     {
-        public static final String TYPE_NOTICE = "gift_notice";
         private String after_open;
         private Custom custom;
         private String msg_type;

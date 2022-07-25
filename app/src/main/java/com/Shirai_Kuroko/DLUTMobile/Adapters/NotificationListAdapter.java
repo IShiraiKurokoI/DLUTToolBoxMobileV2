@@ -38,7 +38,8 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        @SuppressLint("InflateParams") View view = LayoutInflater.from(mContext).inflate(R.layout.item_notice_layout,null,false);
+        @SuppressLint("InflateParams")
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_notice_layout,viewGroup,false);
         return new ViewHolder(view);
     }
 
@@ -55,7 +56,7 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
         String payloadcustom = payload.getPayload().getBody().getCustom().getContent();
         DLUTNoticeContentBean dlutNoticeContentBean = JSON.parseObject(payloadcustom, DLUTNoticeContentBean.class);
         holder.tv_notice_title.setText(dlutNoticeContentBean.getTitle());
-        if (!Objects.equals(dlutNoticeContentBean.getDescription(), " ")) {
+        if (!Objects.equals(dlutNoticeContentBean.getDescription(), " ")&&!Objects.equals(dlutNoticeContentBean.getDescription(), "")) {
             holder.tv_notice_desc.setText(dlutNoticeContentBean.getDescription());
         } else {
             holder.tv_notice_desc.setVisibility(View.GONE);

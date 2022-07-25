@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
 
@@ -46,11 +47,25 @@ public class IntentService extends GTIntentService {
             try {
                 MsgHistoryManager msgHistoryManager = new MsgHistoryManager(context);
                 NotificationPayload notificationPayload = JSON.parseObject(str, NotificationPayload.class);
-                msgHistoryManager.insert(Long.valueOf(notificationPayload.getTimestamp()), JSON.toJSONString(notificationPayload));
-                new Thread(() -> BackendUtils.GetMsgDetailInfo(context, notificationPayload.getPayload().getBody().getCustom().getMsg_id(), Long.valueOf(notificationPayload.getTimestamp()))).start();
+                try {
+                    msgHistoryManager.insert(Long.valueOf(notificationPayload.getTimestamp()), JSON.toJSONString(notificationPayload));
+                } catch (Exception e) {
+                    msgHistoryManager.closedb();
+                }
+
+                try {
+                    new Thread(() -> BackendUtils.GetMsgDetailInfo(context, notificationPayload.getPayload().getBody().getCustom().getMsg_id(), Long.valueOf(notificationPayload.getTimestamp()))).start();
+                } catch (Exception e) {
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+                prefs.edit().putBoolean("unread", true).putInt("unreadcount", prefs.getInt("unreadcount", 0) + 1).apply();
+                Intent intent3 = new Intent("com.Shirai_Kuroko.DLUTMobile.ReceivedNew");
+                context.sendBroadcast(intent3);
 
                 //发送推送消息
-                DLUTNoticeContentBean dlutNoticeContentBean = JSON.parseObject(notificationPayload.getPayload().getBody().getCustom().getContent(),DLUTNoticeContentBean.class);
+                DLUTNoticeContentBean dlutNoticeContentBean = JSON.parseObject(notificationPayload.getPayload().getBody().getCustom().getContent(), DLUTNoticeContentBean.class);
                 String CHANNEL_ONE_ID = "114514";
                 String CHANNEL_ONE_NAME = "个推消息通知";
                 NotificationChannel notificationChannel;
@@ -75,7 +90,7 @@ public class IntentService extends GTIntentService {
                         .setAutoCancel(true)
                         .build();
                 if (manager != null) {
-                    manager.notify(Integer.parseInt(notificationPayload.getPayload().getBody().getCustom().getMsg_id()),notification);
+                    manager.notify(Integer.parseInt(notificationPayload.getPayload().getBody().getCustom().getMsg_id()), notification);
                 }
             } catch (Exception e) {
                 Log.e("个推SDK", "Payload处理错误: ", e);
@@ -91,6 +106,9 @@ public class IntentService extends GTIntentService {
     @Override
     public void onReceiveClientId(Context context, String clientid) {
         Log.i("个推SDK", "收到Clientid  " + clientid);
+        final SharedPreferences.Editor edit = PreferenceManager.getDefaultSharedPreferences(context).edit();
+        edit.putString("device_token", clientid);
+        edit.apply();
         BackendUtils.SetClientID(context, clientid);
     }
 

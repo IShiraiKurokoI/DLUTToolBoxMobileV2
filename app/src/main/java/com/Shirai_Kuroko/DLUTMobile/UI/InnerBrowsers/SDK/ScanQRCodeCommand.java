@@ -44,7 +44,6 @@ public class ScanQRCodeCommand {
                     return true;
                 } else if (intent1.getIntExtra("resultcode", -1) == 0) {
                     this.sendCancelResult();
-//                    this.sendFailedResult("用户已取消操作");
                     return false;
                 } else {
                     this.sendCancelResult();

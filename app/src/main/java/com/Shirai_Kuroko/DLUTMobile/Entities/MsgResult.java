@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class IDPhotoResult {
+public class MsgResult {
 
     @JsonProperty("data")
     private DataDTO data;
@@ -32,28 +32,26 @@ public class IDPhotoResult {
     @Data
     public static class DataDTO {
         @JsonProperty("msg_id")
-        private List<?> msg_id;
+        private List<String> msg_id;
         @JsonProperty("conver_msg_id")
-        private List<?> conver_msg_id;
+        private List<String> conver_msg_id;
         @JsonProperty("app_msg_id")
-        private List<?> app_msg_id;
+        private List<String> app_msg_id;
         @JsonProperty("id_photo")
         private String id_photo;
 
-        public List<?> getApp_msg_id() {
+        public List<String> getAppMsgId() {
             return app_msg_id;
         }
 
-        public List<?> getConver_msg_id() {
+        public List<String> getConverMsgId() {
             return conver_msg_id;
         }
 
-        public List<?> getMsg_id() {
+        public List<String> getMsgId() {
             return msg_id;
         }
 
-        public String getId_photo() {
-            return id_photo;
-        }
+
     }
 }
