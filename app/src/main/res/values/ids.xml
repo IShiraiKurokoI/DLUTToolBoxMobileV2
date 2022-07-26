@@ -238,4 +238,10 @@
     <item name="app_author" type="id" />
     <item name="app_style" type="id" />
     <item name="app_hot" type="id" />
+    <item name="tv_date" type="id" />
+    <item name="tv_time" type="id" />
+    <item name="tv_course" type="id" />
+    <item name="tv_location" type="id" />
+    <item name="text_today" type="id" />
+    <item name="text_today_week" type="id" />
 </resources>

@@ -14,7 +14,8 @@
         android:layout_marginTop="30.0dip"
         android:layout_marginBottom="50.0dip"
         android:text="今日无课"
+        android:textAlignment="center"
         android:textColor="#ff999999"
-        android:textSize="14.0sp"
+        android:textSize="12.0sp"
         tools:ignore="HardcodedText" />
 </LinearLayout>

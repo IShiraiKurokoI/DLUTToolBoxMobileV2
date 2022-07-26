@@ -23,7 +23,7 @@
                 android:layout_width="26.0dip"
                 android:layout_height="26.0dip"
                 android:layout_marginStart="16.0dip"
-                android:src="@mipmap/ic_launcher_foreground"
+                android:src="@drawable/icon"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -35,6 +35,7 @@
                 android:textColor="#ff333333"
                 android:textSize="14.0sp"
                 android:textStyle="bold"
+                android:typeface="monospace"
                 tools:ignore="HardcodedText" />
 
             <ImageView
@@ -87,8 +88,10 @@
                     android:gravity="center"
                     android:includeFontPadding="false"
                     android:text="扫一扫"
+                    android:textAlignment="center"
                     android:textColor="#ffffffff"
                     android:textSize="14.0sp"
+                    android:typeface="monospace"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
 
@@ -116,8 +119,10 @@
                     android:gravity="center"
                     android:includeFontPadding="false"
                     android:text="虚拟卡"
+                    android:textAlignment="center"
                     android:textColor="#ffffffff"
                     android:textSize="14.0sp"
+                    android:typeface="monospace"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
         </LinearLayout>

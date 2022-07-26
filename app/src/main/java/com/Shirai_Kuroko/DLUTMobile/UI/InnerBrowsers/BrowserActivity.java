@@ -501,6 +501,11 @@ public class BrowserActivity extends BaseActivity {
         webView = null;
         CookieManager.getInstance().removeAllCookies(null);
         CookieManager.getInstance().flush();
+        if(thisapp.getId()==1)
+        {
+            Intent intent2 = new Intent("android.appwidget.action.APPWIDGET_UPDATE");
+            sendBroadcast(intent2);
+        }
     }
 
     /* 创建菜单 */

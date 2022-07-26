@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
             badgeDrawable.setVisible(true);
             badgeDrawable.setNumber(prefs.getInt("unreadcount", 0));
         }
+        Intent intent2 = new Intent("android.appwidget.action.APPWIDGET_UPDATE");
+        sendBroadcast(intent2);
     }
 
     public class LocalReceiver extends BroadcastReceiver {

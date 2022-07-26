@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/widget_item_container"
+    android:layout_width="fill_parent"
+    android:layout_height="56.0dip"
+    android:orientation="horizontal"
+    android:paddingBottom="8.0dip">
+
+    <TextView
+        android:id="@id/divider"
+        android:layout_width="fill_parent"
+        android:layout_height="1.0px"
+        android:layout_marginLeft="22.0dip"
+        android:layout_marginRight="22.0dip"
+        android:layout_marginBottom="8.0dip"
+        android:background="@color/divider_color"
+        tools:ignore="PxUsage" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider"
+        android:layout_marginStart="22.0dip"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="上午"
+            android:textColor="#ff333333"
+            android:textSize="14.0sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6.0dip"
+            android:includeFontPadding="false"
+            android:text="8:30"
+            android:textColor="#ff666666"
+            android:textSize="12.0sp"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider"
+        android:layout_marginStart="126.0dip"
+        android:layout_marginEnd="22.0dip"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@id/tv_course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:singleLine="true"
+            android:text="语文"
+            android:textColor="#ff333333"
+            android:textSize="14.0sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6.0dip"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:singleLine="true"
+            android:text="逸夫楼 301"
+            android:textColor="#ff666666"
+            android:textSize="12.0sp"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+</RelativeLayout>
