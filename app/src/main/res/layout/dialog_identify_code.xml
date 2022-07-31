@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/dialog" android:paddingLeft="16.0dip" android:paddingRight="16.0dip" android:layout_width="282.0dip" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:background="@drawable/card_personal_info_card_bg" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="16.0dip" android:textStyle="bold" android:textColor="@color/text_color_50" android:gravity="center" android:id="@id/title" android:layout_width="fill_parent" android:layout_height="60.0dip" android:text="@string/title_input_identify_code" android:includeFontPadding="false" />
+            <ImageView android:id="@id/btn_close" android:layout_width="44.0dip" android:layout_height="44.0dip" android:src="@drawable/browser_quit" android:scaleType="centerInside" android:layout_alignParentRight="true" />
+        </RelativeLayout>
+        <LinearLayout android:layout_gravity="center_horizontal" android:orientation="horizontal" android:background="@drawable/shape_border_d8" android:padding="1.0px" android:layout_width="215.0dip" android:layout_height="49.0dip">
+            <ImageView android:id="@id/iv_identify_code" android:layout_width="0.0dip" android:layout_height="fill_parent" android:scaleType="fitXY" android:layout_weight="121.0" />
+            <View android:background="#ffd8d8d8" android:layout_width="1.0px" android:layout_height="fill_parent" />
+            <Button android:textSize="16.0dip" android:textColor="@color/text_color_66" android:gravity="center" android:id="@id/btn_refresh" android:background="@drawable/btn_verify_refresh_sel" android:paddingLeft="18.0dip" android:paddingRight="16.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/refresh" android:drawableLeft="@drawable/verify_code_refresh" android:layout_weight="94.0" />
+        </LinearLayout>
+        <com.ruijie.whistle.common.widget.PinView android:textSize="18.0dip" android:textColor="#ff404040" android:layout_gravity="center_horizontal" android:id="@id/pv_identify_code" android:background="@color/background_color_fa" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="215.0dip" android:layout_height="40.0dip" android:layout_marginTop="12.0dip" android:maxLength="4" android:inputType="number" app:boxCount="4" app:boxHeight="40.0dip" app:boxMargin="-1.0px" app:boxRadius="4.0dip" app:boxWidth="53.75dip" app:mborderColor="#ffd8d8d8" app:mborderWidth="1.0px" />
+        <TextView android:textSize="14.0dip" android:textColor="#ffcf3939" android:layout_gravity="center_horizontal" android:id="@id/tv_failed_hint" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="14.0dip" android:layout_marginBottom="24.0dip" android:text="" android:lineSpacingExtra="2.2999878dip" />
+    </LinearLayout>
+</RelativeLayout>
