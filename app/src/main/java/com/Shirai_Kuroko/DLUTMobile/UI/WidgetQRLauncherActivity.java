@@ -57,7 +57,6 @@ public class WidgetQRLauncherActivity extends AppCompatActivity {
                     .initiateScan();
             finish();
         }
-        ConfigHelper.MakeupNotificationList(this);
     }
 
     private void setBaseTheme() {

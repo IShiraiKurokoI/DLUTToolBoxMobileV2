@@ -5,6 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.Shirai_Kuroko.DLUTMobile.Entities.NotificationHistoryDataBaseBean;
+import com.Shirai_Kuroko.DLUTMobile.Entities.Oringinal.DLUTNoticeContentBean;
+import com.alibaba.fastjson.JSON;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,14 +16,14 @@ public class MsgHistoryManager {
     private SQLiteDatabase db;
 
     public MsgHistoryManager(Context context) {
-        sql sql = new sql(context, "MsgHistory", null, 1);
+        MessageSQL sql = new MessageSQL(context, "message", null, 1);
         db = sql.getReadableDatabase();
     }
 
-    public void insert(Long timestamp, String content) {
-        String sql = "insert into MsgHistory values(?,?)";
+    public void insert(String msg_id,String create_time,String app_id,int is_read,String title, String msg_content) {
+        String sql = "insert into message values(null,?,?,?,?,?,?)";
         db.beginTransaction();
-        db.execSQL(sql, new Object[]{timestamp, content});
+        db.execSQL(sql, new Object[]{msg_id, create_time,app_id,is_read,title,msg_content});
         db.setTransactionSuccessful();
         db.endTransaction();
         db.close();
@@ -30,22 +34,27 @@ public class MsgHistoryManager {
     }
 
     //删除
-    public void Remove(Long timestamp) {
-        String sql = "delete from MsgHistory where timestamp=?";
-        db.execSQL(sql, new Object[]{timestamp});
+    public void Remove(String _id) {
+        String sql = "delete from message where _id=?";
+        db.execSQL(sql, new Object[]{_id});
         db.close();
     }
 
     @SuppressLint("Range")
-    public String query(Long timestamp) {
-        String sql = "select * from MsgHistory";
-        Cursor cursor = db.rawQuery(sql, null);
+    public NotificationHistoryDataBaseBean query(String msg_id) {
+        String sql = "select * from message where msg_id=?";
+        Cursor cursor = db.rawQuery(sql, new String[]{msg_id});
         if (cursor != null) {
             while (cursor.moveToNext()) {
-                if (cursor.getLong(cursor.getColumnIndex("timestamp")) == timestamp) {
-                    db.close();
-                    return cursor.getString(cursor.getColumnIndex("content"));
-                }
+                NotificationHistoryDataBaseBean notificationHistoryDataBaseBean = new NotificationHistoryDataBaseBean();
+                notificationHistoryDataBaseBean.set_id(cursor.getString(cursor.getColumnIndex("_id")));
+                notificationHistoryDataBaseBean.setMsg_id(cursor.getString(cursor.getColumnIndex("msg_id")));
+                notificationHistoryDataBaseBean.setApp_id(cursor.getString(cursor.getColumnIndex("app_id")));
+                notificationHistoryDataBaseBean.setTitle(cursor.getString(cursor.getColumnIndex("title")));
+                notificationHistoryDataBaseBean.setCreate_time(cursor.getString(cursor.getColumnIndex("create_time")));
+                notificationHistoryDataBaseBean.setIs_read(cursor.getInt(cursor.getColumnIndex("is_read")));
+                notificationHistoryDataBaseBean.setMsg_content(JSON.parseObject(cursor.getString(cursor.getColumnIndex("msg_content")), DLUTNoticeContentBean.class));
+                return notificationHistoryDataBaseBean;
             }
             cursor.close();
         }
@@ -54,10 +63,10 @@ public class MsgHistoryManager {
     }
 
     //修改
-    public void update(Long timestamp, String content) {
+    public void update(String msg_id, String content,String appid) {
         try {
-            String sql = "update MsgHistory set content=? where timestamp=?";
-            db.execSQL(sql, new Object[]{content, timestamp});
+            String sql = "update message set msg_content=?,app_id=? where msg_id=?";
+            db.execSQL(sql, new Object[]{content,appid,msg_id});
             db.close();
         } catch (Exception e) {
             db.close();
@@ -65,14 +74,22 @@ public class MsgHistoryManager {
     }
 
     //查询
-    public List<String> select() {
-        String sql = "select * from MsgHistory";
+    @SuppressLint("Range")
+    public List<NotificationHistoryDataBaseBean> select() {
+        String sql = "select * from message ORDER BY create_time";
         Cursor cursor = db.rawQuery(sql, null);
-        List<String> strings = new ArrayList<>();
+        List<NotificationHistoryDataBaseBean> strings = new ArrayList<>();
         if (cursor != null) {
             while (cursor.moveToNext()) {
-                @SuppressLint("Range") String content = cursor.getString(cursor.getColumnIndex("content"));
-                strings.add(content);
+                NotificationHistoryDataBaseBean notificationHistoryDataBaseBean = new NotificationHistoryDataBaseBean();
+                notificationHistoryDataBaseBean.set_id(cursor.getString(cursor.getColumnIndex("_id")));
+                notificationHistoryDataBaseBean.setMsg_id(cursor.getString(cursor.getColumnIndex("msg_id")));
+                notificationHistoryDataBaseBean.setApp_id(cursor.getString(cursor.getColumnIndex("app_id")));
+                notificationHistoryDataBaseBean.setTitle(cursor.getString(cursor.getColumnIndex("title")));
+                notificationHistoryDataBaseBean.setCreate_time(cursor.getString(cursor.getColumnIndex("create_time")));
+                notificationHistoryDataBaseBean.setIs_read(cursor.getInt(cursor.getColumnIndex("is_read")));
+                notificationHistoryDataBaseBean.setMsg_content(JSON.parseObject(cursor.getString(cursor.getColumnIndex("msg_content")), DLUTNoticeContentBean.class));
+                strings.add(notificationHistoryDataBaseBean);
             }
             cursor.close();
         }

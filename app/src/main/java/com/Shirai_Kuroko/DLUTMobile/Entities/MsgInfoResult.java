@@ -64,6 +64,10 @@ public class MsgInfoResult {
             @JsonProperty("app_info")
             private AppInfoDTO app_info;
 
+            public String getApp_id() {
+                return app_id;
+            }
+
             public String getMsg_content() {
                 return msg_content;
             }

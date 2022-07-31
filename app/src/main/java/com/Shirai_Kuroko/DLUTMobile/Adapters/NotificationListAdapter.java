@@ -15,11 +15,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.Shirai_Kuroko.DLUTMobile.Entities.NotificationPayload;
+import com.Shirai_Kuroko.DLUTMobile.Entities.NotificationHistoryDataBaseBean;
 import com.Shirai_Kuroko.DLUTMobile.Entities.Oringinal.DLUTNoticeContentBean;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.PureBrowserActivity;
-import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 
 import java.util.Date;
@@ -28,9 +27,9 @@ import java.util.Objects;
 
 public class NotificationListAdapter extends RecyclerView.Adapter<NotificationListAdapter.ViewHolder> {
     private final Context mContext;
-    private List<NotificationPayload> mDatas;
+    private List<NotificationHistoryDataBaseBean> mDatas;
 
-    public NotificationListAdapter(Context context, List<NotificationPayload> datas) {
+    public NotificationListAdapter(Context context, List<NotificationHistoryDataBaseBean> datas) {
         mContext = context;
         mDatas = datas;
     }
@@ -50,11 +49,10 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        NotificationPayload payload = mDatas.get(position);
-        Date date = new Date(Long.parseLong(payload.getTimestamp()) * 1000);
+        NotificationHistoryDataBaseBean payload = mDatas.get(position);
+        Date date = new Date(Long.parseLong(payload.getCreate_time()) * 1000);
         holder.tv_notice_time.setText(date.toLocaleString());
-        String payloadcustom = payload.getPayload().getBody().getCustom().getContent();
-        DLUTNoticeContentBean dlutNoticeContentBean = JSON.parseObject(payloadcustom, DLUTNoticeContentBean.class);
+        DLUTNoticeContentBean dlutNoticeContentBean = payload.getMsg_content();
         holder.tv_notice_title.setText(dlutNoticeContentBean.getTitle());
         if (!Objects.equals(dlutNoticeContentBean.getDescription(), " ")&&!Objects.equals(dlutNoticeContentBean.getDescription(), "")) {
             holder.tv_notice_desc.setText(dlutNoticeContentBean.getDescription());

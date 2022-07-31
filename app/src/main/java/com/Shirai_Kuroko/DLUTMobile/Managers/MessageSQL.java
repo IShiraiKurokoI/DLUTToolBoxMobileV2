@@ -6,15 +6,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class sql extends SQLiteOpenHelper {
-    public sql(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+public class MessageSQL extends SQLiteOpenHelper {
+    public MessageSQL(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         //创建表
-        db.execSQL("create table MsgHistory(timestamp long primary Key,content text)");
+        db.execSQL("CREATE TABLE message (_id integer primary key autoincrement, msg_id varchar(32), create_time varchar(32), app_id varchar(128), is_read integer DEFAULT 0, title text, msg_content text)");
     }
 
     @Override

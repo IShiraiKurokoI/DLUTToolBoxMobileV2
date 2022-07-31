@@ -13,11 +13,9 @@ import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
 import com.Shirai_Kuroko.DLUTMobile.Entities.GridAppID;
 import com.Shirai_Kuroko.DLUTMobile.Entities.IDPhotoResult;
 import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
-import com.Shirai_Kuroko.DLUTMobile.Entities.NotificationPayload;
-import com.Shirai_Kuroko.DLUTMobile.Entities.Oringinal.DLUTNoticeContentBean;
+import com.Shirai_Kuroko.DLUTMobile.Entities.NotificationHistoryDataBaseBean;
 import com.Shirai_Kuroko.DLUTMobile.Entities.UserScoreBean;
 import com.Shirai_Kuroko.DLUTMobile.Managers.MsgHistoryManager;
-import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.alibaba.fastjson.JSON;
 
 import java.io.BufferedReader;
@@ -153,24 +151,9 @@ public class ConfigHelper {
         return mList;
     }
 
-    public static List<NotificationPayload> GetNotificationHistoryList(Context context) {
-        ArrayList<NotificationPayload> mList = new ArrayList<>();
-        List<String> list = new MsgHistoryManager(context).select();
-        for (String str : list) {
-            mList.add(JSON.parseObject(str, NotificationPayload.class));
-        }
-        return mList;
-    }
-
-    public static void MakeupNotificationList(Context context) {
-        List<NotificationPayload> notificationPayloadList = ConfigHelper.GetNotificationHistoryList(context);
-        for (int i = 0; i < notificationPayloadList.size(); i++) {
-            NotificationPayload notificationPayload = notificationPayloadList.get(i);
-            String str = notificationPayload.getPayload().getBody().getCustom().getContent();
-            if (JSON.parseObject(str, DLUTNoticeContentBean.class).getDescription().equals(" ")) {
-                new Thread(() -> BackendUtils.GetMsgDetailInfo(context, notificationPayload.getPayload().getBody().getCustom().getMsg_id(), Long.valueOf(notificationPayload.getTimestamp()))).start();
-            }
-        }
+    public static List<NotificationHistoryDataBaseBean> GetNotificationHistoryList(Context context) {
+        List<NotificationHistoryDataBaseBean> list = new MsgHistoryManager(context).select();
+        return list;
     }
 
     public static void SaveDebugInfoPrefJson(Context context, String json) {

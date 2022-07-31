@@ -47,12 +47,12 @@ public class IntentService extends GTIntentService {
                 MsgHistoryManager msgHistoryManager = new MsgHistoryManager(context);
                 NotificationPayload notificationPayload = JSON.parseObject(str, NotificationPayload.class);
                 try {
-                    msgHistoryManager.insert(Long.valueOf(notificationPayload.getTimestamp()), JSON.toJSONString(notificationPayload));
+                    msgHistoryManager.insert(notificationPayload.getPayload().getBody().getCustom().getMsg_id(),notificationPayload.getTimestamp(),notificationPayload.getAppkey(),0,notificationPayload.getPayload().getBody().getTitle(),notificationPayload.getPayload().getBody().getCustom().getContent());
                 } catch (Exception e) {
                     msgHistoryManager.closedb();
                 }
                 try {
-                    new Thread(() -> BackendUtils.GetMsgDetailInfo(context, notificationPayload.getPayload().getBody().getCustom().getMsg_id(), Long.valueOf(notificationPayload.getTimestamp()))).start();
+                    new Thread(() -> BackendUtils.GetMsgDetailInfo(context, notificationPayload.getPayload().getBody().getCustom().getMsg_id())).start();
                 } catch (Exception e) {
                     Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                 }

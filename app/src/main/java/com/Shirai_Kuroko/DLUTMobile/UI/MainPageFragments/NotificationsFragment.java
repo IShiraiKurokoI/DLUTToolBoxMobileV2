@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.Shirai_Kuroko.DLUTMobile.Adapters.NotificationListAdapter;
-import com.Shirai_Kuroko.DLUTMobile.Entities.NotificationPayload;
+import com.Shirai_Kuroko.DLUTMobile.Entities.NotificationHistoryDataBaseBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.google.android.material.badge.BadgeDrawable;
@@ -59,7 +59,7 @@ public class NotificationsFragment extends Fragment {
             return;
         }
         LinearLayout NoticeEmptyView = requireView().requireViewById(R.id.NoticeEmptyView);
-        List<NotificationPayload> notificationPayloadhistoryList;
+        List<NotificationHistoryDataBaseBean> notificationPayloadhistoryList;
         try {
             notificationPayloadhistoryList = ConfigHelper.GetNotificationHistoryList(getContext());
         } catch (Exception e) {
@@ -126,7 +126,7 @@ public class NotificationsFragment extends Fragment {
             return;
         }
         LinearLayout NoticeEmptyView = requireView().requireViewById(R.id.NoticeEmptyView);
-        List<NotificationPayload> notificationPayloadhistoryList;
+        List<NotificationHistoryDataBaseBean> notificationPayloadhistoryList;
         try {
             notificationPayloadhistoryList = ConfigHelper.GetNotificationHistoryList(getContext());
         } catch (Exception e) {
