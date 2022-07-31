@@ -10,6 +10,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
@@ -35,11 +37,37 @@ public class LogToFile {
      */
     public static void init(Context context) {
         logPath = getFilePath(context) + "/Logs";//获得文件储存路径,在后面加"/Logs"建立子文件夹
+        DeleteOverdueLogFile();
     }
 
-    /**
-     * 获得文件存储路径
-     */
+
+    private static void DeleteOverdueLogFile() {
+        File mfolder = new File(logPath); //打开目录文件夹
+        if (mfolder.isDirectory()) {
+            File[] AllFiles = mfolder.listFiles(); //列出目录下的所有文件
+            ArrayList<String> mFilesList = new ArrayList<String>();  //存放/myLog 下的所有文件
+            for (int i = 0; i < AllFiles.length; i++) {
+                File mFile = AllFiles[i]; //得到文件
+                String Name = mFile.getName(); //得到文件的名字
+                if (Name.length() < 1)
+                    return;
+                if (Name.startsWith("程序运行日志") && Name.endsWith(".log")) {  //筛选出log
+                    mFilesList.add(Name); //把文件名添加到链表里
+                }
+            }
+            Collections.sort(mFilesList);   // 将文件按自然排序升序排列
+            //判断日志文件如果大于5，就要处理
+            for (int i = 0; i < mFilesList.size() - 4; i++) {
+                String Name = mFilesList.get(i); //得到链表最早的文件名
+                File mFile = new File(mfolder, Name);  //得到最早的文件
+                mFile.delete(); //删除
+            }
+        }
+    }
+
+        /**
+         * 获得文件存储路径
+         */
     private static String getFilePath(Context context) {
 
         if (Environment.MEDIA_MOUNTED.equals(Environment.MEDIA_MOUNTED) || !Environment.isExternalStorageRemovable()) {//如果外部储存可用
