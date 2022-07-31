@@ -19,4 +19,15 @@
             <enum name="top" value="1" />
         </attr>
     </declare-styleable>
+    <declare-styleable name="PinView">
+        <attr name="boxCount" format="integer" />
+        <attr name="boxHeight" format="dimension" />
+        <attr name="boxMargin" format="dimension" />
+        <attr name="boxRadius" format="dimension" />
+        <attr name="boxWidth" format="dimension" />
+        <attr name="mborderColor" format="reference|color" />
+        <attr name="mborderWidth" format="dimension" />
+    </declare-styleable>
+
+    <attr name="pinViewStyle" format="reference" />
 </resources>

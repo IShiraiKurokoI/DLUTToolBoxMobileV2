@@ -10,6 +10,8 @@ import android.util.Log;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.Shirai_Kuroko.DLUTMobile.Common.LogToFile;
+
 public class PermissionHelper {
     //    private static final int MY_PERMISSION_REQUEST_CODE = 10000;
     private static final int MY_REQUEST_CODE = 10000;
@@ -41,14 +43,17 @@ public class PermissionHelper {
             if (ContextCompat.checkSelfPermission(mContext, permission) != PackageManager.PERMISSION_GRANTED) {
                 // 未获取权限
                 Log.i("权限申请", "您未获得【" + permissionName + "】的权限 ===>");
+                LogToFile.i("权限申请", "您未获得【" + permissionName + "】的权限 ===>");
                 if (ActivityCompat.shouldShowRequestPermissionRationale(mContext, permission)) {
                     // 这是一个坑，某些手机弹出提示时没有永不询问的复选框，点击拒绝就默认勾上了这个复选框，而某些手机上即使勾选上了永不询问的复选框也不起作用
                     Log.i("权限申请", "您勾选了不再提示【" + permissionName + "】权限的申请");
+                    LogToFile.i("权限申请", "您勾选了不再提示【" + permissionName + "】权限的申请");
                 } else {
                     ActivityCompat.requestPermissions(mContext, permissions, MY_REQUEST_CODE);
                 }
             } else {
                 Log.i("权限申请", "您已获得了【" + permissionName + "】的权限");
+                LogToFile.i("权限申请", "您已获得了【" + permissionName + "】的权限");
             }
         }
     }

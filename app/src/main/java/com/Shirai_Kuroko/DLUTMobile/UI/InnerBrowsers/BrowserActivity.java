@@ -25,8 +25,12 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.pm.ShortcutInfoCompat;
+import androidx.core.content.pm.ShortcutManagerCompat;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.preference.PreferenceManager;
 
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
@@ -39,6 +43,9 @@ import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.BrowserProxy;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.WebDownloadListener;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 import com.Shirai_Kuroko.DLUTMobile.Widgets.LoadingView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import java.util.Objects;
 
@@ -57,7 +64,7 @@ public class BrowserActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         WebView.enableSlowWholeDocumentDraw();
         setContentView(R.layout.activity_browser);
-        mContext=this;
+        mContext = this;
         Intent intent = getIntent();
         String id = intent.getStringExtra("App_ID");
         numid = Integer.parseInt(id);
@@ -501,8 +508,7 @@ public class BrowserActivity extends BaseActivity {
         webView = null;
         CookieManager.getInstance().removeAllCookies(null);
         CookieManager.getInstance().flush();
-        if(thisapp.getId()==1)
-        {
+        if (thisapp.getId() == 1) {
             Intent intent2 = new Intent("android.appwidget.action.APPWIDGET_UPDATE");
             sendBroadcast(intent2);
         }
@@ -513,6 +519,7 @@ public class BrowserActivity extends BaseActivity {
         menu.add(0, 0, 0, "刷新");
         menu.add(0, 1, 0, "浏览器打开");
         menu.add(0, 2, 0, "分享");
+        menu.add(0, 3, 0, "固定" + thisapp.getAppName() + "到桌面");
         return true;
     }
 
@@ -542,7 +549,14 @@ public class BrowserActivity extends BaseActivity {
             case 2: {
                 float scale = webView.getScale();
                 int width = webView.getWidth();
-                int height = (int) (webView.getContentHeight() * scale + 200);
+                int height;
+                if (!webView.getOriginalUrl().startsWith("file")) {
+                    height = (int) (webView.getContentHeight() * scale +200);
+                }
+                else
+                {
+                    height = (int) (webView.getContentHeight() * scale);
+                }
                 Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);//设置相应的图片质量
                 Canvas canvas = new Canvas(bitmap);
                 webView.draw(canvas);
@@ -552,18 +566,61 @@ public class BrowserActivity extends BaseActivity {
                 }
                 return MobileUtils.BrowserSharePictureToFriend(this, webView, thisapp, bitmap);
             }
+            case 3: {
+                downShortcutICon();
+                return true;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
+    private void downShortcutICon() {
+        final Bitmap[] bitmap = new Bitmap[1]; //先下载图标 转为bitMap
+        Glide.with(mContext).asBitmap().load(thisapp.getIcon()).into(new SimpleTarget() {
+            @Override
+            public void onResourceReady(@NonNull Object resource, @Nullable Transition transition) {
+                bitmap[0] = (Bitmap) resource;
+                if (bitmap[0] != null) {
+                    addShortCutCompact(bitmap[0]);
+                }
+            }
+        });
+    }
 
-        if (webView.canGoBack()) {//点击返回按钮的时候判断有没有上一页
-            webView.goBack(); // goBack()表示返回webView的上一页面
+    /**
+     * 添加快捷方式
+     */
+    public void addShortCutCompact(Bitmap bitmap) {
+        //启动器是否支持添加快捷方式
+        if (ShortcutManagerCompat.isRequestPinShortcutSupported(mContext)) {
+            Intent intent = getIntent();
+            intent.setAction(Intent.ACTION_DEFAULT);
+            intent.putExtra("Remain",false);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_NO_HISTORY);
+            ShortcutInfoCompat info = new ShortcutInfoCompat.Builder(mContext, thisapp.getId() + thisapp.getAppName()) //设置图标icon
+                    .setIcon(IconCompat.createWithBitmap(bitmap)) //设置名称
+                    .setShortLabel(thisapp.getAppName())
+                    .setIntent(intent)
+                    .build(); //创建快捷方式
+            ShortcutManagerCompat.requestPinShortcut(mContext, info, null);
         } else {
-            super.onBackPressed();
+            Toast.makeText(mContext, "启动器不支持固定快捷方式", Toast.LENGTH_SHORT).show();
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {//点击返回按钮的时候判断有没有上一页
+            webView.goBack(); // goBack()表示返回webView的上一页面
+        } else {
+            if (getIntent().getBooleanExtra("Remain",true))
+            {
+                super.onBackPressed();
+            }
+            else
+            {
+                finish();
+            }
+        }
+    }
 }

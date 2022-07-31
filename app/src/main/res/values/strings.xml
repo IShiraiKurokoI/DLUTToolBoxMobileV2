@@ -108,7 +108,13 @@
     <string name="private_msg_title">【私信】</string>
     <string name="publish_notice">发通知</string>
     <string name="publish_notice_location">添加地点</string>
-    <string name="PrivacyContent">为了更好地保护您的权益，我们依据最新的监管要求更新了 i 大工+的《隐私政策》，特向你说明如下：\n
-1、为保证 APP 稳定运行或提供服务，i 大工+需要向您申请必要的手机权限，包括读取电话状态权限（用于设备识别以便完成安全风拉）、存储权限（用于保存图片、下载附件、上传附件、头像设置等功能）以及隐私政策中所列举的其他使用具体功能时所需要申请的权限类型。您有权拒绝开启或提供，但这将导致你无法使用相关功能。\n
-2、未经您的投权，我们不会从第三方处获取或者向第三方共享或提供您的信息，我们尊重您的选择权，你可以访问、更正、删除你的个人信息。</string>
+    <string name="PrivacyContent">提示：本程序为民间自制i大工+，并非官方软件\n
+        为了更好地保护您的权益，我们依据最新的监管要求更新了 i 大工+的《隐私政策》，特向你说明如下：\n
+        1、为保证 APP 稳定运行或提供服务，i 大工+需要向您申请必要的手机权限，包括读取电话状态权限（用于设备识别以便完成安全风拉）、存储权限（用于保存图片、下载附件、上传附件、头像设置等功能）以及隐私政策中所列举的其他使用具体功能时所需要申请的权限类型。您有权拒绝开启或提供，但这将导致你无法使用相关功能。\n
+        2、未经您的授权，我们不会从第三方处获取或者向第三方共享或提供您的信息，我们尊重您的选择权，你可以访问、更正、删除你的个人信息。</string>
+    <string name="title_input_identify_code">请输入图片验证码</string>
+    <string name="refresh">刷新</string>
+    <string name="confirm">确定</string>
+    <string name="newnickname">请输入新的用户名</string>
+    <string name="tips_input_nickname">最多允许16个字符，支持中文、数字、英文字母以及6个特殊字符_~@#$^</string>
 </resources>

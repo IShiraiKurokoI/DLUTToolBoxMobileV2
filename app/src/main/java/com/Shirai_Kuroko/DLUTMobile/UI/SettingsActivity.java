@@ -217,6 +217,46 @@ public class SettingsActivity extends AppCompatActivity {
                     return false;
                 });
             }
+
+            Preference Exit = findPreference("Exit");
+            if (Exit != null) {
+                Exit.setOnPreferenceClickListener(preference -> {
+                    Dialog Dialog = new Dialog(requireActivity(), R.style.CustomDialog);
+                    @SuppressLint("InflateParams") View view = LayoutInflater.from(requireActivity()).inflate(
+                            R.layout.dialog_confirm_center, null);
+                    final TextView title = view.findViewById(R.id.title);
+                    title.setText("请确认");
+                    final TextView msg = view.findViewById(R.id.msg);
+                    msg.setText("是否退出登录?");
+                    final Button ok = view.findViewById(R.id.ok);
+                    ok.setOnClickListener(view1 -> {
+                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
+                        prefs.edit().remove("UserBean").remove("Password").apply();
+                        Intent intent = new Intent(requireContext(), LoginActivity.class);
+                        startActivity(intent);
+                        requireActivity().finish();
+                        Dialog.dismiss();
+                    });
+                    final Button cancel = view.findViewById(R.id.cancel);
+                    cancel.setOnClickListener(view12 -> Dialog.dismiss());
+                    Window window = Dialog.getWindow();
+                    window.setContentView(view);
+                    window.setGravity(Gravity.CENTER);
+                    window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT,
+                            android.view.WindowManager.LayoutParams.WRAP_CONTENT);
+                    Dialog.setCanceledOnTouchOutside(false);
+                    WindowManager.LayoutParams lp = requireActivity().getWindow().getAttributes();
+                    lp.alpha = 0.5f;
+                    requireActivity().getWindow().setAttributes(lp);
+                    Dialog.setOnDismissListener(dialogInterface -> {
+                        WindowManager.LayoutParams lp1 = requireActivity().getWindow().getAttributes();
+                        lp1.alpha = 1f;
+                        requireActivity().getWindow().setAttributes(lp);
+                    });
+                    Dialog.show();
+                    return false;
+                });
+            }
         }
     }
 }

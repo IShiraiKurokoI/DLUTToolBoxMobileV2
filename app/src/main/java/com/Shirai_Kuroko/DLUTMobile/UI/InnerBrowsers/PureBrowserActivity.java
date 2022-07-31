@@ -236,10 +236,6 @@ public class PureBrowserActivity extends BaseActivity {
             localBuilder.setMessage(message).setPositiveButton("确定", null);
             localBuilder.setCancelable(false);
             localBuilder.create().show();
-            //注意:
-            //必须要这一句代码:result.confirm()表示:
-            //处理结果为确定状态同时唤醒WebCore线程
-            //否则不能继续点击按钮
             result.confirm();
             return true;
         }
@@ -329,7 +325,14 @@ public class PureBrowserActivity extends BaseActivity {
             case 2: {
                 float scale = webView.getScale();
                 int width = webView.getWidth();
-                int height = (int) (webView.getContentHeight() * scale + 200);
+                int height;
+                if (!webView.getOriginalUrl().startsWith("file")) {
+                    height = (int) (webView.getContentHeight() * scale +200);
+                }
+                else
+                {
+                    height = (int) (webView.getContentHeight() * scale);
+                }
                 Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);//设置相应的图片质量
                 Canvas canvas = new Canvas(bitmap);
                 webView.draw(canvas);

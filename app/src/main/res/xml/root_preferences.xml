@@ -66,10 +66,22 @@
             android:id="@+id/Dark"
             app:key="Dark"
             app:title="@string/Theme_title" />
+        <SwitchPreferenceCompat
+            android:id="@+id/Vibration"
+            app:key="Vibration"
+            app:title="通知震动提醒" />
+        <SwitchPreferenceCompat
+            android:id="@+id/Beep"
+            app:key="Beep"
+            app:title="通知铃声提醒" />
         <Preference
             app:key="Clean_Cache"
             app:summary="0MB"
             app:title="@string/clean_cache"
+            app:useSimpleSummaryProvider="true"/>
+        <Preference
+            app:key="Exit"
+            app:title="退出登录"
             app:useSimpleSummaryProvider="true"/>
 
 

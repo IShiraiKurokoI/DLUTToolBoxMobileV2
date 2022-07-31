@@ -1,24 +1,23 @@
 package com.Shirai_Kuroko.DLUTMobile.Services;
 
+import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
+
 import android.annotation.SuppressLint;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.preference.PreferenceManager;
 
 import com.Shirai_Kuroko.DLUTMobile.Entities.NotificationPayload;
 import com.Shirai_Kuroko.DLUTMobile.Entities.Oringinal.DLUTNoticeContentBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
+import com.Shirai_Kuroko.DLUTMobile.Helpers.NotificationHelper;
 import com.Shirai_Kuroko.DLUTMobile.Managers.MsgHistoryManager;
-import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.PureBrowserActivity;
 import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.alibaba.fastjson.JSON;
@@ -52,7 +51,6 @@ public class IntentService extends GTIntentService {
                 } catch (Exception e) {
                     msgHistoryManager.closedb();
                 }
-
                 try {
                     new Thread(() -> BackendUtils.GetMsgDetailInfo(context, notificationPayload.getPayload().getBody().getCustom().getMsg_id(), Long.valueOf(notificationPayload.getTimestamp()))).start();
                 } catch (Exception e) {
@@ -62,36 +60,17 @@ public class IntentService extends GTIntentService {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                 prefs.edit().putBoolean("unread", true).putInt("unreadcount", prefs.getInt("unreadcount", 0) + 1).apply();
                 Intent intent3 = new Intent("com.Shirai_Kuroko.DLUTMobile.ReceivedNew");
-                context.sendBroadcast(intent3);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent3);
 
                 //发送推送消息
                 DLUTNoticeContentBean dlutNoticeContentBean = JSON.parseObject(notificationPayload.getPayload().getBody().getCustom().getContent(), DLUTNoticeContentBean.class);
-                String CHANNEL_ONE_ID = "114514";
-                String CHANNEL_ONE_NAME = "个推消息通知";
-                NotificationChannel notificationChannel;
-                notificationChannel = new NotificationChannel(CHANNEL_ONE_ID,
-                        CHANNEL_ONE_NAME, NotificationManager.IMPORTANCE_HIGH);
-                notificationChannel.enableLights(false);
-                notificationChannel.setLightColor(Color.RED);
-                notificationChannel.setShowBadge(true);
-                notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
-                NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                if (manager != null) {
-                    manager.createNotificationChannel(notificationChannel);
-                }
                 Intent intent = new Intent(this, PureBrowserActivity.class);
                 intent.putExtra("Name", "");
                 intent.putExtra("Url", dlutNoticeContentBean.getUrl());
-                @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-                Notification notification = new Notification.Builder(this, CHANNEL_ONE_ID).setChannelId(CHANNEL_ONE_ID)
-                        .setSmallIcon(R.mipmap.ic_launcher_round)
-                        .setContentTitle(dlutNoticeContentBean.getTitle())
-                        .setContentIntent(pendingIntent)
-                        .setAutoCancel(true)
-                        .build();
-                if (manager != null) {
-                    manager.notify(Integer.parseInt(notificationPayload.getPayload().getBody().getCustom().getMsg_id()), notification);
-                }
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                @SuppressLint("UnspecifiedImmutableFlag")
+                PendingIntent pendingIntent = PendingIntent.getActivity(this, (int) (Math.random()*200), intent, FLAG_UPDATE_CURRENT);
+                new NotificationHelper().Notify(context,pendingIntent,"114514","个推消息通知",dlutNoticeContentBean.getTitle(),Integer.parseInt(notificationPayload.getPayload().getBody().getCustom().getMsg_id()));
             } catch (Exception e) {
                 Log.e("个推SDK", "Payload处理错误: ", e);
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);

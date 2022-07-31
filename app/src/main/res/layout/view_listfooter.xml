@@ -11,6 +11,7 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/icon_footer_nomore"
             tools:ignore="ContentDescription" />

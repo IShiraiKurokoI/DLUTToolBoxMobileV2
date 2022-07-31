@@ -25,7 +25,7 @@
                 android:layout_height="60.0dip"
                 android:gravity="center"
                 android:includeFontPadding="false"
-                android:text="@string/title_input_identify_code"
+                android:text="@string/newnickname"
                 android:textColor="@color/text_color_50"
                 android:textSize="16.0sp"
                 android:textStyle="bold" />
@@ -40,74 +40,35 @@
                 tools:ignore="ContentDescription" />
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="215.0dip"
-            android:layout_height="49.0dip"
+        <TextView
+            android:layout_width="230.0dip"
+            android:layout_height="60.0dip"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/shape_border_d8"
             android:orientation="horizontal"
+            android:text="@string/tips_input_nickname"
             android:padding="1.0px"
-            tools:ignore="PxUsage">
+            tools:ignore="PxUsage" />
 
-            <ImageView
-                android:id="@id/iv_identify_code"
-                android:layout_width="0.0dip"
-                android:layout_height="fill_parent"
-                android:layout_weight="121.0"
-                android:scaleType="fitXY"
-                tools:ignore="ContentDescription" />
-
-            <View
-                android:layout_width="1.0px"
-                android:layout_height="fill_parent"
-                android:background="#ffd8d8d8"
-                tools:ignore="PxUsage" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@id/btn_refresh"
-                android:layout_width="0.0dip"
-                android:layout_height="fill_parent"
-                android:layout_weight="94.0"
-                android:background="@drawable/btn_verify_refresh_sel"
-                android:drawableStart="@drawable/verify_code_refresh"
-                android:gravity="center"
-                android:paddingStart="18.0dip"
-                android:paddingEnd="16.0dip"
-                android:text="@string/refresh"
-                android:textColor="@color/text_color_66"
-                android:textSize="16.0sp" />
-        </LinearLayout>
-
-        <com.Shirai_Kuroko.DLUTMobile.Widgets.PinView
-            android:id="@id/pv_identify_code"
-            android:layout_width="215.0dip"
+        <EditText
+            android:id="@+id/NewNickname"
+            android:layout_width="230.0dip"
             android:layout_height="40.0dip"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="12.0dip"
             android:background="@color/background_color_fa"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:inputType="number"
-            android:maxLength="4"
+            android:inputType="text"
             android:textColor="#ff404040"
             android:textSize="18.0sp"
-            app:boxCount="4"
-            app:boxHeight="40.0dip"
-            app:boxMargin="-1.0px"
-            app:boxRadius="4.0dip"
-            app:boxWidth="53.75dip"
-            app:mborderColor="#ffd8d8d8"
-            app:mborderWidth="1.0px"
-            tools:ignore="PxUsage" />
+            tools:ignore="Autofill,LabelFor,PxUsage" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="14.0dip"
-            android:layout_marginBottom="24.0dip"
-            android:lineSpacingExtra="2.2999878dip"
             android:text="@string/confirm"
             android:textColor="#ffcf3939"
             android:textSize="14.0sp" />

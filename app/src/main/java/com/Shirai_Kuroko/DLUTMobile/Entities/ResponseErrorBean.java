@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class LoginErrorBean {
+public class ResponseErrorBean {
 
     @JsonProperty("ret")
     private Integer ret;
@@ -18,10 +18,30 @@ public class LoginErrorBean {
     @JsonProperty("data")
     private DataDTO data;
 
+    public Integer getErrcode() {
+        return errcode;
+    }
+
+    public Integer getRet() {
+        return ret;
+    }
+
+    public DataDTO getData() {
+        return data;
+    }
+
+    public String getErrmsg() {
+        return errmsg;
+    }
+
     @NoArgsConstructor
     @Data
     public static class DataDTO {
         @JsonProperty("image")
         private String image;
+
+        public String getImage() {
+            return image;
+        }
     }
 }

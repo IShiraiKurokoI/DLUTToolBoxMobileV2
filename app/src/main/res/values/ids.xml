@@ -244,4 +244,7 @@
     <item name="tv_location" type="id" />
     <item name="text_today" type="id" />
     <item name="text_today_week" type="id" />
+    <item name="iv_identify_code" type="id" />
+    <item name="pv_identify_code" type="id" />
+    <item name="tv_failed_hint" type="id" />
 </resources>

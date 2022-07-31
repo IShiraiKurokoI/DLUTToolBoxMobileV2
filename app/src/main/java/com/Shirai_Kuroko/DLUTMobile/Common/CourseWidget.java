@@ -39,6 +39,7 @@ public class CourseWidget extends AppWidgetProvider {
         final String action = intent.getAction();
         Log.i("收到广播", action);
         if ("android.appwidget.action.APPWIDGET_UPDATE".equals(action)) {
+            LogToFile.init(context);
             this.c(context, State.LOADING);
             this.a(context);
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -53,6 +54,7 @@ public class CourseWidget extends AppWidgetProvider {
     @Override
     @SuppressLint("UnspecifiedImmutableFlag")
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        LogToFile.init(context);
         for (int length = appWidgetIds.length, i = 0; i < length; ++i) {
             b(context, appWidgetManager, appWidgetIds[i], State.LOADING);
         }
@@ -173,6 +175,8 @@ public class CourseWidget extends AppWidgetProvider {
                     }
                 } catch (IOException ex) {
                     ex.printStackTrace();
+                    final State data_ERROR = State.DATA_ERROR;
+                    b.c(context, data_ERROR);
                 }
             }
         };
@@ -197,6 +201,8 @@ public class CourseWidget extends AppWidgetProvider {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    final State data_ERROR = State.DATA_ERROR;
+                    b.c(context, data_ERROR);
                 }
             }
         };

@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     boolean usr = false;
     boolean pwd = false;
     boolean pry = false;
+    public String Verify_code="";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -122,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                 loading.show();
                 prefs.edit().putString("Username", UserName.getText().toString()).apply();
                 prefs.edit().putString("Password", Password.getText().toString()).apply();
-                BackendUtils.LoginForLogin(this, UserName.getText().toString(), Password.getText().toString(), this, loading);
+                BackendUtils.LoginForLogin(this, UserName.getText().toString(), Password.getText().toString(), this, loading,Verify_code);
             }
         });
         FindPassword.setOnClickListener(v -> {

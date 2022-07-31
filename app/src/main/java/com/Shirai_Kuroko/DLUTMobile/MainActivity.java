@@ -24,6 +24,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 import androidx.preference.PreferenceManager;
 
+import com.Shirai_Kuroko.DLUTMobile.Common.LogToFile;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.PermissionHelper;
 import com.Shirai_Kuroko.DLUTMobile.UI.LoginActivity;
@@ -42,8 +43,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         PermissionHelper.GetAllPermission(this);
         LocalReceiver localReceiver = new LocalReceiver();
-        LocalBroadcastManager.getInstance(this)
-                .registerReceiver(localReceiver, new IntentFilter("com.Shirai_Kuroko.DLUTMobile.ReceivedNew"));
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.Shirai_Kuroko.DLUTMobile.ReceivedNew");
+        LocalBroadcastManager.getInstance(this).registerReceiver(localReceiver, intentFilter);
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setNavigationBarColor(getResources().getColor(R.color.main_theme_color));
@@ -55,19 +57,23 @@ public class MainActivity extends AppCompatActivity {
         MobileUtils.CheckConfigUpdates(this);
         if (ConfigHelper.NeedLogin(this)) {
             Log.i("无法认证", "需要登陆");
+            LogToFile.i("无法认证", "需要登陆");
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
             String Un = prefs.getString("Username", "");
             String Pd = prefs.getString("Password", "");
             if (Un.length() * Pd.length() != 0) {
                 Log.i("认证失败", "静默登陆");
+                LogToFile.i("认证失败", "静默登陆");
                 BackendUtils.Login(this, Un, Pd);
             } else {
                 Log.i("认证信息为空", "弹出登陆");
+                LogToFile.i("认证信息为空", "弹出登陆");
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
             }
         } else {
             Log.i("启动初始化", "刷新用户数据");
+            LogToFile.i("启动初始化", "刷新用户数据");
             BackendUtils.ReSendUserInfo(this);
         }
         //ConfigHelper.MakeupNotificationList(this);
@@ -85,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
     public class LocalReceiver extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
+            Log.i("收到广播", intent.getAction());
             if (Objects.equals(intent.getAction(), "com.Shirai_Kuroko.DLUTMobile.ReceivedNew")) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 if (prefs.getBoolean("unread", false)) {

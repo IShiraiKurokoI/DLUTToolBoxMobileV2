@@ -14,7 +14,8 @@
         android:background="@android:color/transparent"
         android:clipChildren="false"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -84,7 +85,8 @@
                     android:includeFontPadding="false"
                     android:text="版本：XXXX"
                     android:textColor="@color/text_color_66"
-                    android:textSize="11.0sp" />
+                    android:textSize="11.0sp"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@id/tv_apk_size"
@@ -94,7 +96,8 @@
                     android:includeFontPadding="false"
                     android:text="大小：14MB"
                     android:textColor="@color/text_color_66"
-                    android:textSize="11.0sp" />
+                    android:textSize="11.0sp"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@id/tv_update_msg"
@@ -111,7 +114,8 @@
             android:layout_height="1.0px"
             android:layout_marginLeft="8.0dip"
             android:layout_marginRight="8.0dip"
-            android:background="@color/divider_color" />
+            android:background="@color/divider_color"
+            tools:ignore="PxUsage" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -120,7 +124,7 @@
             android:layout_marginRight="8.0dip"
             android:orientation="horizontal">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@id/btn_ignore"
                 android:layout_width="0.0dip"
                 android:layout_height="40.0dip"
@@ -134,9 +138,10 @@
             <View
                 android:layout_width="1.0px"
                 android:layout_height="fill_parent"
-                android:background="@color/divider_color" />
+                android:background="@color/divider_color"
+                tools:ignore="PxUsage" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@id/btn_update"
                 android:layout_width="0.0dip"
                 android:layout_height="40.0dip"
