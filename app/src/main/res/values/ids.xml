@@ -247,4 +247,6 @@
     <item name="iv_identify_code" type="id" />
     <item name="pv_identify_code" type="id" />
     <item name="tv_failed_hint" type="id" />
+    <item name="Github" type="id" />
+    <item name="github" type="id" />
 </resources>

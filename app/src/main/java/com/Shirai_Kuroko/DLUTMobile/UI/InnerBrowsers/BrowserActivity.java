@@ -11,10 +11,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.CookieManager;
+import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
@@ -47,6 +50,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 
+import java.util.Date;
 import java.util.Objects;
 
 @SuppressWarnings("ALL")
@@ -83,6 +87,7 @@ public class BrowserActivity extends BaseActivity {
         }
         BrowserProxy browserProxy = new BrowserProxy(this, webView);
         webView.addJavascriptInterface(browserProxy, "__nativeWhistleProxy");
+        webView.addJavascriptInterface(new PicShareInterFace(), "Share");
         webView.setWebChromeClient(this.webChromeClient);
         webView.setWebViewClient(this.webViewClient);
         webView.setDownloadListener(new WebDownloadListener(this));
@@ -516,10 +521,12 @@ public class BrowserActivity extends BaseActivity {
 
     /* 创建菜单 */
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, "刷新");
+        menu.add(0, 0, 0, "刷新此页面");
         menu.add(0, 1, 0, "浏览器打开");
-        menu.add(0, 2, 0, "分享");
-        menu.add(0, 3, 0, "固定" + thisapp.getAppName() + "到桌面");
+        menu.add(0, 2, 0, "分享此页面");
+        menu.add(0, 3, 0, "分享原链接");
+        menu.add(0, 4, 0, "保存此页面");
+        menu.add(0, 5, 0, "固定到桌面");
         return true;
     }
 
@@ -547,31 +554,75 @@ public class BrowserActivity extends BaseActivity {
                 return true;
             }
             case 2: {
+                Toast.makeText(getBaseContext(),"正在生成分享图片",Toast.LENGTH_SHORT).show();
+                webView.evaluateJavascript("window.Share.StartShare(document.getElementsByTagName('html')[0].scrollWidth,document.getElementsByTagName('html')[0].scrollHeight)", null);
+                return true;
+            }
+            case 3: {
+                MobileUtils.ShareTextToFriend(mContext,"原始链接："+webView.getOriginalUrl()+"\n当前页面："+webView.getUrl());
+                return true;
+            }
+            case 4: {
+                Toast.makeText(getBaseContext(),"正在生成保存图片",Toast.LENGTH_SHORT).show();
+                webView.evaluateJavascript("window.Share.StartSave(document.getElementsByTagName('html')[0].scrollWidth,document.getElementsByTagName('html')[0].scrollHeight)", null);
+                return true;
+            }
+            case 5: {
+                downShortcutICon();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public class PicShareInterFace {
+        @JavascriptInterface
+        public void StartShare(String s,String s1) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    float scale = webView.getScale();
+                    int width = (int) (Integer.parseInt(s) * scale);
+                    int height;
+                    if (!webView.getOriginalUrl().startsWith("file")) {
+                        height = (int) (Integer.parseInt(s1) * scale + 220);
+                    } else {
+                        height = (int) (Integer.parseInt(s1) * scale);
+                    }
+                    Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);//设置相应的图片质量
+                    Canvas canvas = new Canvas(bitmap);
+                    webView.draw(canvas);
+                    if (!webView.getOriginalUrl().startsWith("file")) {
+                        Bitmap qr = QRCodeHelper.createQRCodeBitmap(webView.getOriginalUrl(), 200, 200, "UTF-8", "L", "0", Color.BLACK, Color.WHITE);
+                        canvas.drawBitmap(qr, 10, bitmap.getHeight() - 210, null);
+                    }
+                    MobileUtils.BrowserSharePictureToFriend(mContext, webView, thisapp, bitmap);
+                }
+            });
+        }
+        @JavascriptInterface
+        public void StartSave(String s,String s1) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(() -> {
                 float scale = webView.getScale();
-                int width = webView.getWidth();
+                int width = (int) (Integer.parseInt(s) * scale);
                 int height;
                 if (!webView.getOriginalUrl().startsWith("file")) {
-                    height = (int) (webView.getContentHeight() * scale +200);
-                }
-                else
-                {
-                    height = (int) (webView.getContentHeight() * scale);
+                    height = (int) (Integer.parseInt(s1) * scale + 220);
+                } else {
+                    height = (int) (Integer.parseInt(s1) * scale);
                 }
                 Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);//设置相应的图片质量
                 Canvas canvas = new Canvas(bitmap);
                 webView.draw(canvas);
                 if (!webView.getOriginalUrl().startsWith("file")) {
                     Bitmap qr = QRCodeHelper.createQRCodeBitmap(webView.getOriginalUrl(), 200, 200, "UTF-8", "L", "0", Color.BLACK, Color.WHITE);
-                    canvas.drawBitmap(qr, bitmap.getWidth() - 210, bitmap.getHeight() - 210, null);
+                    canvas.drawBitmap(qr, 10, bitmap.getHeight() - 210, null);
                 }
-                return MobileUtils.BrowserSharePictureToFriend(this, webView, thisapp, bitmap);
-            }
-            case 3: {
-                downShortcutICon();
-                return true;
-            }
+                MobileUtils.SaveImageToGallery(getBaseContext(),bitmap,thisapp.getAppName()+new Date().toLocaleString()+".bmp");
+            });
         }
-        return super.onOptionsItemSelected(item);
     }
 
     private void downShortcutICon() {
@@ -595,8 +646,8 @@ public class BrowserActivity extends BaseActivity {
         if (ShortcutManagerCompat.isRequestPinShortcutSupported(mContext)) {
             Intent intent = getIntent();
             intent.setAction(Intent.ACTION_DEFAULT);
-            intent.putExtra("Remain",false);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intent.putExtra("Remain", false);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
             ShortcutInfoCompat info = new ShortcutInfoCompat.Builder(mContext, thisapp.getId() + thisapp.getAppName()) //设置图标icon
                     .setIcon(IconCompat.createWithBitmap(bitmap)) //设置名称
                     .setShortLabel(thisapp.getAppName())
@@ -613,12 +664,9 @@ public class BrowserActivity extends BaseActivity {
         if (webView.canGoBack()) {//点击返回按钮的时候判断有没有上一页
             webView.goBack(); // goBack()表示返回webView的上一页面
         } else {
-            if (getIntent().getBooleanExtra("Remain",true))
-            {
+            if (getIntent().getBooleanExtra("Remain", true)) {
                 super.onBackPressed();
-            }
-            else
-            {
+            } else {
                 finish();
             }
         }

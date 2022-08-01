@@ -17,7 +17,8 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Handler;
-import android.os.Message;
+import android.os.Looper;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -43,6 +44,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
 
 import com.Shirai_Kuroko.DLUTMobile.Adapters.ADBannerAdapter;
+import com.Shirai_Kuroko.DLUTMobile.Common.LogToFile;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ADBannerBean;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
 import com.Shirai_Kuroko.DLUTMobile.Entities.GithubLatestBean;
@@ -86,12 +88,6 @@ public class MobileUtils {
         }
         return version;
     }
-
-    public static Handler handler;
-    public static Handler Layouthandler;
-    public static Handler LayoutDefaulthandler;
-    public static Handler Failurehandler;
-    public static Handler NoNeedhandler;
 
     public static void SetShortCuts(Context context) {
         Intent scanIntent = new Intent(context, WidgetQRLauncherActivity.class);
@@ -148,90 +144,58 @@ public class MobileUtils {
         ShortcutManagerCompat.pushDynamicShortcut(context, shortcut3);
     }
 
-    @SuppressWarnings("unchecked")
-    @SuppressLint("HandlerLeak")
     public static void CheckUpDate(Context context, TextView textView, RelativeLayout relativeLayout, boolean DoNotice) {
+        Handler handler = new Handler(Looper.getMainLooper());
         new Thread(() -> {
             String Version = MobileUtils.GetAppVersion(context);
             String UpdateJson = GithubUtils.GetGithubHttpRequest("https://api.github.com/repos/IShiraiKurokoI/DLUTToolBoxMobileV2/releases/latest");
             if (UpdateJson.equals("")) {
                 Log.i("错误", "API 请求超限");
-                Failurehandler.sendMessage(new Message());
+                handler.post(() -> {
+                    textView.setText("检查更新失败");
+                    relativeLayout.setVisibility(View.GONE);
+                    Toast.makeText(context, "API访问请求过多，请稍后再试", Toast.LENGTH_LONG).show();
+                });
                 return;
             }
             GithubLatestBean githubLatestBean = JSON.parseObject(UpdateJson, GithubLatestBean.class);
             String LastestVersion = githubLatestBean.getTagName();
             if (LastestVersion.equals(Version)) {
                 Log.i("无需更新", " 当前版本" + LastestVersion);
-                LayoutDefaulthandler.sendMessage(new Message());
+                handler.post(() -> {
+                    textView.setText("已是最新版本");
+                    relativeLayout.setVisibility(View.GONE);
+                });
                 if (DoNotice) {
-                    NoNeedhandler.sendMessage(new Message());
+                    handler.post(() -> Toast.makeText(context, "你使用的是最新版本！", Toast.LENGTH_SHORT).show());
                 }
             } else {
-                Layouthandler.sendMessage(new Message());
+                handler.post(() -> {
+                    textView.setText("发现新版本");
+                    relativeLayout.setVisibility(View.VISIBLE);
+                });
                 String UpdateContent = githubLatestBean.getBody();
                 String UpdateTime = githubLatestBean.getPublishedAt();
                 String UpdateDownloadUrl = githubLatestBean.getAssets().get(0).getBrowserDownloadUrl();
                 String UpdateSize = CacheManager.getFormatSize(githubLatestBean.getAssets().get(0).getSize());
                 Log.i("需要更新", "新版本：" + LastestVersion + "\n更新时间：" + UpdateTime + "\n更新内容：" + UpdateContent + "\n下载地址：" + UpdateDownloadUrl);
                 if (DoNotice) {
-                    List<String> msgList = new ArrayList<>();
+                    ArrayList<String> msgList = new ArrayList<>();
                     msgList.add(LastestVersion);
                     msgList.add(UpdateSize);
                     msgList.add(UpdateContent);
                     msgList.add(UpdateDownloadUrl);
-                    Message msg = new Message();
-                    msg.obj = msgList;
-                    handler.sendMessage(msg);
+                    handler.post(() -> {
+                        Toast.makeText(context, "发现新版本！", Toast.LENGTH_LONG).show();
+                        ShowUpdateDialog(context, msgList.get(0), msgList.get(1), msgList.get(2), msgList.get(3), (Activity) context);//自定义的方法，真正需要参数的地方
+                    });
                 }
             }
         }).start();
-        handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                Toast.makeText(context, "发现新版本！", Toast.LENGTH_LONG).show();
-                ArrayList<String> list = (ArrayList<String>) msg.obj;   //实例化对接收数据
-                ShowUpdateDialog(context, list.get(0), list.get(1), list.get(2), list.get(3), (Activity) context);//自定义的方法，真正需要参数的地方
-            }
-        };
-        Layouthandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                textView.setText("发现新版本");
-                relativeLayout.setVisibility(View.VISIBLE);
-            }
-        };
-        LayoutDefaulthandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                textView.setText("已是最新版本");
-                relativeLayout.setVisibility(View.GONE);
-            }
-        };
-        Failurehandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                textView.setText("检查更新失败");
-                relativeLayout.setVisibility(View.GONE);
-                Toast.makeText(context, "API访问请求过多，请稍后再试", Toast.LENGTH_LONG).show();
-            }
-        };
-        NoNeedhandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                Toast.makeText(context, "你使用的是最新版本！", Toast.LENGTH_SHORT).show();
-            }
-        };
     }
 
-    @SuppressWarnings("unchecked")
-    @SuppressLint("HandlerLeak")
     public static void CheckUpDateOnStartUp(Context context) {
+        Handler handler = new Handler(Looper.getMainLooper());
         new Thread(() -> {
             String Version = MobileUtils.GetAppVersion(context);
             String UpdateJson = GithubUtils.GetGithubHttpRequest("https://api.github.com/repos/MuoRanLY/DLUTToolBoxMobileV2/releases/latest");
@@ -248,24 +212,28 @@ public class MobileUtils {
                 String UpdateDownloadUrl = githubLatestBean.getAssets().get(0).getBrowserDownloadUrl();
                 String UpdateSize = CacheManager.getFormatSize(githubLatestBean.getAssets().get(0).getSize());
                 Log.i("需要更新", "新版本：" + LastestVersion + "\n更新时间：" + UpdateTime + "\n更新内容：" + UpdateContent + "\n下载地址：" + UpdateDownloadUrl);
-                List<String> msgList = new ArrayList<>();
+                ArrayList<String> msgList = new ArrayList<>();
                 msgList.add(LastestVersion);
                 msgList.add(UpdateSize);
                 msgList.add(UpdateContent);
                 msgList.add(UpdateDownloadUrl);
-                Message msg = new Message();
-                msg.obj = msgList;
-                handler.sendMessage(msg);
+                handler.post(() -> {
+                    ShowUpdateDialog(context, msgList.get(0), msgList.get(1), msgList.get(2), msgList.get(3), (Activity) context);//自定义的方法，真正需要参数的地方
+                });
             }
         }).start();
-        handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                ArrayList<String> list = (ArrayList<String>) msg.obj;   //实例化对接收数据
-                ShowUpdateDialog(context, list.get(0), list.get(1), list.get(2), list.get(3), (Activity) context);//自定义的方法，真正需要参数的地方
-            }
-        };
+    }
+
+    public static void SaveImageToGallery(Context context, Bitmap bitmap, String fileName)
+    {
+        try {
+            MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap,
+                    fileName, "i大工+页面保存"); // 名字和描述没用，系统会自动更改
+                    Toast.makeText(context,"图片成功保存到相册",Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(context,"图片保存失败"+e.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
+            LogToFile.e("图片保存异常：", e.toString());
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -328,7 +296,7 @@ public class MobileUtils {
                 title = thisapp.getAppName();
             }
             String Date = " " + new Date().toLocaleString();
-            String fileName = path + "/" + title + Date + ".png";
+            String fileName = path + "/" + title + Date + ".bmp";
             FileOutputStream fos = new FileOutputStream(fileName);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
             fos.close();
@@ -372,6 +340,8 @@ public class MobileUtils {
                     target.setComponent(new ComponentName(activityInfo.packageName, activityInfo.name));
                     target.putExtra(Intent.EXTRA_STREAM, contentUri);
                     target.setType("image/*");//必须设置，否则选定分享类型后不能跳转界面
+                    target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    target.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     targetIntents.add(new LabeledIntent(target, activityInfo.packageName, resolveInfo.loadLabel(pm), resolveInfo.icon));
                 }
             }
@@ -383,9 +353,13 @@ public class MobileUtils {
             if (chooser == null) return false;
             LabeledIntent[] labeledIntents = targetIntents.toArray(new LabeledIntent[targetIntents.size()]);
             chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, labeledIntents);
+            chooser.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            chooser.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            chooser.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             context.startActivity(chooser);
         } catch (Exception e) {
             Log.i("产生错误", e.toString());
+            e.printStackTrace();
             return false;
         }
         return false;
@@ -401,7 +375,7 @@ public class MobileUtils {
                 dirFile.mkdirs();
             }
             String Date = " " + new Date().toLocaleString();
-            String fileName = path + "/" + webView.getTitle() + Date + ".png";
+            String fileName = path + "/" + webView.getTitle() + Date + ".bmp";
             FileOutputStream fos = new FileOutputStream(fileName);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
             fos.close();
@@ -445,6 +419,8 @@ public class MobileUtils {
                     target.setComponent(new ComponentName(activityInfo.packageName, activityInfo.name));
                     target.putExtra(Intent.EXTRA_STREAM, contentUri);
                     target.setType("image/*");//必须设置，否则选定分享类型后不能跳转界面
+                    target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    target.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     targetIntents.add(new LabeledIntent(target, activityInfo.packageName, resolveInfo.loadLabel(pm), resolveInfo.icon));
                 }
             }
@@ -456,9 +432,13 @@ public class MobileUtils {
             if (chooser == null) return false;
             LabeledIntent[] labeledIntents = targetIntents.toArray(new LabeledIntent[targetIntents.size()]);
             chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, labeledIntents);
+            chooser.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            chooser.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            chooser.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             context.startActivity(chooser);
         } catch (Exception e) {
             Log.i("产生错误", e.toString());
+            e.printStackTrace();
         }
         return false;
     }
@@ -535,6 +515,8 @@ public class MobileUtils {
                     target.setComponent(new ComponentName(activityInfo.packageName, activityInfo.name));
                     target.putExtra(Intent.EXTRA_TEXT, text);
                     target.setType("text/plain");
+                    target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    target.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     targetIntents.add(new LabeledIntent(target, activityInfo.packageName, resolveInfo.loadLabel(pm), resolveInfo.icon));
                 }
             }
@@ -546,6 +528,8 @@ public class MobileUtils {
             if (chooser == null) return;
             LabeledIntent[] labeledIntents = targetIntents.toArray(new LabeledIntent[targetIntents.size()]);
             chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, labeledIntents);
+            chooser.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            chooser.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             context.startActivity(chooser);
         } catch (Exception e) {
             Log.i("产生错误", e.toString());

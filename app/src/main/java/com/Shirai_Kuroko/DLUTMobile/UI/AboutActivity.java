@@ -3,6 +3,7 @@ package com.Shirai_Kuroko.DLUTMobile.UI;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -57,6 +58,13 @@ public class AboutActivity extends AppCompatActivity {
             Intent intent = new Intent(mContext, PureBrowserActivity.class);
             intent.putExtra("Name", "隐私政策");
             intent.putExtra("Url", "https://its.dlut.edu.cn/upload/app/privacy/index.html");
+            startActivity(intent);
+        });
+        RelativeLayout github = requireViewById(R.id.github);
+        github.setOnClickListener(v -> {
+            Uri uri = Uri.parse("https://github.com/IShiraiKurokoI/DLUTToolBoxMobileV2");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         });
     }

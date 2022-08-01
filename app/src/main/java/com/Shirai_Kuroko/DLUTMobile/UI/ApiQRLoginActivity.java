@@ -32,7 +32,7 @@ public class ApiQRLoginActivity extends AppCompatActivity {
         }
         String LoginUrl = url;
         Button btn_login_qrcode =requireViewById(R.id.btn_login_qrcode);
-        btn_login_qrcode.setOnClickListener(view -> BackendUtils.ApiQRLogin(this,LoginUrl));
+        btn_login_qrcode.setOnClickListener(view -> BackendUtils.ApiQRPreLogin(this,LoginUrl));
         TextView tv_qrcode_login_cancel =requireViewById(R.id.tv_qrcode_login_cancel);
         tv_qrcode_login_cancel.setOnClickListener(view -> finish());
     }

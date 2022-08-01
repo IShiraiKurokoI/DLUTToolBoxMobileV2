@@ -12,10 +12,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.CookieManager;
+import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
@@ -40,6 +43,7 @@ import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.WebDownloadListener;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 import com.Shirai_Kuroko.DLUTMobile.Widgets.LoadingView;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class PureBrowserActivity extends BaseActivity {
@@ -73,6 +77,7 @@ public class PureBrowserActivity extends BaseActivity {
         webView.setWebViewClient(this.webViewClient);
         webView.setDownloadListener(new WebDownloadListener(this));
         webView.addJavascriptInterface(new BrowserProxy(this, webView), "__nativeWhistleProxy");
+        webView.addJavascriptInterface(new PicShareInterFace(), "Share");
         WebSettings webSettings = webView.getSettings();
         webSettings.setUserAgentString(getString(R.string.UserAgent));//设置默认UA
         webSettings.setJavaScriptEnabled(true);//允许使用js
@@ -293,9 +298,11 @@ public class PureBrowserActivity extends BaseActivity {
 
     /* 创建菜单 */
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, "刷新");
+        menu.add(0, 0, 0, "刷新此页面");
         menu.add(0, 1, 0, "浏览器打开");
-        menu.add(0, 2, 0, "分享");
+        menu.add(0, 2, 0, "分享此页面");
+        menu.add(0, 3, 0, "分享原链接");
+        menu.add(0, 4, 0, "保存此页面");
         return true;
     }
 
@@ -323,27 +330,68 @@ public class PureBrowserActivity extends BaseActivity {
                 return true;
             }
             case 2: {
+                Toast.makeText(getBaseContext(),"正在生成分享图片",Toast.LENGTH_SHORT).show();
+                webView.evaluateJavascript("window.Share.StartShare(document.getElementsByTagName('html')[0].scrollWidth,document.getElementsByTagName('html')[0].scrollHeight)", null);
+                return true;
+            }
+            case 3: {
+                MobileUtils.ShareTextToFriend(getBaseContext(),"原始链接："+webView.getOriginalUrl()+"\n当前页面："+webView.getUrl());
+                return true;
+            }
+            case 4: {
+                Toast.makeText(getBaseContext(),"正在生成保存图片",Toast.LENGTH_SHORT).show();
+                webView.evaluateJavascript("window.Share.StartSave(document.getElementsByTagName('html')[0].scrollWidth,document.getElementsByTagName('html')[0].scrollHeight)", null);
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public class PicShareInterFace {
+        @JavascriptInterface
+        public void StartShare(String s,String s1) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(() -> {
                 float scale = webView.getScale();
-                int width = webView.getWidth();
+                int width = (int) (Integer.parseInt(s) * scale);
                 int height;
                 if (!webView.getOriginalUrl().startsWith("file")) {
-                    height = (int) (webView.getContentHeight() * scale +200);
-                }
-                else
-                {
-                    height = (int) (webView.getContentHeight() * scale);
+                    height = (int) (Integer.parseInt(s1) * scale + 220);
+                } else {
+                    height = (int) (Integer.parseInt(s1) * scale);
                 }
                 Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);//设置相应的图片质量
                 Canvas canvas = new Canvas(bitmap);
                 webView.draw(canvas);
                 if (!webView.getOriginalUrl().startsWith("file")) {
                     Bitmap qr = QRCodeHelper.createQRCodeBitmap(webView.getOriginalUrl(), 200, 200, "UTF-8", "L", "0", Color.BLACK, Color.WHITE);
-                    canvas.drawBitmap(qr, bitmap.getWidth() - 210, bitmap.getHeight() - 210, null);
+                    canvas.drawBitmap(qr, 10, bitmap.getHeight() - 210, null);
                 }
-                return MobileUtils.PureBrowserSharePictureToFriend(this, webView, bitmap);
-            }
+                MobileUtils.PureBrowserSharePictureToFriend(getBaseContext(), webView, bitmap);
+            });
         }
-        return super.onOptionsItemSelected(item);
+        @JavascriptInterface
+        public void StartSave(String s,String s1) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(() -> {
+                float scale = webView.getScale();
+                int width = (int) (Integer.parseInt(s) * scale);
+                int height;
+                if (!webView.getOriginalUrl().startsWith("file")) {
+                    height = (int) (Integer.parseInt(s1) * scale + 220);
+                } else {
+                    height = (int) (Integer.parseInt(s1) * scale);
+                }
+                Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);//设置相应的图片质量
+                Canvas canvas = new Canvas(bitmap);
+                webView.draw(canvas);
+                if (!webView.getOriginalUrl().startsWith("file")) {
+                    Bitmap qr = QRCodeHelper.createQRCodeBitmap(webView.getOriginalUrl(), 200, 200, "UTF-8", "L", "0", Color.BLACK, Color.WHITE);
+                    canvas.drawBitmap(qr, 10, bitmap.getHeight() - 210, null);
+                }
+                MobileUtils.SaveImageToGallery(getBaseContext(),bitmap,webView.getTitle()+new Date().toLocaleString()+".bmp");
+            });
+        }
     }
 
     @Override
