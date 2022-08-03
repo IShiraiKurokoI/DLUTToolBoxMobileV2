@@ -40,15 +40,11 @@
             android:textSize="18sp"
             android:textColor="@color/white"
             android:text="@string/title_dashboard"/>
-        <androidx.appcompat.widget.SearchView
+        <com.Shirai_Kuroko.DLUTMobile.Widgets.SearchEditText
             android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/main_theme_color"
-            app:searchIcon="@drawable/btn_start_search_nor"
-            android:layout_marginTop="40dp"
-            app:goIcon="@color/transparent"
-            app:closeIcon="@drawable/selector_btn_login_et_clear"/>
+            android:layout_marginTop="40dp"/>
     </RelativeLayout>
 
     <HorizontalScrollView

@@ -296,7 +296,7 @@ public class MobileUtils {
                 title = thisapp.getAppName();
             }
             String Date = " " + new Date().toLocaleString();
-            String fileName = path + "/" + title + Date + ".bmp";
+            String fileName = path + "/" + title + Date + ".png";
             FileOutputStream fos = new FileOutputStream(fileName);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
             fos.close();
@@ -310,6 +310,7 @@ public class MobileUtils {
             intent.setType("image/*");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             PackageManager pm = context.getPackageManager();
             List<ResolveInfo> resInfo = pm.queryIntentActivities(intent, 0);
             if (resInfo.isEmpty()) {
@@ -375,7 +376,7 @@ public class MobileUtils {
                 dirFile.mkdirs();
             }
             String Date = " " + new Date().toLocaleString();
-            String fileName = path + "/" + webView.getTitle() + Date + ".bmp";
+            String fileName = path + "/" + webView.getTitle() + Date + ".png";
             FileOutputStream fos = new FileOutputStream(fileName);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
             fos.close();
@@ -389,6 +390,7 @@ public class MobileUtils {
             intent.setType("image/*");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             PackageManager pm = context.getPackageManager();
             List<ResolveInfo> resInfo = pm.queryIntentActivities(intent, 0);
             if (resInfo.isEmpty()) {
@@ -421,6 +423,7 @@ public class MobileUtils {
                     target.setType("image/*");//必须设置，否则选定分享类型后不能跳转界面
                     target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     target.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    target.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     targetIntents.add(new LabeledIntent(target, activityInfo.packageName, resolveInfo.loadLabel(pm), resolveInfo.icon));
                 }
             }

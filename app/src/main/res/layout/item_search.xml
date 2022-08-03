@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myspace="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/item_search_root"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/idg_theme_color"
+    android:paddingStart="16.0dip"
+    android:paddingTop="7.0dip"
+    android:paddingEnd="12.0dip"
+    android:paddingBottom="7.0dip">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@id/btn_search_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="28.0dip"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16.0dip"
+        android:layout_marginEnd="-40.0dip"
+        android:background="@android:color/transparent"
+        android:minWidth="0.0dip"
+        android:text="@string/cancel"
+        android:textColor="@color/idg_title_btn_text_sel"
+        android:textSize="14.0sp" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/btn_search_cancel">
+
+        <RelativeLayout
+            android:id="@id/item_serach_panel"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/search_view_input_height"
+            android:visibility="invisible">
+
+            <com.Shirai_Kuroko.DLUTMobile.Widgets.AnanEditText
+                android:id="@id/item_search_et"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/search_bg"
+                android:drawableStart="@drawable/search_icon"
+                android:drawablePadding="@dimen/search_view_drawable_padding"
+                android:hint="@string/search"
+                android:imeOptions="actionSearch"
+                android:includeFontPadding="false"
+                android:paddingEnd="30.0dip"
+                android:singleLine="true"
+                android:textColorHint="@color/text_color_88"
+                android:textSize="12.0sp"
+                myspace:isInputLimited="true"
+                myspace:maxTextCount="50"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:id="@id/item_search_clean_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignEnd="@id/item_search_et"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="4.0dip"
+                android:paddingStart="5.0dip"
+                android:src="@drawable/icon_et_del_sel"
+                android:visibility="invisible"
+                tools:ignore="ContentDescription,RtlSymmetry" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@id/item_search_et_ll"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/search_view_input_height"
+            android:layout_gravity="center"
+            android:background="@drawable/search_bg"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@id/item_search_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/search_icon"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@id/item_search_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/search_view_drawable_padding"
+                android:text="@string/search"
+                android:textColor="@color/text_color_88"
+                android:textSize="12.0sp" />
+        </LinearLayout>
+    </FrameLayout>
+</RelativeLayout>

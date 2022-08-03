@@ -25,8 +25,8 @@ import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.BrowserActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.OpenVirtualCardActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.ScanQRCodeActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.SearchActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.ServiceManagement.AppGridManageActivity;
-import com.Shirai_Kuroko.DLUTMobile.UI.ServiceManagement.AppcenterActivity;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 import com.bumptech.glide.Glide;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment {
 
         ImageView imageView = requireView().findViewById(R.id.iv_search);
         imageView.setOnClickListener(view1 -> {
-            Intent intent = new Intent(requireActivity(), AppcenterActivity.class);
+            Intent intent = new Intent(requireActivity(), SearchActivity.class);
             startActivity(intent);
         });
 

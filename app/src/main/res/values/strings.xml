@@ -118,4 +118,15 @@
     <string name="newnickname">请输入新的用户名</string>
     <string name="tips_input_nickname">最多允许16个字符，支持中文、数字、英文字母以及6个特殊字符_~@#$^</string>
     <string name="github">GitHub项目地址</string>
+    <string name="search">搜索</string>
+    <string name="search_clear_search_history">清空搜索记录</string>
+    <string name="search_contacts">搜索联系人</string>
+    <string name="search_hint">搜索</string>
+    <string name="search_hint_app_or_notice">搜索服务或消息标题</string>
+    <string name="search_history">历史搜索</string>
+    <string name="search_menu_title">Search</string>
+    <string name="search_results_empty">暂无搜索结果</string>
+    <string name="search_string_cannot_be_empty">搜索内容不能为空</string>
+    <string name="searching">搜索中…</string>
+    <string name="cancel">取消</string>
 </resources>

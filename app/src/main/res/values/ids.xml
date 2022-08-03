@@ -249,4 +249,15 @@
     <item name="tv_failed_hint" type="id" />
     <item name="Github" type="id" />
     <item name="github" type="id" />
+    <item name="item_search_root" type="id" />
+    <item name="btn_search_cancel" type="id" />
+    <item name="item_serach_panel" type="id" />
+    <item name="item_search_clean_btn" type="id" />
+    <item name="item_search_et" type="id" />
+    <item name="item_search_et_ll" type="id" />
+    <item name="item_search_icon" type="id" />
+    <item name="item_search_txt" type="id" />
+    <item name="fm_search_et" type="id" />
+    <item name="tv_notice_type" type="id" />
+    <item name="tv_notice_content" type="id" />
 </resources>

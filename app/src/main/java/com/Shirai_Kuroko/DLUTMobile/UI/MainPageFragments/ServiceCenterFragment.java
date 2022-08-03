@@ -1,14 +1,18 @@
 package com.Shirai_Kuroko.DLUTMobile.UI.MainPageFragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
@@ -26,6 +30,7 @@ import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.ServiceManagement.AppDetailActivity;
+import com.Shirai_Kuroko.DLUTMobile.Widgets.AnanEditText;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -86,53 +91,74 @@ public class ServiceCenterFragment extends Fragment {
         mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                androidx.appcompat.widget.SearchView search;
-                search = requireActivity().findViewById(R.id.search);
-                if (search != null) {
-                    if (search.hasFocus()) {
-                        search.clearFocus();
-                    }
-                }
+                ((InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE))
+                        .hideSoftInputFromWindow(view.getWindowToken(),
+                                InputMethodManager.HIDE_NOT_ALWAYS);
             }
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
             }
         });
-        androidx.appcompat.widget.SearchView search;
-        search = requireActivity().findViewById(R.id.search);
-        search.setIconifiedByDefault(false);
-        search.setSubmitButtonEnabled(true);
-        search.setQueryHint("查找");
-        search.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
-            //            单击搜索按钮时激发该方法
+
+        AnanEditText ananEditText = requireActivity().findViewById(R.id.item_search_et);
+        ananEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                if (TextUtils.isEmpty(query)) {
-                    adapter.showAllProduct();
-                } else {
-                    adapter.getFilter().filter(query);
-                }
-                cleanbg();
-                LinearLayout l1 = requireActivity().findViewById(R.id.CatagoryLinear1);
-                l1.setBackgroundColor(CatagorySelected);
-//                search.clearFocus();
-                return true;
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                if (TextUtils.isEmpty(newText)) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (TextUtils.isEmpty(editable.toString())) {
                     adapter.showAllProduct();
                 } else {
-                    adapter.getFilter().filter(newText);
+                    adapter.getFilter().filter(editable.toString());
                 }
                 cleanbg();
                 LinearLayout l1 = requireActivity().findViewById(R.id.CatagoryLinear1);
                 l1.setBackgroundColor(CatagorySelected);
-                return true;
             }
         });
+//        androidx.appcompat.widget.SearchView search;
+//        search = requireActivity().findViewById(R.id.search);
+//        search.setIconifiedByDefault(false);
+//        search.setSubmitButtonEnabled(true);
+//        search.setQueryHint("查找");
+//        search.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+//            //            单击搜索按钮时激发该方法
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                if (TextUtils.isEmpty(query)) {
+//                    adapter.showAllProduct();
+//                } else {
+//                    adapter.getFilter().filter(query);
+//                }
+//                cleanbg();
+//                LinearLayout l1 = requireActivity().findViewById(R.id.CatagoryLinear1);
+//                l1.setBackgroundColor(CatagorySelected);
+////                search.clearFocus();
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                if (TextUtils.isEmpty(newText)) {
+//                    adapter.showAllProduct();
+//                } else {
+//                    adapter.getFilter().filter(newText);
+//                }
+//                cleanbg();
+//                LinearLayout l1 = requireActivity().findViewById(R.id.CatagoryLinear1);
+//                l1.setBackgroundColor(CatagorySelected);
+//                return true;
+//            }
+//        });
         LinearLayout l1 = requireActivity().findViewById(R.id.CatagoryLinear1);
         LinearLayout l2 = requireActivity().findViewById(R.id.CatagoryLinear2);
         LinearLayout l3 = requireActivity().findViewById(R.id.CatagoryLinear3);
@@ -356,14 +382,16 @@ public class ServiceCenterFragment extends Fragment {
     }
 
     public void Refresh() {
-        androidx.appcompat.widget.SearchView search;
-        search = requireActivity().findViewById(R.id.search);
-        String query = search.getQuery().toString();
+//        androidx.appcompat.widget.SearchView search;
+//        search = requireActivity().findViewById(R.id.search);
+//        String query = search.getQuery().toString();
+        AnanEditText ananEditText = requireActivity().findViewById(R.id.item_search_et);
+        String query = ananEditText.getText().toString();
         if (!TextUtils.isEmpty(query)) {
             cleanbg();
             LinearLayout l1 = requireActivity().findViewById(R.id.CatagoryLinear1);
             l1.setBackgroundColor(CatagorySelected);
-            adapter.getFilter().filter(query);
+            ananEditText.setText("");
         } else {
             if (catagoryfilter.equals("")) {
                 adapter.showAllProduct();

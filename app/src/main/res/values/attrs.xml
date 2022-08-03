@@ -29,5 +29,10 @@
         <attr name="mborderWidth" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="AnanEditText">
+        <attr name="maxTextCount" format="integer" />
+        <attr name="isInputLimited" format="boolean" />
+    </declare-styleable>
+
     <attr name="pinViewStyle" format="reference" />
 </resources>
