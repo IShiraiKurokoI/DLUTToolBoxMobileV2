@@ -85,7 +85,6 @@ public class CacheManager {
         return size;
     }
 
-
     //格式化单位
     public static String getFormatSize(double size) {
 

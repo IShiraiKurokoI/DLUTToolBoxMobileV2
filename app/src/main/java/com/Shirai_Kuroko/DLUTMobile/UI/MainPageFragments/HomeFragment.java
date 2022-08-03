@@ -18,6 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.Shirai_Kuroko.DLUTMobile.Entities.GridAppID;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
@@ -72,9 +74,11 @@ public class HomeFragment extends Fragment {
             Intent intent = new Intent(requireActivity(), SearchActivity.class);
             startActivity(intent);
         });
-
         ImageView iv_more = requireView().findViewById(R.id.iv_more);
         iv_more.setOnClickListener(this::showPopupWindow);
+        RecyclerView CollectionCard = requireView().findViewById(R.id.CollectionCard);
+        CollectionCard.setLayoutManager(new LinearLayoutManager(requireActivity()));
+
     }
 
     public void showPopupWindow(View view) {

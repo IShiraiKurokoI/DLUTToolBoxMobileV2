@@ -98,4 +98,10 @@
     <color name="base_line_color_1">#ffe0e0e0</color>
     <color name="base_line_color_2">#ffe6e6e6</color>
     <color name="time_count_red">#fffa6f66</color>
+    <color name="bg_color_card_red">#fff5222d</color>
+    <color name="card_view_btn_txt">#ff005c97</color>
+    <color name="cardview_dark_background">#ff424242</color>
+    <color name="cardview_light_background">#ffffffff</color>
+    <color name="cardview_shadow_end_color">#03000000</color>
+    <color name="cardview_shadow_start_color">#37000000</color>
 </resources>

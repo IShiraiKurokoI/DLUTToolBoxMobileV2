@@ -27,6 +27,7 @@ import androidx.preference.PreferenceManager;
 import com.Shirai_Kuroko.DLUTMobile.Common.CrashHandler;
 import com.Shirai_Kuroko.DLUTMobile.Common.LogToFile;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
+import com.Shirai_Kuroko.DLUTMobile.Managers.AutoCleaner;
 import com.Shirai_Kuroko.DLUTMobile.Services.BackgroudWIFIMonitorService;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.PureBrowserActivity;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
@@ -38,6 +39,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LogToFile.init(this);
+        AutoCleaner.Clean(this);
         CrashHandler.getInstance().init(this);
         MobileUtils.SetShortCuts(this);
         Window window = getWindow();

@@ -260,4 +260,13 @@
     <item name="fm_search_et" type="id" />
     <item name="tv_notice_type" type="id" />
     <item name="tv_notice_content" type="id" />
+    <item name="ll_card_tittle" type="id" />
+    <item name="iv_card_icon" type="id" />
+    <item name="tv_card_name" type="id" />
+    <item name="tv_unread_count" type="id" />
+    <item name="tv_action_btn" type="id" />
+    <item name="iv_card_menu" type="id" />
+    <item name="tabs_container_base" type="id" />
+    <item name="tabs_container" type="id" />
+    <item name="fl_card_content" type="id" />
 </resources>

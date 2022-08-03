@@ -27,6 +27,7 @@ import androidx.preference.PreferenceManager;
 import com.Shirai_Kuroko.DLUTMobile.Common.LogToFile;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.PermissionHelper;
+import com.Shirai_Kuroko.DLUTMobile.Managers.AutoCleaner;
 import com.Shirai_Kuroko.DLUTMobile.UI.LoginActivity;
 import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
@@ -133,8 +134,15 @@ public class MainActivity extends AppCompatActivity {
             //利用handler延迟发送更改状态信息
             handler.sendEmptyMessageDelayed(0, 1800);
         } else {
+            AutoCleaner.Clean(this);
             finish();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        AutoCleaner.Clean(this);
+        super.onDestroy();
     }
 
     /**

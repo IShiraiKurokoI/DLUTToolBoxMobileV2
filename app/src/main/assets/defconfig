@@ -26,7 +26,7 @@
     "icon": "https://store.m.dlut.edu.cn/group1/M00/02/03/ynZM2V8hIHuAakGbAABHogF7lj8252.png",
     "describe": "图书馆入馆预约系统为读者提供座位和研修间的预约使用服务，请读者按图书馆的座位和研修间的使用规则合理预约使用空间资源。",
     "popularity": "13430254",
-    "url": "https://sso.dlut.edu.cn/cas/login?service=http://seat.lib.dlut.edu.cn/yanxiujian/client/login.php?redirect=index.php&from=rj",
+    "url": "https://sso.dlut.edu.cn/cas/login?from=rj&service=http%3A%2F%2Fseat.lib.dlut.edu.cn%2Fyanxiujian%2Fclient%2Flogin.php",
     "issubscription": 0
   },
   {
@@ -696,7 +696,7 @@
     "icon": "https://store.m.dlut.edu.cn/group1/M00/02/AE/ynZM2WCFBIqARg_gAAAodUwo5gA430.png",
     "describe": "学校专任教师教学培训管理系统移动版，涵盖从培训报名到培训反馈的全过程数据管理，教师可自由查看个人历史培训数据。",
     "popularity": "2494",
-    "url": "https://sso.dlut.edu.cn/cas/login?service=http://ctfdpeixun.dlut.edu.cn/auth/login/?next=/user/dashboard&from=rj",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f3e34798373561486b06c7a89440377bc62da5b0414b/auth/login?filter=app&from=rj",
     "issubscription": 0
   },
   {
