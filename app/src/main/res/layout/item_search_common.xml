@@ -12,7 +12,8 @@
         android:id="@+id/ServiceItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="?attr/selectableItemBackground">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
@@ -77,7 +78,8 @@
         android:layout_marginBottom="12dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:background="?attr/selectableItemBackground">
 
         <TextView
             android:id="@id/tv_notice_title"

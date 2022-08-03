@@ -13,7 +13,8 @@
         android:layout_height="0dp"
         android:layout_weight="1.0"
         android:orientation="vertical"
-        android:paddingTop="16.0dip">
+        android:paddingTop="16.0dip"
+        android:background="?attr/selectableItemBackground">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"

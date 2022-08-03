@@ -6,7 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="?attr/selectableItemBackground">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"

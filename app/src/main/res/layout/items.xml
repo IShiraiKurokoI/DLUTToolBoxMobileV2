@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:maxHeight="72dp"
-    android:minHeight="72dp">
+    android:minHeight="72dp"
+    android:background="?attr/selectableItemBackground">
     <TextView
         android:id="@+id/Position_Num"
         android:layout_width="40dp"

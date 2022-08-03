@@ -149,7 +149,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@id/btn_exchange"
         android:layout_width="fill_parent"
         android:layout_height="47.0dip"
