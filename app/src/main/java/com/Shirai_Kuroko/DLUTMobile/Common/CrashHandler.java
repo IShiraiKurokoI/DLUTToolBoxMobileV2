@@ -4,10 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Looper;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -84,8 +87,14 @@ public class CrashHandler implements UncaughtExceptionHandler {
             // 使用Toast来显示异常信息
             new Thread(() -> {
                 Looper.prepare();
-                Toast.makeText(mContext, "很抱歉,程序出现异常,即将重启.\n崩溃日志保存在程序/Android/com.Shirai_Kuroko.DLUTMobile/files/Logs目录下",
-                        Toast.LENGTH_LONG).show();
+                Toast toast = Toast.makeText(mContext, "很抱歉,程序出现异常,即将退出.\n崩溃日志保存在程序/Android/com.Shirai_Kuroko.DLUTMobile/files/Logs目录下",
+                        Toast.LENGTH_LONG);
+                int tvToastId = Resources.getSystem().getIdentifier("message", "id", "android");
+                TextView tvToast = toast.getView().findViewById(tvToastId);
+                if(tvToast != null){
+                    tvToast.setGravity(Gravity.CENTER);
+                }
+                toast.show();
                 Looper.loop();
             }).start();
             // 收集设备参数信息
