@@ -26,6 +26,8 @@ import com.igexin.sdk.message.GTCmdMessage;
 import com.igexin.sdk.message.GTNotificationMessage;
 import com.igexin.sdk.message.GTTransmitMessage;
 
+import java.net.URLDecoder;
+
 /**
  * 继承 GTIntentService 接收来自个推的消息，所有消息在主线程中回调，如果注册了该服务，则务必要在 AndroidManifest 中声明，否则无法接受消息
  */
@@ -70,7 +72,7 @@ public class IntentService extends GTIntentService {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 @SuppressLint("UnspecifiedImmutableFlag")
                 PendingIntent pendingIntent = PendingIntent.getActivity(this, (int) (Math.random()*200), intent, FLAG_UPDATE_CURRENT);
-                new NotificationHelper().Notify(context,pendingIntent,"114514","个推消息通知",dlutNoticeContentBean.getTitle(),Integer.parseInt(notificationPayload.getPayload().getBody().getCustom().getMsg_id()));
+                new NotificationHelper().Notify(context,pendingIntent,"114514","个推消息通知", URLDecoder.decode(dlutNoticeContentBean.getTitle()),Integer.parseInt(notificationPayload.getPayload().getBody().getCustom().getMsg_id()));
             } catch (Exception e) {
                 Log.e("个推SDK", "Payload处理错误: ", e);
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
