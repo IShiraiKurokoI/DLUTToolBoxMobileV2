@@ -9,11 +9,13 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Binder;
-import android.os.Environment;
 import android.os.IBinder;
+import android.view.Gravity;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
@@ -35,7 +37,7 @@ public class DownloadService extends Service {
         public void onProgress(int progress) {
             //使用getNotificationManager函数构建一个用于显示下载进度的通知
             //使用notify去触发这个通知
-            getNotificationManager().notify(1,getNotification("正在下载",progress,downloadUrl));
+            getNotificationManager().notify(1,getNotification("正在下载\n",progress,downloadUrl));
         }
 
         @SuppressLint("UnspecifiedImmutableFlag")
@@ -54,7 +56,13 @@ public class DownloadService extends Service {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             new NotificationHelper().Notify(DownloadService.this, PendingIntent.getActivity(DownloadService.this,(int) (Math.random()*200), intent, FLAG_UPDATE_CURRENT),"1314","下载完成通知","下载完成",FileName+"\n已保存至Download目录下",(int) System.currentTimeMillis());
-            Toast.makeText(DownloadService.this,FileName+"\n下载成功\n已保存至Download目录下",Toast.LENGTH_LONG).show();
+            Toast toast = Toast.makeText(DownloadService.this,FileName+"\n下载成功\n已保存至\n"+FilePath,Toast.LENGTH_LONG);
+            int tvToastId = Resources.getSystem().getIdentifier("message", "id", "android");
+            TextView tvToast = toast.getView().findViewById(tvToastId);
+            if(tvToast != null){
+                tvToast.setGravity(Gravity.CENTER);
+            }
+            toast.show();
         }
 
         @Override
@@ -93,35 +101,41 @@ public class DownloadService extends Service {
                 //使用execute开启下载
                 downLoadTask.execute(downloadUrl);
                 //startForeground使服务成为一个前台服务以创建持续运行的通知
-                startForeground(1,getNotification("开始下载",0,FileName));
-                Toast.makeText(DownloadService.this,"开始下载",Toast.LENGTH_SHORT).show();
-            }
-        }
-        public void pauseDownload(){
-            if (downLoadTask!=null){
-                downLoadTask.pauseDownload();
-            }
-        }
-        //取消下载后需要将下载中的任务取消
-        public void cancelDownload(){
-            if(downLoadTask!=null){
-                downLoadTask.cancelDownload();
-            }else {
-                if (downloadUrl!=null)
-                {
-                    //取消需要将文件删除并将通知关闭
-                    String fileName=downloadUrl.substring(downloadUrl.lastIndexOf("/"));
-                    String directory= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
-                    File file=new File(directory+fileName);
-                    if(file.exists()){
-                        file.delete();
-                    }
-                    getNotificationManager().cancel(1);
-                    stopForeground(true);
-                    Toast.makeText(DownloadService.this,"下载取消",Toast.LENGTH_SHORT).show();
+                startForeground(1,getNotification("下载"+FileName+"中",0,FileName));
+                Toast toast = Toast.makeText(DownloadService.this,"开始下载\n"+FileName,Toast.LENGTH_SHORT);
+                int tvToastId = Resources.getSystem().getIdentifier("message", "id", "android");
+                TextView tvToast = toast.getView().findViewById(tvToastId);
+                if(tvToast != null){
+                    tvToast.setGravity(Gravity.CENTER);
                 }
+                toast.show();
             }
         }
+//        public void pauseDownload(){
+//            if (downLoadTask!=null){
+//                downLoadTask.pauseDownload();
+//            }
+//        }
+//        //取消下载后需要将下载中的任务取消
+//        public void cancelDownload(){
+//            if(downLoadTask!=null){
+//                downLoadTask.cancelDownload();
+//            }else {
+//                if (downloadUrl!=null)
+//                {
+//                    //取消需要将文件删除并将通知关闭
+//                    String fileName=downloadUrl.substring(downloadUrl.lastIndexOf("/"));
+//                    String directory= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+//                    File file=new File(directory+fileName);
+//                    if(file.exists()){
+//                        file.delete();
+//                    }
+//                    getNotificationManager().cancel(1);
+//                    stopForeground(true);
+//                    Toast.makeText(DownloadService.this,"下载取消",Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        }
     }
 
     private NotificationManager getNotificationManager(){

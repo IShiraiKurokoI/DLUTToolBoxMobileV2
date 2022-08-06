@@ -2,25 +2,19 @@ package com.Shirai_Kuroko.DLUTMobile.Common;
 
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.util.Log;
 import android.webkit.CookieManager;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
-import java.util.Date;
+import java.util.Objects;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/**
- * Created by 海绵宝宝 on 2019/5/13.
- */
-
-/**
- * 三个参数第一个为需要传入给后台的数据类型，第二个是进度显示类型，第三个为使用Integer作为反馈结果类型
- **/
 public class DownLoadTask extends AsyncTask<String, Integer, Integer> {
 
     public static final int TYPE_SUCCESS = 0;
@@ -30,9 +24,9 @@ public class DownLoadTask extends AsyncTask<String, Integer, Integer> {
 
     private String DownloadPath;
 
-    private String RealFileName;
+    private final String RealFileName;
 
-    private DownloadListener downloadListener;
+    private final DownloadListener downloadListener;
 
     private boolean isCanceled = false;
 
@@ -41,35 +35,57 @@ public class DownLoadTask extends AsyncTask<String, Integer, Integer> {
     private int lastProgress;
 
     //通过DownLoadTask回调下载状态
-    public DownLoadTask(DownloadListener listener,String FileName) {
-        RealFileName =FileName;
+    public DownLoadTask(DownloadListener listener, String FileName) {
+        RealFileName = FileName;
         downloadListener = listener;
+    }
+
+    public static String getExtensionName(String filename) {
+        if ((filename != null) && (filename.length() > 0)) {
+            int dot = filename.lastIndexOf('.');
+            if ((dot > -1) && (dot < (filename.length() - 1))) {
+                return filename.substring(dot + 1);
+            }
+        }
+        return filename;
+    }
+
+    public static String getFileNameNoEx(String filename) {
+        if ((filename != null) && (filename.length() > 0)) {
+            int dot = filename.lastIndexOf('.');
+            if ((dot > -1) && (dot < (filename.length()))) {
+                return filename.substring(0, dot);
+            }
+        }
+        return filename;
     }
 
     @Override//后台执行具体的下载逻辑
     protected Integer doInBackground(String... params) {
         InputStream is = null;
-        RandomAccessFile savedFile = null;
+        RandomAccessFile savedFile;
         File file = null;
         try {
             long downloadLength = 0;
             String downloadUrl = params[0];
             String derectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();//获取本地的下载文件夹的路径
-            DownloadPath=derectory +"/"+new Date(System.currentTimeMillis()).toLocaleString()+"  "+ RealFileName;
+            DownloadPath = derectory + "/" + RealFileName;
             file = new File(DownloadPath);
-            if (file.exists()) {
-                downloadLength = file.length();
+            int i = 1;
+            while (file.exists()) {
+                file = new File(derectory + "/" + getFileNameNoEx(RealFileName) + "(" + i + ")." + getExtensionName(RealFileName));
+                i++;
             }
+            DownloadPath = file.getAbsolutePath();
             long contentLength = getContentLength(downloadUrl);//读取下载文件的字节数
+            Log.i("文件下载", "本地大小：" + downloadLength + " 远程大小:" + contentLength);
             if (contentLength == 0) {
                 return TYPE_FAILED;
-            } else if (contentLength == downloadLength) {
-                return TYPE_SUCCESS;
             }
             OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder().addHeader("cookie",CookieManager.getInstance().getCookie(downloadUrl)).addHeader("RANGE", "bytes=" + downloadLength + "-").url(downloadUrl).build();//head用于告诉服务器我们从那个字节开始下载
+            Request request = new Request.Builder().addHeader("cookie", CookieManager.getInstance().getCookie(downloadUrl)).addHeader("RANGE", "bytes=" + downloadLength + "-").url(downloadUrl).build();//head用于告诉服务器我们从那个字节开始下载
             Response response = client.newCall(request).execute();
-            is = response.body().byteStream();
+            is = Objects.requireNonNull(response.body()).byteStream();
             savedFile = new RandomAccessFile(file, "rw");
             savedFile.seek(downloadLength);//跳过已经下载的字节
             byte[] b = new byte[1024];
@@ -87,7 +103,7 @@ public class DownLoadTask extends AsyncTask<String, Integer, Integer> {
                     publishProgress(progress);
                 }
             }
-            response.body().close();
+            Objects.requireNonNull(response.body()).close();
             return TYPE_SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
@@ -118,7 +134,7 @@ public class DownLoadTask extends AsyncTask<String, Integer, Integer> {
     protected void onPostExecute(Integer integer) {
         switch (integer) {
             case TYPE_SUCCESS:
-                downloadListener.onSuccess(DownloadPath,RealFileName);
+                downloadListener.onSuccess(DownloadPath, RealFileName);
                 break;
             case TYPE_FAILED:
                 downloadListener.onFailed();
@@ -144,10 +160,10 @@ public class DownLoadTask extends AsyncTask<String, Integer, Integer> {
     //获取需要下载的文件长度
     private long getContentLength(String downloadUrl) throws IOException {
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(downloadUrl).build();
+        Request request = new Request.Builder().addHeader("Accept-Encoding", "identity").addHeader("cookie", CookieManager.getInstance().getCookie(downloadUrl)).url(downloadUrl).build();
         Response response = client.newCall(request).execute();
         if (response.isSuccessful()) {
-            long contentLength = response.body().contentLength();
+            long contentLength = Objects.requireNonNull(response.body()).contentLength();
             response.close();
             return contentLength;
         }

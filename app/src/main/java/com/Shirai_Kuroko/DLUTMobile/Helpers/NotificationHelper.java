@@ -46,11 +46,10 @@ public class NotificationHelper {
             manager.notify(id, notification);
         }
     }
-    public void Notify(Context context,PendingIntent pendingIntent,String CHANNEL_ONE_ID,String CHANNEL_ONE_NAME,String title,String info,int id)
+    public void Notify(Context context,PendingIntent pendingIntent,String CHANNEL_ID,String CHANNEL_NAME,String title,String info,int id)
     {
         NotificationChannel notificationChannel;
-        notificationChannel = new NotificationChannel(CHANNEL_ONE_ID,
-                CHANNEL_ONE_NAME, NotificationManager.IMPORTANCE_HIGH);
+        notificationChannel = new NotificationChannel(CHANNEL_ID,CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
         notificationChannel.enableLights(false);
         notificationChannel.setLightColor(Color.RED);
         notificationChannel.setShowBadge(true);
@@ -60,11 +59,12 @@ public class NotificationHelper {
             manager.createNotificationChannel(notificationChannel);
         }
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        Notification notification = new Notification.Builder(context, CHANNEL_ONE_ID).setChannelId(CHANNEL_ONE_ID)
+        Notification notification = new Notification.Builder(context, CHANNEL_ID).setChannelId(CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle(title)
                 .setContentIntent(pendingIntent)
                 .setContentText(info)
+                .setPriority(Notification.PRIORITY_MAX)
                 .setShowWhen(true)
                 .build();
         notification.flags = Notification.FLAG_AUTO_CANCEL;

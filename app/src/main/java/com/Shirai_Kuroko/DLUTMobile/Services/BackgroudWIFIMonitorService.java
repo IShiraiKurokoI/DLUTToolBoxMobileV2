@@ -60,14 +60,15 @@ public class BackgroudWIFIMonitorService extends Service {
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle("正在后台监测校园网网络连接")
                 .setShowWhen(false)
-                .setContentIntent(pendingIntent)
+                .setContentIntent(null)
+//                .setContentIntent(pendingIntent)
                 .build();
 
         BroadcastReceiver Receiver = new WIFIStateChangeBroadcastReceiver();
         IntentFilter intentFilter = new IntentFilter(WifiManager.NETWORK_STATE_CHANGED_ACTION);
         registerReceiver(Receiver, intentFilter);
 
-        startForeground(1, notification);
+        startForeground(2, notification);
     }
 
     @Override
