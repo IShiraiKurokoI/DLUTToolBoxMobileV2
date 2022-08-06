@@ -2,4 +2,5 @@
 <paths>
     <external-files-path name="SharePicture"  path="Share"/>
     <external-files-path name="Crop"  path="Crop"/>
+    <external-path name="external_storage_root"  path="."/>
 </paths>

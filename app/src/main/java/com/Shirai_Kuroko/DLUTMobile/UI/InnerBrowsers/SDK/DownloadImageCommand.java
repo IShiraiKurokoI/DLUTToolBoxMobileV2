@@ -1,5 +1,6 @@
 package com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DownloadImageCommand {
@@ -16,7 +17,12 @@ public class DownloadImageCommand {
     }
 
     public void execute(JSONObject jsonObject) {
-        sendFailedResult(cmdName+"命令尚未实现");
+        try {
+            proxy.webview.evaluateJavascript("window.location.href='"+jsonObject.getString("imageUrl")+"'",null);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            sendFailedResult(e.toString());
+        }
     }
 
     public void sendCancelResult() {
