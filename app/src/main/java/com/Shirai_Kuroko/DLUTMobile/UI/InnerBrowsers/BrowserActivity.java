@@ -6,6 +6,7 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -16,6 +17,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
@@ -65,6 +67,8 @@ public class BrowserActivity extends BaseActivity {
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        CookieManager.getInstance().removeAllCookies(null);
+        CookieManager.getInstance().flush();
         super.onCreate(savedInstanceState);
         WebView.enableSlowWholeDocumentDraw();
         setContentView(R.layout.activity_browser);
@@ -225,8 +229,7 @@ public class BrowserActivity extends BaseActivity {
             }
             if (url.contains("webvpn.dlut.edu.cn/login"))//webvpn跳转处理
             {
-                view.evaluateJavascript("document.getElementById('cas-login').click()", value -> {
-                });
+                view.evaluateJavascript("document.getElementById('cas-login').click()", null);
                 return;
             }
             SpecialHandle(url);
@@ -236,11 +239,17 @@ public class BrowserActivity extends BaseActivity {
         public void onPageStarted(WebView view, String url, Bitmap favicon) {//页面开始加载
             Log.i("开始加载", url);//日志记录加载了什么页面
             switch (thisapp.getId()) {
+                case 51: {
+                    if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/home"))
+                    {
+                        webView.loadUrl("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/eleCostOfDlutPay?projectId=33");
+                    }
+                    break;
+                }
                 case 70://选课系统自动跳转
                 {
                     if (url.contains("/student/home")) {
-                        webView.evaluateJavascript("window.location.href='/student/for-std/course-select'", value -> {
-                        });
+                        webView.evaluateJavascript("window.location.href='/student/for-std/course-select'", null);
                     }
                     break;
                 }
@@ -249,8 +258,7 @@ public class BrowserActivity extends BaseActivity {
                     if (url.contains("/student/home")) {
                         webView.getSettings().setLoadWithOverviewMode(false);
                         webView.getSettings().setUseWideViewPort(false);
-                        webView.evaluateJavascript("window.location.href='/student/for-std/exam-arrange'", value -> {
-                        });
+                        webView.evaluateJavascript("window.location.href='/student/for-std/exam-arrange'", null);
                     }
                     break;
                 }
@@ -259,8 +267,7 @@ public class BrowserActivity extends BaseActivity {
                     if (url.contains("/student/home")) {
                         webView.getSettings().setLoadWithOverviewMode(false);
                         webView.getSettings().setUseWideViewPort(false);
-                        webView.evaluateJavascript("window.location.href='/student/for-std/grade/sheet'", value -> {
-                        });
+                        webView.evaluateJavascript("window.location.href='/student/for-std/grade/sheet'", null);
                     }
                     break;
                 }
@@ -269,41 +276,64 @@ public class BrowserActivity extends BaseActivity {
                     if (url.contains("/student/home")) {
                         webView.getSettings().setLoadWithOverviewMode(false);
                         webView.getSettings().setUseWideViewPort(false);
-                        webView.evaluateJavascript("window.location.href='/student/for-std/evaluation/summative'", value -> {
-                        });
+                        webView.evaluateJavascript("window.location.href='/student/for-std/evaluation/summative'", null);
                     }
                     break;
                 }
                 case 75://我的课表自动跳转
                 {
                     if (url.contains("/student/home")) {
-                        webView.evaluateJavascript("window.location.href='/student/for-std/course-table'", value -> {
-                        });
+                        webView.evaluateJavascript("window.location.href='/student/for-std/course-table'", null);
                     }
                     break;
                 }
                 case 76://班级课表自动跳转
                 {
                     if (url.contains("/student/home")) {
-                        webView.evaluateJavascript("window.location.href='/student/for-std/adminclass-course-table'", value -> {
-                        });
+                        webView.evaluateJavascript("window.location.href='/student/for-std/adminclass-course-table'", null);
                     }
                     break;
                 }
                 case 77://培养方案自动跳转
                 {
                     if (url.contains("/student/home")) {
-                        webView.evaluateJavascript("window.location.href='/student/for-std/program-completion-preview'", value -> {
-                        });
+                        webView.evaluateJavascript("window.location.href='/student/for-std/program-completion-preview'", null);
                     }
                     break;
                 }
                 case 79://开课查询自动跳转
                 {
                     if (url.contains("/student/home")) {
-                        webView.evaluateJavascript("window.location.href='/student/for-std/lesson-search'", value -> {
-                        });
+                        webView.evaluateJavascript("window.location.href='/student/for-std/lesson-search'", null);
                     }
+                    break;
+                }
+                case 82: {
+                    if (url.contains("guid.lib.dlut.edu.cn)"))
+                    {
+                        webView.loadUrl("https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f7e24898693c6152300c85b98c1b2631a4d2be57/map/index.html");
+                    }
+                    break;
+                }
+                case 83: {
+                    if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/home"))
+                    {
+                        webView.loadUrl("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/netCostOfSlPay?projectId=28");
+                    }
+                    break;
+                }
+                case 85: {
+                    webView.getSettings().setLoadWithOverviewMode(false);
+                    webView.getSettings().setUseWideViewPort(false);
+                    ((Activity)mContext).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
+                    ((Activity)mContext).getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                    break;
+                }
+                case 86: {
+                    webView.getSettings().setLoadWithOverviewMode(false);
+                    webView.getSettings().setUseWideViewPort(false);
+                    ((Activity)mContext).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
+                    ((Activity)mContext).getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
                     break;
                 }
                 default://默认加载完成隐藏加载条
@@ -334,6 +364,7 @@ public class BrowserActivity extends BaseActivity {
                 startActivity(intent);
                 return true;
             }
+
             return super.shouldOverrideUrlLoading(view, request);
         }
     };
@@ -347,14 +378,10 @@ public class BrowserActivity extends BaseActivity {
                     String MailAddress = prefs.getString("MailAddress", "");
                     String MailPassword = prefs.getString("MailPassword", "").split("@")[0];
                     if (MailAddress.length() * MailPassword.length() != 0) {
-                        webView.evaluateJavascript("username.value='" + MailAddress + "'", value -> {
-                        });
-                        webView.evaluateJavascript("password.value='" + MailPassword + "'", value -> {
-                        });
-                        webView.evaluateJavascript("domain.value='mail.dlut.edu.cn'", value -> {
-                        });
-                        webView.evaluateJavascript("document.getElementsByClassName('loginBtn')[0].click()", value -> {
-                        });
+                        webView.evaluateJavascript("username.value='" + MailAddress + "'", null);
+                        webView.evaluateJavascript("password.value='" + MailPassword + "'", null);
+                        webView.evaluateJavascript("domain.value='mail.dlut.edu.cn'", null);
+                        webView.evaluateJavascript("document.getElementsByClassName('loginBtn')[0].click()", null);
                     } else {
                         loading.dismiss();
                         AlertDialog.Builder localBuilder = new AlertDialog.Builder(webView.getContext());
@@ -368,9 +395,22 @@ public class BrowserActivity extends BaseActivity {
 
                 break;
             }
+            case 51: {
+                if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/home"))
+                {
+                    webView.loadUrl("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/eleCostOfDlutPay?projectId=33");
+                }
+                if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/eleCostOfDlutPay?projectId=33"))
+                {
+                    webView.clearHistory();
+                    loading.dismiss();
+                }
+                break;
+            }
             case 70://选课系统自动跳转
             {
                 if (url.contains("course-select")) {
+                    webView.clearHistory();
                     loading.dismiss();
                 }
                 break;
@@ -378,6 +418,7 @@ public class BrowserActivity extends BaseActivity {
             case 71://考试信息自动跳转
             {
                 if (url.contains("exam-arrange")) {
+                    webView.clearHistory();
                     loading.dismiss();
                 }
                 break;
@@ -385,6 +426,7 @@ public class BrowserActivity extends BaseActivity {
             case 73://成绩信息自动跳转
             {
                 if (url.contains("for-std/grade/sheet")) {
+                    webView.clearHistory();
                     loading.dismiss();
                 }
                 break;
@@ -392,6 +434,7 @@ public class BrowserActivity extends BaseActivity {
             case 74://评教系统自动跳转
             {
                 if (url.contains("evaluation")) {
+                    webView.clearHistory();
                     loading.dismiss();
                 }
                 break;
@@ -399,6 +442,7 @@ public class BrowserActivity extends BaseActivity {
             case 75://我的课表自动跳转
             {
                 if (url.contains("course-table")) {
+                    webView.clearHistory();
                     loading.dismiss();
                 }
                 break;
@@ -406,6 +450,7 @@ public class BrowserActivity extends BaseActivity {
             case 76://班级课表自动跳转
             {
                 if (url.contains("adminclass-course-table")) {
+                    webView.clearHistory();
                     loading.dismiss();
                 }
                 break;
@@ -413,6 +458,7 @@ public class BrowserActivity extends BaseActivity {
             case 77://培养方案自动跳转
             {
                 if (url.contains("program-completion-preview")) {
+                    webView.clearHistory();
                     loading.dismiss();
                 }
                 break;
@@ -420,10 +466,8 @@ public class BrowserActivity extends BaseActivity {
             case 78://校园网自服务跳转处理
             {
                 if (Objects.equals(url, "http://172.20.20.1:8800/user/operate/index")) {
-                    webView.evaluateJavascript("document.getElementsByClassName('radio')[0].innerHTML='<label><input type=\"radio\" name=\"OperateForm[shiftType]\" value=\"1\"> 立即生效</label><label><input type=\"radio\" name=\"OperateForm[shiftType]\" value=\"2\"> 下个周期生效</label>'", value -> {
-                    });
-                    webView.evaluateJavascript("document.getElementsByTagName('select')[1].innerHTML+='<option value=\"13\">包月限100G</option>'", value -> {
-                    });
+                    webView.evaluateJavascript("document.getElementsByClassName('radio')[0].innerHTML='<label><input type=\"radio\" name=\"OperateForm[shiftType]\" value=\"1\"> 立即生效</label><label><input type=\"radio\" name=\"OperateForm[shiftType]\" value=\"2\"> 下个周期生效</label>'", null);
+                    webView.evaluateJavascript("document.getElementsByTagName('select')[1].innerHTML+='<option value=\"13\">包月限100G</option>'", null);
                 }
                 if (Objects.equals(url, "http://172.20.20.1:8800/")) {
                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -431,10 +475,8 @@ public class BrowserActivity extends BaseActivity {
                     String NPd = prefs.getString("NetworkPassword", "");
                     final boolean c = Un.length() * NPd.length() != 0;
                     if (c) {
-                        webView.evaluateJavascript("document.getElementById('loginform-username').value=" + Un, value -> {
-                        });
-                        webView.evaluateJavascript("document.getElementById('loginform-password').value='" + NPd + "'", value -> {
-                        });
+                        webView.evaluateJavascript("document.getElementById('loginform-username').value=" + Un, null);
+                        webView.evaluateJavascript("document.getElementById('loginform-password').value='" + NPd + "'", null);
                     } else {
                         AlertDialog.Builder localBuilder = new AlertDialog.Builder(webView.getContext());
                         localBuilder.setMessage("校园网信息未配置完全，集成认证失败，请手动认证并前往设置界面补全信息！").setPositiveButton("确定", null);
@@ -447,6 +489,26 @@ public class BrowserActivity extends BaseActivity {
             case 79://开课查询自动跳转
             {
                 if (url.contains("lesson-search")) {
+                    webView.clearHistory();
+                    loading.dismiss();
+                }
+                break;
+            }
+            case 82: {
+                if (url.contains("guid.lib.dlut.edu.cn)"))
+                {
+                    webView.loadUrl("https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f7e24898693c6152300c85b98c1b2631a4d2be57/map/index.html");
+                }
+                break;
+            }
+            case 83: {
+                if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/home"))
+                {
+                    webView.loadUrl("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/netCostOfSlPay?projectId=28");
+                }
+                if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/netCostOfSlPay?projectId=28"))
+                {
+                    webView.clearHistory();
                     loading.dismiss();
                 }
                 break;
@@ -554,16 +616,16 @@ public class BrowserActivity extends BaseActivity {
                 return true;
             }
             case 2: {
-                Toast.makeText(getBaseContext(),"正在生成分享图片",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "正在生成分享图片", Toast.LENGTH_SHORT).show();
                 webView.evaluateJavascript("window.Share.StartShare(document.getElementsByTagName('html')[0].scrollWidth,document.getElementsByTagName('html')[0].scrollHeight)", null);
                 return true;
             }
             case 3: {
-                MobileUtils.ShareTextToFriend(mContext,"原始链接："+webView.getOriginalUrl()+"\n当前页面："+webView.getUrl());
+                MobileUtils.ShareTextToFriend(mContext, "原始链接：" + webView.getOriginalUrl() + "\n当前页面：" + webView.getUrl());
                 return true;
             }
             case 4: {
-                Toast.makeText(getBaseContext(),"正在生成保存图片",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "正在生成保存图片", Toast.LENGTH_SHORT).show();
                 webView.evaluateJavascript("window.Share.StartSave(document.getElementsByTagName('html')[0].scrollWidth,document.getElementsByTagName('html')[0].scrollHeight)", null);
                 return true;
             }
@@ -577,7 +639,7 @@ public class BrowserActivity extends BaseActivity {
 
     public class PicShareInterFace {
         @JavascriptInterface
-        public void StartShare(String s,String s1) {
+        public void StartShare(String s, String s1) {
             Handler handler = new Handler(Looper.getMainLooper());
             handler.post(new Runnable() {
                 @Override
@@ -601,8 +663,9 @@ public class BrowserActivity extends BaseActivity {
                 }
             });
         }
+
         @JavascriptInterface
-        public void StartSave(String s,String s1) {
+        public void StartSave(String s, String s1) {
             Handler handler = new Handler(Looper.getMainLooper());
             handler.post(() -> {
                 float scale = webView.getScale();
@@ -620,7 +683,7 @@ public class BrowserActivity extends BaseActivity {
                     Bitmap qr = QRCodeHelper.createQRCodeBitmap(webView.getOriginalUrl(), 200, 200, "UTF-8", "L", "0", Color.BLACK, Color.WHITE);
                     canvas.drawBitmap(qr, 10, bitmap.getHeight() - 210, null);
                 }
-                MobileUtils.SaveImageToGallery(getBaseContext(),bitmap,thisapp.getAppName()+new Date().toLocaleString()+".bmp");
+                MobileUtils.SaveImageToGallery(getBaseContext(), bitmap, thisapp.getAppName() + new Date().toLocaleString() + ".bmp");
             });
         }
     }

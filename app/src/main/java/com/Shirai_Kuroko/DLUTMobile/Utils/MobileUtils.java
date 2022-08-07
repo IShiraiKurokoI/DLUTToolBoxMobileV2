@@ -574,6 +574,8 @@ public class MobileUtils {
             }
             for (int i = ConfigNow.size(); i < DefaultList.size(); i++) {
                 ConfigNow.add(DefaultList.get(i));
+                Log.i("更新新应用", DefaultList.get(i).getAppName());
+                LogToFile.i("更新新应用", DefaultList.get(i).getAppName());
             }
             ConfigHelper.SavePrefJson(context, JSON.toJSONString(ConfigNow));
         } catch (Exception e) {

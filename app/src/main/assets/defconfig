@@ -512,11 +512,11 @@
   {
     "id": 51,
     "category": "life",
-    "app_name": "宿舍电费（测试）",
+    "app_name": "宿舍电费",
     "icon": "https://my.m.dlut.edu.cn/images/appicon/shejiao.png",
-    "describe": "宿舍电费查询",
+    "describe": "宿舍电费查询与充值",
     "popularity": "37285",
-    "url": "http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/casLogin?target=openEleRoutePage?from=rj&filter=app",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/?filter=app&from=rj",
     "issubscription": 0
   },
   {
@@ -807,6 +807,66 @@
     "describe": "CERNET网络监控，仅校园网内可以访问，实时显示校园网线路负载以及流量情况",
     "popularity": "16060060",
     "url": "file:///android_asset/Monitor.html",
+    "issubscription": 0
+  },
+  {
+    "id": 81,
+    "category": "office",
+    "app_name": "VPN客户端申请",
+    "icon": "https://ehall.dlut.edu.cn/fp/uploadfiles/uw_service/default/srvpic158.png",
+    "describe": "师生可在此应用下办理VPN客户端服务。",
+    "popularity": "1395454",
+    "url": "https://sso.dlut.edu.cn/cas/login?from=rj&service=https%3A%2F%2Fsso.dlut.edu.cn%2Fcas%2Flogin%3Fservice%3Dhttps%253A%252F%252Fehall.dlut.edu.cn%252Ffp%252Fview%253Fm%253Dfp%2523from%253Dhall%2526serveID%253D8f283c6a-083d-417b-b134-22a0b46ce537%2526act%253Dfp%252Fserveapply",
+    "issubscription": 0
+  },
+  {
+    "id": 82,
+    "category": "study",
+    "app_name": "读者入馆培训",
+    "icon": "https://ehall.dlut.edu.cn/fp/uploadfiles/uw_service/2019/06/20/1561004260430.png",
+    "describe": "师生可在此应用下完成图书馆入馆培训。",
+    "popularity": "1395454",
+    "url": "http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f7e24898693c6152300c85b98c1b2631a4d2be57/site/index.html?filter=app&from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 83,
+    "category": "life",
+    "app_name": "网费缴费",
+    "icon": "https://ehall.dlut.edu.cn/fp/uploadfiles/uw_service/09901/2020/05/12/1589274197322.png",
+    "describe": "师生可在此应用下充值网费（三校区通用）。",
+    "popularity": "1395454",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/?filter=app&from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 84,
+    "category": "office",
+    "app_name": "网上意见箱",
+    "icon": "https://ehall.dlut.edu.cn/fp/uploadfiles/uw_service/default/srvpic98.png",
+    "describe": "师生可在此应用下向学校反馈意见。",
+    "popularity": "1395454",
+    "url": "https://sso.dlut.edu.cn/cas/login?from=rj&service=https%3A%2F%2Fsso.dlut.edu.cn%2Fcas%2Flogin%3Fservice%3Dhttps%253A%252F%252Fehall.dlut.edu.cn%252Ffp%252Fview%253Fm%253Dfp%2523from%253Dhall%2526serveID%253D0d9c4d08-6828-4507-80b8-f989d3a1904c%2526act%253Dfp%252Fserveapply",
+    "issubscription": 0
+  },
+  {
+    "id": 85,
+    "category": "office",
+    "app_name": "大工云盘",
+    "icon": "https://portal.dlut.edu.cn/tp//resource/image/apps/apps-03.png",
+    "describe": "大连理工大学网盘，能用，但不好用",
+    "popularity": "1395454",
+    "url": "https://sso.dlut.edu.cn/cas/login?from=rj&service=https%3A%2F%2Fsso.dlut.edu.cn%2Fcas%2Flogin%3Fservice%3Dhttp%3A%2F%2Fpan.dlut.edu.cn%2Fcas",
+    "issubscription": 0
+  },
+  {
+    "id": 86,
+    "category": "office",
+    "app_name": "自助打印平台",
+    "icon": "https://portal.dlut.edu.cn/tp//resource/image/apps/apps-27.png",
+    "describe": "可在此进行自助电子打印服务",
+    "popularity": "1395454",
+    "url": "https://sso.dlut.edu.cn/cas/login?from=rj&service=https%3A%2F%2Fsso.dlut.edu.cn%2Fcas%2Flogin%3Fservice%3Dhttps%3A%2F%2Fsso.dlut.edu.cn%2Fcas%2Flogin%3Fservice%3Dhttp%253A%252F%252Feproof.dlut.edu.cn%252Fsso%252Flogin.jsp",
     "issubscription": 0
   }
 ]

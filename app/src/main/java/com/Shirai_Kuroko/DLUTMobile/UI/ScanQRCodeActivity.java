@@ -87,7 +87,7 @@ public class ScanQRCodeActivity extends AppCompatActivity {
             //显示闪光灯
             .isShowLightController(true)
             //自定义文案
-            .setScanHintText("将二维码放入框内，即可自动扫描")
+            .setScanHintText("将条形码放入框内，即可自动扫描")
             //自定义文案颜色
             .setScanHintTextColor("#FFFFFF")
             //自定义文案大小（单位sp）
@@ -229,20 +229,22 @@ public class ScanQRCodeActivity extends AppCompatActivity {
             if (one) {
                 one = false;
                 switcher.setText("切换至条形码识别");
-                mScanSurfaceView.setScanConfig(QRscanConfig);
-                mScanSurfaceView.restartScan();
+                initView();
             } else {
                 one = true;
                 switcher.setText("切换至二维码识别");
-                mScanSurfaceView.setScanConfig(OnescanConfig);
-                mScanSurfaceView.restartScan();
+                initView();
             }
         });
     }
 
     private void initView() {
         mScanSurfaceView.init(this);
-        mScanSurfaceView.setScanConfig(QRscanConfig);
+        if (one) {
+            mScanSurfaceView.setScanConfig(OnescanConfig);
+        } else {
+            mScanSurfaceView.setScanConfig(QRscanConfig);
+        }
         mScanSurfaceView.setOnScanCallback(new OnScanCallback() {
             @Override
             public void onScanSuccess(String resultTxt, Bitmap barcode) {
