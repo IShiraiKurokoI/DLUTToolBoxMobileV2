@@ -1,6 +1,8 @@
 package com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.PermissionInfo;
 import android.util.Log;
 
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.BrowserActivity;
@@ -25,6 +27,8 @@ public class ScanQRCodeCommand {
     }
 
     public void execute(final JSONObject jsonObject) {
+        PackageManager packageManager = proxy.context.getPackageManager();
+        PermissionInfo permissionInfo = null;
         this.jsonObject = jsonObject;
         final Intent intent = new Intent(proxy.context, StartScanActivity.class);
         BrowserActivity browserActivity = (BrowserActivity)this.proxy.context;
@@ -36,13 +40,14 @@ public class ScanQRCodeCommand {
                         Log.i("扫码返回内容", intent1.getStringExtra("content"));
                         jsonObject1.put("resultStr", URLEncoder.encode(intent1.getStringExtra("content").replaceAll("\n", "%5cn").replaceAll("\r", "%5cr").replaceAll("\t", "%5ct").replaceAll("\\\\", "%5c")));
                         jsonObject1.put("type", "raw");
+                        this.sendSucceedResult(jsonObject1);
                     } catch (JSONException e) {
-                        ScanQRCodeCommand.this.sendFailedResult("Decode Error");
+                        this.sendFailedResult("Decode Error");
                         e.printStackTrace();
                     }
-                    this.sendSucceedResult(jsonObject1);
                     return true;
                 } else if (intent1.getIntExtra("resultcode", -1) == 0) {
+                    Log.i("扫码返回内容", "已经处理");
                     this.sendCancelResult();
                     return false;
                 } else {

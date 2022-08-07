@@ -54,7 +54,8 @@
                 android:textColor="@color/text_color_66"
                 android:textColorHint="@color/text_color_bb"
                 android:textSize="16.0sp"
-                tools:ignore="Autofill" />
+                android:importantForAutofill="yes"
+                android:autofillHints="username"/>
             <ImageView
                 android:id="@id/iv_login_et_num_clear"
                 android:layout_width="19.0dip"
@@ -101,7 +102,8 @@
                 android:textColor="@color/text_color_50"
                 android:textColorHint="@color/text_color_bb"
                 android:textSize="16.0sp"
-                tools:ignore="Autofill" />
+                android:importantForAutofill="yes"
+                android:autofillHints="password"/>
             <ImageView
                 android:id="@id/iv_login_et_pwd_clear"
                 android:layout_width="19.0dip"

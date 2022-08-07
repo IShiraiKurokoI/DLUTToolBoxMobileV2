@@ -31,7 +31,6 @@ import com.Shirai_Kuroko.DLUTMobile.UI.SearchActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.ServiceManagement.AppGridManageActivity;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 import com.bumptech.glide.Glide;
-import com.google.zxing.integration.android.IntentIntegrator;
 import com.youth.banner.Banner;
 
 import java.util.List;
@@ -91,14 +90,8 @@ public class HomeFragment extends Fragment {
         window.setAnimationStyle(R.style.main_more_anim);
         window.showAsDropDown(view, 0, 0);
         v.findViewById(R.id.btn_start_qr).setOnClickListener(v1 -> {
-            new IntentIntegrator(getActivity())
-                    // 自定义Activity，重点是这行----------------------------
-                    .setCaptureActivity(ScanQRCodeActivity.class)
-                    .setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)// 扫码的类型,可选：一维码，二维码，一/二维码
-                    .setPrompt("将二维码/条码放入框内，即可自动扫描")// 设置提示语
-                    .setCameraId(0)// 选择摄像头,可使用前置或者后置
-                    .setBeepEnabled(false)// 是否开启声音,扫完码之后会"哔"的一声
-                    .initiateScan();
+            Intent intent = new Intent(requireContext(), ScanQRCodeActivity.class);
+            startActivity(intent);
             window.dismiss(); //控制弹窗消失
         });
         v.findViewById(R.id.btn_start_virtual_card).setOnClickListener(v12 -> {

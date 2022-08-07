@@ -36,7 +36,7 @@ android {
         minSdk 29
         targetSdk 31
         versionCode 1
-        versionName "1.6.6"
+        versionName "1.6.8"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders =[
                 PUSH_APPID:"EM2xtY6UCM64MPEoE4cEZ1",
@@ -114,7 +114,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.github.bumptech.glide:glide:4.13.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
-    implementation 'com.google.zxing:core:3.3.3'
+    //zxing 3.4.0 不兼容7.0以下版本，必须java8+
+    implementation 'com.google.zxing:core:3.4.0'
+    implementation 'com.github.maning0303:MNZXingCode:V2.1.9'
     implementation 'com.getui:gtsdk:3.2.10.0'  //个推SDK
     implementation 'com.getui:gtc:3.1.9.0' //个推核心组件
     implementation 'pub.devrel:easypermissions:3.0.0'
@@ -127,5 +129,4 @@ dependencies {
     implementation 'io.github.lucksiege:compress:v3.10.4'
     implementation 'io.github.lucksiege:ucrop:v3.10.4'
     implementation 'io.github.lucksiege:camerax:v3.10.4'
-    implementation 'com.journeyapps:zxing-android-embedded:3.5.0'
 }

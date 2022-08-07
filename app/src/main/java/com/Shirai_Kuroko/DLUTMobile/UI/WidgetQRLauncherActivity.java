@@ -14,7 +14,6 @@ import com.Shirai_Kuroko.DLUTMobile.Helpers.PermissionHelper;
 import com.Shirai_Kuroko.DLUTMobile.Services.BackgroudWIFIMonitorService;
 import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
-import com.google.zxing.integration.android.IntentIntegrator;
 
 public class WidgetQRLauncherActivity extends AppCompatActivity {
 
@@ -47,14 +46,8 @@ public class WidgetQRLauncherActivity extends AppCompatActivity {
         } else {
             Log.i("启动初始化", "刷新用户数据");
             BackendUtils.ReSendUserInfo(this);
-            new IntentIntegrator(this)
-                    // 自定义Activity，重点是这行----------------------------
-                    .setCaptureActivity(ScanQRCodeActivity.class)
-                    .setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)// 扫码的类型,可选：一维码，二维码，一/二维码
-                    .setPrompt("将二维码/条码放入框内，即可自动扫描")// 设置提示语
-                    .setCameraId(0)// 选择摄像头,可使用前置或者后置
-                    .setBeepEnabled(false)// 是否开启声音,扫完码之后会"哔"的一声
-                    .initiateScan();
+            Intent intent = new Intent(this, ScanQRCodeActivity.class);
+            startActivity(intent);
             finish();
         }
     }

@@ -290,10 +290,13 @@ public class PureBrowserActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         //释放资源
-        webView.destroy();
-        CookieManager.getInstance().removeAllCookies(null);
-        CookieManager.getInstance().flush();
-        webView = null;
+        if (!getIntent().getBooleanExtra("NoClean",false))
+        {
+            webView.destroy();
+            CookieManager.getInstance().removeAllCookies(null);
+            CookieManager.getInstance().flush();
+            webView = null;
+        }
     }
 
     /* 创建菜单 */

@@ -269,4 +269,5 @@
     <item name="tabs_container_base" type="id" />
     <item name="tabs_container" type="id" />
     <item name="fl_card_content" type="id" />
+    <item name="tv_switch" type="id" />
 </resources>
