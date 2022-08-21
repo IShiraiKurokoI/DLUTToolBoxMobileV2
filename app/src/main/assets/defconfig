@@ -853,7 +853,7 @@
     "id": 85,
     "category": "office",
     "app_name": "大工云盘",
-    "icon": "https://portal.dlut.edu.cn/tp//resource/image/apps/apps-03.png",
+    "icon": "https://portal.dlut.edu.cn/tp/resource/image/apps/apps-03.png",
     "describe": "大连理工大学网盘，能用，但不好用",
     "popularity": "1395454",
     "url": "https://sso.dlut.edu.cn/cas/login?from=rj&service=https%3A%2F%2Fsso.dlut.edu.cn%2Fcas%2Flogin%3Fservice%3Dhttp%3A%2F%2Fpan.dlut.edu.cn%2Fcas",
@@ -861,12 +861,12 @@
   },
   {
     "id": 86,
-    "category": "office",
-    "app_name": "自助打印平台",
-    "icon": "https://portal.dlut.edu.cn/tp//resource/image/apps/apps-27.png",
-    "describe": "可在此进行自助电子打印服务",
+    "category": "study",
+    "app_name": "图书馆资源列表",
+    "icon": "https://portal.dlut.edu.cn/tp/uploadfiles/appstore/2018/04/18/1524045113642.png",
+    "describe": "图书馆资源功能概览",
     "popularity": "1395454",
-    "url": "https://sso.dlut.edu.cn/cas/login?from=rj&service=https%3A%2F%2Fsso.dlut.edu.cn%2Fcas%2Flogin%3Fservice%3Dhttps%3A%2F%2Fsso.dlut.edu.cn%2Fcas%2Flogin%3Fservice%3Dhttp%253A%252F%252Feproof.dlut.edu.cn%252Fsso%252Flogin.jsp",
+    "url": "http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421e7e056d22b396a1e7a049cb8d65027204e7199/sjkdhejlbyAtoZ/ALL.htm?filter=app&from=rj",
     "issubscription": 0
   }
 ]

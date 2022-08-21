@@ -329,13 +329,6 @@ public class BrowserActivity extends BaseActivity {
                     ((Activity)mContext).getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
                     break;
                 }
-                case 86: {
-                    webView.getSettings().setLoadWithOverviewMode(false);
-                    webView.getSettings().setUseWideViewPort(false);
-                    ((Activity)mContext).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
-                    ((Activity)mContext).getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                    break;
-                }
                 default://默认加载完成隐藏加载条
                 {
                     if (!url.contains("https://api.m.dlut.edu.cn/login?")) {
