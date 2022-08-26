@@ -89,6 +89,7 @@ public class BrowserActivity extends BaseActivity {
         if (!thisapp.getUrl().contains("rj")) {
             loading.show();
         }
+        Log.i("TAG", "onCreate: "+thisapp.getUrl());
         BrowserProxy browserProxy = new BrowserProxy(this, webView);
         webView.addJavascriptInterface(browserProxy, "__nativeWhistleProxy");
         webView.addJavascriptInterface(new PicShareInterFace(), "Share");

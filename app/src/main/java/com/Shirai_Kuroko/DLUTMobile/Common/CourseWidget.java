@@ -36,6 +36,7 @@ public class CourseWidget extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
+        LogToFile.init(context);
         final String action = intent.getAction();
         Log.i("收到广播", action);
         if ("android.appwidget.action.APPWIDGET_UPDATE".equals(action)) {
@@ -55,6 +56,7 @@ public class CourseWidget extends AppWidgetProvider {
     @SuppressLint("UnspecifiedImmutableFlag")
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         LogToFile.init(context);
+        BackendUtils.GainScore(context);
         for (int length = appWidgetIds.length, i = 0; i < length; ++i) {
             b(context, appWidgetManager, appWidgetIds[i], State.LOADING);
         }
