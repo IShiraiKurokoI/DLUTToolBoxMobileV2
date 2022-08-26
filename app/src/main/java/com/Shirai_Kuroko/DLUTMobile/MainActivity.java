@@ -56,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
         MobileUtils.CheckUpDateOnStartUp(this);
         MobileUtils.CheckConfigUpdates(this);
+//        new Thread(()->{
+//            BackendUtils.GetMsgDetailInfo(this,"24296983");
+//        }).start();
         if (ConfigHelper.NeedLogin(this)) {
             Log.i("无法认证", "需要登陆");
             LogToFile.i("无法认证", "需要登陆");
