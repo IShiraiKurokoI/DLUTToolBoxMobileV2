@@ -37,6 +37,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
                 android:id="@id/iv_notice_big"
                 style="@style/iv_notice_big"
                 android:layout_marginStart="6dp"

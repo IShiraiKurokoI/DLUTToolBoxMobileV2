@@ -56,9 +56,14 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
         MobileUtils.CheckUpDateOnStartUp(this);
         MobileUtils.CheckConfigUpdates(this);
+        //功能测试用代码，除了测试debug没有任何用处
 //        new Thread(()->{
-//            BackendUtils.GetMsgDetailInfo(this,"24296983");
+//            BackendUtils.GetMsgNewDetailInfo(this,"24296983");
 //        }).start();
+//        SharedPreferences prefs1 = PreferenceManager.getDefaultSharedPreferences(this);
+//        int unreadcount = prefs1.getInt("unreadcount", 0);
+//        prefs1.edit().putBoolean("unread", true).apply();
+//        prefs1.edit().putInt("unreadcount", 3).apply();
         if (ConfigHelper.NeedLogin(this)) {
             Log.i("无法认证", "需要登陆");
             LogToFile.i("无法认证", "需要登陆");

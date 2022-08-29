@@ -33,7 +33,8 @@ public class ADBannerAdapter extends BannerAdapter<ADBannerBean, ADBannerAdapter
         imageView.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView.setAdjustViewBounds(true);
         return new BannerViewHolder(imageView);
     }
 

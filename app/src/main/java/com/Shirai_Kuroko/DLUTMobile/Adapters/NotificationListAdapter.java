@@ -21,9 +21,9 @@ import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.PureBrowserActivity;
 import com.bumptech.glide.Glide;
 
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 public class NotificationListAdapter extends RecyclerView.Adapter<NotificationListAdapter.ViewHolder> {
     private final Context mContext;
@@ -54,8 +54,9 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
         holder.tv_notice_time.setText(date.toLocaleString());
         DLUTNoticeContentBean dlutNoticeContentBean = payload.getMsg_content();
         holder.tv_notice_title.setText(dlutNoticeContentBean.getTitle());
-        if (!Objects.equals(dlutNoticeContentBean.getDescription(), " ")&&!Objects.equals(dlutNoticeContentBean.getDescription(), "")) {
-            holder.tv_notice_desc.setText(dlutNoticeContentBean.getDescription());
+        if (URLDecoder.decode(dlutNoticeContentBean.getDescription()).length()!=0) {
+            holder.tv_notice_desc.setVisibility(View.VISIBLE);
+            holder.tv_notice_desc.setText(URLDecoder.decode(dlutNoticeContentBean.getDescription()));
         } else {
             holder.tv_notice_desc.setVisibility(View.GONE);
         }

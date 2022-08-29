@@ -106,16 +106,11 @@ public class NotificationsFragment extends Fragment {
 
             recyclerView.setVisibility(View.VISIBLE);
             NoticeEmptyView.setVisibility(View.GONE);
-            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
+            linearLayoutManager.setStackFromEnd(true);
+            recyclerView.setLayoutManager(linearLayoutManager);
             NotificationListAdapter notificationListAdapter = new NotificationListAdapter(getContext(), notificationPayloadhistoryList);
             recyclerView.setAdapter(notificationListAdapter);
-            if (scroll) {
-                recyclerView.scrollToPosition(notificationListAdapter.getItemCount() - 1);
-                scroll = false;
-            }
-            if (unreadcount > 0) {
-                recyclerView.scrollToPosition(notificationListAdapter.getItemCount() - 1);
-            }
         }
     }
 
@@ -172,10 +167,11 @@ public class NotificationsFragment extends Fragment {
 
             recyclerView.setVisibility(View.VISIBLE);
             NoticeEmptyView.setVisibility(View.GONE);
-            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
+            linearLayoutManager.setStackFromEnd(true);
+            recyclerView.setLayoutManager(linearLayoutManager);
             NotificationListAdapter notificationListAdapter = new NotificationListAdapter(getContext(), notificationPayloadhistoryList);
             recyclerView.setAdapter(notificationListAdapter);
-            recyclerView.scrollToPosition(notificationListAdapter.getItemCount() - 1);
         }
     }
 
@@ -199,7 +195,7 @@ public class NotificationsFragment extends Fragment {
         super.onResume();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
         if (prefs.getBoolean("unread", false)) {
-            Resumeinit();
+           Resumeinit();
         }
     }
 

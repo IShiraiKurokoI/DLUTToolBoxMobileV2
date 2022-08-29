@@ -50,6 +50,8 @@
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="180dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         app:banner_indicator_marginBottom="13dp"
         app:banner_indicator_selected_width="20dp"
         app:banner_indicator_normal_width="20dp"/>
