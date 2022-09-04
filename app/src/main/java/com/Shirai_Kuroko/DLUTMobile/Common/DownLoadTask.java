@@ -160,14 +160,8 @@ public class DownLoadTask extends AsyncTask<String, Integer, Integer> {
     //获取需要下载的文件长度
     private long getContentLength(String downloadUrl) throws IOException {
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().addHeader("Accept-Encoding", "identity").addHeader("cookie", CookieManager.getInstance().getCookie(downloadUrl)).url(downloadUrl).build();
+        Request request = new Request.Builder().addHeader("cookie", CookieManager.getInstance().getCookie(downloadUrl)).url(downloadUrl).build();//head用于告诉服务器我们从那个字节开始下载
         Response response = client.newCall(request).execute();
-        if (response.isSuccessful()) {
-            long contentLength = Objects.requireNonNull(response.body()).contentLength();
-            response.close();
-            return contentLength;
-        }
-        return 0;
+        return response.body().contentLength();
     }
-
 }

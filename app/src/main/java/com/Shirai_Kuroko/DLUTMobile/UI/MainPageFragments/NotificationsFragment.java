@@ -75,9 +75,12 @@ public class NotificationsFragment extends Fragment {
             //清除红点
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
             BottomNavigationView bottomNavigationView = requireActivity().findViewById(R.id.nav_view);
-            BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(bottomNavigationView.getMenu().getItem(1).getItemId());
-            badgeDrawable.setVisible(false);
-            badgeDrawable.clearNumber();
+            if(bottomNavigationView!=null)
+            {
+                BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(bottomNavigationView.getMenu().getItem(1).getItemId());
+                badgeDrawable.setVisible(false);
+                badgeDrawable.clearNumber();
+            }
             int unreadcount = prefs.getInt("unreadcount", 0);
             prefs.edit().putBoolean("unread", false).apply();
             prefs.edit().putInt("unreadcount", 0).apply();
@@ -103,7 +106,6 @@ public class NotificationsFragment extends Fragment {
                     unreadbutton.setVisibility(View.GONE);
                 });
             }
-
             recyclerView.setVisibility(View.VISIBLE);
             NoticeEmptyView.setVisibility(View.GONE);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
@@ -136,9 +138,12 @@ public class NotificationsFragment extends Fragment {
             //清除红点
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
             BottomNavigationView bottomNavigationView = requireActivity().findViewById(R.id.nav_view);
-            BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(bottomNavigationView.getMenu().getItem(1).getItemId());
-            badgeDrawable.setVisible(false);
-            badgeDrawable.clearNumber();
+            if(bottomNavigationView!=null)
+            {
+                BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(bottomNavigationView.getMenu().getItem(1).getItemId());
+                badgeDrawable.setVisible(false);
+                badgeDrawable.clearNumber();
+            }
             int unreadcount = prefs.getInt("unreadcount", 0);
             prefs.edit().putBoolean("unread", false).apply();
             prefs.edit().putInt("unreadcount", 0).apply();

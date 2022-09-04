@@ -61,6 +61,7 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
             holder.tv_notice_desc.setVisibility(View.GONE);
         }
         if (dlutNoticeContentBean.getPicurl() != null) {
+            holder.iv_notice_big.setVisibility(View.VISIBLE);
             Glide.with(mContext).load(dlutNoticeContentBean.getPicurl()).into(holder.iv_notice_big);
         } else {
             holder.iv_notice_big.setVisibility(View.GONE);
