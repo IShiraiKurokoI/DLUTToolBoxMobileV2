@@ -1,7 +1,6 @@
 package com.Shirai_Kuroko.DLUTMobile.Widgets;
 
 import android.animation.Animator;
-import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -11,7 +10,6 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
@@ -54,22 +52,22 @@ public class SearchEditText extends RelativeLayout implements View.OnClickListen
         this.p = false;
         this.q = 300;
         this.a = a;
-        LayoutInflater.from(a).inflate(R.layout.item_search, (ViewGroup)this, true);
-        this.b = (Button)this.findViewById(R.id.btn_search_cancel);
+        LayoutInflater.from(a).inflate(R.layout.item_search, this, true);
+        this.b = this.findViewById(R.id.btn_search_cancel);
         this.c = this.findViewById(R.id.item_search_et_ll);
         this.d = this.findViewById(R.id.item_search_icon);
         this.e = this.findViewById(R.id.item_search_txt);
         this.f = this.findViewById(R.id.item_serach_panel);
-        this.g = (AnanEditText)this.findViewById(R.id.item_search_et);
+        this.g = this.findViewById(R.id.item_search_et);
         this.h = this.findViewById(R.id.item_search_clean_btn);
-        this.c.setOnClickListener((View.OnClickListener)this);
-        this.b.setOnClickListener((View.OnClickListener)this);
-        this.h.setOnClickListener((View.OnClickListener)this);
-        this.g.addTextChangedListener((TextWatcher) new j1(this));
-        this.g.getViewTreeObserver().addOnGlobalLayoutListener((ViewTreeObserver.OnGlobalLayoutListener) new k1(this));
-        this.b.getViewTreeObserver().addOnGlobalLayoutListener((ViewTreeObserver.OnGlobalLayoutListener) new l1(this));
-        this.d.getViewTreeObserver().addOnGlobalLayoutListener((ViewTreeObserver.OnGlobalLayoutListener) new m1(this));
-        this.e.getViewTreeObserver().addOnGlobalLayoutListener((ViewTreeObserver.OnGlobalLayoutListener) new n1(this));
+        this.c.setOnClickListener(this);
+        this.b.setOnClickListener(this);
+        this.h.setOnClickListener(this);
+        this.g.addTextChangedListener(new j1(this));
+        this.g.getViewTreeObserver().addOnGlobalLayoutListener(new k1(this));
+        this.b.getViewTreeObserver().addOnGlobalLayoutListener(new l1(this));
+        this.d.getViewTreeObserver().addOnGlobalLayoutListener(new m1(this));
+        this.e.getViewTreeObserver().addOnGlobalLayoutListener(new n1(this));
     }
 
     public static void E(final Context context) {
@@ -102,16 +100,16 @@ public class SearchEditText extends RelativeLayout implements View.OnClickListen
             }
         }
         if (!b) {
-            this.g.setText((CharSequence)"");
+            this.g.setText("");
             this.f.setVisibility(View.INVISIBLE);
             this.c.setVisibility(View.VISIBLE);
             E(this.a);
         }
         final ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration((long)this.q);
-        ofFloat.setInterpolator((TimeInterpolator)new DecelerateInterpolator());
+        ofFloat.setDuration(this.q);
+        ofFloat.setInterpolator(new DecelerateInterpolator());
         final SearchEditText aa = this;
-        ofFloat.addUpdateListener((ValueAnimator.AnimatorUpdateListener) valueAnimator -> {
+        ofFloat.addUpdateListener(valueAnimator -> {
             final Float n = (Float)valueAnimator.getAnimatedValue();
             float x;
             if (b) {
@@ -147,7 +145,7 @@ public class SearchEditText extends RelativeLayout implements View.OnClickListen
             ((LayoutParams)aa.b.getLayoutParams()).rightMargin = (int)n3;
             aa.b.requestLayout();
         });
-        ofFloat.addListener((Animator.AnimatorListener)new Animator.AnimatorListener() {
+        ofFloat.addListener(new Animator.AnimatorListener() {
 
             public void onAnimationCancel(final Animator animator) {
             }
@@ -158,7 +156,7 @@ public class SearchEditText extends RelativeLayout implements View.OnClickListen
                     aa.f.setVisibility(View.VISIBLE);
                     aa.c.setVisibility(View.GONE);
                     aa.g.requestFocus();
-                    T(aa.a, (View) aa.g);
+                    T(aa.a, aa.g);
                 }
             }
 
@@ -191,7 +189,7 @@ public class SearchEditText extends RelativeLayout implements View.OnClickListen
             this.a(false);
         }
         else if (id == R.id.item_search_clean_btn) {
-            this.g.setText((CharSequence)"");
+            this.g.setText("");
         }
     }
 
@@ -242,7 +240,7 @@ public class SearchEditText extends RelativeLayout implements View.OnClickListen
         }
 
         public void onGlobalLayout() {
-            this.a.g.getViewTreeObserver().removeGlobalOnLayoutListener((ViewTreeObserver.OnGlobalLayoutListener)this);
+            this.a.g.getViewTreeObserver().removeGlobalOnLayoutListener(this);
             final SearchEditText a = this.a;
             a.k = a.g.getCompoundDrawablePadding() + (int)(this.a.a.getResources().getDisplayMetrics().density * 2.0f + 0.5f);
         }
@@ -258,7 +256,7 @@ public class SearchEditText extends RelativeLayout implements View.OnClickListen
         }
 
         public void onGlobalLayout() {
-            this.a.b.getViewTreeObserver().removeGlobalOnLayoutListener((ViewTreeObserver.OnGlobalLayoutListener)this);
+            this.a.b.getViewTreeObserver().removeGlobalOnLayoutListener(this);
             final SearchEditText a = this.a;
             a.i = a.b.getWidth();
             final SearchEditText a2 = this.a;
@@ -276,7 +274,7 @@ public class SearchEditText extends RelativeLayout implements View.OnClickListen
         }
 
         public void onGlobalLayout() {
-            this.a.d.getViewTreeObserver().removeGlobalOnLayoutListener((ViewTreeObserver.OnGlobalLayoutListener)this);
+            this.a.d.getViewTreeObserver().removeGlobalOnLayoutListener(this);
             final SearchEditText a = this.a;
             a.n = a.d.getX();
             final SearchEditText a2 = this.a;
@@ -294,7 +292,7 @@ public class SearchEditText extends RelativeLayout implements View.OnClickListen
         }
 
         public void onGlobalLayout() {
-            this.a.e.getViewTreeObserver().removeGlobalOnLayoutListener((ViewTreeObserver.OnGlobalLayoutListener)this);
+            this.a.e.getViewTreeObserver().removeGlobalOnLayoutListener(this);
             final SearchEditText a = this.a;
             a.o = a.e.getX();
             final SearchEditText a2 = this.a;

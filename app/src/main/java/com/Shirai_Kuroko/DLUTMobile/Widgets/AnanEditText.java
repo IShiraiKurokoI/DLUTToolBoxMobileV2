@@ -44,7 +44,8 @@ public class AnanEditText extends EditText {
         this.b = obtainStyledAttributes.getBoolean(R.styleable.AnanEditText_isInputLimited, false);
         this.c(this.a);
         this.d = new Handler(Looper.getMainLooper());
-        this.addTextChangedListener((TextWatcher) new a(this));
+        this.addTextChangedListener(new a(this));
+        this.setTextColor(getResources().getColor(R.color.black));
     }
 
     public AnanEditText(final Context context, final AttributeSet set, final int n) {
@@ -65,7 +66,8 @@ public class AnanEditText extends EditText {
         this.b = obtainStyledAttributes.getBoolean(R.styleable.AnanEditText_isInputLimited, false);
         this.c(this.a);
         this.d = new Handler(Looper.getMainLooper());
-        this.addTextChangedListener((TextWatcher) new a(this));
+        this.addTextChangedListener(new a(this));
+        this.setTextColor(getResources().getColor(R.color.black));
     }
 //
 //    public static void a(final AnanEditText ananEditText, final String s) {
@@ -89,9 +91,9 @@ public class AnanEditText extends EditText {
 
     public final void c(final int n) {
         if (n >= 0) {
-            this.setFilters(new InputFilter[]{(InputFilter) new b(this,n)});
+            this.setFilters(new InputFilter[]{new b(this,n)});
         } else {
-            this.setFilters(new InputFilter[]{(InputFilter) new b(this,-1)});
+            this.setFilters(new InputFilter[]{new b(this,-1)});
         }
     }
 
@@ -99,7 +101,7 @@ public class AnanEditText extends EditText {
         if (n == 16908322) {
             try {
                 final ClipboardManager clipboardManager = (ClipboardManager) this.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-                clipboardManager.setPrimaryClip(ClipData.newPlainText((CharSequence) "", clipboardManager.getPrimaryClip().getItemAt(0).getText()));
+                clipboardManager.setPrimaryClip(ClipData.newPlainText("", clipboardManager.getPrimaryClip().getItemAt(0).getText()));
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -124,7 +126,7 @@ public class AnanEditText extends EditText {
             final String substring2 = spanned.toString().substring(beginIndex);
             final CharSequence subSequence = obj.subSequence(n, n2);
             final String string2 = substring +
-                    (Object) subSequence +
+                    subSequence +
                     substring2;
             if (string2.length() > this.a && this.b.b) {
                 n2 = n3;
@@ -137,17 +139,13 @@ public class AnanEditText extends EditText {
                     }
                     final CharSequence subSequence2 = subSequence.subSequence(n, n + n2 + 1);
                     final String string3 = substring +
-                            (Object) subSequence2 +
+                            subSequence2 +
                             substring2;
                     if (string3.length() >= this.a) {
                         if (string3.length() == this.a) {
                             obj = subSequence2;
                         }
-                        final AnanEditText b = this.b;
-                        String sb3 = substring +
-                                (Object) obj +
-                                substring2;
-//                        AnanEditText.a(b, sb3);
+                        //                        AnanEditText.a(b, sb3);
                         charSequence = obj;
                         break;
                     }

@@ -39,7 +39,6 @@ import java.util.List;
 public class ServiceCenterFragment extends Fragment {
 
     private boolean nobar = false;
-
     public ServiceCenterFragment() {
     }
 
@@ -101,30 +100,37 @@ public class ServiceCenterFragment extends Fragment {
             }
         });
 
-        AnanEditText ananEditText = requireActivity().findViewById(R.id.item_search_et);
-        ananEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        AnanEditText ananEditText = this.requireActivity().findViewById(R.id.item_search_et);
+        if (ananEditText!=null)
+        {
+            ananEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (TextUtils.isEmpty(editable.toString())) {
-                    adapter.showAllProduct();
-                } else {
-                    adapter.getFilter().filter(editable.toString());
                 }
-                cleanbg();
-                LinearLayout l1 = requireActivity().findViewById(R.id.CatagoryLinear1);
-                l1.setBackgroundColor(CatagorySelected);
-            }
-        });
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    if (TextUtils.isEmpty(editable.toString())) {
+                        adapter.showAllProduct();
+                    } else {
+                        adapter.getFilter().filter(editable.toString());
+                    }
+                    cleanbg();
+                    LinearLayout l1 = requireActivity().findViewById(R.id.CatagoryLinear1);
+                    l1.setBackgroundColor(CatagorySelected);
+                }
+            });
+        }
+        else
+        {
+            return;
+        }
 //        androidx.appcompat.widget.SearchView search;
 //        search = requireActivity().findViewById(R.id.search);
 //        search.setIconifiedByDefault(false);
