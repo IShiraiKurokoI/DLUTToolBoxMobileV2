@@ -3,16 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@id/widget_item_container"
     android:layout_width="fill_parent"
-    android:layout_height="98.0dip"
-    android:gravity="center_horizontal"
+    android:layout_height="108.0dip"
+    android:gravity="center"
     android:orientation="vertical">
 
     <TextView
         android:id="@id/empty_wording"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30.0dip"
-        android:layout_marginBottom="50.0dip"
         android:text="今日无课"
         android:textAlignment="center"
         android:textColor="#ff999999"

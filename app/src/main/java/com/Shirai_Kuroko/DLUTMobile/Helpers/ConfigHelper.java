@@ -9,10 +9,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
 
+import com.Shirai_Kuroko.DLUTMobile.Common.CenterToast;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
-import com.Shirai_Kuroko.DLUTMobile.Entities.GridAppID;
+import com.Shirai_Kuroko.DLUTMobile.Entities.ID;
 import com.Shirai_Kuroko.DLUTMobile.Entities.IDPhotoResult;
 import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
+import com.Shirai_Kuroko.DLUTMobile.Entities.MainCardBean;
 import com.Shirai_Kuroko.DLUTMobile.Entities.NotificationHistoryDataBaseBean;
 import com.Shirai_Kuroko.DLUTMobile.Entities.UserScoreBean;
 import com.Shirai_Kuroko.DLUTMobile.Managers.MsgHistoryManager;
@@ -33,9 +35,8 @@ public class ConfigHelper {
         ArrayList<ApplicationConfig> mList;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String acfjson = prefs.getString("APPCONFIG", defconfig);
-        if (Objects.equals(acfjson, ""))
-        {
-            acfjson=defconfig;
+        if (Objects.equals(acfjson, "")) {
+            acfjson = defconfig;
         }
         List<ApplicationConfig> jsonlist = JSON.parseArray(acfjson, ApplicationConfig.class);
         ApplicationConfig[] acfs = new ApplicationConfig[0];
@@ -46,12 +47,49 @@ public class ConfigHelper {
         return mList;
     }
 
+    public static ArrayList<MainCardBean.MainCardDataBean> GetCardList(Context context) {
+        String defconfig = GetDefaultCardConfig(context);
+        ArrayList<MainCardBean.MainCardDataBean> mList;
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String acfjson = prefs.getString("AppCardConfig", defconfig);
+        if (Objects.equals(acfjson, "")) {
+            acfjson = defconfig;
+        }
+        List<MainCardBean.MainCardDataBean> jsonlist = JSON.parseObject(acfjson, MainCardBean.class).getList_data();
+        MainCardBean.MainCardDataBean[] acfs = new MainCardBean.MainCardDataBean[0];
+        if (jsonlist != null) {
+            acfs = jsonlist.toArray(new MainCardBean.MainCardDataBean[0]);
+        }
+        mList = new ArrayList<>(Arrays.asList(acfs));
+        return mList;
+    }
+
     public static String GetDefaultConfigString(Context context) {
         StringBuilder termsString = new StringBuilder();
         BufferedReader reader;
         try {
             reader = new BufferedReader(
-                    new InputStreamReader(context.getAssets().open("defconfig")));
+                    new InputStreamReader(context.getAssets().open("DefaultAppConfig")));
+
+            String str;
+            while ((str = reader.readLine()) != null) {
+                termsString.append(str);
+            }
+
+            reader.close();
+            return termsString.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String GetDefaultCardConfig(Context context) {
+        StringBuilder termsString = new StringBuilder();
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(
+                    new InputStreamReader(context.getAssets().open("DefaultCardConfig")));
 
             String str;
             while ((str = reader.readLine()) != null) {
@@ -72,7 +110,7 @@ public class ConfigHelper {
         String json = JSON.toJSONString(mlist);
         SavePrefJson(context, json);
         AddtoGrid(context, appnumid);
-        Toast.makeText(context, Getmlist(context).get(appnumid).getAppName() + "添加成功", Toast.LENGTH_SHORT).show();
+        CenterToast.makeText(context, Getmlist(context).get(appnumid).getAppName() + "添加成功", Toast.LENGTH_SHORT).show();
     }
 
     public static void removesubscription(Context context, int appnumid) {
@@ -81,7 +119,17 @@ public class ConfigHelper {
         String json = JSON.toJSONString(mlist);
         SavePrefJson(context, json);
         DeleteFromGrid(context, appnumid);
-        Toast.makeText(context, Getmlist(context).get(appnumid).getAppName() + "移除成功", Toast.LENGTH_SHORT).show();
+        CenterToast.makeText(context, Getmlist(context).get(appnumid).getAppName() + "移除成功", Toast.LENGTH_SHORT).show();
+    }
+
+    public static void addCardsubscription(Context context, int id) {
+        AddtoCard(context, id);
+        CenterToast.makeText(context, GetCardList(context).get(id).getApp_name() + "添加成功", Toast.LENGTH_SHORT).show();
+    }
+
+    public static void removeCardsubscription(Context context, int id) {
+        DeleteFromCard(context, id);
+        CenterToast.makeText(context, GetCardList(context).get(id).getApp_name() + "移除成功", Toast.LENGTH_SHORT).show();
     }
 
     public static void SavePrefJson(Context context, String json) {
@@ -94,6 +142,11 @@ public class ConfigHelper {
         prefs.edit().putString("HomeGridConfig", json).apply();
     }
 
+    public static void SaveCardPrefJson(Context context, String json) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.edit().putString("HomeCardConfig", json).apply();
+    }
+
     public static boolean GetThemeType(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         boolean pref = prefs.getBoolean("Dark", false);
@@ -103,10 +156,9 @@ public class ConfigHelper {
         } else if (app == 2) {
             return true;
         }
-        if(app==-1)
-        {
+        if (app == -1) {
             UiModeManager uiModeManager = (UiModeManager) context.getSystemService(Context.UI_MODE_SERVICE);
-            if (uiModeManager.getNightMode()==UiModeManager.MODE_NIGHT_YES) {
+            if (uiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_YES) {
                 return true;
             }
         }
@@ -116,13 +168,13 @@ public class ConfigHelper {
     public static void AddtoGrid(Context context, int id) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String GridConfig = prefs.getString("HomeGridConfig", "[]");
-        List<GridAppID> jsonlist = JSON.parseArray(GridConfig, GridAppID.class);
-        for (GridAppID ga : jsonlist) {
+        List<ID> jsonlist = JSON.parseArray(GridConfig, ID.class);
+        for (ID ga : jsonlist) {
             if (ga.getId().equals(id)) {
                 return;
             }
         }
-        jsonlist.add(new GridAppID(id));
+        jsonlist.add(new ID(id));
         String json = JSON.toJSONString(jsonlist);
         SaveGridPrefJson(context, json);
     }
@@ -130,7 +182,7 @@ public class ConfigHelper {
     public static void DeleteFromGrid(Context context, int id) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String GridConfig = prefs.getString("HomeGridConfig", "[]");
-        List<GridAppID> jsonlist = JSON.parseArray(GridConfig, GridAppID.class);
+        List<ID> jsonlist = JSON.parseArray(GridConfig, ID.class);
         for (int i = 0; i < jsonlist.size(); i++) {
             if (jsonlist.get(i).getId().equals(id)) {
                 jsonlist.remove(i);
@@ -141,12 +193,50 @@ public class ConfigHelper {
         SaveGridPrefJson(context, json);
     }
 
-    public static ArrayList<GridAppID> GetGridIDList(Context context) {
-        ArrayList<GridAppID> mList;
+    public static ArrayList<ID> GetGridIDList(Context context) {
+        ArrayList<ID> mList;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String GridConfig = prefs.getString("HomeGridConfig", "[]");
-        List<GridAppID> jsonlist = JSON.parseArray(GridConfig, GridAppID.class);
-        GridAppID[] gais = jsonlist.toArray(new GridAppID[0]);
+        List<ID> jsonlist = JSON.parseArray(GridConfig, ID.class);
+        ID[] gais = jsonlist.toArray(new ID[0]);
+        mList = new ArrayList<>(Arrays.asList(gais));
+        return mList;
+    }
+
+    public static void AddtoCard(Context context, int id) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String GridConfig = prefs.getString("HomeCardConfig", "[]");
+        List<ID> jsonlist = JSON.parseArray(GridConfig, ID.class);
+        for (ID ga : jsonlist) {
+            if (ga.getId().equals(id)) {
+                return;
+            }
+        }
+        jsonlist.add(new ID(id));
+        String json = JSON.toJSONString(jsonlist);
+        SaveCardPrefJson(context, json);
+    }
+
+    public static void DeleteFromCard(Context context, int id) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String GridConfig = prefs.getString("HomeCardConfig", "[]");
+        List<ID> jsonlist = JSON.parseArray(GridConfig, ID.class);
+        for (int i = 0; i < jsonlist.size(); i++) {
+            if (jsonlist.get(i).getId().equals(id)) {
+                jsonlist.remove(i);
+                i--;
+            }
+        }
+        String json = JSON.toJSONString(jsonlist);
+        SaveCardPrefJson(context, json);
+    }
+
+    public static ArrayList<ID> GetCardIDList(Context context) {
+        ArrayList<ID> mList;
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String GridConfig = prefs.getString("HomeCardConfig", "[]");
+        List<ID> jsonlist = JSON.parseArray(GridConfig, ID.class);
+        ID[] gais = jsonlist.toArray(new ID[0]);
         mList = new ArrayList<>(Arrays.asList(gais));
         return mList;
     }
@@ -225,15 +315,13 @@ public class ConfigHelper {
         prefs.edit().putString("IDPhotoResult", json).apply();
     }
 
-    public static boolean FPStatus(Context context)
-    {
+    public static boolean FPStatus(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getBoolean("FP", false);
     }
 
-    public static void AgreeFP(Context context)
-    {
+    public static void AgreeFP(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        prefs.edit().putBoolean("FP",true).apply();
+        prefs.edit().putBoolean("FP", true).apply();
     }
 }

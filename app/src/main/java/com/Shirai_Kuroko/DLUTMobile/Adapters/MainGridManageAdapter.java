@@ -19,7 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
-import com.Shirai_Kuroko.DLUTMobile.Entities.GridAppID;
+import com.Shirai_Kuroko.DLUTMobile.Entities.ID;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ContextHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
@@ -27,11 +27,11 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter {
+public class MainGridManageAdapter extends RecyclerView.Adapter {
     private final Context mContext;
-    private ArrayList<GridAppID> mDatas;
+    private ArrayList<ID> mDatas;
 
-    public RecyclerViewAdapter(Context context, ArrayList<GridAppID> datas) {
+    public MainGridManageAdapter(Context context, ArrayList<ID> datas) {
         mContext = context;
         mDatas = datas;
     }

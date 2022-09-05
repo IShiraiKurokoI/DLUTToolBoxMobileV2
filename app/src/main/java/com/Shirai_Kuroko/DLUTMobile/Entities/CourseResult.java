@@ -19,6 +19,10 @@ public class CourseResult {
     @JsonProperty("data")
     private List<CourseBean> data;
 
+    public String getErrmsg() {
+        return errmsg;
+    }
+
     public Integer getErrcode() {
         return errcode;
     }

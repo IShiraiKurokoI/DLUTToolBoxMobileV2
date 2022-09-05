@@ -46,7 +46,7 @@ public class CourseWidget extends AppWidgetProvider {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             ComponentName thisAppWidget = new ComponentName(context.getPackageName(), CourseWidget.class.getName());
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds,  R.id.list_course);
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.list_course);
         }
     }
 
@@ -106,12 +106,49 @@ public class CourseWidget extends AppWidgetProvider {
                 final Intent intent6 = new Intent(context, BrowserActivity.class);
                 intent6.putExtra("App_ID", String.valueOf(1));
                 remoteViews.setPendingIntentTemplate(list_course, PendingIntent.getActivity(context, 0, intent6, PendingIntent.FLAG_UPDATE_CURRENT));
-                appWidgetManager.notifyAppWidgetViewDataChanged(i,list_course);
+                appWidgetManager.notifyAppWidgetViewDataChanged(i, list_course);
             }
         }
-        appWidgetManager.notifyAppWidgetViewDataChanged(i,list_course);
+        appWidgetManager.notifyAppWidgetViewDataChanged(i, list_course);
         appWidgetManager.updateAppWidget(i, remoteViews);
-        appWidgetManager.notifyAppWidgetViewDataChanged(i,list_course);
+        appWidgetManager.notifyAppWidgetViewDataChanged(i, list_course);
+    }
+
+    @SuppressLint("UnspecifiedImmutableFlag")
+    public static void b(final Context context, final AppWidgetManager appWidgetManager, final int i, final String state) {
+
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.layout_course_widget);
+        remoteViews.setOnClickPendingIntent(R.id.root_container, null);
+        Intent intent = new Intent(context, WidgetQRLauncherActivity.class);
+        @SuppressLint("UnspecifiedImmutableFlag")
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        remoteViews.setOnClickPendingIntent(R.id.btn_start_qr_scan, pendingIntent);
+        Intent intent1 = new Intent(context, OpenVirtualCardActivity.class);
+        @SuppressLint("UnspecifiedImmutableFlag")
+        PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, 0);
+        remoteViews.setOnClickPendingIntent(R.id.btn_start_virtual_card, pendingIntent1);
+
+        final int list_course = R.id.list_course;
+        final Intent intent2 = new Intent("android.appwidget.action.APPWIDGET_UPDATE");
+        remoteViews.setOnClickPendingIntent(R.id.btn_refresh, PendingIntent.getBroadcast(context, 0, intent2, 0));
+
+        if (ConfigHelper.NeedLogin(context)) {
+            final int content_container = R.id.content_container;
+            remoteViews.removeAllViews(content_container);
+            final RemoteViews remoteViews2 = new RemoteViews(context.getPackageName(), R.layout.layout_course_widget_login_view);
+            final Intent intent4 = new Intent(context, SplashActivity.class);
+            remoteViews2.setOnClickPendingIntent(R.id.btn_login, PendingIntent.getActivity(context, 0, intent4, PendingIntent.FLAG_UPDATE_CURRENT));
+            remoteViews.addView(content_container, remoteViews2);
+            WidgetHelper.M(remoteViews, false);
+        } else {
+            final int content_container2 = R.id.content_container;
+            remoteViews.removeAllViews(content_container2);
+            remoteViews.addView(content_container2, WidgetHelper.v(context, state));
+            WidgetHelper.M(remoteViews, false);
+        }
+        appWidgetManager.notifyAppWidgetViewDataChanged(i, list_course);
+        appWidgetManager.updateAppWidget(i, remoteViews);
+        appWidgetManager.notifyAppWidgetViewDataChanged(i, list_course);
     }
 
     @Override
@@ -136,6 +173,14 @@ public class CourseWidget extends AppWidgetProvider {
     }
 
     public final void c(final Context context, final State state) {
+        final AppWidgetManager instance = AppWidgetManager.getInstance(context);
+        final int[] appWidgetIds = instance.getAppWidgetIds(new ComponentName(context, CourseWidget.class));
+        for (int length = appWidgetIds.length, i = 0; i < length; ++i) {
+            b(context, instance, appWidgetIds[i], state);
+        }
+    }
+
+    public final void c(final Context context, final String state) {
         final AppWidgetManager instance = AppWidgetManager.getInstance(context);
         final int[] appWidgetIds = instance.getAppWidgetIds(new ComponentName(context, CourseWidget.class));
         for (int length = appWidgetIds.length, i = 0; i < length; ++i) {
@@ -172,13 +217,11 @@ public class CourseWidget extends AppWidgetProvider {
                             b.c(context, data_NULL);
                         }
                     } else {
-                        final State data_ERROR = State.DATA_ERROR;
-                        b.c(context, data_ERROR);
+                        b.c(context, "服务器端错误消息：\n"+courseResult.getErrmsg());
                     }
                 } catch (IOException ex) {
                     ex.printStackTrace();
-                    final State data_ERROR = State.DATA_ERROR;
-                    b.c(context, data_ERROR);
+                    b.c(context, ex.getLocalizedMessage());
                 }
             }
         };
@@ -193,9 +236,16 @@ public class CourseWidget extends AppWidgetProvider {
                     if (accessTokenResponse.getAccess_token() != null) {
                         new Thread(() -> {
                             Response response = BackendUtils.GetCourseList(context, accessTokenResponse.getAccess_token());
-                            Message message = new Message();
-                            message.obj = response;
-                            UpdateHandler.sendMessage(message);
+                            if (response!=null)
+                            {
+                                Message message = new Message();
+                                message.obj = response;
+                                UpdateHandler.sendMessage(message);
+                            }
+                            else
+                            {
+                                b.c(context, "连接服务器失败");
+                            }
                         }).start();
                     } else {
                         final State data_ERROR = State.DATA_ERROR;
@@ -203,17 +253,23 @@ public class CourseWidget extends AppWidgetProvider {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    final State data_ERROR = State.DATA_ERROR;
-                    b.c(context, data_ERROR);
+                    b.c(context, e.getLocalizedMessage());
                 }
             }
         };
 
         new Thread(() -> {
             Response response = BackendUtils.GetAccessToken(context);
-            Message message = new Message();
-            message.obj = response;
-            TokenHandler.sendMessage(message);
+            if (response!=null)
+            {
+                Message message = new Message();
+                message.obj = response;
+                TokenHandler.sendMessage(message);
+            }
+            else
+            {
+                b.c(context, "连接服务器失败");
+            }
         }).start();
     }
 

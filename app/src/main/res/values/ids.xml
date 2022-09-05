@@ -270,4 +270,11 @@
     <item name="tabs_container" type="id" />
     <item name="fl_card_content" type="id" />
     <item name="tv_switch" type="id" />
+    <item name="ll_main_manager_card" type="id" />
+    <item name="card_icon" type="id" />
+    <item name="card_name" type="id" />
+    <item name="btn_card_add" type="id" />
+    <item name="v_item_divider" type="id" />
+    <item name="head_empty_view" type="id" />
+    <item name="btn_drag_three" type="id" />
 </resources>

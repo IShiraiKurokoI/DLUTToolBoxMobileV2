@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class GridAppID {
+public class ID {
 
     @JsonProperty("id")
     private Integer id;
@@ -16,7 +16,7 @@ public class GridAppID {
         return id;
     }
 
-    public GridAppID(int _id)
+    public ID(int _id)
     {
         this.id = _id;
     }

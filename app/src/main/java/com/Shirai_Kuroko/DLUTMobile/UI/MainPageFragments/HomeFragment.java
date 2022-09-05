@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,9 +22,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.Shirai_Kuroko.DLUTMobile.Entities.GridAppID;
+import com.Shirai_Kuroko.DLUTMobile.Entities.ID;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.UI.CardManageActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.BrowserActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.OpenVirtualCardActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.ScanQRCodeActivity;
@@ -54,9 +56,9 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         GridView mgv = requireView().findViewById(R.id.main_grid);
-        List<GridAppID> gridAppIDS = ConfigHelper.GetGridIDList(requireContext());
-        gridAppIDS.add(new GridAppID(-1));
-        adapter = new MainGridAdapter(gridAppIDS);
+        List<ID> IDS = ConfigHelper.GetGridIDList(requireContext());
+        IDS.add(new ID(-1));
+        adapter = new MainGridAdapter(IDS);
         if (mgv != null) {
             mgv.setAdapter(adapter);
         } else {
@@ -75,9 +77,15 @@ public class HomeFragment extends Fragment {
         });
         ImageView iv_more = requireView().findViewById(R.id.iv_more);
         iv_more.setOnClickListener(this::showPopupWindow);
+        //TODO:主页卡片实现
         RecyclerView CollectionCard = requireView().findViewById(R.id.CollectionCard);
         CollectionCard.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
+        LinearLayout ll_main_manager_card = requireView().findViewById(R.id.ll_main_manager_card);
+        ll_main_manager_card.setOnClickListener(view12 -> {
+            Intent intent = new Intent(requireContext(), CardManageActivity.class);
+            startActivity(intent);
+        });
     }
 
     public void showPopupWindow(View view) {
@@ -104,13 +112,13 @@ public class HomeFragment extends Fragment {
 
 
     public class MainGridAdapter extends BaseAdapter {
-        private List<GridAppID> mList;
+        private List<ID> mList;
 
-        public MainGridAdapter(List<GridAppID> List) {
+        public MainGridAdapter(List<ID> List) {
             this.mList = List;
         }
 
-        public void showallgriditems(List<GridAppID> List) {
+        public void showallgriditems(List<ID> List) {
             mList = List;
             notifyDataSetChanged();
         }
@@ -179,9 +187,9 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (adapter != null) {
-            List<GridAppID> gridAppIDS = ConfigHelper.GetGridIDList(requireContext());
-            gridAppIDS.add(new GridAppID(-1));
-            adapter.showallgriditems(gridAppIDS);
+            List<ID> IDS = ConfigHelper.GetGridIDList(requireContext());
+            IDS.add(new ID(-1));
+            adapter.showallgriditems(IDS);
         }
     }
 }
