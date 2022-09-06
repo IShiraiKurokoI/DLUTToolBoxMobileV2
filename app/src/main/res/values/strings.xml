@@ -129,4 +129,8 @@
     <string name="search_string_cannot_be_empty">搜索内容不能为空</string>
     <string name="searching">搜索中…</string>
     <string name="cancel">取消</string>
+    <string name="card_wording_empty">暂无内容</string>
+    <string name="card_wording_error">数据解析错误</string>
+    <string name="card_wording_loading">数据加载中</string>
+    <string name="card_wording_un_support">暂不支持该类型的卡片</string>
 </resources>

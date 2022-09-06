@@ -104,4 +104,5 @@
     <color name="cardview_light_background">#ffffffff</color>
     <color name="cardview_shadow_end_color">#03000000</color>
     <color name="cardview_shadow_start_color">#37000000</color>
+    <color name="bg_common_popup_mask">#7f000000</color>
 </resources>

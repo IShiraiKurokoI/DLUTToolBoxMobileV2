@@ -50,88 +50,104 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <com.youth.banner.Banner
-                android:id="@+id/banner"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                app:banner_indicator_marginBottom="13dp"
-                app:banner_indicator_normal_width="20dp"
-                app:banner_indicator_selected_width="20dp" />
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/divider" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="0dp"
-                android:text="@string/my_service" />
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/divider" />
-
-            <com.Shirai_Kuroko.DLUTMobile.Widgets.MainGridView
-                android:id="@+id/main_grid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:columnWidth="85dp"
-                android:numColumns="auto_fit"
-                android:stretchMode="columnWidth" />
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/divider" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/CollectionCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never"/>
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        android:layout_weight="1">
 
             <LinearLayout
-                android:id="@id/ll_main_manager_card"
-                android:layout_width="fill_parent"
-                android:layout_height="52.0dip"
-                android:layout_marginLeft="16.0dip"
-                android:layout_marginTop="3.0dip"
-                android:layout_marginRight="16.0dip"
-                android:layout_marginBottom="10.0dip"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:foreground="?attr/selectableItemBackground">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_card_manager"
-                    tools:ignore="ContentDescription" />
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    app:banner_indicator_marginBottom="13dp"
+                    app:banner_indicator_normal_width="20dp"
+                    app:banner_indicator_selected_width="20dp" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/divider" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6.0dip"
-                    android:drawablePadding="4.0dip"
-                    android:text="首页卡片管理"
-                    android:textSize="14.0sp"
-                    app:drawableEndCompat="@drawable/icon_service_empty_arrow"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="@string/my_service" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/divider" />
+
+                <com.Shirai_Kuroko.DLUTMobile.Widgets.MainGridView
+                    android:id="@+id/main_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:columnWidth="85dp"
+                    android:numColumns="auto_fit"
+                    android:stretchMode="columnWidth" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/divider" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="服务卡片"
                     tools:ignore="HardcodedText" />
-            </LinearLayout>
+
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/divider" />
+
+                <com.Shirai_Kuroko.DLUTMobile.Widgets.MainCardView
+                    android:id="@+id/CollectionCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never" />
+                <LinearLayout
+                    android:id="@id/ll_main_manager_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="52.0dip"
+                    android:layout_marginLeft="16.0dip"
+                    android:layout_marginTop="3.0dip"
+                    android:layout_marginRight="16.0dip"
+                    android:layout_marginBottom="10.0dip"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_card_manager"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6.0dip"
+                        android:drawablePadding="4.0dip"
+                        android:text="首页卡片管理"
+                        android:textSize="14.0sp"
+                        app:drawableEndCompat="@drawable/icon_service_empty_arrow"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

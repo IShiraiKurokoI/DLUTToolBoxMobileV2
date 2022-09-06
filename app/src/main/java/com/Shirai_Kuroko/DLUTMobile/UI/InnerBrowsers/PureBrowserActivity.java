@@ -106,7 +106,7 @@ public class PureBrowserActivity extends BaseActivity {
         if (!Url.contains("rj")) {
             loading.show();
         }
-        webView.loadUrl(Url);
+        webView.loadUrl(Url.replace("202.118.65.217","webvpn.dlut.edu.cn"));
     }
 
     public void SyncCookie(Context context) {

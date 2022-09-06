@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@id/ll_card_menu_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@id/ll_card_menu_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8.0dip"
+        android:layout_marginRight="8.0dip"
+        android:background="@drawable/bg_card_menu_up"
+        android:divider="@drawable/divider_hor"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <TextView
+            android:id="@id/tv_card_menu_hide"
+            android:layout_width="fill_parent"
+            android:layout_height="48.0dip"
+            android:drawablePadding="10.0dip"
+            android:gravity="center_vertical"
+            android:text="在首页隐藏此卡片"
+            android:textColor="#ff505050"
+            android:textSize="12.0sp"
+            app:drawableStartCompat="@drawable/icon_card_menu_hide" />
+
+        <TextView
+            android:id="@id/tv_card_menu_manager"
+            android:layout_width="fill_parent"
+            android:layout_height="48.0dip"
+            android:drawablePadding="10.0dip"
+            android:gravity="center_vertical"
+            android:text="首页卡片管理"
+            android:textColor="#ff505050"
+            android:textSize="12.0sp"
+            app:drawableLeftCompat="@drawable/icon_card_menu_manager" />
+
+        <TextView
+            android:id="@id/tv_card_menu_refresh"
+            android:layout_width="fill_parent"
+            android:layout_height="48.0dip"
+            android:drawablePadding="10.0dip"
+            android:gravity="center_vertical"
+            android:text="刷新"
+            android:textColor="#ff505050"
+            android:textSize="12.0sp"
+            app:drawableLeftCompat="@drawable/icon_card_menu_refresh" />
+    </LinearLayout>
+</LinearLayout>

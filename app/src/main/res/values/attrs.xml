@@ -34,5 +34,10 @@
         <attr name="isInputLimited" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="MaxHeightView">
+        <attr name="mhv_HeightDimen" format="reference|dimension" />
+        <attr name="mhv_HeightRatio" format="reference|float" />
+    </declare-styleable>
+
     <attr name="pinViewStyle" format="reference" />
 </resources>

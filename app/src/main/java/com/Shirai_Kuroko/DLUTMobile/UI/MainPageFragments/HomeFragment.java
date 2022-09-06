@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.Shirai_Kuroko.DLUTMobile.Adapters.MainCardAdapter;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ID;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
@@ -35,11 +36,14 @@ import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     MainGridAdapter adapter;
+    public MainCardAdapter mainCardAdapter;
+    ArrayList<ID> prevlist=new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -80,7 +84,11 @@ public class HomeFragment extends Fragment {
         //TODO:主页卡片实现
         RecyclerView CollectionCard = requireView().findViewById(R.id.CollectionCard);
         CollectionCard.setLayoutManager(new LinearLayoutManager(requireActivity()));
-
+        prevlist = ConfigHelper.GetCardIDList(getContext());
+        mainCardAdapter = new MainCardAdapter(getContext(),prevlist,this);
+        mainCardAdapter.setHasStableIds(true);
+        CollectionCard.setAdapter(mainCardAdapter);
+        CollectionCard.setNestedScrollingEnabled(false);
         LinearLayout ll_main_manager_card = requireView().findViewById(R.id.ll_main_manager_card);
         ll_main_manager_card.setOnClickListener(view12 -> {
             Intent intent = new Intent(requireContext(), CardManageActivity.class);
@@ -109,7 +117,30 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    public void CallRemoveAndUpdate(int Position)
+    {
+        if (Position !=0)
+        {
+            prevlist = (ArrayList<ID>) mainCardAdapter.RemovePostion(Position);
+        }
+        else
+        {
+            prevlist =null;
+            CallRefresh();
+        }
+    }
 
+    public void CallRefresh()
+    {
+        if (mainCardAdapter!=null)
+        {
+            if (prevlist!=ConfigHelper.GetCardIDList(getContext()))
+            {
+                prevlist=ConfigHelper.GetCardIDList(getContext());
+                mainCardAdapter.datarefresh(prevlist);
+            }
+        }
+    }
 
     public class MainGridAdapter extends BaseAdapter {
         private List<ID> mList;
@@ -191,5 +222,6 @@ public class HomeFragment extends Fragment {
             IDS.add(new ID(-1));
             adapter.showallgriditems(IDS);
         }
+        CallRefresh();
     }
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:foreground="?attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@id/iv_card_scroll_img"
+        android:layout_width="116.0dip"
+        android:layout_height="116.0dip"
+        android:layout_marginTop="14.0dip"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@id/tv_card_scroll_tittle"
+        android:layout_width="116.0dip"
+        android:layout_height="37.0dip"
+        android:layout_marginTop="14.0dip"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:lineSpacingExtra="3.0dip"
+        android:maxLines="2"
+        android:text=""
+        android:textSize="12.0sp" />
+
+    <TextView
+        android:id="@id/tv_card_scroll_des"
+        android:layout_width="116.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8.0dip"
+        android:layout_marginBottom="14.0dip"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text=""
+        android:textSize="11.0sp" />
+</LinearLayout>

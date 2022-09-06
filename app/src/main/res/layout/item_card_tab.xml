@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="?attr/colorOnPrimary"
+    android:orientation="vertical"
+    android:foreground="?attr/selectableItemBackground">
+
+    <TextView
+        android:id="@id/tv_tab_name"
+        android:layout_width="fill_parent"
+        android:layout_height="32.0dip"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="全部新闻"
+        android:textColor="#ff333333"
+        android:textSize="12.0sp"
+        tools:ignore="HardcodedText" />
+
+    <View
+        android:id="@id/card_ind"
+        android:layout_width="fill_parent"
+        android:layout_height="2.0dip"
+        android:background="@drawable/selector_bg_card_tab_ind" />
+</LinearLayout>

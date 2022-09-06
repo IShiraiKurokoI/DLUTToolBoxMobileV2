@@ -179,4 +179,9 @@
         <item name="android:singleLine">true</item>
         <item name="android:includeFontPadding">false</item>
     </style>
+
+    <style name="popwin_anim_style">
+        <item name="android:windowEnterAnimation">@anim/popup_in</item>
+        <item name="android:windowExitAnimation">@anim/popup_out</item>
+    </style>
 </resources>

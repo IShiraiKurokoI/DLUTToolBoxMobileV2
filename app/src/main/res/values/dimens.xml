@@ -31,6 +31,7 @@
     <dimen name="card_expand_text_size">12.0dip</dimen>
     <dimen name="card_hor_scroll_item_margin">14.0dip</dimen>
     <dimen name="card_loading_view_height">160.0dip</dimen>
+    <dimen name="card_loading_main_view_height">80.0dip</dimen>
     <dimen name="card_open_margin_bottom">18.0dip</dimen>
     <dimen name="card_padding_both_side">16.0dip</dimen>
     <dimen name="card_table_row_height">27.0dip</dimen>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:foreground="?attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@id/iv_card_img_icon"
+        android:layout_width="72.0dip"
+        android:layout_height="72.0dip"
+        android:layout_marginTop="12.0dip"
+        android:layout_marginBottom="12.0dip"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@id/tv_card_img_tittle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12.0dip"
+        android:layout_marginTop="12.0dip"
+        android:layout_toEndOf="@id/iv_card_img_icon"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text=""
+        android:textSize="12.0sp" />
+
+    <TextView
+        android:id="@id/tv_card_img_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_card_img_tittle"
+        android:layout_marginStart="12.0dip"
+        android:layout_marginTop="12.0dip"
+        android:layout_toEndOf="@id/iv_card_img_icon"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text=""
+        android:textSize="11.0sp" />
+</RelativeLayout>

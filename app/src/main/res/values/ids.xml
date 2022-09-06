@@ -277,4 +277,27 @@
     <item name="v_item_divider" type="id" />
     <item name="head_empty_view" type="id" />
     <item name="btn_drag_three" type="id" />
+    <item name="ll_card_title" type="id" />
+    <item name="tv_card_data_value" type="id" />
+    <item name="tv_card_data_des" type="id" />
+    <item name="ll_card_scroll_content" type="id" />
+    <item name="iv_card_scroll_img" type="id" />
+    <item name="tv_card_scroll_tittle" type="id" />
+    <item name="tv_card_scroll_des" type="id" />
+    <item name="tv_tab_name" type="id" />
+    <item name="card_ind" type="id" />
+    <item name="ll_card_menu_root" type="id" />
+    <item name="ll_card_menu_content" type="id" />
+    <item name="tv_card_menu_hide" type="id" />
+    <item name="tv_card_menu_manager" type="id" />
+    <item name="alpha" type="id" />
+    <item name="iv_card_img_icon" type="id" />
+    <item name="tv_card_img_tittle" type="id" />
+    <item name="tv_card_img_content" type="id" />
+    <item name="iv_unread_tip" type="id" />
+    <item name="tv_card_text_tittle" type="id" />
+    <item name="tv_card_text_date" type="id" />
+    <item name="main_card_tabs_container" type="id" />
+    <item name="tv_card_expand" type="id" />
+    <item name="tv_card_menu_refresh" type="id" />
 </resources>
