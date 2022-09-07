@@ -70,6 +70,7 @@ public abstract class ExpandableCardContentView<T> extends BaseCardContentView<T
         h.setOnClickListener(this);
         this.h = h;
         this.setLayoutTransition(new LayoutTransition());
+        this.h.setOnClickListener(this);
         this.addView(this.h);
     }
 
@@ -89,19 +90,14 @@ public abstract class ExpandableCardContentView<T> extends BaseCardContentView<T
             this.g ^= true;
             final a i = this.i;
             if (i != null) {
-                e= !e;
-                if(e)
-                {
-                    ChangeExpand(e);
-                }
+                i.SetExpand(g);
             }
         }
     }
 
-    public abstract void ChangeExpand(boolean e);
 
     interface a
     {
-
+        void SetExpand(boolean e);
     }
 }

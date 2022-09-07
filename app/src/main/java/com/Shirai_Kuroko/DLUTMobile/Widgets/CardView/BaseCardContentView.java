@@ -43,6 +43,7 @@ public class BaseCardContentView<T> extends LinearLayout {
     }
 
     public void a() {
+
     }
 
     public TextView b() {
@@ -53,7 +54,6 @@ public class BaseCardContentView<T> extends LinearLayout {
         textView.setTextSize(1, this.d * 12.0f);
         textView.setTextColor(Color.parseColor("#999999"));
         final String string = this.getContext().getResources().getString(R.string.card_wording_empty);
-        Exception ex = null;
         Serializable string2;
         Label_0325:
         {
@@ -78,7 +78,7 @@ public class BaseCardContentView<T> extends LinearLayout {
                         break Label_0325;
                     }
                     final List<String> noDataText = this.b.getGlobal().getTheme().getNoDataText();
-                    final String s = (String) (string2 = noDataText.get(0));
+                    string2 = noDataText.get(0);
                     try {
                         if (noDataText.size() <= 1) {
                             break Label_0313;
@@ -88,7 +88,6 @@ public class BaseCardContentView<T> extends LinearLayout {
                                     "\r\n" +
                                     noDataText.get(1);
                         }
-                        break Label_0313;
                     } catch (Exception exx) {
                         string2 = exx.getLocalizedMessage();
                     }

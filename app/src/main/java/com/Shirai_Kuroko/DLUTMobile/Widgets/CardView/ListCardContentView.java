@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import com.Shirai_Kuroko.DLUTMobile.R;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -30,13 +29,13 @@ public abstract class ListCardContentView<T> extends ExpandableCardContentView<T
 
     public ListCardContentView(@NonNull final Context context) {
         super(context);
-        this.k = new ArrayList<View>();
+        this.k = new ArrayList<>();
         this.l = true;
     }
 
     public ListCardContentView(@NonNull final Context context, @Nullable final AttributeSet set) {
         super(context, set);
-        this.k = new ArrayList<View>();
+        this.k = new ArrayList<>();
         this.l = true;
     }
 
@@ -87,25 +86,12 @@ public abstract class ListCardContentView<T> extends ExpandableCardContentView<T
     @Override
     public void e() {
         super.e();
-        final Iterator<View> iterator = this.k.iterator();
-        while (iterator.hasNext()) {
-            this.j.removeView((View) iterator.next());
+        for (View view : this.k) {
+            this.j.removeView(view);
         }
         this.k.clear();
     }
     public abstract View f(final T p0, final int p1);
-
-    @Override
-    public void ChangeExpand(boolean e) {
-        if (e)
-        {
-            d();
-        }
-        else
-        {
-            e();
-        }
-    }
 }
 
 

@@ -38,7 +38,6 @@ import com.Shirai_Kuroko.DLUTMobile.UI.MainPageFragments.HomeFragment;
 import com.Shirai_Kuroko.DLUTMobile.Widgets.MaxHeightView;
 import com.bumptech.glide.Glide;
 
-import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -210,7 +209,7 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
                                 c = this.g.getData(DataCardItemBean.class);
                             } else {
                                 baseCardContentView = new TableCardView(this.e);
-                                c = this.g.getData(TableCardRowBean.class,true);
+                                c = this.g.getData(TableCardRowBean.class, true);
                             }
                         } else {
                             baseCardContentView = new HorScrollCardView(this.e);
@@ -229,10 +228,6 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
                 if (g2 != null && g2.getTabs() != null && this.g.getTabs().getData() != null) {
                     final List<CardTabsBean.TabBean> data = this.g.getTabs().getData();
                     final int size = data.size();
-                    final PrintStream out = System.out;
-                    String sb2 = "-------addTabsView---:  " +
-                            size;
-                    out.println(sb2);
                     if (size < 1) {
                         this.m.setVisibility(View.GONE);
                     } else {
@@ -299,6 +294,13 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
                 baseCardContentView.c = (List) c;
                 baseCardContentView.a();
                 baseCardContentView.b = this.g;
+                this.v = new ExpandableCardContentView.a() {
+                    @Override
+                    public void SetExpand(boolean e) {
+                        f.setExpand(e);
+                        f();
+                    }
+                };
                 final ExpandableCardContentView.a v = this.v;
                 if (v != null && baseCardContentView instanceof ExpandableCardContentView) {
                     final ExpandableCardContentView expandableCardContentView = (ExpandableCardContentView) baseCardContentView;

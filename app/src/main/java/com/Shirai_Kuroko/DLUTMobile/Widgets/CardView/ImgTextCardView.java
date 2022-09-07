@@ -10,10 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.Shirai_Kuroko.DLUTMobile.Common.CenterToast;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ImgTextCardItemBean;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.PureBrowserActivity;
@@ -73,9 +75,9 @@ public class ImgTextCardView extends ListCardContentView<ImgTextCardItemBean> {
         }
         textView.setText((CharSequence) imgTextCardItemBean.getTitle());
         textView2.setText((CharSequence) imgTextCardItemBean.getContent());
-        if (imgTextCardItemBean.getImage().contains("http://www.dlut.edu.cn"))
+        if (imgTextCardItemBean.getImage().equals("http://www.dlut.edu.cn"))
         {
-            Glide.with(this.f).load("https://www.dlut.edu.cn/images/new/logoft.png").into(imageView);
+            imageView.setImageResource(R.drawable.icon);
         }
         else
         {
@@ -83,11 +85,14 @@ public class ImgTextCardView extends ListCardContentView<ImgTextCardItemBean> {
         }
         if (!TextUtils.isEmpty((CharSequence) imgTextCardItemBean.getUrl())) {
             inflate.setOnClickListener((View.OnClickListener) new d(this.getContext(), imgTextCardItemBean.getUrl()));
+        }else
+        {
+            inflate.setOnClickListener(view -> CenterToast.makeText(getContext(),"无可打开内容", Toast.LENGTH_SHORT).show());
         }
         return inflate;
     }
 
-    public class d implements View.OnClickListener {
+    public static class d implements View.OnClickListener {
         public Context a;
         public String b;
 

@@ -300,4 +300,5 @@
     <item name="main_card_tabs_container" type="id" />
     <item name="tv_card_expand" type="id" />
     <item name="tv_card_menu_refresh" type="id" />
+    <item name="btn_main_card_manage_ban" type="id" />
 </resources>

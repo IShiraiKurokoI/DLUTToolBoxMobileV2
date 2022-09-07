@@ -65,6 +65,33 @@
                     app:drawableStartCompat="@drawable/icon_virtual_card"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@id/btn_main_card_manage_ban"
+                android:layout_width="fill_parent"
+                android:layout_height="44.0dip"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1.0px"
+                    android:layout_marginLeft="14.0dip"
+                    android:layout_marginRight="14.0dip"
+                    android:background="#ffe0e0e0"
+                    tools:ignore="PxUsage" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.0dip"
+                    android:layout_marginStart="14.0dip"
+                    android:layout_weight="1.0"
+                    android:drawablePadding="9.0dip"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="管 理 卡 片"
+                    android:textSize="14.0sp"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </FrameLayout>

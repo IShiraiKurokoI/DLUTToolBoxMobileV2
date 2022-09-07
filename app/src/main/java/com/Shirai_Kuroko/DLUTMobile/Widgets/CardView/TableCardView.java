@@ -46,13 +46,11 @@ public class TableCardView extends ListCardContentView<TableCardRowBean>
 
     public View g(TableCardRowBean tableCardRowBean) {
         final List<TableCardRowBean.TableCellBean> data = tableCardRowBean.getData();
-        Object o2;
-        final Object o = o2 = null;
+        View o2;
+        o2 = null;
         if (data != null) {
-            o2 = o;
             if (data.size() != 0) {
                 if (data.size() > 4) {
-                    o2 = o;
                 }
                 else {
                     final Iterator<TableCardRowBean.TableCellBean> iterator = data.iterator();
@@ -62,9 +60,8 @@ public class TableCardView extends ListCardContentView<TableCardRowBean>
                     }
                     int n2;
                     if ((n2 = n) == 0) {
-                        final Iterator<TableCardRowBean.TableCellBean> iterator2 = data.iterator();
-                        while (iterator2.hasNext()) {
-                            ((TableCardRowBean.TableCellBean)iterator2.next()).setSpan(12 / data.size());
+                        for (TableCardRowBean.TableCellBean datum : data) {
+                            datum.setSpan(12 / data.size());
                         }
                         n2 = 12;
                     }
@@ -91,18 +88,18 @@ public class TableCardView extends ListCardContentView<TableCardRowBean>
                         ((TextView)tableCardRowBean1).setSingleLine();
                         ((TextView)tableCardRowBean1).setEllipsize(TextUtils.TruncateAt.END);
                         ((TextView)tableCardRowBean1).setLayoutParams((ViewGroup.LayoutParams)layoutParams2);
-                        try {
-//                            ((TextView)tableCardRowBean1).setTextColor(f(tableCellBean.getColor()));
-                        }
-                        catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
+//                        try {
+////                            ((TextView)tableCardRowBean1).setTextColor(f(tableCellBean.getColor()));
+//                        }
+//                        catch (Exception ex) {
+//                            ex.printStackTrace();
+//                        }
                         linearLayout.addView(tableCardRowBean1);
                     }
                 }
             }
         }
-        return (View)o2;
+        return o2;
     }
 
     public static int f(final String s) {

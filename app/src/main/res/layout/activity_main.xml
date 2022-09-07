@@ -25,7 +25,7 @@
         android:background="@color/main_theme_color"
         app:labelVisibilityMode="labeled"
         app:itemTextColor="@color/white"
-        app:itemRippleColor="@color/transparent"
+        app:itemRippleColor="@null"
         app:itemIconTint="@color/white"
         android:outlineSpotShadowColor="@color/white"
         android:outlineAmbientShadowColor="@color/white"

@@ -111,7 +111,7 @@ public class HorScrollCardView extends BaseCardContentView<HorScrollCardItemBean
         this.addView(inflate);
     }
 
-    public class d implements View.OnClickListener
+    public static class d implements View.OnClickListener
     {
         public Context a;
         public String b;

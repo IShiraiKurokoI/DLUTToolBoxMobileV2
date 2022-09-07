@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="?attr/actionBarSize"
     android:orientation="vertical"
     tools:context=".UI.MainPageFragments.HomeFragment">
 
@@ -53,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -120,37 +121,49 @@
                     android:layout_height="0.5dp"
                     android:background="@color/divider" />
 
-                <com.Shirai_Kuroko.DLUTMobile.Widgets.MainCardView
-                    android:id="@+id/CollectionCard"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/CollectionCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never" />
+                </RelativeLayout>
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:overScrollMode="never" />
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="10dp">
 
-                <LinearLayout
-                    android:id="@id/ll_main_manager_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:id="@id/ll_main_manager_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/icon_card_manager"
-                        tools:ignore="ContentDescription" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_card_manager"
+                            tools:ignore="ContentDescription" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6.0dip"
-                        android:drawablePadding="4.0dip"
-                        android:text="首页卡片管理"
-                        android:textSize="14.0sp"
-                        app:drawableEndCompat="@drawable/icon_service_empty_arrow"
-                        tools:ignore="HardcodedText" />
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6.0dip"
+                            android:drawablePadding="4.0dip"
+                            android:text="首页卡片管理"
+                            android:textSize="14.0sp"
+                            app:drawableEndCompat="@drawable/icon_service_empty_arrow"
+                            tools:ignore="HardcodedText" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

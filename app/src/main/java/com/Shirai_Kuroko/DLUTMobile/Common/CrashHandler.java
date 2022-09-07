@@ -2,6 +2,7 @@ package com.Shirai_Kuroko.DLUTMobile.Common;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+
+import com.Shirai_Kuroko.DLUTMobile.SplashActivity;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -74,9 +77,9 @@ public class CrashHandler implements UncaughtExceptionHandler {
             // 退出程序
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(1);
-//            Intent intent = new Intent(this, MainActivity.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_NEW_TASK);
-//            startActivity(intent);
+            Intent intent = new Intent(mContext, SplashActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
         }
     }
 

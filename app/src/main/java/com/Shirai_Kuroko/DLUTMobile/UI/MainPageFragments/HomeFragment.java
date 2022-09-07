@@ -115,7 +115,7 @@ public class HomeFragment extends Fragment {
     public void showPopupWindow(View view) {
         @SuppressLint("InflateParams")
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.popup_main_right_more, null);
-        PopupWindow window = new PopupWindow(v, 360, 300, true);
+        PopupWindow window = new PopupWindow(v, 370, 450, true);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         window.setOutsideTouchable(true);
         window.setTouchable(true);
@@ -131,6 +131,10 @@ public class HomeFragment extends Fragment {
             startActivity(intent);
             window.dismiss();
         });
+        v.findViewById(R.id.btn_main_card_manage_ban).setOnClickListener(v12 -> {
+            Intent intent = new Intent(requireContext(), CardManageActivity.class);
+            startActivity(intent);
+        });
     }
 
     public void CallRemoveAndUpdate(int Position) {
@@ -144,7 +148,7 @@ public class HomeFragment extends Fragment {
 
     public void CallRefresh() {
         if (mainCardAdapter != null) {
-            if (prevlist != ConfigHelper.GetCardIDList(getContext())) {
+            if (!ConfigHelper.GetCardIDList(getContext()).equals(prevlist)) {
                 prevlist = ConfigHelper.GetCardIDList(getContext());
                 mainCardAdapter.datarefresh(prevlist);
             }

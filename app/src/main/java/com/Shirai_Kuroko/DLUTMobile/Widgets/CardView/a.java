@@ -12,7 +12,6 @@ import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.alibaba.fastjson.JSON;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -41,17 +40,14 @@ public class a implements Runnable {
     public void run() {
         try {
             final CardView b = this.b;
-            final String w = CardView.w;
-            final Map<String, String> d = b.d();
+            b.d();
             String s;
             final String str = s = this.b.f.getCard_url();
             if (!str.startsWith("http://")) {
                 s = str;
                 if (!str.startsWith("https://")) {
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append("http://");
-                    sb.append(str);
-                    s = sb.toString();
+                    s = "http://" +
+                            str;
                 }
             }
             LoginResponseBean UserBean = ConfigHelper.GetUserBean(b.e);
@@ -73,8 +69,7 @@ public class a implements Runnable {
             Handler handler = new Handler(Looper.getMainLooper());
             String finalS = s;
             new Thread(() -> {
-                String url = finalS;
-                Request request = BackendUtils.CommonGetRequsetBuilderForCard(url);
+                Request request = BackendUtils.CommonGetRequsetBuilderForCard(finalS);
                 LogToFile.i("请求方法体", request.toString());
                 Log.i("请求方法体", request.toString());
                 Response response;
@@ -83,12 +78,7 @@ public class a implements Runnable {
                 } catch (IOException e) {
                     handler.post(() -> this.a = e.getLocalizedMessage());
                     this.b.g=null;
-                    new Handler(this.b.e.getMainLooper()).post(new Runnable() {
-                        @Override
-                        public void run() {
-                            b.f();
-                        }
-                    });
+                    new Handler(this.b.e.getMainLooper()).post(b::f);
                     e.printStackTrace();
                     return;
                 }
@@ -99,12 +89,7 @@ public class a implements Runnable {
                     } catch (IOException e) {
                         handler.post(() -> this.a = e.getLocalizedMessage());
                         this.b.g=null;
-                        new Handler(this.b.e.getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                                b.f();
-                            }
-                        });
+                        new Handler(this.b.e.getMainLooper()).post(b::f);
                         e.printStackTrace();
                         return;
                     }
@@ -112,8 +97,8 @@ public class a implements Runnable {
                     if (!result.contains("verify failed")) {
                         handler.post(() -> {
                             a=result;
-                            Log.i("卡片请求结果", "请求：\n"+request.toString()+"\n返回：\n"+a);
-                            LogToFile.i("卡片请求结果", "请求：\n"+request.toString()+"\n返回：\n"+a);
+                            Log.i("卡片请求结果", "请求：\n"+ request +"\n返回：\n"+a);
+                            LogToFile.i("卡片请求结果", "请求：\n"+ request +"\n返回：\n"+a);
                             try {
                                 this.b.g= JSON.parseObject(a, CardInfoBean.class);
                                 this.b.f();

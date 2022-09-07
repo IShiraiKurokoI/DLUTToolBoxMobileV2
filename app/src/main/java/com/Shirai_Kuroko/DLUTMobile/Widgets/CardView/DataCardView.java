@@ -64,18 +64,6 @@ public class DataCardView extends ExpandableCardContentView<DataCardItemBean>
         this.j.removeView(this.k);
     }
 
-    @Override
-    public void ChangeExpand(boolean e) {
-        if (e)
-        {
-            d();
-        }
-        else
-        {
-            e();
-        }
-    }
-
     public final View f(final int n) {
         final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-1, (int)(super.f.getResources().getDimension(R.dimen.card_data_row_height) * super.d + 0.5));
         final LinearLayout linearLayout = new LinearLayout(super.f);
