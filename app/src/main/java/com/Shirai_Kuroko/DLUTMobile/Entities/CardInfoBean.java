@@ -52,6 +52,40 @@ public class CardInfoBean
         return list;
     }
 
+    public <T> List<T> getData(final Class<T> clazz,boolean quchong) {
+        final ArrayList<T> list = new ArrayList<>();
+        final List<JSONObject> data = this.data;
+        if (data != null) {
+            if (data.size() != 0) {
+                for (final JSONObject jsonObject : this.data) {
+                    try {
+                        list.add(JSON.parseObject(jsonObject.toJSONString(),clazz));
+                    }
+                    catch (Exception ex) {
+                        ex.printStackTrace();
+                        return null;
+                    }
+                }
+            }
+        }
+        return duplicateRemovalByCircle(list);
+    }
+
+
+
+    public <T> List<T> duplicateRemovalByCircle(List<T> list){
+        List newList = new ArrayList();
+        for (int i = 0;i < list.size();i++){
+            for (int j = 0;j < i;j++){
+                if(list.get(i).equals(list.get(j))){
+                    newList.remove(list.get(j));
+                }
+            }
+            newList.add(list.get(i));
+        }
+        return newList;
+    }
+
     public ConfigBean getGlobal() {
         return this.global;
     }

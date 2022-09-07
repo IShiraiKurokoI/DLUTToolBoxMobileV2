@@ -160,14 +160,17 @@ public class CourseBean implements Serializable, Cloneable
     }
 
     public String getEndTime() {
-        String endTime;
+        String s;
         if (TextUtils.isEmpty((CharSequence)this.event_endtime)) {
-            endTime = "";
+            s = "";
+        }
+        else if (this.event_endtime.length() > 5) {
+            s = this.event_endtime.substring(0, 5);
         }
         else {
-            endTime = this.event_endtime;
+            s = this.event_endtime;
         }
-        return endTime;
+        return s;
     }
 
     public int getItemType() {

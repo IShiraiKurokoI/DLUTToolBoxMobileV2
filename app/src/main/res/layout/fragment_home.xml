@@ -47,12 +47,17 @@
             android:src="@drawable/ic_main_right_add"
             tools:ignore="ContentDescription" />
     </RelativeLayout>
-
-    <ScrollView
+    <!--    <include layout="@layout/refresh_head"/>-->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:overScrollMode="never"
-        android:layout_weight="1">
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:overScrollMode="never">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -120,14 +125,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:overScrollMode="never" />
+
                 <LinearLayout
                     android:id="@id/ll_main_manager_card"
                     android:layout_width="match_parent"
-                    android:layout_height="52.0dip"
-                    android:layout_marginLeft="16.0dip"
-                    android:layout_marginTop="3.0dip"
-                    android:layout_marginRight="16.0dip"
-                    android:layout_marginBottom="10.0dip"
+                    android:layout_height="52dp"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center"
                     android:orientation="horizontal">
@@ -148,6 +150,7 @@
                         app:drawableEndCompat="@drawable/icon_service_empty_arrow"
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

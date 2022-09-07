@@ -28,6 +28,8 @@ import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.alibaba.fastjson.JSON;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import okhttp3.Response;
@@ -188,6 +190,20 @@ public class CourseWidget extends AppWidgetProvider {
         }
     }
 
+    public List duplicateRemovalByCircle(List<CourseBean> list){
+
+        List newList = new ArrayList();
+        for (int i = 0;i < list.size();i++){
+            for (int j = 0;j < i;j++){
+                if(list.get(i).equals(list.get(j))){
+                    newList.remove(list.get(j));
+                }
+            }
+            newList.add(list.get(i));
+        }
+        return newList;
+    }
+
     public final void a(final Context context) {
         final CourseWidget b = this;
         if (ConfigHelper.NeedLogin(context)) {
@@ -210,7 +226,7 @@ public class CourseWidget extends AppWidgetProvider {
                     CourseResult courseResult = JSON.parseObject(response, CourseResult.class);
                     if (courseResult.getErrcode() == 0) {
                         if (courseResult.getData() != null) {
-                            CourseBean.updateLocalList(courseResult.getData());
+                            CourseBean.updateLocalList(duplicateRemovalByCircle(courseResult.getData()));
                             b.c(context, State.DEFAULT);
                         } else {
                             final State data_NULL = State.DATA_NULL;

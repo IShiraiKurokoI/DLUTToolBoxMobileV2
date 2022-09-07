@@ -210,7 +210,7 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
                                 c = this.g.getData(DataCardItemBean.class);
                             } else {
                                 baseCardContentView = new TableCardView(this.e);
-                                c = this.g.getData(TableCardRowBean.class);
+                                c = this.g.getData(TableCardRowBean.class,true);
                             }
                         } else {
                             baseCardContentView = new HorScrollCardView(this.e);

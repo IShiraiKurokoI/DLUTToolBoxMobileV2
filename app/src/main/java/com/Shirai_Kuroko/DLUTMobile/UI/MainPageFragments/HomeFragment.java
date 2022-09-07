@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +22,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.Shirai_Kuroko.DLUTMobile.Adapters.MainCardAdapter;
+import com.Shirai_Kuroko.DLUTMobile.Common.CenterToast;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ID;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
@@ -43,7 +46,7 @@ public class HomeFragment extends Fragment {
 
     MainGridAdapter adapter;
     public MainCardAdapter mainCardAdapter;
-    ArrayList<ID> prevlist=new ArrayList<>();
+    ArrayList<ID> prevlist = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -68,7 +71,7 @@ public class HomeFragment extends Fragment {
         } else {
             Toast.makeText(requireActivity(), "错误：未检测到主界面GridView", Toast.LENGTH_SHORT).show();
         }
-
+        mgv.setNestedScrollingEnabled(false);
         Banner banner = requireView().findViewById(R.id.banner);
         if (banner != null) {
             MobileUtils.GetGalllery(requireActivity(), banner);
@@ -85,7 +88,7 @@ public class HomeFragment extends Fragment {
         RecyclerView CollectionCard = requireView().findViewById(R.id.CollectionCard);
         CollectionCard.setLayoutManager(new LinearLayoutManager(requireActivity()));
         prevlist = ConfigHelper.GetCardIDList(getContext());
-        mainCardAdapter = new MainCardAdapter(getContext(),prevlist,this);
+        mainCardAdapter = new MainCardAdapter(getContext(), prevlist, this);
         mainCardAdapter.setHasStableIds(true);
         CollectionCard.setAdapter(mainCardAdapter);
         CollectionCard.setNestedScrollingEnabled(false);
@@ -93,6 +96,19 @@ public class HomeFragment extends Fragment {
         ll_main_manager_card.setOnClickListener(view12 -> {
             Intent intent = new Intent(requireContext(), CardManageActivity.class);
             startActivity(intent);
+        });
+        SwipeRefreshLayout swipeRefreshLayout = requireView().findViewById(R.id.refresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                CallReload();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 1000);
+            }
         });
     }
 
@@ -117,29 +133,31 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    public void CallRemoveAndUpdate(int Position)
-    {
-        if (Position !=0)
-        {
+    public void CallRemoveAndUpdate(int Position) {
+        if (Position != 0) {
             prevlist = (ArrayList<ID>) mainCardAdapter.RemovePostion(Position);
-        }
-        else
-        {
-            prevlist =null;
+        } else {
+            prevlist = null;
             CallRefresh();
         }
     }
 
-    public void CallRefresh()
-    {
-        if (mainCardAdapter!=null)
-        {
-            if (prevlist!=ConfigHelper.GetCardIDList(getContext()))
-            {
-                prevlist=ConfigHelper.GetCardIDList(getContext());
+    public void CallRefresh() {
+        if (mainCardAdapter != null) {
+            if (prevlist != ConfigHelper.GetCardIDList(getContext())) {
+                prevlist = ConfigHelper.GetCardIDList(getContext());
                 mainCardAdapter.datarefresh(prevlist);
             }
         }
+    }
+
+    public void CallReload() {
+        RecyclerView CollectionCard = requireView().findViewById(R.id.CollectionCard);
+        prevlist = ConfigHelper.GetCardIDList(getContext());
+        mainCardAdapter = new MainCardAdapter(getContext(), prevlist, this);
+        mainCardAdapter.setHasStableIds(true);
+        CollectionCard.setAdapter(mainCardAdapter);
+        CenterToast.makeText(getContext(),"刷新成功",Toast.LENGTH_SHORT).show();
     }
 
     public class MainGridAdapter extends BaseAdapter {
