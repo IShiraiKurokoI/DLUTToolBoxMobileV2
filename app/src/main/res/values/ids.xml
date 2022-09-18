@@ -301,4 +301,10 @@
     <item name="tv_card_expand" type="id" />
     <item name="tv_card_menu_refresh" type="id" />
     <item name="btn_main_card_manage_ban" type="id" />
+    <item name="tv_more" type="id" />
+    <item name="btn_open_browser" type="id" />
+    <item name="btn_share" type="id" />
+    <item name="btn_share_link" type="id" />
+    <item name="btn_save" type="id" />
+    <item name="btn_pin" type="id" />
 </resources>

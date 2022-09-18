@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12.0dip"
+        android:layout_marginRight="12.0dip"
+        android:layout_marginBottom="12.0dip"
+        app:cardCornerRadius="8.0dip"
+        app:cardElevation="4.0dip">
+
+        <LinearLayout
+            android:layout_width="130.0dip"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@id/btn_refresh"
+                android:layout_width="fill_parent"
+                android:layout_height="44.0dip"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14.0dip"
+                    android:button="@null"
+                    android:drawablePadding="9.0dip"
+                    android:includeFontPadding="false"
+                    android:gravity="center_vertical"
+                    android:text="刷新此页面"
+                    android:textSize="14.0sp"
+                    app:drawableStartCompat="@drawable/icon_card_menu_refresh"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@id/btn_open_browser"
+                android:layout_width="fill_parent"
+                android:layout_height="44.0dip"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1.0px"
+                    android:layout_marginLeft="14.0dip"
+                    android:layout_marginRight="14.0dip"
+                    android:background="#ffe0e0e0"
+                    tools:ignore="PxUsage" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.0dip"
+                    android:layout_marginStart="14.0dip"
+                    android:layout_weight="1.0"
+                    android:drawablePadding="9.0dip"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="浏览器打开"
+                    android:textSize="14.0sp"
+                    app:drawableStartCompat="@drawable/front_menu"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@id/btn_share"
+                android:layout_width="fill_parent"
+                android:layout_height="44.0dip"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1.0px"
+                    android:layout_marginLeft="14.0dip"
+                    android:layout_marginRight="14.0dip"
+                    android:background="#ffe0e0e0"
+                    tools:ignore="PxUsage" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.0dip"
+                    android:layout_marginStart="14.0dip"
+                    android:layout_weight="1.0"
+                    android:drawablePadding="9.0dip"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    app:drawableStartCompat="@drawable/icon_share_notice"
+                    android:text="分享此页面"
+                    android:textSize="14.0sp"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@id/btn_share_link"
+                android:layout_width="fill_parent"
+                android:layout_height="44.0dip"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1.0px"
+                    android:layout_marginLeft="14.0dip"
+                    android:layout_marginRight="14.0dip"
+                    android:background="#ffe0e0e0"
+                    tools:ignore="PxUsage" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.0dip"
+                    android:layout_marginStart="14.0dip"
+                    android:layout_weight="1.0"
+                    android:drawablePadding="9.0dip"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    app:drawableStartCompat="@drawable/icon_share_link"
+                    android:text="分享原链接"
+                    android:textSize="14.0sp"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@id/btn_save"
+                android:layout_width="fill_parent"
+                android:layout_height="44.0dip"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1.0px"
+                    android:layout_marginLeft="14.0dip"
+                    android:layout_marginRight="14.0dip"
+                    android:background="#ffe0e0e0"
+                    tools:ignore="PxUsage" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.0dip"
+                    android:layout_marginStart="14.0dip"
+                    android:layout_weight="1.0"
+                    android:drawablePadding="9.0dip"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    app:drawableStartCompat="@drawable/icon_save"
+                    android:text="保存此页面"
+                    android:textSize="14.0sp"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@id/btn_pin"
+                android:layout_width="fill_parent"
+                android:layout_height="44.0dip"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1.0px"
+                    android:layout_marginLeft="14.0dip"
+                    android:layout_marginRight="14.0dip"
+                    android:background="#ffe0e0e0"
+                    tools:ignore="PxUsage" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.0dip"
+                    android:layout_marginStart="14.0dip"
+                    android:layout_weight="1.0"
+                    android:drawablePadding="9.0dip"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    app:drawableStartCompat="@drawable/icon_pin"
+                    android:text="固定到桌面"
+                    android:textSize="14.0sp"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

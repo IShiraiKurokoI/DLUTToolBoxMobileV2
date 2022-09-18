@@ -30,8 +30,6 @@ public class b extends h
         if (this.c.findViewById(R.id.card_ind).isSelected()) {
             return;
         }
-        this.e.f.setSelectTab(this.d);
-        //TODO:
-//        b.a.a.b.h.d.a("com.ruijie.whistle.action_receive_notify_main_card");
+        this.e.appBean.setSelectTab(this.d);
     }
 }

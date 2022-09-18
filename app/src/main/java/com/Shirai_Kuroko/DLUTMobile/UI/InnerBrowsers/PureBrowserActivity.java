@@ -10,13 +10,16 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
@@ -26,10 +29,11 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.PreferenceManager;
 
@@ -62,12 +66,12 @@ public class PureBrowserActivity extends BaseActivity {
         String Url = intent.getStringExtra("Url");
         String Name = intent.getStringExtra("Name");
         webView = findViewById(R.id.PureBrowser);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowTitleEnabled(true);
-            actionBar.setTitle(Name);
-        }
+        TextView Return = requireViewById(R.id.iv_back);
+        Return.setOnClickListener(v -> finish());
+        TextView tv_title = requireViewById(R.id.tv_title);
+        tv_title.setText(Name);
+        TextView tv_more = requireViewById(R.id.tv_more);
+        tv_more.setOnClickListener(this::showPopupWindow);
         if (Objects.equals(Name, "")) {
             NoTitle = true;
         }
@@ -107,6 +111,46 @@ public class PureBrowserActivity extends BaseActivity {
             loading.show();
         }
         webView.loadUrl(Url.replace("202.118.65.217","webvpn.dlut.edu.cn"));
+    }
+
+    public void showPopupWindow(View view) {
+        @SuppressLint("InflateParams")
+        View v = LayoutInflater.from(this).inflate(R.layout.popup_purebrowser_right_more, null);
+        PopupWindow window = new PopupWindow(v, 480, 750, true);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        window.setOutsideTouchable(true);
+        window.setTouchable(true);
+        window.setAnimationStyle(R.style.main_more_anim);
+        window.showAsDropDown(view, 0, 0);
+        v.findViewById(R.id.btn_refresh).setOnClickListener(view1 -> {
+            webView.reload();
+            window.dismiss();
+        });
+        v.findViewById(R.id.btn_open_browser).setOnClickListener(view12 -> {
+            if (webView.getOriginalUrl().startsWith("file")) {
+                Toast.makeText(getBaseContext(), "此页面无法在浏览器内打开", Toast.LENGTH_SHORT).show();
+            }
+            Intent intent = new Intent();
+            intent.setAction("android.intent.action.VIEW");
+            Uri content_url = Uri.parse(webView.getOriginalUrl());
+            intent.setData(content_url);
+            startActivity(intent);
+            window.dismiss();
+        });
+        v.findViewById(R.id.btn_share).setOnClickListener(view13 -> {
+            Toast.makeText(getBaseContext(), "正在生成分享图片", Toast.LENGTH_SHORT).show();
+            webView.evaluateJavascript("window.Share.StartShare(document.getElementsByTagName('html')[0].scrollWidth,document.getElementsByTagName('html')[0].scrollHeight)", null);
+            window.dismiss();
+        });
+        v.findViewById(R.id.btn_share_link).setOnClickListener(view14 -> {
+            MobileUtils.ShareTextToFriend(getBaseContext(), "原始链接：" + webView.getOriginalUrl() + "\n当前页面：" + webView.getUrl());
+            window.dismiss();
+        });
+        v.findViewById(R.id.btn_save).setOnClickListener(view15 -> {
+            Toast.makeText(getBaseContext(), "正在生成保存图片", Toast.LENGTH_SHORT).show();
+            webView.evaluateJavascript("window.Share.StartSave(document.getElementsByTagName('html')[0].scrollWidth,document.getElementsByTagName('html')[0].scrollHeight)", null);
+            window.dismiss();
+        });
     }
 
     public void SyncCookie(Context context) {
@@ -149,7 +193,8 @@ public class PureBrowserActivity extends BaseActivity {
             Log.i("加载完成", url);
             loading.dismiss();
             if (NoTitle) {
-                Objects.requireNonNull(getSupportActionBar()).setTitle(webView.getTitle());
+                TextView tv_title = requireViewById(R.id.tv_title);
+                tv_title.setText(webView.getTitle());
             }
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
             String Un = prefs.getString("Username", "");
@@ -250,7 +295,8 @@ public class PureBrowserActivity extends BaseActivity {
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
             if (NoTitle) {
-                Objects.requireNonNull(getSupportActionBar()).setTitle(title);
+                TextView tv_title = requireViewById(R.id.tv_title);
+                tv_title.setText(webView.getTitle());
             }
         }
 

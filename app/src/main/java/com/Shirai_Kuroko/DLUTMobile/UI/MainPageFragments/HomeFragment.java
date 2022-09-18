@@ -84,7 +84,6 @@ public class HomeFragment extends Fragment {
         });
         ImageView iv_more = requireView().findViewById(R.id.iv_more);
         iv_more.setOnClickListener(this::showPopupWindow);
-        //TODO:主页卡片实现
         RecyclerView CollectionCard = requireView().findViewById(R.id.CollectionCard);
         CollectionCard.setLayoutManager(new LinearLayoutManager(requireActivity()));
         prevlist = ConfigHelper.GetCardIDList(getContext());
@@ -115,7 +114,7 @@ public class HomeFragment extends Fragment {
     public void showPopupWindow(View view) {
         @SuppressLint("InflateParams")
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.popup_main_right_more, null);
-        PopupWindow window = new PopupWindow(v, 370, 450, true);
+        PopupWindow window = new PopupWindow(v, 350, 450, true);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         window.setOutsideTouchable(true);
         window.setTouchable(true);

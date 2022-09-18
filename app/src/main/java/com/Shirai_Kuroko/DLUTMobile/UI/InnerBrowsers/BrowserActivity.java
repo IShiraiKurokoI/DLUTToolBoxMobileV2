@@ -10,13 +10,14 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.WindowManager;
 import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
@@ -27,11 +28,12 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.pm.ShortcutInfoCompat;
 import androidx.core.content.pm.ShortcutManagerCompat;
@@ -72,17 +74,17 @@ public class BrowserActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         WebView.enableSlowWholeDocumentDraw();
         setContentView(R.layout.activity_browser);
+        TextView Return = requireViewById(R.id.iv_back);
+        Return.setOnClickListener(v -> finish());
+        TextView tv_title = requireViewById(R.id.tv_title);
+        TextView tv_more = requireViewById(R.id.tv_more);
         mContext = this;
         Intent intent = getIntent();
         String id = intent.getStringExtra("App_ID");
         numid = Integer.parseInt(id);
         thisapp = ConfigHelper.Getmlist(this).get(numid);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowTitleEnabled(true);
-            actionBar.setTitle(thisapp.getAppName());
-        }
+        tv_title.setText(thisapp.getAppName());
+        tv_more.setOnClickListener(this::showPopupWindow);
         SyncCookie(this);
         webView = findViewById(R.id.BrowserWebView);
         loading = new LoadingView(this, R.style.CustomDialog);
@@ -240,8 +242,7 @@ public class BrowserActivity extends BaseActivity {
             Log.i("开始加载", url);//日志记录加载了什么页面
             switch (thisapp.getId()) {
                 case 51: {
-                    if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/home"))
-                    {
+                    if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/home")) {
                         webView.loadUrl("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/eleCostOfDlutPay?projectId=33");
                     }
                     break;
@@ -309,15 +310,13 @@ public class BrowserActivity extends BaseActivity {
                     break;
                 }
                 case 82: {
-                    if (url.contains("guid.lib.dlut.edu.cn)"))
-                    {
+                    if (url.contains("guid.lib.dlut.edu.cn)")) {
                         webView.loadUrl("https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f7e24898693c6152300c85b98c1b2631a4d2be57/map/index.html");
                     }
                     break;
                 }
                 case 83: {
-                    if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/home"))
-                    {
+                    if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/home")) {
                         webView.loadUrl("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/netCostOfSlPay?projectId=28");
                     }
                     break;
@@ -325,8 +324,8 @@ public class BrowserActivity extends BaseActivity {
                 case 85: {
                     webView.getSettings().setLoadWithOverviewMode(false);
                     webView.getSettings().setUseWideViewPort(false);
-                    ((Activity)mContext).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
-                    ((Activity)mContext).getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                    ((Activity) mContext).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
+                    ((Activity) mContext).getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
                     break;
                 }
                 default://默认加载完成隐藏加载条
@@ -389,12 +388,10 @@ public class BrowserActivity extends BaseActivity {
                 break;
             }
             case 51: {
-                if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/home"))
-                {
+                if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/home")) {
                     webView.loadUrl("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/eleCostOfDlutPay?projectId=33");
                 }
-                if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/eleCostOfDlutPay?projectId=33"))
-                {
+                if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/eleCostOfDlutPay?projectId=33")) {
                     webView.clearHistory();
                     loading.dismiss();
                 }
@@ -488,19 +485,16 @@ public class BrowserActivity extends BaseActivity {
                 break;
             }
             case 82: {
-                if (url.contains("guid.lib.dlut.edu.cn)"))
-                {
+                if (url.contains("guid.lib.dlut.edu.cn)")) {
                     webView.loadUrl("https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f7e24898693c6152300c85b98c1b2631a4d2be57/map/index.html");
                 }
                 break;
             }
             case 83: {
-                if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/home"))
-                {
+                if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/home")) {
                     webView.loadUrl("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/netCostOfSlPay?projectId=28");
                 }
-                if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/netCostOfSlPay?projectId=28"))
-                {
+                if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/netCostOfSlPay?projectId=28")) {
                     webView.clearHistory();
                     loading.dismiss();
                 }
@@ -574,86 +568,71 @@ public class BrowserActivity extends BaseActivity {
         }
     }
 
-    /* 创建菜单 */
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, "刷新此页面");
-        menu.add(0, 1, 0, "浏览器打开");
-        menu.add(0, 2, 0, "分享此页面");
-        menu.add(0, 3, 0, "分享原链接");
-        menu.add(0, 4, 0, "保存此页面");
-        menu.add(0, 5, 0, "固定到桌面");
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-            return true;
-        }
-        switch (item.getItemId()) {
-            case 0: {
-                webView.reload();
-                return true;
+    public void showPopupWindow(View view) {
+        @SuppressLint("InflateParams")
+        View v = LayoutInflater.from(this).inflate(R.layout.popup_browser_right_more, null);
+        PopupWindow window = new PopupWindow(v, 480, 900, true);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        window.setOutsideTouchable(true);
+        window.setTouchable(true);
+        window.setAnimationStyle(R.style.main_more_anim);
+        window.showAsDropDown(view, 0, 0);
+        v.findViewById(R.id.btn_refresh).setOnClickListener(view1 -> {
+            webView.reload();
+            window.dismiss();
+        });
+        v.findViewById(R.id.btn_open_browser).setOnClickListener(view12 -> {
+            if (webView.getOriginalUrl().startsWith("file")) {
+                Toast.makeText(mContext, "此页面无法在浏览器内打开", Toast.LENGTH_SHORT).show();
             }
-            case 1: {
-                if (webView.getOriginalUrl().startsWith("file")) {
-                    Toast.makeText(this, "此页面无法在浏览器内打开", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.VIEW");
-                Uri content_url = Uri.parse(webView.getOriginalUrl());
-                intent.setData(content_url);
-                startActivity(intent);
-                return true;
-            }
-            case 2: {
-                Toast.makeText(getBaseContext(), "正在生成分享图片", Toast.LENGTH_SHORT).show();
-                webView.evaluateJavascript("window.Share.StartShare(document.getElementsByTagName('html')[0].scrollWidth,document.getElementsByTagName('html')[0].scrollHeight)", null);
-                return true;
-            }
-            case 3: {
-                MobileUtils.ShareTextToFriend(mContext, "原始链接：" + webView.getOriginalUrl() + "\n当前页面：" + webView.getUrl());
-                return true;
-            }
-            case 4: {
-                Toast.makeText(getBaseContext(), "正在生成保存图片", Toast.LENGTH_SHORT).show();
-                webView.evaluateJavascript("window.Share.StartSave(document.getElementsByTagName('html')[0].scrollWidth,document.getElementsByTagName('html')[0].scrollHeight)", null);
-                return true;
-            }
-            case 5: {
-                downShortcutICon();
-                return true;
-            }
-        }
-        return super.onOptionsItemSelected(item);
+            Intent intent = new Intent();
+            intent.setAction("android.intent.action.VIEW");
+            Uri content_url = Uri.parse(webView.getOriginalUrl());
+            intent.setData(content_url);
+            startActivity(intent);
+            window.dismiss();
+        });
+        v.findViewById(R.id.btn_share).setOnClickListener(view13 -> {
+            Toast.makeText(getBaseContext(), "正在生成分享图片", Toast.LENGTH_SHORT).show();
+            webView.evaluateJavascript("window.Share.StartShare(document.getElementsByTagName('html')[0].scrollWidth,document.getElementsByTagName('html')[0].scrollHeight)", null);
+            window.dismiss();
+        });
+        v.findViewById(R.id.btn_share_link).setOnClickListener(view14 -> {
+            MobileUtils.ShareTextToFriend(mContext, "原始链接：" + webView.getOriginalUrl() + "\n当前页面：" + webView.getUrl());
+            window.dismiss();
+        });
+        v.findViewById(R.id.btn_save).setOnClickListener(view15 -> {
+            Toast.makeText(getBaseContext(), "正在生成保存图片", Toast.LENGTH_SHORT).show();
+            webView.evaluateJavascript("window.Share.StartSave(document.getElementsByTagName('html')[0].scrollWidth,document.getElementsByTagName('html')[0].scrollHeight)", null);
+            window.dismiss();
+        });
+        v.findViewById(R.id.btn_pin).setOnClickListener(view16 -> {
+            downShortcutICon();
+            window.dismiss();
+        });
     }
 
     public class PicShareInterFace {
         @JavascriptInterface
         public void StartShare(String s, String s1) {
             Handler handler = new Handler(Looper.getMainLooper());
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    float scale = webView.getScale();
-                    int width = (int) (Integer.parseInt(s) * scale);
-                    int height;
-                    if (!webView.getOriginalUrl().startsWith("file")) {
-                        height = (int) (Integer.parseInt(s1) * scale + 220);
-                    } else {
-                        height = (int) (Integer.parseInt(s1) * scale);
-                    }
-                    Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);//设置相应的图片质量
-                    Canvas canvas = new Canvas(bitmap);
-                    webView.draw(canvas);
-                    if (!webView.getOriginalUrl().startsWith("file")) {
-                        Bitmap qr = QRCodeHelper.createQRCodeBitmap(webView.getOriginalUrl(), 200, 200, "UTF-8", "L", "0", Color.BLACK, Color.WHITE);
-                        canvas.drawBitmap(qr, 10, bitmap.getHeight() - 210, null);
-                    }
-                    MobileUtils.BrowserSharePictureToFriend(mContext, webView, thisapp, bitmap);
+            handler.post(() -> {
+                float scale = webView.getScale();
+                int width = (int) (Integer.parseInt(s) * scale);
+                int height;
+                if (!webView.getOriginalUrl().startsWith("file")) {
+                    height = (int) (Integer.parseInt(s1) * scale + 220);
+                } else {
+                    height = (int) (Integer.parseInt(s1) * scale);
                 }
+                Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);//设置相应的图片质量
+                Canvas canvas = new Canvas(bitmap);
+                webView.draw(canvas);
+                if (!webView.getOriginalUrl().startsWith("file")) {
+                    Bitmap qr = QRCodeHelper.createQRCodeBitmap(webView.getOriginalUrl(), 200, 200, "UTF-8", "L", "0", Color.BLACK, Color.WHITE);
+                    canvas.drawBitmap(qr, 10, bitmap.getHeight() - 210, null);
+                }
+                MobileUtils.BrowserSharePictureToFriend(mContext, webView, thisapp, bitmap);
             });
         }
 

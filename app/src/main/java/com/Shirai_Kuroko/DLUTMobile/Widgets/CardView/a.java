@@ -23,7 +23,7 @@ import okhttp3.Response;
  * @author Shirai_Kuroko
  * @version 1.0.0
  * @ClassName a.java
- * @Description TODO
+ * @Description CardViewDataLoader
  * @createTime 2022年09月06日 09:12
  */
 public class a implements Runnable {
@@ -42,7 +42,7 @@ public class a implements Runnable {
             final CardView b = this.b;
             b.d();
             String s;
-            final String str = s = this.b.f.getCard_url();
+            final String str = s = this.b.appBean.getCard_url();
             if (!str.startsWith("http://")) {
                 s = str;
                 if (!str.startsWith("https://")) {
@@ -50,7 +50,7 @@ public class a implements Runnable {
                             str;
                 }
             }
-            LoginResponseBean UserBean = ConfigHelper.GetUserBean(b.e);
+            LoginResponseBean UserBean = ConfigHelper.GetUserBean(b.context);
             if (UserBean == null) {
                 return;
             }
@@ -77,8 +77,8 @@ public class a implements Runnable {
                     response = new OkHttpClient().newBuilder().connectTimeout(10, TimeUnit.SECONDS).readTimeout(10,TimeUnit.SECONDS).build().newCall(request).execute();
                 } catch (IOException e) {
                     handler.post(() -> this.a = e.getLocalizedMessage());
-                    this.b.g=null;
-                    new Handler(this.b.e.getMainLooper()).post(b::f);
+                    this.b.cardInfoBean =null;
+                    new Handler(this.b.context.getMainLooper()).post(b::f);
                     e.printStackTrace();
                     return;
                 }
@@ -88,8 +88,8 @@ public class a implements Runnable {
                         ResponseBody = Objects.requireNonNull(response.body()).string();
                     } catch (IOException e) {
                         handler.post(() -> this.a = e.getLocalizedMessage());
-                        this.b.g=null;
-                        new Handler(this.b.e.getMainLooper()).post(b::f);
+                        this.b.cardInfoBean =null;
+                        new Handler(this.b.context.getMainLooper()).post(b::f);
                         e.printStackTrace();
                         return;
                     }
@@ -100,13 +100,13 @@ public class a implements Runnable {
                             Log.i("卡片请求结果", "请求：\n"+ request +"\n返回：\n"+a);
                             LogToFile.i("卡片请求结果", "请求：\n"+ request +"\n返回：\n"+a);
                             try {
-                                this.b.g= JSON.parseObject(a, CardInfoBean.class);
+                                this.b.cardInfoBean = JSON.parseObject(a, CardInfoBean.class);
                                 this.b.f();
                             }
                             catch (Exception e)
                             {
                                 e.printStackTrace();
-                                this.b.g=null;
+                                this.b.cardInfoBean =null;
                                 this.b.f();
                             }
                         });

@@ -52,22 +52,22 @@ import java.util.Map;
 public class CardView extends MaxHeightView implements View.OnClickListener {
     public static final String w;
     public int[] d;
-    public Context e;
-    public AppBean f;
-    public CardInfoBean g;
-    public ImageView h;
-    public TextView i;
-    public TextView j;
-    public FrameLayout k;
-    public FrameLayout l;
+    public Context context;
+    public AppBean appBean;
+    public CardInfoBean cardInfoBean;
+    public ImageView imageView;
+    public TextView textView1;
+    public TextView textView2;
+    public FrameLayout frameLayout;
+    public FrameLayout frameLayout1;
     public View m;
     public TextView n;
     public float o;
     public float p;
-    public LinearLayout q;
+    public LinearLayout linearLayout;
     public boolean r;
     public e t;
-    public TextView u;
+    public TextView textView;
     public ExpandableCardContentView.a v;
     public int id;
     public int position;
@@ -87,21 +87,21 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
         this.o = -1.0f;
         this.p = 1.0f;
         this.r = true;
-        this.e = e;
+        this.context = e;
         this.o = (float) e.obtainStyledAttributes(set, d).getLayoutDimension(0, -1);
         this.t = new e();
-        LayoutInflater.from(this.e).inflate(R.layout.card_base, this);
-        this.q = this.findViewById(R.id.ll_card_title);
-        this.h = this.findViewById(R.id.iv_card_icon);
-        this.i = this.findViewById(R.id.tv_card_name);
-        this.j = this.findViewById(R.id.tv_unread_count);
-        this.k = this.findViewById(R.id.tabs_container);
-        this.l = this.findViewById(R.id.fl_card_content);
+        LayoutInflater.from(this.context).inflate(R.layout.card_base, this);
+        this.linearLayout = this.findViewById(R.id.ll_card_title);
+        this.imageView = this.findViewById(R.id.iv_card_icon);
+        this.textView1 = this.findViewById(R.id.tv_card_name);
+        this.textView2 = this.findViewById(R.id.tv_unread_count);
+        this.frameLayout = this.findViewById(R.id.tabs_container);
+        this.frameLayout1 = this.findViewById(R.id.fl_card_content);
         this.m = this.findViewById(R.id.tabs_container_base);
         this.findViewById(R.id.iv_card_menu).setOnClickListener(this);
-        this.u = this.findViewById(R.id.tv_action_btn);
+        this.textView = this.findViewById(R.id.tv_action_btn);
         if (this.o != -1.0f) {
-            this.setScaleX(this.p = V(this.e, 270.0f) / (float) (u0(e)[0] - V(this.e, 16.0f) * 2));
+            this.setScaleX(this.p = V(this.context, 270.0f) / (float) (u0(e)[0] - V(this.context, 16.0f) * 2));
             this.setScaleY(this.p);
         }
     }
@@ -122,8 +122,8 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
 
     public final Map<String, String> d() {
         final HashMap a = A("v", "1");
-        a.put("verify", ConfigHelper.GetUserBean(e).getData().getVerify());
-        String sb = this.f.getSelectTab() +
+        a.put("verify", ConfigHelper.GetUserBean(context).getData().getVerify());
+        String sb = this.appBean.getSelectTab() +
                 "";
         a.put("tab", sb);
         return (Map<String, String>) a;
@@ -144,31 +144,31 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
         }
 
         public void onClick(final View view) {
-            Intent intent = new Intent(e, PureBrowserActivity.class);
+            Intent intent = new Intent(context, PureBrowserActivity.class);
             intent.putExtra("Name", "");
             intent.putExtra("Url", this.a.getUrl());
-            e.startActivity(intent);
+            context.startActivity(intent);
         }
     }
 
     public final void f() {
-        this.l.removeView(this.n);
-        this.k.removeAllViews();
-        if (this.g == null) {
-            new Handler(e.getMainLooper()).post(() -> h(2));
+        this.frameLayout1.removeView(this.n);
+        this.frameLayout.removeAllViews();
+        if (this.cardInfoBean == null) {
+            new Handler(context.getMainLooper()).post(() -> h(2));
             return;
         }
         final e t = this.t;
-        String sb = this.f.getCard_url() +
+        String sb = this.appBean.getCard_url() +
                 this.d();
-        t.b.put(sb, this.g);
-        final CardInfoBean.ConfigBean global = this.g.getGlobal();
+        t.b.put(sb, this.cardInfoBean);
+        final CardInfoBean.ConfigBean global = this.cardInfoBean.getGlobal();
         if (global != null) {
             final int tips = global.getTips();
             if (tips > 0) {
-                this.j.setVisibility(View.VISIBLE);
+                this.textView2.setVisibility(View.VISIBLE);
             } else {
-                this.j.setVisibility(View.GONE);
+                this.textView2.setVisibility(View.GONE);
             }
             String value;
             if (tips > 99) {
@@ -176,57 +176,57 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
             } else {
                 value = String.valueOf(tips);
             }
-            this.j.setText(value);
+            this.textView2.setText(value);
         } else {
-            this.j.setVisibility(View.GONE);
+            this.textView2.setVisibility(View.GONE);
         }
         if (global != null && global.getAction() != null) {
             final CardInfoBean.ActionBean action = global.getAction();
             if (TextUtils.isEmpty(action.getName())) {
-                this.u.setVisibility(View.GONE);
+                this.textView.setVisibility(View.GONE);
             } else {
-                this.u.setVisibility(View.VISIBLE);
-                this.u.setText(action.getName());
+                this.textView.setVisibility(View.VISIBLE);
+                this.textView.setText(action.getName());
                 if (!TextUtils.isEmpty(action.getUrl())) {
-                    this.u.setOnClickListener(new c(this, action));
+                    this.textView.setOnClickListener(new c(this, action));
                 }
             }
         } else {
-            this.u.setVisibility(View.GONE);
+            this.textView.setVisibility(View.GONE);
         }
         this.m.setVisibility(View.GONE);
-        final CardInfoBean g = this.g;
+        final CardInfoBean g = this.cardInfoBean;
         if (g != null && g.getMeta() != null) {
-            final int template = this.g.getMeta().getTemplate();
+            final int template = this.cardInfoBean.getMeta().getTemplate();
             if (template >= 1 && template <= 5) {
-                BaseCardContentView baseCardContentView = new BaseCardContentView(this.e);
+                BaseCardContentView baseCardContentView = new BaseCardContentView(this.context);
                 Object c;
                 if (template != 1) {
                     if (template != 2) {
                         if (template != 3) {
                             if (template != 4) {
-                                baseCardContentView = new DataCardView(this.e);
-                                c = this.g.getData(DataCardItemBean.class);
+                                baseCardContentView = new DataCardView(this.context);
+                                c = this.cardInfoBean.getData(DataCardItemBean.class);
                             } else {
-                                baseCardContentView = new TableCardView(this.e);
-                                c = this.g.getData(TableCardRowBean.class, true);
+                                baseCardContentView = new TableCardView(this.context);
+                                c = this.cardInfoBean.getData(TableCardRowBean.class, true);
                             }
                         } else {
-                            baseCardContentView = new HorScrollCardView(this.e);
-                            c = this.g.getData(HorScrollCardItemBean.class);
+                            baseCardContentView = new HorScrollCardView(this.context);
+                            c = this.cardInfoBean.getData(HorScrollCardItemBean.class);
                         }
                     } else {
-                        baseCardContentView = new ImgTextCardView(this.e);
-                        c = this.g.getData(ImgTextCardItemBean.class);
+                        baseCardContentView = new ImgTextCardView(this.context);
+                        c = this.cardInfoBean.getData(ImgTextCardItemBean.class);
                     }
                 } else {
-                    baseCardContentView = new TextCardView(this.e);
-                    c = this.g.getData(TextCardItemBean.class);
+                    baseCardContentView = new TextCardView(this.context);
+                    c = this.cardInfoBean.getData(TextCardItemBean.class);
                 }
-                this.k.removeAllViews();
-                final CardInfoBean g2 = this.g;
-                if (g2 != null && g2.getTabs() != null && this.g.getTabs().getData() != null) {
-                    final List<CardTabsBean.TabBean> data = this.g.getTabs().getData();
+                this.frameLayout.removeAllViews();
+                final CardInfoBean g2 = this.cardInfoBean;
+                if (g2 != null && g2.getTabs() != null && this.cardInfoBean.getTabs().getData() != null) {
+                    final List<CardTabsBean.TabBean> data = this.cardInfoBean.getTabs().getData();
                     final int size = data.size();
                     if (size < 1) {
                         this.m.setVisibility(View.GONE);
@@ -234,10 +234,10 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
                         this.m.setVisibility(View.VISIBLE);
                         final boolean b = size > 4;
                         final LinearLayout.LayoutParams linearLayoutLayoutParams = new LinearLayout.LayoutParams(-1, -2);
-                        final LinearLayout linearLayout = new LinearLayout(this.e);
+                        final LinearLayout linearLayout = new LinearLayout(this.context);
                         linearLayout.setLayoutParams(new LayoutParams(-1, -2));
                         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                        final int n = u0(e)[0] - V(this.e, 16.0f) * 2;
+                        final int n = u0(context)[0] - V(this.context, 16.0f) * 2;
                         int n2;
                         if (size >= 4) {
                             n2 = n / 4;
@@ -252,7 +252,7 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
                         }
                         for (int i = 0; i < size; ++i) {
                             final CardTabsBean.TabBean tabBean = data.get(i);
-                            final LinearLayout linearLayout2 = (LinearLayout) LayoutInflater.from(this.e).inflate(R.layout.item_card_tab, null);
+                            final LinearLayout linearLayout2 = (LinearLayout) LayoutInflater.from(this.context).inflate(R.layout.item_card_tab, null);
                             final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(e, -2);
                             if ((layoutParams.width = e) == 0) {
                                 layoutParams.weight = 1.0f;
@@ -273,19 +273,19 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
                             textView.setTextSize(0, (float) this.e(textView.getTextSize()));
                             textView.setText(substring);
                             textView.setOnClickListener(new b(this, 2000, linearLayout2, i));
-                            linearLayout2.findViewById(R.id.card_ind).setSelected(i == this.f.getSelectTab());
+                            linearLayout2.findViewById(R.id.card_ind).setSelected(i == this.appBean.getSelectTab());
                             linearLayout.addView(linearLayout2);
                         }
                         if (b) {
-                            final HorizontalScrollView horizontalScrollView = new HorizontalScrollView(this.e);
+                            final HorizontalScrollView horizontalScrollView = new HorizontalScrollView(this.context);
                             horizontalScrollView.setHorizontalScrollBarEnabled(false);
                             horizontalScrollView.setLayoutParams(linearLayoutLayoutParams);
                             horizontalScrollView.addView(linearLayout);
-                            this.k.addView(horizontalScrollView);
+                            this.frameLayout.addView(horizontalScrollView);
                         } else {
                             linearLayout.setId(R.id.main_card_tabs_container);
                             linearLayout.setLayoutParams(linearLayoutLayoutParams);
-                            this.k.addView(linearLayout);
+                            this.frameLayout.addView(linearLayout);
                         }
                     }
                 } else {
@@ -293,11 +293,11 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
                 }
                 baseCardContentView.c = (List) c;
                 baseCardContentView.a();
-                baseCardContentView.b = this.g;
+                baseCardContentView.b = this.cardInfoBean;
                 this.v = new ExpandableCardContentView.a() {
                     @Override
                     public void SetExpand(boolean e) {
-                        f.setExpand(e);
+                        appBean.setExpand(e);
                         f();
                     }
                 };
@@ -305,7 +305,7 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
                 if (v != null && baseCardContentView instanceof ExpandableCardContentView) {
                     final ExpandableCardContentView expandableCardContentView = (ExpandableCardContentView) baseCardContentView;
                     expandableCardContentView.i = v;
-                    final boolean expand = this.f.isExpand();
+                    final boolean expand = this.appBean.isExpand();
                     expandableCardContentView.g = expand;
                     if (expandableCardContentView.e) {
                         if (expand) {
@@ -315,8 +315,8 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
                         }
                     }
                 }
-                this.l.removeAllViews();
-                this.l.addView(baseCardContentView);
+                this.frameLayout1.removeAllViews();
+                this.frameLayout1.addView(baseCardContentView);
             } else {
                 this.h(4);
             }
@@ -326,30 +326,30 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
     }
 
     public void g(@NonNull final AppBean f) {
-        this.f = f;
-        this.i.setText(f.getApp_name());
-        Glide.with(this.e).load(this.f.getIcon()).into(this.h);
+        this.appBean = f;
+        this.textView1.setText(f.getApp_name());
+        Glide.with(this.context).load(this.appBean.getIcon()).into(this.imageView);
         final e t = this.t;
-        final String string = this.f.getCard_url() +
+        final String string = this.appBean.getCard_url() +
                 this.d();
         t.b.size();
         final CardInfoBean g = t.b.get(string);
         if (g == null) {
-            if (!d(this.e)) {
+            if (!d(this.context)) {
                 this.h(3);
-            } else if (TextUtils.isEmpty(this.f.getCard_url())) {
+            } else if (TextUtils.isEmpty(this.appBean.getCard_url())) {
                 this.h(2);
             } else {
                 this.h(1);
-                Handler handler = new Handler(this.e.getMainLooper());
+                Handler handler = new Handler(this.context.getMainLooper());
                 handler.post(new com.Shirai_Kuroko.DLUTMobile.Widgets.CardView.a(this));
             }
         } else {
-            this.g = g;
+            this.cardInfoBean = g;
             this.f();
         }
-        this.q.setOnClickListener(
-                new d(e, f.getUrl())
+        this.linearLayout.setOnClickListener(
+                new d(context, f.getUrl())
         );
     }
 
@@ -359,14 +359,14 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
     }
 
     public void h(final int n) {
-        this.l.removeAllViews();
+        this.frameLayout1.removeAllViews();
         if (this.n == null) {
-            final FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(-1, (int) (this.e.getResources().getDimension(R.dimen.card_loading_main_view_height) * this.p + 0.5));
-            final TextView n2 = new TextView(this.e);
+            final FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(-1, (int) (this.context.getResources().getDimension(R.dimen.card_loading_main_view_height) * this.p + 0.5));
+            final TextView n2 = new TextView(this.context);
             n2.setLayoutParams(layoutParams);
             n2.setGravity(17);
             n2.setTextSize(1, this.p * 12.0f);
-            n2.setTextColor(this.e.getResources().getColor(R.color.textColorPrimary));
+            n2.setTextColor(this.context.getResources().getColor(R.color.textColorPrimary));
             n2.setText("Loading ... ...");
             this.n = n2;
         }
@@ -385,12 +385,12 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
         } else {
             this.n.setText(R.string.card_wording_loading);
         }
-        this.l.addView(this.n);
+        this.frameLayout1.addView(this.n);
     }
 
     public void onClick(final View view) {
         if (view.getId() == R.id.iv_card_menu) {
-            final Context e = this.e;
+            final Context e = this.context;
             final View inflate = LayoutInflater.from(e).inflate(R.layout.popup_card_menu, null);
             final PopupWindow popupWindow = new PopupWindow(inflate, -1, -1, true);
             popupWindow.setTouchable(true);
@@ -434,7 +434,7 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
             });
             inflate.findViewById(R.id.tv_card_menu_refresh).setOnClickListener(view12 -> {
                 h(1);
-                Handler handler = new Handler(this.e.getMainLooper());
+                Handler handler = new Handler(this.context.getMainLooper());
                 handler.post(new com.Shirai_Kuroko.DLUTMobile.Widgets.CardView.a(this));
                 popupWindow.dismiss();
             });
