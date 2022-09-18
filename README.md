@@ -11,6 +11,6 @@
 我的</br>
 ![Screenshot_20220804_071908_com Shirai_Kuroko DLUT](https://user-images.githubusercontent.com/73374735/182729406-701c30f2-d2f5-486d-9076-96a8f239b550.jpg)
 浏览器界面</br>
-![A4DAE7880AA056D5E9E2631ACD7D1CCF](https://user-images.githubusercontent.com/73374735/190933451-21d40d81-526a-4cf9-bf6a-8e1d242433a9.jpg)
+![Screenshot_20220919_074136_com Shirai_Kuroko DLUT](https://user-images.githubusercontent.com/73374735/190933482-4929eb4c-f931-497c-bbfa-6aa667566267.jpg)
 </br>
 如有问题，BUG反馈及建议请提Issue或者联系作者邮箱：ishirai_kurokoi@foxmail.com
