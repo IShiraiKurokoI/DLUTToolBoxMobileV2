@@ -54,13 +54,27 @@ public class AppDetailActivity extends AppCompatActivity {
 
         TextView tda = findViewById(R.id.app_author);
 
-        if(thisapp.getId()<70)
+        if(thisapp.getType()!=null)
         {
-            tda.setText("校方应用");
+            if (thisapp.getType().contains("custom"))
+            {
+                tda.setText("自制应用");
+            }
+            else
+            {
+                tda.setText("校方应用");
+            }
         }
         else
         {
-            tda.setText("自制应用");
+            if (thisapp.getApp_id()==null)
+            {
+                tda.setText("替换应用");
+            }
+            else
+            {
+                tda.setText("校方应用");
+            }
         }
         if (ThemeType) {
             bo.setTextColor(Color.WHITE);

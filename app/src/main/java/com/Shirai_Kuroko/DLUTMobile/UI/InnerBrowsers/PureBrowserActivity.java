@@ -30,6 +30,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +46,6 @@ import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.BaseActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.BrowserProxy;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.WebDownloadListener;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
-import com.Shirai_Kuroko.DLUTMobile.Widgets.LoadingView;
 
 import java.util.Date;
 import java.util.Objects;
@@ -53,8 +53,9 @@ import java.util.Objects;
 public class PureBrowserActivity extends BaseActivity {
 
     private WebView webView;
-    private LoadingView loading;
+//    private LoadingView loading;
     boolean NoTitle = false;
+    private ProgressBar progressBar;
 
     @SuppressLint({"SetJavaScriptEnabled", "NewApi"})
     @Override
@@ -75,8 +76,8 @@ public class PureBrowserActivity extends BaseActivity {
         if (Objects.equals(Name, "")) {
             NoTitle = true;
         }
-        loading = new LoadingView(this, R.style.CustomDialog);
-        loading.show();
+//        loading = new LoadingView(this, R.style.CustomDialog);
+//        loading.show();
         webView.setWebChromeClient(this.webChromeClient);
         webView.setWebViewClient(this.webViewClient);
         webView.setDownloadListener(new WebDownloadListener(this));
@@ -107,9 +108,11 @@ public class PureBrowserActivity extends BaseActivity {
         webView.setBackgroundColor(Color.WHITE); // 设置背景色
         webView.getBackground().setAlpha(125); // 设置透明度 范围：0-255
         SyncCookie(this);
-        if (!Url.contains("rj")) {
-            loading.show();
-        }
+//        if (!Url.contains("rj")) {
+//            loading.show();
+//        }
+        progressBar=findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.VISIBLE);
         webView.loadUrl(Url.replace("202.118.65.217","webvpn.dlut.edu.cn"));
     }
 
@@ -191,7 +194,8 @@ public class PureBrowserActivity extends BaseActivity {
         @Override
         public void onPageFinished(WebView view, String url) {//页面加载完成
             Log.i("加载完成", url);
-            loading.dismiss();
+//            loading.dismiss();
+            progressBar.setVisibility(View.GONE);
             if (NoTitle) {
                 TextView tv_title = requireViewById(R.id.tv_title);
                 tv_title.setText(webView.getTitle());
@@ -247,9 +251,10 @@ public class PureBrowserActivity extends BaseActivity {
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {//页面开始加载
-            if (!url.contains("https://api.m.dlut.edu.cn/login?")) {
-                loading.show();//显示加载条
-            }
+//            if (!url.contains("https://api.m.dlut.edu.cn/login?")) {
+//                loading.show();//显示加载条
+                progressBar.setVisibility(View.VISIBLE);
+//            }
             Log.i("开始加载", url);//日志记录加载了什么页面
         }
 
@@ -288,6 +293,12 @@ public class PureBrowserActivity extends BaseActivity {
             localBuilder.create().show();
             result.confirm();
             return true;
+        }
+
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            super.onProgressChanged(view, newProgress);
+            progressBar.setProgress(newProgress,true);
         }
 
         //获取网页标题

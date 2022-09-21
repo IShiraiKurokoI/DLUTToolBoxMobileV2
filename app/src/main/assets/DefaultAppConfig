@@ -1,6 +1,7 @@
 [
   {
     "id": 0,
+    "app_id": "19b32196decf419a",
     "category": "life",
     "app_name": "玉兰卡",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/08/ynZM2VlLGmmAb9t7AAAj67t6MTY8968130",
@@ -11,6 +12,7 @@
   },
   {
     "id": 1,
+	"app_id": "14177ff5ca59e492",
     "category": "study",
     "app_name": "我的课表",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU-IiAPBCnAAAamt9Ip481490708",
@@ -21,6 +23,7 @@
   },
   {
     "id": 2,
+	"app_id": "f8df3d5f67fa5048",
     "category": "life",
     "app_name": "图书馆预约",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/02/03/ynZM2V8hIHuAakGbAABHogF7lj8252.png",
@@ -31,6 +34,7 @@
   },
   {
     "id": 3,
+	"app_id": "0764d4403c85f1bf",
     "category": "study",
     "app_name": "我的成绩",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2VlUWLqADKhKAAAUi-vic4E4521607",
@@ -41,6 +45,7 @@
   },
   {
     "id": 4,
+	"app_id": "9e480a50eff6dd35",
     "category": "life",
     "app_name": "网络自助",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/5B/ynZM2VmyW9mAGzv_AAAXfJXYcgw8899921",
@@ -51,6 +56,7 @@
   },
   {
     "id": 5,
+	"app_id": "75434923bfeeb9c2",
     "category": "study",
     "app_name": "考试安排",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/7B/ynZM2Vn7QI6AOQVDAAAZa-V0lMA6705172",
@@ -61,6 +67,7 @@
   },
   {
     "id": 6,
+	"app_id": "dbd4319d9980d0d9",
     "category": "life",
     "app_name": "浴室预约",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/FA/ynZM2V7UyAqAM6yFAAAzNGbR99s260.png",
@@ -71,16 +78,18 @@
   },
   {
     "id": 7,
-    "category": "office",
-    "app_name": "我赞赞我吐槽",
-    "icon": "https://store.m.dlut.edu.cn/group1/M00/01/0D/ynZM2VuVHpGAV97WAAAZMppK4Xc428.png",
-    "describe": "我赞赞我吐槽是针对学校职能部处、学部学院等部门服务进行评价和反馈的应用。",
+	"app_id": "85b3e8b80c1934f7",
+    "category": "life",
+    "app_name": "青年之家",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/05/6C/ynZM2WMpGR-AEIa_AAA2WxbpeVI481.png",
+    "describe": "大连理工大学“青年之家”学生论坛是学校在读学生互动交流、信息共享的网络平台，分为“学在大工”“活力校园”“生活热话”“互助交友”“意见建议”5个模块，在全体学生用户共建共治共享下，共同建成学生交流思想、分享经验、凝结爱校情怀的网络阵地。",
     "popularity": "2794106",
-    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=9qXqHnRQuhhViycC&redirect_uri=https%3a%2f%2flightapp.m.dlut.edu.cn%2fcheck%2fcomplainpraise&response_type=code&scope=base_api&state=dlut",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f2f552cd693464456a468ca88d1b203b/?filter=app",
     "issubscription": 0
   },
   {
     "id": 8,
+	"app_id": "54a9eb67638d2f89",
     "category": "office",
     "app_name": "迎新系统",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2VlnDrGAZ4zkAAAXPSNRMjc4254667",
@@ -91,6 +100,7 @@
   },
   {
     "id": 9,
+	"app_id": "f1497e0734ea7c01",
     "category": "life",
     "app_name": "体育场馆预订",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/02/30/ynZM2V9Mj2GAXxRpAAAZEquDC1U035.png",
@@ -101,6 +111,7 @@
   },
   {
     "id": 10,
+	"app_id": "72b1dda0f0844532",
     "category": "study",
     "app_name": "空闲教室",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/08/ynZM2VkeVL2AGt4BAAAYlzvpSVo6550599",
@@ -111,6 +122,7 @@
   },
   {
     "id": 11,
+	"app_id": "c219a4898adb1063",
     "category": "office",
     "app_name": "办事大厅",
     "icon": "https://my.m.dlut.edu.cn/images/appicon/shejiao.png",
@@ -121,6 +133,7 @@
   },
   {
     "id": 12,
+	"app_id": "38a542261fd1b6ab",
     "category": "life",
     "app_name": "校车定位",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/02/31/ynZM2V9Mt0SAE0SFAABPvJJ1-9A273.png",
@@ -131,6 +144,7 @@
   },
   {
     "id": 13,
+	"app_id": "abccc53d6b78cb01",
     "category": "study",
     "app_name": "研究生系统",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/2B/ynZM2VwcpHeADVLoAAAxsF8nPV0948.png",
@@ -141,6 +155,7 @@
   },
   {
     "id": 14,
+	"app_id": "d4f4d6fc4a8a0919",
     "category": "office",
     "app_name": "电子邮件",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/45/ynZM2VmdGl6AH-LhAAAYbvXmkRY0582290",
@@ -151,6 +166,7 @@
   },
   {
     "id": 15,
+	"app_id": "bc06dc5a52a67fbc",
     "category": "office",
     "app_name": "教师主页",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU_9iAdpatAAAcFW_puS88241415",
@@ -161,6 +177,7 @@
   },
   {
     "id": 16,
+	"app_id": "dd7772bfd34c857a",
     "category": "study",
     "app_name": "图书借阅",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2VlVDfOAH_FlAAAQiDCdlzs0313949",
@@ -171,6 +188,7 @@
   },
   {
     "id": 17,
+	"app_id": "ff08d787d7e95e7d",
     "category": "life",
     "app_name": "校园地图",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkVANOAaHFwAAAhBvGkHdU6252034",
@@ -181,6 +199,7 @@
   },
   {
     "id": 18,
+	"app_id": "d6b6f6abad481078",
     "category": "life",
     "app_name": "校历",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU_zyAVLJJAAAWwzlljqM2626410",
@@ -191,6 +210,7 @@
   },
   {
     "id": 19,
+	"app_id": "68542d005d38ee8b",
     "category": "life",
     "app_name": "跳蚤市场",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/AF/ynZM2Vso7YGAGwRfAAAZLmkTJ08566.png",
@@ -203,6 +223,7 @@
     "id": 20,
     "category": "life",
     "app_name": "返校前-学生返校申请",
+	"app_id": "594b656625da6d53",
     "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
     "describe": "该应用为学生申请返校的入口。适用于 国内本科生、研究生。",
     "popularity": "654307",
@@ -211,6 +232,7 @@
   },
   {
     "id": 21,
+	"app_id": "0e410a5da0e8ae86",
     "category": "office",
     "app_name": "校内通知",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/34/ynZM2VmRCTmAYyO4AAAZ_eqIXRM2301923",
@@ -221,6 +243,7 @@
   },
   {
     "id": 22,
+	"app_id": "da48a62b95497e7f",
     "category": "life",
     "app_name": "校园缴费",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/EF/ynZM2V5cX6uADgWxAAAbr4bV4J8446.png",
@@ -231,6 +254,7 @@
   },
   {
     "id": 23,
+	"app_id": "daf0a0ef5077f514",
     "category": "life",
     "app_name": "体质测评",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/25/ynZM2VwAqXuAfK3HAAAQNK-baPo920.png",
@@ -241,6 +265,7 @@
   },
   {
     "id": 24,
+	"app_id": "6fb7764b112a2746",
     "category": "study",
     "app_name": "四六级查询",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2VlocseAbGj2AAAhfXbUWgg692.png",
@@ -251,6 +276,7 @@
   },
   {
     "id": 25,
+	"app_id": "10e4a948d870cff2",
     "category": "office",
     "app_name": "公共通知",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU-9iAJ779AAAqN7kS9pY1398660",
@@ -261,6 +287,7 @@
   },
   {
     "id": 26,
+	"app_id": "dfddb5a60bb224b8",
     "category": "study",
     "app_name": "返校后信息上报",
     "icon": "https://my.m.dlut.edu.cn/images/appicon/shejiao.png",
@@ -271,6 +298,7 @@
   },
   {
     "id": 27,
+	"app_id": "6fc0e66f85e16032",
     "category": "life",
     "app_name": "离校系统",
     "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
@@ -281,6 +309,7 @@
   },
   {
     "id": 28,
+	"app_id": "50ac974f2840944c",
     "category": "office",
     "app_name": "学校新闻",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU-aqAYmGdAAARVIgc0DA1466483",
@@ -291,6 +320,7 @@
   },
   {
     "id": 29,
+	"app_id": "4ddb2c259240f03e",
     "category": "life",
     "app_name": "在校住宿学生外出申请 ",
     "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
@@ -301,6 +331,7 @@
   },
   {
     "id": 30,
+	"app_id": "bac83fb595d894f1",
     "category": "fun",
     "app_name": "视频直播",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/AE/ynZM2Vsjs_WAbKVBAAAUZ1O0wWU349.png",
@@ -311,6 +342,7 @@
   },
   {
     "id": 31,
+	"app_id": "d016b1a9f2684fb3",
     "category": "life",
     "app_name": "活动报名",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/0B/ynZM2VuPucOAG2EUAAAijVD0PLU792.png",
@@ -323,6 +355,7 @@
     "id": 32,
     "category": "life",
     "app_name": "返校中-健康状况和行程轨迹上报",
+	"app_id": "4bdcdb3b0658e270",
     "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
     "describe": "健康状况和行程轨迹上报：适用于 国内本科生、研究生、教职工、自聘人员",
     "popularity": "156672",
@@ -331,6 +364,7 @@
   },
   {
     "id": 33,
+	"app_id": "d350fb3ff8ce60c7",
     "category": "life",
     "app_name": "校内生活",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/8D/ynZM2VomenWAeOXkAAANqO47Geg0182891",
@@ -341,6 +375,7 @@
   },
   {
     "id": 34,
+	"app_id": "a8f5cb0d15208c41",
     "category": "life",
     "app_name": "校内点餐",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/50/ynZM2V0iBPCAD9VwAAAqiXkNdzA224.png",
@@ -351,6 +386,7 @@
   },
   {
     "id": 35,
+	"app_id": "d5420be25058d35b",
     "category": "life",
     "app_name": "学生临时离连申请",
     "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
@@ -361,6 +397,7 @@
   },
   {
     "id": 36,
+	"app_id": "4347b0f684e921d3",
     "category": "office",
     "app_name": "学工系统",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/F6/ynZM2V6qTHOADRmFAAAaO5TnZvA986.png",
@@ -371,6 +408,7 @@
   },
   {
     "id": 37,
+	"app_id": "2d16e783a41da673",
     "category": "office",
     "app_name": "就业信息",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/2B/ynZM2VwcpEmACJvsAAASGKGgtfo473.png",
@@ -381,6 +419,7 @@
   },
   {
     "id": 38,
+	"app_id": "9fa1f536cf2f2e7e",
     "category": "life",
     "app_name": "心理测评",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/02/A1/ynZM2WBYEe-ALSxiAAA-gtcEwFw355.png",
@@ -391,6 +430,7 @@
   },
   {
     "id": 39,
+	"app_id": "1ba83e5866adfdd9",
     "category": "office",
     "app_name": "校内公示",
     "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
@@ -401,6 +441,7 @@
   },
   {
     "id": 40,
+	"app_id": "2ead17d3bdef2a44",
     "category": "life",
     "app_name": "建行悦生活",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/5B/ynZM2VmyVgKAd-EPAAAYxpZfwd41645169",
@@ -411,6 +452,7 @@
   },
   {
     "id": 41,
+	"app_id": "fcf2106edde68e3c",
     "category": "life",
     "app_name": "快递查询",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/66/ynZM2VnLWSaAJKY7AAAkX4ZoFA40140603",
@@ -421,6 +463,7 @@
   },
   {
     "id": 42,
+	"app_id": "87e869f06af67802",
     "category": "life",
     "app_name": "校园黄页",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU_seAKxroAAAQdRbBtmw9038204",
@@ -431,6 +474,7 @@
   },
   {
     "id": 43,
+	"app_id": "49a20ee5f4c4df24",
     "category": "life",
     "app_name": "失物招领",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2Vli91KANtAuAAATb6WPdjg6232663",
@@ -441,6 +485,7 @@
   },
   {
     "id": 44,
+	"app_id": "cc7285cd837e77c8",
     "category": "office",
     "app_name": "官方主页",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/64/ynZM2VnEY6GAdhnPAAAjrL12SSc3513707",
@@ -451,6 +496,7 @@
   },
   {
     "id": 45,
+	"app_id": "e792ad1aad829c78",
     "category": "office",
     "app_name": "照片采集",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/19/ynZM2VvAP52AemfbAAA0ZwVo190430.png",
@@ -461,6 +507,7 @@
   },
   {
     "id": 46,
+	"app_id": "20b3f362fbaf7f6c",
     "category": "study",
     "app_name": "党建园地",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/A9/ynZM2VrkCoOAOJ_gAAAa8o1hjHA163.png",
@@ -471,6 +518,7 @@
   },
   {
     "id": 47,
+	"app_id": "d0957ac8e53f097c",
     "category": "social",
     "app_name": "移动自助",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/14/ynZM2VmH0PmAG5uFAAAilppM9Qo8711333",
@@ -481,6 +529,7 @@
   },
   {
     "id": 48,
+	"app_id": "d51e5b9cba42f205",
     "category": "life",
     "app_name": "校园网测速",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/45/ynZM2Vzjo7-AEl7QAAAv69n_AZs158.png",
@@ -491,6 +540,7 @@
   },
   {
     "id": 49,
+	"app_id": "73de59d68e3c0b94",
     "category": "social",
     "app_name": "易班",
     "icon": "https://my.m.dlut.edu.cn/images/appicon/yule.png",
@@ -501,6 +551,7 @@
   },
   {
     "id": 50,
+	"app_id": "6d39fdba5a7448fd",
     "category": "office",
     "app_name": "学校概况",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU_IKAaIdPAAAZftzAzPc1764114",
@@ -521,6 +572,7 @@
   },
   {
     "id": 52,
+	"app_id": "08547369c91d9a1e",
     "category": "social",
     "app_name": "官方微博",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/45/ynZM2VmdGjmAdiJPAAAc47CEc1Q1587217",
@@ -531,6 +583,7 @@
   },
   {
     "id": 53,
+	"app_id": "74e66df77a9a3f7f",
     "category": "life",
     "app_name": "互帮互助",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/22/ynZM2VvyhUSAY2kwAAAguGXRhgI468.png",
@@ -541,6 +594,7 @@
   },
   {
     "id": 54,
+	"app_id": "12c1086a213d6de4",
     "category": "office",
     "app_name": "调查问卷",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2VlsDimAOrJHAAAUG6dAb505075498",
@@ -551,6 +605,7 @@
   },
   {
     "id": 55,
+	"app_id": "87998add3ad36769",
     "category": "life",
     "app_name": "校报",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/22/ynZM2VvudlKADs6DAAAbslcI-uo343.png",
@@ -561,6 +616,7 @@
   },
   {
     "id": 56,
+	"app_id": "0431be95c2043111",
     "category": "office",
     "app_name": "机构知识库",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/14/ynZM2VurU1CAWR60AAAdLHl4Y2E380.png",
@@ -571,6 +627,7 @@
   },
   {
     "id": 57,
+	"app_id": "7822edc5ac263617",
     "category": "office",
     "app_name": "自助打印",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/25/ynZM2Vv97QaAZQDFAAAXvITm0Jg604.png",
@@ -581,6 +638,7 @@
   },
   {
     "id": 58,
+	"app_id": "03afd0b5746f66a4",
     "category": "life",
     "app_name": "门禁管理",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/02/9B/ynZM2WA_INuAQzvbAAASWmFwefE245.png",
@@ -591,6 +649,7 @@
   },
   {
     "id": 59,
+	"app_id": "d76cfd8e6d0ec486",
     "category": "life",
     "app_name": "平安大工",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/6D/ynZM2VntfSSADIDlAAAy0MisHFc7154732",
@@ -601,6 +660,7 @@
   },
   {
     "id": 60,
+	"app_id": "5a742ab4264bb0c3",
     "category": "life",
     "app_name": "预约排号",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/02/44/ynZM2V9Vvd6AW456AABWXBbIxGY056.png",
@@ -611,6 +671,7 @@
   },
   {
     "id": 61,
+	"app_id": "e8d5afbffb2fd0bd",
     "category": "social",
     "app_name": "电信选号",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/14/ynZM2VmH0O2AJtBTAAAVkijl2t04899563",
@@ -631,6 +692,7 @@
   },
   {
     "id": 63,
+	"app_id": "12d054f624921fb3",
     "category": "life",
     "app_name": "智能助手",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/02/44/ynZM2V9VqPOAZ4ZgAACSZGfegWo269.png",
@@ -641,6 +703,7 @@
   },
   {
     "id": 64,
+	"app_id": "ad186c9811223457",
     "category": "life",
     "app_name": "资源预约",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/02/83/ynZM2V_N3euAAn5PAAAZ46zJWmQ263.png",
@@ -651,6 +714,7 @@
   },
   {
     "id": 65,
+	"app_id": "53fef93fd4364221",
     "category": "office",
     "app_name": "移动OA",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/03/9F/ynZM2WIgRWeAXK2gAAAuFIR6-Pc622.png",
@@ -671,6 +735,7 @@
   },
   {
     "id": 67,
+	"app_id": "68e7ae1fda650cca",
     "category": "office",
     "app_name": "组工平台",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/03/D8/ynZM2WJC7gCAYYfMAABOdPZK638911.png",
@@ -681,6 +746,7 @@
   },
   {
     "id": 68,
+	"app_id": "8e3e76189a068784",
     "category": "office",
     "app_name": "多媒体教室管理",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/03/4A/ynZM2WGOE1KAbZSmAAAKzt9dyGg960.png",
@@ -691,6 +757,7 @@
   },
   {
     "id": 69,
+	"app_id": "0f1f3ea99270552b",
     "category": "office",
     "app_name": "培训管理",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/02/AE/ynZM2WCFBIqARg_gAAAodUwo5gA430.png",
@@ -705,6 +772,7 @@
     "app_name": "选课系统（教务系统）",
     "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
     "describe": "教务系统的选课界面",
+    "type": "custom",
     "popularity": "16060060",
     "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
@@ -715,6 +783,7 @@
     "app_name": "考试信息（教务系统）",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/7B/ynZM2Vn7QI6AOQVDAAAZa-V0lMA6705172",
     "describe": "教务系统的考试信息",
+    "type": "custom",
     "popularity": "16060060",
     "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
@@ -725,6 +794,7 @@
     "app_name": "教务主页",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/08/ynZM2VkeVL2AGt4BAAAYlzvpSVo6550599",
     "describe": "教务系统主页",
+    "type": "custom",
     "popularity": "16060060",
     "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
@@ -735,6 +805,7 @@
     "app_name": "成绩信息（教务系统）",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2VlUWLqADKhKAAAUi-vic4E4521607",
     "describe": "教务系统的成绩信息",
+    "type": "custom",
     "popularity": "16060060",
     "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
@@ -745,6 +816,7 @@
     "app_name": "评教系统（教务系统）",
     "icon": "https://my.m.dlut.edu.cn/images/appicon/shejiao.png",
     "describe": "教务系统的评教系统",
+    "type": "custom",
     "popularity": "16060060",
     "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
@@ -755,6 +827,7 @@
     "app_name": "我的课表（教务系统）",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU-IiAPBCnAAAamt9Ip481490708",
     "describe": "教务系统的详细课表",
+    "type": "custom",
     "popularity": "16060060",
     "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
@@ -765,6 +838,7 @@
     "app_name": "班级课表（教务系统）",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/01/ynZM2VkU-IiAPBCnAAAamt9Ip481490708",
     "describe": "教务系统的班级课表",
+    "type": "custom",
     "popularity": "16060060",
     "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
@@ -775,6 +849,7 @@
     "app_name": "培养方案（教务系统）",
     "icon": "https://my.m.dlut.edu.cn/images/appicon/xuexi.png",
     "describe": "教务系统的培养方案",
+    "type": "custom",
     "popularity": "16060060",
     "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
@@ -785,6 +860,7 @@
     "app_name": "校园网自服务（开发区校区）",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/5B/ynZM2VmyW9mAGzv_AAAXfJXYcgw8899921",
     "describe": "开发区校区的校园网自服务",
+    "type": "custom",
     "popularity": "16060060",
     "url": "http://172.20.20.1:8080",
     "issubscription": 0
@@ -795,6 +871,7 @@
     "app_name": "开课查询（教务系统）",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/8D/ynZM2VomenWAeOXkAAANqO47Geg0182891",
     "describe": "开课信息查询（教务系统）",
+    "type": "custom",
     "popularity": "16060060",
     "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421faef4690693464456a468ca88d1b203b/student/ucas-sso/login?filter=app&from=rj",
     "issubscription": 0
@@ -805,6 +882,7 @@
     "app_name": "校园网状态（校内访问）",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/5B/ynZM2VmyW9mAGzv_AAAXfJXYcgw8899921",
     "describe": "CERNET网络监控，仅校园网内可以访问，实时显示校园网线路负载以及流量情况",
+    "type": "custom",
     "popularity": "16060060",
     "url": "file:///android_asset/Monitor.html",
     "issubscription": 0
@@ -815,6 +893,7 @@
     "app_name": "VPN客户端申请",
     "icon": "https://ehall.dlut.edu.cn/fp/uploadfiles/uw_service/default/srvpic158.png",
     "describe": "师生可在此应用下办理VPN客户端服务。",
+    "type": "custom",
     "popularity": "1395454",
     "url": "https://sso.dlut.edu.cn/cas/login?from=rj&service=https%3A%2F%2Fsso.dlut.edu.cn%2Fcas%2Flogin%3Fservice%3Dhttps%253A%252F%252Fehall.dlut.edu.cn%252Ffp%252Fview%253Fm%253Dfp%2523from%253Dhall%2526serveID%253D8f283c6a-083d-417b-b134-22a0b46ce537%2526act%253Dfp%252Fserveapply",
     "issubscription": 0
@@ -825,6 +904,7 @@
     "app_name": "读者入馆培训",
     "icon": "https://ehall.dlut.edu.cn/fp/uploadfiles/uw_service/2019/06/20/1561004260430.png",
     "describe": "师生可在此应用下完成图书馆入馆培训。",
+    "type": "custom",
     "popularity": "1395454",
     "url": "http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f7e24898693c6152300c85b98c1b2631a4d2be57/site/index.html?filter=app&from=rj",
     "issubscription": 0
@@ -835,6 +915,7 @@
     "app_name": "网费缴费",
     "icon": "https://ehall.dlut.edu.cn/fp/uploadfiles/uw_service/09901/2020/05/12/1589274197322.png",
     "describe": "师生可在此应用下充值网费（三校区通用）。",
+    "type": "custom",
     "popularity": "1395454",
     "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/?filter=app&from=rj",
     "issubscription": 0
@@ -845,6 +926,7 @@
     "app_name": "网上意见箱",
     "icon": "https://ehall.dlut.edu.cn/fp/uploadfiles/uw_service/default/srvpic98.png",
     "describe": "师生可在此应用下向学校反馈意见。",
+    "type": "custom",
     "popularity": "1395454",
     "url": "https://sso.dlut.edu.cn/cas/login?from=rj&service=https%3A%2F%2Fsso.dlut.edu.cn%2Fcas%2Flogin%3Fservice%3Dhttps%253A%252F%252Fehall.dlut.edu.cn%252Ffp%252Fview%253Fm%253Dfp%2523from%253Dhall%2526serveID%253D0d9c4d08-6828-4507-80b8-f989d3a1904c%2526act%253Dfp%252Fserveapply",
     "issubscription": 0
@@ -855,6 +937,7 @@
     "app_name": "大工云盘",
     "icon": "https://portal.dlut.edu.cn/tp/resource/image/apps/apps-03.png",
     "describe": "大连理工大学网盘，能用，但不好用",
+    "type": "custom",
     "popularity": "1395454",
     "url": "https://sso.dlut.edu.cn/cas/login?from=rj&service=https%3A%2F%2Fsso.dlut.edu.cn%2Fcas%2Flogin%3Fservice%3Dhttp%3A%2F%2Fpan.dlut.edu.cn%2Fcas",
     "issubscription": 0
@@ -865,8 +948,31 @@
     "app_name": "图书馆资源列表",
     "icon": "https://portal.dlut.edu.cn/tp/uploadfiles/appstore/2018/04/18/1524045113642.png",
     "describe": "图书馆资源功能概览",
+    "type": "custom",
     "popularity": "1395454",
     "url": "http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421e7e056d22b396a1e7a049cb8d65027204e7199/sjkdhejlbyAtoZ/ALL.htm?filter=app&from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 87,
+    "app_id": "3bdc684ff91b3049",
+    "category": "office",
+    "app_name": "DUTer建言",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/05/6A/ynZM2WMn4VSAK3DCAAALTLkhkOk599.png",
+    "describe": "欢迎使用DUTer建言，该平台主要用于征询在校师生为学校发展的意见建议，受理师生各类投诉反映和政策咨询等。不接受检举控告，不受理涉法涉诉涉纪、内容不合理、语言不健康、反映信息笼统模糊等问题。",
+    "popularity": "1395454",
+    "url": "https://ehall.dlut.edu.cn/fp/s/QZMKMV?from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 88,
+    "app_id": "86c3ba34d0ac0fe0",
+    "category": "office",
+    "app_name": "安全准入考试",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/03/59/ynZM2WGgeg-AV37sAABDPXT_nX8596.png",
+    "describe": "针对实验室准入考试系统对应的手机端",
+    "popularity": "635",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421fbe45988693464456a468ca88d1b203b/dut_ksxt/Wap/Login/Login.html?from=rj&filter=app",
     "issubscription": 0
   }
 ]

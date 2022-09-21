@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 public class ApplicationConfig {
     @JsonProperty("id")
     private Integer id;
+    @JsonProperty("app_id")
+    private String app_id;
     @JsonProperty("category")
     private String category;
     @JsonProperty("app_name")
@@ -18,6 +20,8 @@ public class ApplicationConfig {
     private String icon;
     @JsonProperty("describe")
     private String describe;
+    @JsonProperty("type")
+    private String type;
     @JsonProperty("popularity")
     private String popularity;
     @JsonProperty("url")
@@ -83,5 +87,21 @@ public class ApplicationConfig {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getApp_id() {
+        return app_id;
+    }
+
+    public void setApp_id(String app_id) {
+        this.app_id = app_id;
     }
 }

@@ -29,6 +29,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,7 +50,6 @@ import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.BaseActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.BrowserProxy;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.WebDownloadListener;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
-import com.Shirai_Kuroko.DLUTMobile.Widgets.LoadingView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
@@ -63,8 +63,9 @@ public class BrowserActivity extends BaseActivity {
     int numid = 0;
     ApplicationConfig thisapp;
     private WebView webView;
-    private LoadingView loading;
+//    private LoadingView loading;
     private Context mContext;
+    private ProgressBar progressBar;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -87,10 +88,11 @@ public class BrowserActivity extends BaseActivity {
         tv_more.setOnClickListener(this::showPopupWindow);
         SyncCookie(this);
         webView = findViewById(R.id.BrowserWebView);
-        loading = new LoadingView(this, R.style.CustomDialog);
-        if (!thisapp.getUrl().contains("rj")) {
-            loading.show();
-        }
+//        loading = new LoadingView(this, R.style.CustomDialog);
+        progressBar=findViewById(R.id.progressbar);
+//        if (!thisapp.getUrl().contains("rj")) {
+            progressBar.setVisibility(View.VISIBLE);
+//        }
         BrowserProxy browserProxy = new BrowserProxy(this, webView);
         webView.addJavascriptInterface(browserProxy, "__nativeWhistleProxy");
         webView.addJavascriptInterface(new PicShareInterFace(), "Share");
@@ -330,9 +332,9 @@ public class BrowserActivity extends BaseActivity {
                 }
                 default://默认加载完成隐藏加载条
                 {
-                    if (!url.contains("https://api.m.dlut.edu.cn/login?")) {
-                        loading.show();//显示加载条
-                    }
+//                    if (!url.contains("https://api.m.dlut.edu.cn/login?")) {
+                        progressBar.setVisibility(View.VISIBLE);//显示加载条
+//                    }
                     break;
                 }
             }
@@ -375,14 +377,14 @@ public class BrowserActivity extends BaseActivity {
                         webView.evaluateJavascript("domain.value='mail.dlut.edu.cn'", null);
                         webView.evaluateJavascript("document.getElementsByClassName('loginBtn')[0].click()", null);
                     } else {
-                        loading.dismiss();
+                        progressBar.setVisibility(View.GONE);
                         AlertDialog.Builder localBuilder = new AlertDialog.Builder(webView.getContext());
                         localBuilder.setMessage("邮件信息未配置完全，集成认证失败，请手动认证并前往设置界面补全信息！").setPositiveButton("确定", null);
                         localBuilder.setCancelable(false);
                         localBuilder.create().show();
                     }
                 } else {
-                    loading.dismiss();
+                    progressBar.setVisibility(View.GONE);
                 }
 
                 break;
@@ -393,7 +395,7 @@ public class BrowserActivity extends BaseActivity {
                 }
                 if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/eleCostOfDlutPay?projectId=33")) {
                     webView.clearHistory();
-                    loading.dismiss();
+                    progressBar.setVisibility(View.GONE);
                 }
                 break;
             }
@@ -401,7 +403,7 @@ public class BrowserActivity extends BaseActivity {
             {
                 if (url.contains("course-select")) {
                     webView.clearHistory();
-                    loading.dismiss();
+                    progressBar.setVisibility(View.GONE);
                 }
                 break;
             }
@@ -409,7 +411,7 @@ public class BrowserActivity extends BaseActivity {
             {
                 if (url.contains("exam-arrange")) {
                     webView.clearHistory();
-                    loading.dismiss();
+                    progressBar.setVisibility(View.GONE);
                 }
                 break;
             }
@@ -417,7 +419,7 @@ public class BrowserActivity extends BaseActivity {
             {
                 if (url.contains("for-std/grade/sheet")) {
                     webView.clearHistory();
-                    loading.dismiss();
+                    progressBar.setVisibility(View.GONE);
                 }
                 break;
             }
@@ -425,7 +427,7 @@ public class BrowserActivity extends BaseActivity {
             {
                 if (url.contains("evaluation")) {
                     webView.clearHistory();
-                    loading.dismiss();
+                    progressBar.setVisibility(View.GONE);
                 }
                 break;
             }
@@ -433,7 +435,7 @@ public class BrowserActivity extends BaseActivity {
             {
                 if (url.contains("course-table")) {
                     webView.clearHistory();
-                    loading.dismiss();
+                    progressBar.setVisibility(View.GONE);
                 }
                 break;
             }
@@ -441,7 +443,7 @@ public class BrowserActivity extends BaseActivity {
             {
                 if (url.contains("adminclass-course-table")) {
                     webView.clearHistory();
-                    loading.dismiss();
+                    progressBar.setVisibility(View.GONE);
                 }
                 break;
             }
@@ -449,7 +451,7 @@ public class BrowserActivity extends BaseActivity {
             {
                 if (url.contains("program-completion-preview")) {
                     webView.clearHistory();
-                    loading.dismiss();
+                    progressBar.setVisibility(View.GONE);
                 }
                 break;
             }
@@ -480,7 +482,7 @@ public class BrowserActivity extends BaseActivity {
             {
                 if (url.contains("lesson-search")) {
                     webView.clearHistory();
-                    loading.dismiss();
+                    progressBar.setVisibility(View.GONE);
                 }
                 break;
             }
@@ -496,13 +498,13 @@ public class BrowserActivity extends BaseActivity {
                 }
                 if (url.contains("http://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421f5f4408e23206949730d87b8d6512f209640763a21f75b0c/mobile/#/netCostOfSlPay?projectId=28")) {
                     webView.clearHistory();
-                    loading.dismiss();
+                    progressBar.setVisibility(View.GONE);
                 }
                 break;
             }
             default://默认加载完成隐藏加载条
             {
-                loading.dismiss();
+                progressBar.setVisibility(View.GONE);
                 break;
             }
         }
@@ -520,6 +522,12 @@ public class BrowserActivity extends BaseActivity {
             localBuilder.create().show();
             result.confirm();
             return true;
+        }
+
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            super.onProgressChanged(view, newProgress);
+            progressBar.setProgress(newProgress,true);
         }
 
         @Override

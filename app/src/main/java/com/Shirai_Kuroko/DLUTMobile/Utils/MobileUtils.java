@@ -564,6 +564,36 @@ public class MobileUtils {
                 if (!Now.getDescribe().equals(DefaultNow.getDescribe())) {
                     Now.setDescribe(DefaultNow.getDescribe());
                 }
+                if (Now.getType()==null)
+                {
+                    if (DefaultNow.getType()!=null) {
+                        Now.setType(DefaultNow.getType());
+                    }
+                }
+                else
+                {
+                    if (DefaultNow.getType()!=null)
+                    {
+                        if (!Now.getType().equals(DefaultNow.getType())) {
+                            Now.setType(DefaultNow.getType());
+                        }
+                    }
+                }
+                if (Now.getApp_id()==null)
+                {
+                    if (DefaultNow.getApp_id()!=null) {
+                        Now.setApp_id(DefaultNow.getApp_id());
+                    }
+                }
+                else
+                {
+                    if (DefaultNow.getApp_id()!=null)
+                    {
+                        if (!Now.getApp_id().equals(DefaultNow.getApp_id())) {
+                            Now.setApp_id(DefaultNow.getApp_id());
+                        }
+                    }
+                }
                 if (!Now.getPopularity().equals(DefaultNow.getPopularity())) {
                     Now.setPopularity(DefaultNow.getPopularity());
                 }

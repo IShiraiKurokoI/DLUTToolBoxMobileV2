@@ -241,9 +241,23 @@ public class ConfigHelper {
         return mList;
     }
 
+    public static List duplicateRemovalByCircle(List<NotificationHistoryDataBaseBean> list){
+
+        List newList = new ArrayList();
+        for (int i = 0;i < list.size();i++){
+            for (int j = 0;j < i;j++){
+                if(list.get(i).getMsg_id().equals(list.get(j).getMsg_id())){
+                    newList.remove(list.get(j));
+                }
+            }
+            newList.add(list.get(i));
+        }
+        return newList;
+    }
+
     public static List<NotificationHistoryDataBaseBean> GetNotificationHistoryList(Context context) {
         List<NotificationHistoryDataBaseBean> list = new MsgHistoryManager(context).select();
-        return list;
+        return duplicateRemovalByCircle(list);
     }
 
     public static void SaveDebugInfoPrefJson(Context context, String json) {
