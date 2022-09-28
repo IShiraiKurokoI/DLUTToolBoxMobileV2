@@ -198,7 +198,11 @@ public class PureBrowserActivity extends BaseActivity {
             progressBar.setVisibility(View.GONE);
             if (NoTitle) {
                 TextView tv_title = requireViewById(R.id.tv_title);
-                tv_title.setText(webView.getTitle());
+                String title = webView.getTitle();
+                if (!title.startsWith("https://")&&!title.startsWith("http://"))
+                {
+                    tv_title.setText(title);
+                }
             }
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
             String Un = prefs.getString("Username", "");
@@ -308,7 +312,7 @@ public class PureBrowserActivity extends BaseActivity {
             if (NoTitle) {
                 TextView tv_title = requireViewById(R.id.tv_title);
                 Log.i("TAG", "onReceivedTitle: "+title);
-                if (!title.contains("https://")&&!title.contains("http://"))
+                if (!title.startsWith("https://")&&!title.startsWith("http://"))
                 {
                     tv_title.setText(title);
                 }
