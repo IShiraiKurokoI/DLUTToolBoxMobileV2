@@ -307,7 +307,11 @@ public class PureBrowserActivity extends BaseActivity {
             super.onReceivedTitle(view, title);
             if (NoTitle) {
                 TextView tv_title = requireViewById(R.id.tv_title);
-                tv_title.setText(webView.getTitle());
+                Log.i("TAG", "onReceivedTitle: "+title);
+                if (!title.contains("https://")&&!title.contains("http://"))
+                {
+                    tv_title.setText(title);
+                }
             }
         }
 
