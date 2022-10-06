@@ -594,13 +594,13 @@
   },
   {
     "id": 54,
-	"app_id": "12c1086a213d6de4",
+	"app_id": "c02a69e148dfdef4",
     "category": "office",
     "app_name": "调查问卷",
-    "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2VlsDimAOrJHAAAUG6dAb505075498",
-    "describe": "校内各单位可以通过本应用发布调查问卷。问卷设计和发布本单位的信息化专干有权限。",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/05/6F/ynZM2WMr0eOAFU3IAABeIT1UeNw528.png",
+    "describe": "调查问卷填写入口，可获取本人可填写及已历史填写过的问卷。",
     "popularity": "25599",
-    "url": "https://wlightapp.m.dlut.edu.cn/questionnaire",
+    "url": "https://dlutwj.wjx.cn/user/qlist.aspx?sysid=162364420",
     "issubscription": 0
   },
   {

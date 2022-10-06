@@ -2,7 +2,6 @@ package com.Shirai_Kuroko.DLUTMobile.Widgets.CardView;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import com.Shirai_Kuroko.DLUTMobile.Common.LogToFile;
 import com.Shirai_Kuroko.DLUTMobile.Entities.CardInfoBean;
@@ -71,7 +70,6 @@ public class a implements Runnable {
             new Thread(() -> {
                 Request request = BackendUtils.CommonGetRequsetBuilderForCard(finalS);
                 LogToFile.i("请求方法体", request.toString());
-                Log.i("请求方法体", request.toString());
                 Response response;
                 try {
                     response = new OkHttpClient().newBuilder().connectTimeout(10, TimeUnit.SECONDS).readTimeout(10,TimeUnit.SECONDS).build().newCall(request).execute();
@@ -97,7 +95,6 @@ public class a implements Runnable {
                     if (!result.contains("verify failed")) {
                         handler.post(() -> {
                             a=result;
-                            Log.i("卡片请求结果", "请求：\n"+ request +"\n返回：\n"+a);
                             LogToFile.i("卡片请求结果", "请求：\n"+ request +"\n返回：\n"+a);
                             try {
                                 this.b.cardInfoBean = JSON.parseObject(a, CardInfoBean.class);

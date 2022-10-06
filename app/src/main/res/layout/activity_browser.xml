@@ -35,10 +35,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text=""
+            android:layout_toEndOf="@id/iv_back"
+            android:layout_toStartOf="@id/tv_more"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="18.0sp"
-            tools:ignore="HardcodedText" />
+            android:textSize="18.0sp"/>
 
         <TextView
             android:id="@id/tv_more"
