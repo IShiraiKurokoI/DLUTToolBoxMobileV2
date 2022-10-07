@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="8.0dip"
+    android:paddingEnd="16.0dip"
+    android:paddingBottom="10.0dip">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:paddingStart="16.0dip">
+
+            <TextView
+                android:id="@id/tv_app_comment_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="7.0dip"
+                android:ellipsize="end"
+                android:maxEms="15"
+                android:singleLine="true"
+                android:text=""
+                android:textSize="12.0sp" />
+
+            <TextView
+                android:id="@id/app_comment_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="10.0sp" />
+        </LinearLayout>
+
+        <RatingBar
+            android:id="@id/app_rating"
+            style="@style/appCommentRatingBarGray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14.0dip"
+            android:layout_marginTop="6.0dip"
+            android:isIndicator="true"
+            android:numStars="5" />
+
+        <TextView
+            android:id="@id/app_comment_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8.0dip"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="6.0dip"
+            android:paddingStart="16.0dip"
+            android:text=""
+            android:textSize="14.0sp" />
+    </LinearLayout>
+</LinearLayout>

@@ -11,6 +11,12 @@
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/album_list_item_arrow_sel.xml" value="0.197" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/app_click_bg_sel.xml" value="0.1335" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/app_click_pre_shape.xml" value="0.1335" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/app_comment_btn_bg_sel.xml" value="0.143" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/app_comment_rating_bar.xml" value="0.156" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/app_radio_button_left_background.xml" value="0.1265" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/app_radio_button_right_background.xml" value="0.1265" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/app_score_progress_shape_bg.xml" value="0.143" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/app_score_proportion_shape_bg.xml" value="0.143" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/bg_center_toast_dark.xml" value="0.1155" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/bg_ff_to_f0.xml" value="0.1155" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/bg_notice_publish_advance.xml" value="0.1155" />
@@ -90,6 +96,10 @@
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/shape_tab_bg.xml" value="0.121" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/shape_verify_refresh_nor.xml" value="0.1335" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/shape_verify_refresh_pre.xml" value="0.1335" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/star_rating_bar_gray.xml" value="0.1805" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/star_rating_bar_level.xml" value="0.143" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/star_rating_bar_level_night.xml" value="0.184" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/star_rating_bar_yellow.xml" value="0.1265" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/drawable/tips_unread_new_msg_sel.xml" value="0.1575" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.14825970548862116" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout-w1240dp/content_scrolling.xml" value="0.1" />
@@ -107,6 +117,7 @@
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/activity_card.xml" value="0.1609375" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/activity_card_manage.xml" value="0.2" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/activity_card_sort.xml" value="0.19479166666666667" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/activity_comment.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/activity_exchange_record.xml" value="0.1359375" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/activity_feedback.xml" value="0.1" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/activity_gift.xml" value="0.264" />
@@ -130,6 +141,7 @@
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/activity_ssologin.xml" value="0.1983695652173913" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/ai_banner_content.xml" value="0.1111111111111111" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/app_center_school_item.xml" value="0.1983695652173913" />
+        <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/app_user_comment_lv_item.xml" value="0.115625" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/card_base.xml" value="0.2" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/card_hor_scroll_content.xml" value="0.1" />
         <entry key="..\:/Users/Shirai_Kuroko/AndroidStudioProjects/DLUTMobile/app/src/main/res/layout/center_toast.xml" value="0.125" />

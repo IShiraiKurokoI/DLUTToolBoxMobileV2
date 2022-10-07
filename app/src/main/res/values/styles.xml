@@ -136,6 +136,31 @@
         <item name="android:layout_marginTop">6.0dip</item>
     </style>
 
+    <style name="appCommentRatingBarYellow" parent="@android:style/Widget.RatingBar">
+        <item name="android:maxHeight">10.0dip</item>
+        <item name="android:progressDrawable">@drawable/star_rating_bar_yellow</item>
+        <item name="android:minHeight">10.0dip</item>
+        <item name="android:stepSize">0.5</item>
+    </style>
+
+    <style name="appCommentRatingBarGray" parent="@android:style/Widget.RatingBar">
+        <item name="android:maxHeight">10.0dip</item>
+        <item name="android:progressDrawable">@drawable/star_rating_bar_gray</item>
+        <item name="android:minHeight">10.0dip</item>
+    </style>
+
+    <style name="appCommentRatingLevelStyle" parent="@android:style/Widget.RatingBar">
+        <item name="android:maxHeight">10.0dip</item>
+        <item name="android:progressDrawable">@drawable/star_rating_bar_level</item>
+        <item name="android:minHeight">10.0dip</item>
+    </style>
+
+    <style name="starRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:maxHeight">32.0dip</item>
+        <item name="android:progressDrawable">@drawable/app_comment_rating_bar</item>
+        <item name="android:minHeight">32.0dip</item>
+    </style>
+
     <style name="notice_check_box">
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:paddingTop">16.0dip</item>

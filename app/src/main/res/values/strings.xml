@@ -144,4 +144,14 @@
     <string name="loading">正在加载...</string>
     <string name="load_succeed">加载成功</string>
     <string name="load_fail">加载失败</string>
+    <string name="service_introduction">服务介绍</string>
+    <string name="app_user_comment">用户评论</string>
+    <string name="app_user_wanna_comment">添加评论</string>
+    <string name="comment">评论</string>
+    <string name="comment_et_hint">认真评论是对开发GG最好的鼓励o(≧v≦)o，请勿灌水</string>
+    <string name="comment_et_null">评论内容不能为空</string>
+    <string name="comment_failed">评论添加失败：%1$s</string>
+    <string name="comment_rating_null">星评不能为空</string>
+    <string name="comment_star">星评</string>
+    <string name="comment_succeed">评论添加成功</string>
 </resources>

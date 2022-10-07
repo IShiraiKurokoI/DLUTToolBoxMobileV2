@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UI.CommentActivity">
+
+    <RelativeLayout
+        android:id="@+id/RelativeHeader"
+        android:layout_width="fill_parent"
+        android:layout_height="56.0dip"
+        android:background="@color/main_theme_color"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0">
+
+        <TextView
+            android:id="@id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="16.0dip"
+            android:paddingRight="16.0dip"
+            android:text="@string/cancel"
+            android:textColor="@color/white"
+            tools:ignore="RelativeOverlap" />
+
+        <TextView
+            android:id="@id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="添加评论"
+            android:textColor="@color/white"
+            android:textSize="18.0sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@id/tv_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:paddingLeft="16.0dip"
+            android:paddingRight="16.0dip"
+            android:text="确定"
+            android:textColor="@color/white"
+            tools:ignore="HardcodedText" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@id/comment_rating_panel"
+            android:layout_width="fill_parent"
+            android:layout_height="52.0dip"
+            android:background="@color/background_color_fb"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16.0dip"
+                android:gravity="center"
+                android:text="@string/comment_star"
+                android:textColor="@color/comment_edit_ratting"
+                android:textSize="16.0sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="32.0dip"
+                android:layout_marginStart="12.0dip"
+                android:gravity="center">
+
+                <RatingBar
+                    android:id="@id/comment_ratingBar"
+                    style="@style/starRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:numStars="5"
+                    android:rating="5.0"
+                    android:stepSize="1.0" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0px"
+            android:background="@color/divider_color"
+            tools:ignore="PxUsage" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0px"
+            android:background="@color/divider_color"
+            tools:ignore="PxUsage" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center|left|top"
+            tools:ignore="RtlHardcoded">
+
+            <EditText
+                android:id="@id/comment_content_et"
+                android:layout_width="fill_parent"
+                android:layout_height="180.0dip"
+                android:background="@color/background_color_fb"
+                android:gravity="center|left|top"
+                android:hint="@string/comment_et_hint"
+                android:maxLength="140"
+                android:paddingLeft="16.0dip"
+                android:paddingTop="12.0dip"
+                android:paddingRight="16.0dip"
+                android:paddingBottom="32.0dip"
+                android:textColor="@color/text_color_66"
+                android:textColorHint="@color/text_color_bb"
+                android:textSize="14.0sp"
+                android:importantForAutofill="no"
+                tools:ignore="TextFields" />
+
+            <TextView
+                android:id="@id/comment_words_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/comment_content_et"
+                android:layout_alignBottom="@id/comment_content_et"
+                android:layout_marginRight="16.0dip"
+                android:layout_marginBottom="16.0dip"
+                android:includeFontPadding="false"
+                android:text="@string/talk_comment_limit"
+                android:textColor="@color/comment_edit_hint"
+                android:textSize="12.0sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

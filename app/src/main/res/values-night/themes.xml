@@ -32,6 +32,14 @@
         <item name="actionMenuTextColor">@color/main_theme_color</item>
     </style>
 
+
+
+    <style name="appCommentRatingLevelStyle" parent="@android:style/Widget.RatingBar">
+        <item name="android:maxHeight">10.0dip</item>
+        <item name="android:progressDrawable">@drawable/star_rating_bar_level_night</item>
+        <item name="android:minHeight">10.0dip</item>
+    </style>
+
     <style name="bg_view">
         <item name="android:background">@drawable/bg_mine_panel_dark</item>
     </style>>

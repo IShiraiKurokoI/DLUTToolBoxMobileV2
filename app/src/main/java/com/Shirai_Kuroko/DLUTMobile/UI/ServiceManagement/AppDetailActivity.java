@@ -4,24 +4,31 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
+import com.Shirai_Kuroko.DLUTMobile.Common.CenterToast;
+import com.Shirai_Kuroko.DLUTMobile.Common.LogToFile;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.UI.CommentActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.BrowserActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.BaseActivity;
+import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.bumptech.glide.Glide;
 
-public class AppDetailActivity extends AppCompatActivity {
+public class AppDetailActivity extends BaseActivity {
 
     int numid = 0;
     ApplicationConfig thisapp;
@@ -54,32 +61,39 @@ public class AppDetailActivity extends AppCompatActivity {
 
         TextView tda = findViewById(R.id.app_author);
 
-        if(thisapp.getType()!=null)
-        {
-            if (thisapp.getType().contains("custom"))
-            {
+        RadioButton app_user_comment = findViewById(R.id.app_user_comment);
+        RadioButton app_instruction = findViewById(R.id.app_instruction);
+        if (thisapp.getType() != null) {
+            if (thisapp.getType().contains("custom")) {
                 tda.setText("自制应用");
-            }
-            else
-            {
+                app_user_comment.setOnClickListener(view -> {
+                    CenterToast.makeText(this, "抱歉，该应用暂不支持评论", Toast.LENGTH_SHORT).show();
+                    app_instruction.setChecked(true);
+                    app_user_comment.setChecked(false);
+                });
+                app_user_comment.setEnabled(true);
+            } else {
                 tda.setText("校方应用");
+                app_user_comment.setOnClickListener(view -> {
+                    CenterToast.makeText(this, "抱歉，该应用暂不支持评论", Toast.LENGTH_SHORT).show();
+                    app_instruction.setChecked(true);
+                    app_user_comment.setChecked(false);
+                });
+                app_user_comment.setEnabled(true);
             }
-        }
-        else
-        {
-            if (thisapp.getApp_id()==null)
-            {
-                tda.setText("替换应用");
-            }
-            else
-            {
-                tda.setText("校方应用");
-            }
-        }
-        if (ThemeType) {
-            bo.setTextColor(Color.WHITE);
         } else {
-            bo.setTextColor(Color.BLACK);
+            if (thisapp.getApp_id() == null) {
+                tda.setText("替换应用");
+                app_user_comment.setOnClickListener(view -> {
+                    CenterToast.makeText(this, "抱歉，该应用暂不支持评论", Toast.LENGTH_SHORT).show();
+                    app_instruction.setChecked(true);
+                    app_user_comment.setChecked(false);
+                });
+                app_user_comment.setEnabled(true);
+            } else {
+                tda.setText("校方应用");
+                BackendUtils.GetAppConfigNow(this, thisapp.getApp_id(), this);
+            }
         }
         ImageButton ba = findViewById(R.id.add);
         if (thisapp.getIssubscription() == 1) {
@@ -98,6 +112,23 @@ public class AppDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void CommentApp() {
+        Intent Commentintent = new Intent(this, CommentActivity.class);
+        startActivityForResultHere(Commentintent, 100, (i, i1, intent) -> {
+            if (intent.getIntExtra("resultcode", -1) == 1) {//succeed
+                LogToFile.i("CommentApp","完成评论\n分数："+intent.getIntExtra("score", 5)+"\n内容："+intent.getStringExtra("comment"));
+                BackendUtils.CommentAppFunInfo(this, thisapp.getApp_id(), intent.getStringExtra("comment"), intent.getIntExtra("score", 5),this);
+                return true;
+            } else if (intent.getIntExtra("resultcode", -1) == 0) {
+                Log.i("TAG", "CommentApp: 取消评论");
+                CenterToast.makeText(this, "取消评论", Toast.LENGTH_SHORT).show();
+                return false;
+            } else {
+                return false;
+            }
+        });
     }
 
     public void onAddClick(View v) {

@@ -307,4 +307,29 @@
     <item name="btn_share_link" type="id" />
     <item name="btn_save" type="id" />
     <item name="btn_pin" type="id" />
+    <item name="head_view_group" type="id" />
+    <item name="app_instruction" type="id" />
+    <item name="app_user_comment" type="id" />
+    <item name="tv_app_comment_name" type="id" />
+    <item name="app_comment_time" type="id" />
+    <item name="app_comment_content" type="id" />
+    <item name="app_average" type="id" />
+    <item name="app_rating_times" type="id" />
+    <item name="app_score_5star_parent" type="id" />
+    <item name="app_score_5star_progress" type="id" />
+    <item name="app_score_4star_parent" type="id" />
+    <item name="app_score_4star_progress" type="id" />
+    <item name="ratingBar" type="id" />
+    <item name="app_score_3star_parent" type="id" />
+    <item name="app_score_3star_progress" type="id" />
+    <item name="app_score_2star_parent" type="id" />
+    <item name="app_score_2star_progress" type="id" />
+    <item name="app_score_1star_parent" type="id" />
+    <item name="app_score_1star_progress" type="id" />
+    <item name="app_user_comment_panel" type="id" />
+    <item name="comment" type="id" />
+    <item name="tv_confirm" type="id" />
+    <item name="comment_rating_panel" type="id" />
+    <item name="comment_ratingBar" type="id" />
+    <item name="comment_content_et" type="id" />
 </resources>

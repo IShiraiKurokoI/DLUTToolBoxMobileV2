@@ -35,6 +35,9 @@
     <color name="text_color_88">#ff888888</color>
     <color name="text_color_8d">#ff8d8d8d</color>
     <color name="text_color_99">#ff999999</color>
+    <color name="ratting_bg_hint">#fff5f5f5</color>
+    <color name="ratting_bg_set">#ffa0a0a0</color>
+    <color name="ratting_counts">#ff505050</color>
     <color name="text_color_9b">#ff9b9b9b</color>
     <color name="text_color_9c">#ff9c9c9c</color>
     <color name="text_color_9d">#ff9d9d9d</color>
@@ -75,6 +78,7 @@
     <color name="background_color_005c97">#ff005c97</color>
     <color name="background_color_0073bd">#ff0073bd</color>
     <color name="background_color_00_alpha_50">#7f000000</color>
+    <color name="comment_edit_ratting">#ff505050</color>
     <color name="background_color_0a8a52">#ff0a8a52</color>
     <color name="background_color_0dac67">#ff0dac67</color>
     <color name="background_color_29634a">#ff29634a</color>

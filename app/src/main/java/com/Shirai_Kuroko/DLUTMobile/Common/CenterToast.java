@@ -1,8 +1,10 @@
 package com.Shirai_Kuroko.DLUTMobile.Common;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -42,6 +44,11 @@ public class CenterToast extends Toast
         this.b.setTextSize(1, (float)16);
         this.b.setText(text);
         this.setDuration(Toast.LENGTH_SHORT);
+        int tvToastId = Resources.getSystem().getIdentifier("message", "id", "android");
+        TextView tvToast = ((TextView) this.getView().findViewById(tvToastId));
+        if(tvToast != null){
+            tvToast.setGravity(Gravity.CENTER);
+        }
         this.show();
     }
 
