@@ -974,5 +974,16 @@
     "popularity": "635",
     "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421fbe45988693464456a468ca88d1b203b/dut_ksxt/Wap/Login/Login.html?from=rj&filter=app",
     "issubscription": 0
+  },
+  {
+    "id": 89,
+    "app_id": "752f4932d7f90958",
+    "category": "study",
+    "app_name": "安全准入考试",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/05/7C/ynZM2WNgsKCAZc5sAAARL-e-cEo984.png",
+    "describe": "教务处综合教学管理系统推出移动端—“大工教务”，旨在为广大师生提供更加便捷、更及时的教学服务，不仅可以方便师生查询“课表、成绩、考试安排”等信息，随时了解教学安排等情况，也可以在线办理“教室借用、调课申请”等部分业务，后续将持续拓展新的功能，为全校师生提供更加个性化的教学服务。",
+    "popularity": "4201",
+    "url": "http://jxgl.dlut.edu.cn/cas-auth/jasig/cas/login?from=rj",
+    "issubscription": 0
   }
 ]

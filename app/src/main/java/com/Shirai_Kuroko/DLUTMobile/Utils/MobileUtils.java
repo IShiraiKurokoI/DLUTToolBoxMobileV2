@@ -217,9 +217,14 @@ public class MobileUtils {
                 msgList.add(UpdateSize);
                 msgList.add(UpdateContent);
                 msgList.add(UpdateDownloadUrl);
-                handler.post(() -> {
-                    ShowUpdateDialog(context, msgList.get(0), msgList.get(1), msgList.get(2), msgList.get(3), (Activity) context);//自定义的方法，真正需要参数的地方
-                });
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+                prefs.getString("NoNewVersion","");
+                if (!prefs.getString("NoNewVersion", "").equals(LastestVersion))
+                {
+                    handler.post(() -> {
+                        ShowUpdateDialog(context, msgList.get(0), msgList.get(1), msgList.get(2), msgList.get(3), (Activity) context);//自定义的方法，真正需要参数的地方
+                    });
+                }
             }
         }).start();
     }
@@ -248,7 +253,11 @@ public class MobileUtils {
         final TextView tv_update_msg = view.findViewById(R.id.tv_update_msg);
         tv_update_msg.setText(content);
         final Button btn_ignore = view.findViewById(R.id.btn_ignore);
-        btn_ignore.setOnClickListener(v -> UpdateDialog.dismiss());
+        btn_ignore.setOnClickListener(view1 -> {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            prefs.edit().putString("NoNewVersion", version).apply();
+            UpdateDialog.dismiss();
+        });
         final Button btn_update = view.findViewById(R.id.btn_update);
         btn_update.setOnClickListener(v -> {
             Uri uri = Uri.parse(downloadUrl);
