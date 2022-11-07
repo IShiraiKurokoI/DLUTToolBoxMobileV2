@@ -60,7 +60,6 @@ public class BackgroudWIFIMonitorService extends Service {
                 .setContentTitle("正在后台监测校园网网络连接")
                 .setShowWhen(false)
                 .setContentIntent(null)
-//                .setContentIntent(pendingIntent)
                 .build();
 
         BroadcastReceiver Receiver = new WIFIStateChangeBroadcastReceiver();

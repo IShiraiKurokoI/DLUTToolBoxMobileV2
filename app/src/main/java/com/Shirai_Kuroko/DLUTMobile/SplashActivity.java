@@ -28,7 +28,6 @@ import com.Shirai_Kuroko.DLUTMobile.Common.CrashHandler;
 import com.Shirai_Kuroko.DLUTMobile.Common.LogToFile;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Managers.AutoCleaner;
-import com.Shirai_Kuroko.DLUTMobile.Services.BackgroudWIFIMonitorService;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.PureBrowserActivity;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 
@@ -52,11 +51,6 @@ public class SplashActivity extends AppCompatActivity {
         TextView Version = requireViewById(R.id.Version);
         Version.setText("Version " + MobileUtils.GetAppVersion(this));
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean Autologin = prefs.getBoolean("AutoLogin", false);
-        if (Autologin) {
-            Intent ServiceIntent = new Intent(this, BackgroudWIFIMonitorService.class);
-            startForegroundService(ServiceIntent);
-        }
         if (ConfigHelper.FPStatus(this)) {
             Handler handler = new Handler();
             // 延迟SPLASH_DISPLAY_LENGHT时间然后跳转到MainActivity

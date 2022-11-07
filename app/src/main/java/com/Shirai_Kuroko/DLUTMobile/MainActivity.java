@@ -28,6 +28,7 @@ import com.Shirai_Kuroko.DLUTMobile.Common.LogToFile;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.PermissionHelper;
 import com.Shirai_Kuroko.DLUTMobile.Managers.AutoCleaner;
+import com.Shirai_Kuroko.DLUTMobile.Services.BackgroudWIFIMonitorService;
 import com.Shirai_Kuroko.DLUTMobile.UI.LoginActivity;
 import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
@@ -64,16 +65,21 @@ public class MainActivity extends AppCompatActivity {
 //        int unreadcount = prefs1.getInt("unreadcount", 0);
 //        prefs1.edit().putBoolean("unread", true).apply();
 //        prefs1.edit().putInt("unreadcount", 3).apply();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        boolean Autologin = prefs.getBoolean("AutoLogin", false);
         if (ConfigHelper.NeedLogin(this)) {
             Log.i("无法认证", "需要登陆");
             LogToFile.i("无法认证", "需要登陆");
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
             String Un = prefs.getString("Username", "");
             String Pd = prefs.getString("Password", "");
             if (Un.length() * Pd.length() != 0) {
                 Log.i("认证失败", "静默登陆");
                 LogToFile.i("认证失败", "静默登陆");
                 BackendUtils.Login(this, Un, Pd);
+                if (Autologin) {
+                    Intent ServiceIntent = new Intent(this, BackgroudWIFIMonitorService.class);
+                    startForegroundService(ServiceIntent);
+                }
             } else {
                 Log.i("认证信息为空", "弹出登陆");
                 LogToFile.i("认证信息为空", "弹出登陆");
@@ -84,9 +90,12 @@ public class MainActivity extends AppCompatActivity {
             Log.i("启动初始化", "刷新用户数据");
             LogToFile.i("启动初始化", "刷新用户数据");
             BackendUtils.ReSendUserInfo(this);
+            if (Autologin) {
+                Intent ServiceIntent = new Intent(this, BackgroudWIFIMonitorService.class);
+                startForegroundService(ServiceIntent);
+            }
         }
         //ConfigHelper.MakeupNotificationList(this);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         if (prefs.getBoolean("unread", false)) {
             BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(bottomNavigationView.getMenu().getItem(1).getItemId());

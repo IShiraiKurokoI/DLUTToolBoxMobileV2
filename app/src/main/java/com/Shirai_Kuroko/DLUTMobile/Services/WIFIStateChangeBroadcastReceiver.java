@@ -1,9 +1,15 @@
 package com.Shirai_Kuroko.DLUTMobile.Services;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
@@ -14,6 +20,7 @@ import android.util.Log;
 import androidx.preference.PreferenceManager;
 
 import com.Shirai_Kuroko.DLUTMobile.Helpers.NotificationHelper;
+import com.Shirai_Kuroko.DLUTMobile.R;
 
 import java.util.Objects;
 
@@ -44,7 +51,6 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                         String un = prefs.getString("Username", "");
                         String pd = prefs.getString("NetworkPassword", "");
                         if (un.length() * pd.length() != 0) {
-//                            Handler handler = new Handler(Looper.getMainLooper());
                             Runnable Login = new Runnable() {
                                 int TriedTimes = 0;
                                 @Override
@@ -86,11 +92,31 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                                             String[] data = NetInfo.split(",");
                                             String Text;
                                             if (data.length > 2) {
-                                                Text = "校园网余额:  " + data[2] + "\n校园网已用流量:  " + formatdataflow(data[0]) + "\nIPV4地址:\n" + data[5] + "\n网卡MAC地址:\n" + data[3];
+                                                Text = "余额:" + data[2] + " | 已用流量:" + formatdataflow(data[0]) ;
                                                 if (datawarn) {
-                                                    Text += "\n|本月流量使用已超过90G，请留意！！|\n";
+                                                    Text += "\n|本月流量使用已超过90G，请留意！！|";
                                                 }
-                                                new NotificationHelper().Notify(context,null,"2042","联网消息通知","校园网连接成功",Text,(int) (System.currentTimeMillis()+Math.random()));
+                                                String CHANNEL_ONE_ID = "114514";
+                                                String CHANNEL_ONE_NAME = "校园网连接监测服务";
+                                                NotificationChannel notificationChannel;
+                                                notificationChannel = new NotificationChannel(CHANNEL_ONE_ID,
+                                                        CHANNEL_ONE_NAME, NotificationManager.IMPORTANCE_HIGH);
+                                                notificationChannel.enableLights(false);
+                                                notificationChannel.setLightColor(Color.RED);
+                                                notificationChannel.setShowBadge(true);
+                                                notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
+                                                NotificationManager manager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+                                                if (manager != null) {
+                                                    manager.createNotificationChannel(notificationChannel);
+                                                }
+                                                Notification NewNotification = new Notification.Builder(context, CHANNEL_ONE_ID).setChannelId(CHANNEL_ONE_ID)
+                                                        .setSmallIcon(R.mipmap.ic_launcher_round)
+                                                        .setContentTitle(ssid+"已连接")
+                                                        .setShowWhen(false)
+                                                        .setContentIntent(null)
+                                                        .setContentText(Text)
+                                                        .build();
+                                                manager.notify(2,NewNotification);
                                             }
                                             else
                                             {
@@ -126,6 +152,29 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                         //ToDo:自动连接主校区校园网
                     }
                 }
+                else if(state == NetworkInfo.State.DISCONNECTED)
+                {
+                    String CHANNEL_ONE_ID = "114514";
+                    String CHANNEL_ONE_NAME = "校园网连接监测服务";
+                    NotificationChannel notificationChannel;
+                    notificationChannel = new NotificationChannel(CHANNEL_ONE_ID,
+                            CHANNEL_ONE_NAME, NotificationManager.IMPORTANCE_HIGH);
+                    notificationChannel.enableLights(false);
+                    notificationChannel.setLightColor(Color.RED);
+                    notificationChannel.setShowBadge(true);
+                    notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
+                    NotificationManager manager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+                    if (manager != null) {
+                        manager.createNotificationChannel(notificationChannel);
+                    }
+                    Notification NewNotification = new Notification.Builder(context, CHANNEL_ONE_ID).setChannelId(CHANNEL_ONE_ID)
+                            .setSmallIcon(R.mipmap.ic_launcher_round)
+                            .setContentTitle("正在后台监测校园网网络连接")
+                            .setShowWhen(false)
+                            .setContentIntent(null)
+                            .build();
+                    manager.notify(2,NewNotification);
+                }
             }
         }
     }
@@ -138,13 +187,13 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
         }
         if (temp > 1000000000) {
             temp /= 1024 * 1024 * 1024;
-            re = temp + "G";
+            re = String.format("%.4f",temp)  + "G";
         } else if (temp > 1000000) {
             temp /= 1024 * 1024;
-            re = temp + "M";
+            re = String.format("%.4f",temp)  + "M";
         } else {
             temp /= 1024;
-            re = temp + "K";
+            re = String.format("%.4f",temp) + "K";
         }
         return re + "B";
     }
