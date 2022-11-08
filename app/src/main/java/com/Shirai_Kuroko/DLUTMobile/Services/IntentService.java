@@ -69,10 +69,11 @@ public class IntentService extends GTIntentService {
                 Intent intent = new Intent(this, PureBrowserActivity.class);
                 intent.putExtra("Name", "");
                 intent.putExtra("Url", dlutNoticeContentBean.getUrl());
+                intent.putExtra("MsgID", notificationPayload.getPayload().getBody().getCustom().getMsg_id());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 @SuppressLint("UnspecifiedImmutableFlag")
                 PendingIntent pendingIntent = PendingIntent.getActivity(this, (int) (Math.random()*200), intent, FLAG_UPDATE_CURRENT);
-                new NotificationHelper().Notify(context,pendingIntent,"114514","个推消息通知", URLDecoder.decode(dlutNoticeContentBean.getTitle()),Integer.parseInt(notificationPayload.getPayload().getBody().getCustom().getMsg_id()));
+                new NotificationHelper().Notify(context,pendingIntent,"1919810","消息通知", URLDecoder.decode(dlutNoticeContentBean.getTitle()),Integer.parseInt(notificationPayload.getPayload().getBody().getCustom().getMsg_id()));
             } catch (Exception e) {
                 Log.e("个推SDK", "Payload处理错误: ", e);
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);

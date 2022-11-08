@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;
@@ -258,6 +259,31 @@ public class ConfigHelper {
     public static List<NotificationHistoryDataBaseBean> GetNotificationHistoryList(Context context) {
         List<NotificationHistoryDataBaseBean> list = new MsgHistoryManager(context).select();
         return duplicateRemovalByCircle(list);
+    }
+
+    public static List<Integer> GetUnreadCount(Context context)
+    {
+        List<NotificationHistoryDataBaseBean> list = GetNotificationHistoryList(context);
+        int count = 0;
+        int top = -1;
+        for (int i = 0;i< list.size();i++) {
+            NotificationHistoryDataBaseBean notificationHistoryDataBaseBean = list.get(i);
+            if (notificationHistoryDataBaseBean.getIs_read()==0)
+            {
+                count++;
+                Log.i("TAG", "GetUnreadCount: "+i);
+                if (top == -1)
+                {
+                    top = i;
+                }
+            }
+        }
+        List<Integer> integerList = new ArrayList<>();
+        Log.i("TAG", "GetUnreadCount: "+top);
+        Log.i("TAG", "GetUnreadCount: "+count);
+        integerList.add(top);
+        integerList.add(count);
+        return integerList;
     }
 
     public static void SaveDebugInfoPrefJson(Context context, String json) {

@@ -332,4 +332,5 @@
     <item name="comment_rating_panel" type="id" />
     <item name="comment_ratingBar" type="id" />
     <item name="comment_content_et" type="id" />
+    <item name="tv_ReadAll" type="id" />
 </resources>

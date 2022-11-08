@@ -28,6 +28,18 @@
             android:text="@string/title_notifications"
             android:textColor="@color/white"
             android:textSize="18sp" />
+
+        <TextView
+            android:id="@id/tv_ReadAll"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:paddingLeft="16.0dip"
+            android:paddingRight="16.0dip"
+            android:text="全部已读"
+            android:textColor="@color/white"
+            tools:ignore="HardcodedText" />
     </RelativeLayout>
 
     <RelativeLayout

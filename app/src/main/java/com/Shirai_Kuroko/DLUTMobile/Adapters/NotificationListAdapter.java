@@ -4,6 +4,10 @@ package com.Shirai_Kuroko.DLUTMobile.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +57,10 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
         Date date = new Date(Long.parseLong(payload.getCreate_time()) * 1000);
         holder.tv_notice_time.setText(date.toLocaleString());
         DLUTNoticeContentBean dlutNoticeContentBean = payload.getMsg_content();
-        holder.tv_notice_title.setText(dlutNoticeContentBean.getTitle());
+        SpannableStringBuilder style=new SpannableStringBuilder("【未读】");
+        style.setSpan(new ForegroundColorSpan(Color.RED),0,4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        holder.tv_notice_title.setText((payload.getIs_read())==1?"":style);
+        holder.tv_notice_title.append(dlutNoticeContentBean.getTitle());
         if (URLDecoder.decode(dlutNoticeContentBean.getDescription()).length()!=0) {
             holder.tv_notice_desc.setVisibility(View.VISIBLE);
             holder.tv_notice_desc.setText(URLDecoder.decode(dlutNoticeContentBean.getDescription()));
@@ -71,7 +78,9 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
                 Intent intent = new Intent(mContext, PureBrowserActivity.class);
                 intent.putExtra("Name", "");
                 intent.putExtra("Url", dlutNoticeContentBean.getUrl());
+                intent.putExtra("MsgID", payload.getMsg_id());
                 mContext.startActivity(intent);
+                holder.tv_notice_title.setText(dlutNoticeContentBean.getTitle());
             }
         });
     }

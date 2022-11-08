@@ -1,13 +1,18 @@
 package com.Shirai_Kuroko.DLUTMobile.UI.MainPageFragments;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.Shirai_Kuroko.DLUTMobile.Adapters.NotificationListAdapter;
 import com.Shirai_Kuroko.DLUTMobile.Entities.NotificationHistoryDataBaseBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
+import com.Shirai_Kuroko.DLUTMobile.Managers.MsgHistoryManager;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -58,6 +64,42 @@ public class NotificationsFragment extends Fragment {
         if (recyclerView == null) {
             return;
         }
+        TextView tv_ReadAll = requireView().requireViewById(R.id.tv_ReadAll);
+        tv_ReadAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view2) {
+                Dialog Dialog = new Dialog(getActivity(), R.style.CustomDialog);
+                @SuppressLint("InflateParams") View view = LayoutInflater.from(getActivity()).inflate(
+                        R.layout.dialog_confirm_center, null);
+                final TextView title = view.findViewById(R.id.title);
+                title.setText("请确认");
+                final TextView msg = view.findViewById(R.id.msg);
+                msg.setText("是否全部已读?");
+                final Button ok = view.findViewById(R.id.ok);
+                ok.setOnClickListener(view1 -> {
+                    new MsgHistoryManager(getContext()).SetReadAll();
+                    Resumeinit();
+                    Dialog.dismiss();
+                });
+                final Button cancel = view.findViewById(R.id.cancel);
+                cancel.setOnClickListener(view12 -> Dialog.dismiss());
+                Window window = Dialog.getWindow();
+                window.setContentView(view);
+                window.setGravity(Gravity.CENTER);
+                window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT,
+                        android.view.WindowManager.LayoutParams.WRAP_CONTENT);
+                Dialog.setCanceledOnTouchOutside(false);
+                WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+                lp.alpha = 0.5f;
+                getActivity().getWindow().setAttributes(lp);
+                Dialog.setOnDismissListener(dialogInterface -> {
+                    WindowManager.LayoutParams lp1 = getActivity().getWindow().getAttributes();
+                    lp1.alpha = 1f;
+                    getActivity().getWindow().setAttributes(lp1);
+                });
+                Dialog.show();
+            }
+        });
         LinearLayout NoticeEmptyView = requireView().requireViewById(R.id.NoticeEmptyView);
         List<NotificationHistoryDataBaseBean> notificationPayloadhistoryList;
         try {
@@ -73,7 +115,6 @@ public class NotificationsFragment extends Fragment {
             NoticeEmptyView.setVisibility(View.VISIBLE);
         } else {
             //清除红点
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
             BottomNavigationView bottomNavigationView = requireActivity().findViewById(R.id.nav_view);
             if(bottomNavigationView!=null)
             {
@@ -81,9 +122,8 @@ public class NotificationsFragment extends Fragment {
                 badgeDrawable.setVisible(false);
                 badgeDrawable.clearNumber();
             }
-            int unreadcount = prefs.getInt("unreadcount", 0);
-            prefs.edit().putBoolean("unread", false).apply();
-            prefs.edit().putInt("unreadcount", 0).apply();
+            List<Integer> list = ConfigHelper.GetUnreadCount(getContext());
+            int unreadcount = list.get(1);
 
             LinearSmoothScroller smoothScroller = new LinearSmoothScroller(requireContext()) {
                 @Override
@@ -101,7 +141,7 @@ public class NotificationsFragment extends Fragment {
                 unreadbutton.setText(unreadcount + "条未读消息");
                 unreadbutton.setVisibility(View.VISIBLE);
                 unreadbutton.setOnClickListener(view1 -> {
-                    smoothScroller.setTargetPosition(notificationPayloadhistoryList.size() - unreadcount);
+                    smoothScroller.setTargetPosition(list.get(0));
                     Objects.requireNonNull(recyclerView.getLayoutManager()).startSmoothScroll(smoothScroller);
                     unreadbutton.setVisibility(View.GONE);
                 });
@@ -136,7 +176,6 @@ public class NotificationsFragment extends Fragment {
             NoticeEmptyView.setVisibility(View.VISIBLE);
         } else {
             //清除红点
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
             BottomNavigationView bottomNavigationView = requireActivity().findViewById(R.id.nav_view);
             if(bottomNavigationView!=null)
             {
@@ -144,9 +183,8 @@ public class NotificationsFragment extends Fragment {
                 badgeDrawable.setVisible(false);
                 badgeDrawable.clearNumber();
             }
-            int unreadcount = prefs.getInt("unreadcount", 0);
-            prefs.edit().putBoolean("unread", false).apply();
-            prefs.edit().putInt("unreadcount", 0).apply();
+            List<Integer> list = ConfigHelper.GetUnreadCount(getContext());
+            int unreadcount = list.get(1);
 
             LinearSmoothScroller smoothScroller = new LinearSmoothScroller(requireContext()) {
                 @Override
@@ -164,7 +202,7 @@ public class NotificationsFragment extends Fragment {
                 unreadbutton.setText(unreadcount + "条未读消息");
                 unreadbutton.setVisibility(View.VISIBLE);
                 unreadbutton.setOnClickListener(view1 -> {
-                    smoothScroller.setTargetPosition(notificationPayloadhistoryList.size() - unreadcount);
+                    smoothScroller.setTargetPosition(list.get(0));
                     Objects.requireNonNull(recyclerView.getLayoutManager()).startSmoothScroll(smoothScroller);
                     unreadbutton.setVisibility(View.GONE);
                 });

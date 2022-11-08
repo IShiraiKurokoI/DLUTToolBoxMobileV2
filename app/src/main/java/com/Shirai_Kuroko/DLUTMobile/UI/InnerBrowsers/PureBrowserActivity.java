@@ -40,7 +40,9 @@ import androidx.preference.PreferenceManager;
 
 import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
+import com.Shirai_Kuroko.DLUTMobile.Helpers.NotificationHelper;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.QRCodeHelper;
+import com.Shirai_Kuroko.DLUTMobile.Managers.MsgHistoryManager;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.BaseActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.BrowserProxy;
@@ -66,6 +68,17 @@ public class PureBrowserActivity extends BaseActivity {
         Intent intent = getIntent();
         String Url = intent.getStringExtra("Url");
         String Name = intent.getStringExtra("Name");
+        try {
+            String MsgID = intent.getStringExtra("MsgID");
+            if (MsgID!=null)
+            {
+                new MsgHistoryManager(this).SetRead(MsgID);
+                new NotificationHelper().Cancel(this, "1919810", "消息通知", Integer.parseInt(MsgID));
+            }
+        }catch (Exception e)
+        {
+            Log.i("Purebrowser", "无需设置已读");
+        }
         webView = findViewById(R.id.PureBrowser);
         TextView Return = requireViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());

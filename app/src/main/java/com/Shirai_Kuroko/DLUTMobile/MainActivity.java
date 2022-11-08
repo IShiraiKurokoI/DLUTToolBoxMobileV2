@@ -36,6 +36,7 @@ import com.Shirai_Kuroko.DLUTMobile.databinding.ActivityMainBinding;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -97,11 +98,13 @@ public class MainActivity extends AppCompatActivity {
         }
         //ConfigHelper.MakeupNotificationList(this);
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
-        if (prefs.getBoolean("unread", false)) {
+
+        List<Integer> list = ConfigHelper.GetUnreadCount(this);
+        if (list.get(0)!=-1) {
             BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(bottomNavigationView.getMenu().getItem(1).getItemId());
             badgeDrawable.setBackgroundColor(Color.RED);
             badgeDrawable.setVisible(true);
-            badgeDrawable.setNumber(prefs.getInt("unreadcount", 0));
+            badgeDrawable.setNumber(list.get(1));
         }
         Intent intent2 = new Intent("android.appwidget.action.APPWIDGET_UPDATE");
         sendBroadcast(intent2);
@@ -111,13 +114,13 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             Log.i("收到广播", intent.getAction());
             if (Objects.equals(intent.getAction(), "com.Shirai_Kuroko.DLUTMobile.ReceivedNew")) {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                if (prefs.getBoolean("unread", false)) {
+                List<Integer> list = ConfigHelper.GetUnreadCount(getBaseContext());
+                if (list.get(0)!=-1) {
                     BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
                     BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(bottomNavigationView.getMenu().getItem(1).getItemId());
                     badgeDrawable.setBackgroundColor(Color.RED);
                     badgeDrawable.setVisible(true);
-                    badgeDrawable.setNumber(prefs.getInt("unreadcount", 0));
+                    badgeDrawable.setNumber(list.get(1));
                 }
             }
         }

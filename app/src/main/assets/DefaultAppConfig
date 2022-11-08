@@ -862,7 +862,7 @@
     "describe": "开发区校区的校园网自服务",
     "type": "custom",
     "popularity": "16060060",
-    "url": "http://172.20.20.1:8080",
+    "url": "http://172.20.20.1:8800",
     "issubscription": 0
   },
   {

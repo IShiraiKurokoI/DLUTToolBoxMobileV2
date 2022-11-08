@@ -46,6 +46,26 @@ public class NotificationHelper {
             manager.notify(id, notification);
         }
     }
+
+    public void Cancel(Context context,String CHANNEL_ONE_ID,String CHANNEL_ONE_NAME,int id)
+    {
+        NotificationChannel notificationChannel;
+        notificationChannel = new NotificationChannel(CHANNEL_ONE_ID,
+                CHANNEL_ONE_NAME, NotificationManager.IMPORTANCE_HIGH);
+        notificationChannel.enableLights(false);
+        notificationChannel.setLightColor(Color.RED);
+        notificationChannel.setShowBadge(true);
+        notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
+        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (manager != null) {
+            manager.createNotificationChannel(notificationChannel);
+        }
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        if (manager != null) {
+            manager.cancel(id);
+        }
+    }
+
     public void Notify(Context context,PendingIntent pendingIntent,String CHANNEL_ID,String CHANNEL_NAME,String title,String info,int id)
     {
         NotificationChannel notificationChannel;
@@ -80,4 +100,6 @@ public class NotificationHelper {
             manager.notify(id, notification);
         }
     }
+
+
 }
