@@ -21,6 +21,17 @@
         app:layout_constraintVertical_bias="0">
 
         <TextView
+            android:id="@id/iv_manage"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="16.0dip"
+            android:paddingRight="16.0dip"
+            android:text="管理消息记录"
+            android:textColor="@color/white"
+            tools:ignore="RelativeOverlap" />
+
+        <TextView
             android:id="@id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

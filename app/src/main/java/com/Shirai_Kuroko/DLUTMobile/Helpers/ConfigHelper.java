@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;
@@ -271,7 +270,6 @@ public class ConfigHelper {
             if (notificationHistoryDataBaseBean.getIs_read()==0)
             {
                 count++;
-                Log.i("TAG", "GetUnreadCount: "+i);
                 if (top == -1)
                 {
                     top = i;
@@ -279,8 +277,6 @@ public class ConfigHelper {
             }
         }
         List<Integer> integerList = new ArrayList<>();
-        Log.i("TAG", "GetUnreadCount: "+top);
-        Log.i("TAG", "GetUnreadCount: "+count);
         integerList.add(top);
         integerList.add(count);
         return integerList;

@@ -333,4 +333,8 @@
     <item name="comment_ratingBar" type="id" />
     <item name="comment_content_et" type="id" />
     <item name="tv_ReadAll" type="id" />
+    <item name="iv_manage" type="id" />
+    <item name="btn_delete" type="id" />
+    <item name="btn_select_all" type="id" />
+    <item name="btn_reverse" type="id" />
 </resources>

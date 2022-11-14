@@ -3,6 +3,7 @@ package com.Shirai_Kuroko.DLUTMobile.UI.MainPageFragments;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import com.Shirai_Kuroko.DLUTMobile.Entities.NotificationHistoryDataBaseBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Managers.MsgHistoryManager;
 import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.UI.NotificationManageActivity;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -64,41 +66,43 @@ public class NotificationsFragment extends Fragment {
         if (recyclerView == null) {
             return;
         }
+        TextView iv_manage = requireView().requireViewById(R.id.iv_manage);
+        iv_manage.setOnClickListener(view -> {
+            Intent intent = new Intent(getContext(), NotificationManageActivity.class);
+            startActivity(intent);
+        });
         TextView tv_ReadAll = requireView().requireViewById(R.id.tv_ReadAll);
-        tv_ReadAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view2) {
-                Dialog Dialog = new Dialog(getActivity(), R.style.CustomDialog);
-                @SuppressLint("InflateParams") View view = LayoutInflater.from(getActivity()).inflate(
-                        R.layout.dialog_confirm_center, null);
-                final TextView title = view.findViewById(R.id.title);
-                title.setText("请确认");
-                final TextView msg = view.findViewById(R.id.msg);
-                msg.setText("是否全部已读?");
-                final Button ok = view.findViewById(R.id.ok);
-                ok.setOnClickListener(view1 -> {
-                    new MsgHistoryManager(getContext()).SetReadAll();
-                    Resumeinit();
-                    Dialog.dismiss();
-                });
-                final Button cancel = view.findViewById(R.id.cancel);
-                cancel.setOnClickListener(view12 -> Dialog.dismiss());
-                Window window = Dialog.getWindow();
-                window.setContentView(view);
-                window.setGravity(Gravity.CENTER);
-                window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT,
-                        android.view.WindowManager.LayoutParams.WRAP_CONTENT);
-                Dialog.setCanceledOnTouchOutside(false);
-                WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
-                lp.alpha = 0.5f;
-                getActivity().getWindow().setAttributes(lp);
-                Dialog.setOnDismissListener(dialogInterface -> {
-                    WindowManager.LayoutParams lp1 = getActivity().getWindow().getAttributes();
-                    lp1.alpha = 1f;
-                    getActivity().getWindow().setAttributes(lp1);
-                });
-                Dialog.show();
-            }
+        tv_ReadAll.setOnClickListener(view2 -> {
+            Dialog Dialog = new Dialog(getActivity(), R.style.CustomDialog);
+            @SuppressLint("InflateParams") View view = LayoutInflater.from(getActivity()).inflate(
+                    R.layout.dialog_confirm_center, null);
+            final TextView title = view.findViewById(R.id.title);
+            title.setText("请确认");
+            final TextView msg = view.findViewById(R.id.msg);
+            msg.setText("是否全部已读?");
+            final Button ok = view.findViewById(R.id.ok);
+            ok.setOnClickListener(view1 -> {
+                new MsgHistoryManager(getContext()).SetReadAll();
+                Resumeinit();
+                Dialog.dismiss();
+            });
+            final Button cancel = view.findViewById(R.id.cancel);
+            cancel.setOnClickListener(view12 -> Dialog.dismiss());
+            Window window = Dialog.getWindow();
+            window.setContentView(view);
+            window.setGravity(Gravity.CENTER);
+            window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.WRAP_CONTENT);
+            Dialog.setCanceledOnTouchOutside(false);
+            WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+            lp.alpha = 0.5f;
+            getActivity().getWindow().setAttributes(lp);
+            Dialog.setOnDismissListener(dialogInterface -> {
+                WindowManager.LayoutParams lp1 = getActivity().getWindow().getAttributes();
+                lp1.alpha = 1f;
+                getActivity().getWindow().setAttributes(lp1);
+            });
+            Dialog.show();
         });
         LinearLayout NoticeEmptyView = requireView().requireViewById(R.id.NoticeEmptyView);
         List<NotificationHistoryDataBaseBean> notificationPayloadhistoryList;

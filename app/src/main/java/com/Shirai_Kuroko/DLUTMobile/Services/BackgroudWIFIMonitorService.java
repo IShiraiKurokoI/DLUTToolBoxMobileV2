@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.preference.PreferenceManager;
 
 import com.Shirai_Kuroko.DLUTMobile.MainActivity;
@@ -59,13 +60,18 @@ public class BackgroudWIFIMonitorService extends Service {
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle("正在后台监测校园网网络连接")
                 .setShowWhen(false)
+                .setAllowSystemGeneratedContextualActions(false)
+                .setVisibility(Notification.VISIBILITY_SECRET)
                 .setContentIntent(null)
                 .build();
 
         BroadcastReceiver Receiver = new WIFIStateChangeBroadcastReceiver();
         IntentFilter intentFilter = new IntentFilter(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        intentFilter.addAction("com.Shirai_Kuroko.DLUTMobile.ManualConnect");
+        intentFilter.addAction("com.Shirai_Kuroko.DLUTMobile.ManualDisconnect");
+        intentFilter.addAction("com.Shirai_Kuroko.DLUTMobile.OpenService");
         registerReceiver(Receiver, intentFilter);
-
+        LocalBroadcastManager.getInstance(this).registerReceiver(Receiver, intentFilter);
         startForeground(2, notification);
     }
 
