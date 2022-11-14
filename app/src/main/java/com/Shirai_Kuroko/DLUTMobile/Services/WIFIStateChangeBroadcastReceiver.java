@@ -332,9 +332,9 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
             if (content != null) {
                 builder.setContentText(content);
             }
-            builder.addAction(R.drawable.icon,"手动连接", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.ManualConnect"), PendingIntent.FLAG_UPDATE_CURRENT));
-            builder.addAction(R.drawable.icon,"断开连接", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.ManualDisconnect"), PendingIntent.FLAG_UPDATE_CURRENT));
-            builder.addAction(R.drawable.icon,"打开自服务", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.OpenService"), PendingIntent.FLAG_UPDATE_CURRENT));
+            builder.addAction(R.drawable.icon,"手动连接", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.ManualConnect"), PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
+            builder.addAction(R.drawable.icon,"断开连接", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.ManualDisconnect"), PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
+            builder.addAction(R.drawable.icon,"打开自服务", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.OpenService"), PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
             Notification NewNotification = builder
                     .setShowWhen(false)
                     .setContentIntent(null)

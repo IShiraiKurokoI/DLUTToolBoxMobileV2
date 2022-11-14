@@ -71,23 +71,23 @@ public class CourseWidget extends AppWidgetProvider {
         remoteViews.setOnClickPendingIntent(R.id.root_container, null);
         Intent intent = new Intent(context, WidgetQRLauncherActivity.class);
         @SuppressLint("UnspecifiedImmutableFlag")
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
         remoteViews.setOnClickPendingIntent(R.id.btn_start_qr_scan, pendingIntent);
         Intent intent1 = new Intent(context, OpenVirtualCardActivity.class);
         @SuppressLint("UnspecifiedImmutableFlag")
-        PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
         remoteViews.setOnClickPendingIntent(R.id.btn_start_virtual_card, pendingIntent1);
 
         final int list_course = R.id.list_course;
         final Intent intent2 = new Intent("android.appwidget.action.APPWIDGET_UPDATE");
-        remoteViews.setOnClickPendingIntent(R.id.btn_refresh, PendingIntent.getBroadcast(context, 0, intent2, PendingIntent.FLAG_UPDATE_CURRENT));
+        remoteViews.setOnClickPendingIntent(R.id.btn_refresh, PendingIntent.getBroadcast(context, 0, intent2, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
 
         if (ConfigHelper.NeedLogin(context)) {
             final int content_container = R.id.content_container;
             remoteViews.removeAllViews(content_container);
             final RemoteViews remoteViews2 = new RemoteViews(context.getPackageName(), R.layout.layout_course_widget_login_view);
             final Intent intent4 = new Intent(context, SplashActivity.class);
-            remoteViews2.setOnClickPendingIntent(R.id.btn_login, PendingIntent.getActivity(context, 0, intent4, PendingIntent.FLAG_UPDATE_CURRENT));
+            remoteViews2.setOnClickPendingIntent(R.id.btn_login, PendingIntent.getActivity(context, 0, intent4, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
             remoteViews.addView(content_container, remoteViews2);
             WidgetHelper.M(remoteViews, false);
         } else {
@@ -105,7 +105,7 @@ public class CourseWidget extends AppWidgetProvider {
                 remoteViews.setRemoteAdapter(list_course, adapter);
                 final Intent intent6 = new Intent(context, BrowserActivity.class);
                 intent6.putExtra("App_ID", String.valueOf(1));
-                remoteViews.setPendingIntentTemplate(list_course, PendingIntent.getActivity(context, 0, intent6, PendingIntent.FLAG_UPDATE_CURRENT));
+                remoteViews.setPendingIntentTemplate(list_course, PendingIntent.getActivity(context, 0, intent6, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
                 appWidgetManager.notifyAppWidgetViewDataChanged(i, list_course);
             }
         }
@@ -121,23 +121,23 @@ public class CourseWidget extends AppWidgetProvider {
         remoteViews.setOnClickPendingIntent(R.id.root_container, null);
         Intent intent = new Intent(context, WidgetQRLauncherActivity.class);
         @SuppressLint("UnspecifiedImmutableFlag")
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
         remoteViews.setOnClickPendingIntent(R.id.btn_start_qr_scan, pendingIntent);
         Intent intent1 = new Intent(context, OpenVirtualCardActivity.class);
         @SuppressLint("UnspecifiedImmutableFlag")
-        PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
         remoteViews.setOnClickPendingIntent(R.id.btn_start_virtual_card, pendingIntent1);
 
         final int list_course = R.id.list_course;
         final Intent intent2 = new Intent("android.appwidget.action.APPWIDGET_UPDATE");
-        remoteViews.setOnClickPendingIntent(R.id.btn_refresh, PendingIntent.getBroadcast(context, 0, intent2, PendingIntent.FLAG_UPDATE_CURRENT));
+        remoteViews.setOnClickPendingIntent(R.id.btn_refresh, PendingIntent.getBroadcast(context, 0, intent2, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
 
         if (ConfigHelper.NeedLogin(context)) {
             final int content_container = R.id.content_container;
             remoteViews.removeAllViews(content_container);
             final RemoteViews remoteViews2 = new RemoteViews(context.getPackageName(), R.layout.layout_course_widget_login_view);
             final Intent intent4 = new Intent(context, SplashActivity.class);
-            remoteViews2.setOnClickPendingIntent(R.id.btn_login, PendingIntent.getActivity(context, 0, intent4, PendingIntent.FLAG_UPDATE_CURRENT));
+            remoteViews2.setOnClickPendingIntent(R.id.btn_login, PendingIntent.getActivity(context, 0, intent4, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
             remoteViews.addView(content_container, remoteViews2);
             WidgetHelper.M(remoteViews, false);
         } else {

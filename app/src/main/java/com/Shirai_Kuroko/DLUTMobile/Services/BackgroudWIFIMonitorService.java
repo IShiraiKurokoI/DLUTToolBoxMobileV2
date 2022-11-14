@@ -55,7 +55,7 @@ public class BackgroudWIFIMonitorService extends Service {
             manager.createNotificationChannel(notificationChannel);
         }
         Intent intent = new Intent(this, MainActivity.class);
-        @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
         Notification notification = new Notification.Builder(this, CHANNEL_ONE_ID).setChannelId(CHANNEL_ONE_ID)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle("正在后台监测校园网网络连接")

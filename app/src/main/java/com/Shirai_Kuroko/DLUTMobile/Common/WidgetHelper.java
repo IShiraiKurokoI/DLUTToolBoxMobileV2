@@ -35,7 +35,7 @@ public class WidgetHelper {
         remoteViews.setTextViewText(R.id.empty_wording, (CharSequence)anObject);
         if (CourseBean.CourseEmptyWords.USER_FORBIDDEN.txt.equals(anObject)) {
             final Intent intent = new Intent(context, SplashActivity.class);
-            remoteViews.setOnClickPendingIntent(R.id.widget_item_container, PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+            remoteViews.setOnClickPendingIntent(R.id.widget_item_container, PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
         }
         return remoteViews;
     }
