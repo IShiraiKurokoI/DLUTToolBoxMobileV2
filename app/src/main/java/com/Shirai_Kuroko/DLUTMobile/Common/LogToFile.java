@@ -46,8 +46,8 @@ public class LogToFile {
         if (mfolder.isDirectory()) {
             File[] AllFiles = mfolder.listFiles(); //列出目录下的所有文件
             ArrayList<String> mFilesList = new ArrayList<String>();  //存放/myLog 下的所有文件
-            for (int i = 0; i < AllFiles.length; i++) {
-                File mFile = AllFiles[i]; //得到文件
+            //得到文件
+            for (File mFile : AllFiles) {
                 String Name = mFile.getName(); //得到文件的名字
                 if (Name.length() < 1)
                     return;

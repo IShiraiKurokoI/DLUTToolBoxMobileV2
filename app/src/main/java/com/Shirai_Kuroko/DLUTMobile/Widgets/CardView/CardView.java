@@ -294,12 +294,9 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
                 baseCardContentView.c = (List) c;
                 baseCardContentView.a();
                 baseCardContentView.b = this.cardInfoBean;
-                this.v = new ExpandableCardContentView.a() {
-                    @Override
-                    public void SetExpand(boolean e) {
-                        appBean.setExpand(e);
-                        f();
-                    }
+                this.v = e -> {
+                    appBean.setExpand(e);
+                    f();
                 };
                 final ExpandableCardContentView.a v = this.v;
                 if (v != null && baseCardContentView instanceof ExpandableCardContentView) {

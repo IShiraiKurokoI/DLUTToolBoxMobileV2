@@ -70,7 +70,7 @@ public class CourseBean implements Serializable, Cloneable
 
         public String txt;
 
-        private CourseEmptyWords(final String txt) {
+        CourseEmptyWords(final String txt) {
             this.txt = txt;
         }
     }

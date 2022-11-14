@@ -55,7 +55,6 @@ public class CourseWidget extends AppWidgetProvider {
     public static final String a = "";
 
     @Override
-    @SuppressLint("UnspecifiedImmutableFlag")
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         LogToFile.init(context);
         BackendUtils.GainScore(context);
@@ -65,7 +64,6 @@ public class CourseWidget extends AppWidgetProvider {
         this.a(context);
         super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
-
     @SuppressLint("UnspecifiedImmutableFlag")
     public static void b(final Context context, final AppWidgetManager appWidgetManager, final int i, final State state) {
 
@@ -82,7 +80,7 @@ public class CourseWidget extends AppWidgetProvider {
 
         final int list_course = R.id.list_course;
         final Intent intent2 = new Intent("android.appwidget.action.APPWIDGET_UPDATE");
-        remoteViews.setOnClickPendingIntent(R.id.btn_refresh, PendingIntent.getBroadcast(context, 0, intent2, 0));
+        remoteViews.setOnClickPendingIntent(R.id.btn_refresh, PendingIntent.getBroadcast(context, 0, intent2, PendingIntent.FLAG_UPDATE_CURRENT));
 
         if (ConfigHelper.NeedLogin(context)) {
             final int content_container = R.id.content_container;
@@ -132,7 +130,7 @@ public class CourseWidget extends AppWidgetProvider {
 
         final int list_course = R.id.list_course;
         final Intent intent2 = new Intent("android.appwidget.action.APPWIDGET_UPDATE");
-        remoteViews.setOnClickPendingIntent(R.id.btn_refresh, PendingIntent.getBroadcast(context, 0, intent2, 0));
+        remoteViews.setOnClickPendingIntent(R.id.btn_refresh, PendingIntent.getBroadcast(context, 0, intent2, PendingIntent.FLAG_UPDATE_CURRENT));
 
         if (ConfigHelper.NeedLogin(context)) {
             final int content_container = R.id.content_container;
