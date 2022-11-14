@@ -161,7 +161,7 @@ public class LogToFile {
             return;
         }
 
-        String fileName = logPath + "/程序崩溃日志 " + dateFormat.format(new Date()) + ".log";//log日志名，使用时间命名，保证不重复
+        String fileName = logPath + "/程序崩溃日志 " + dateFormat.format(new Date()) + ".crashlog";//log日志名，使用时间命名，保证不重复
         String log = dateFormat.format(date) + " 日志类别 " + type + " " + tag + "\n" + msg + "\n\n";//log日志内容，可以自行定制
 
         //如果父路径不存在

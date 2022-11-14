@@ -73,11 +73,11 @@ public class CourseWidget extends AppWidgetProvider {
         remoteViews.setOnClickPendingIntent(R.id.root_container, null);
         Intent intent = new Intent(context, WidgetQRLauncherActivity.class);
         @SuppressLint("UnspecifiedImmutableFlag")
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         remoteViews.setOnClickPendingIntent(R.id.btn_start_qr_scan, pendingIntent);
         Intent intent1 = new Intent(context, OpenVirtualCardActivity.class);
         @SuppressLint("UnspecifiedImmutableFlag")
-        PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, 0);
+        PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
         remoteViews.setOnClickPendingIntent(R.id.btn_start_virtual_card, pendingIntent1);
 
         final int list_course = R.id.list_course;
@@ -123,11 +123,11 @@ public class CourseWidget extends AppWidgetProvider {
         remoteViews.setOnClickPendingIntent(R.id.root_container, null);
         Intent intent = new Intent(context, WidgetQRLauncherActivity.class);
         @SuppressLint("UnspecifiedImmutableFlag")
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         remoteViews.setOnClickPendingIntent(R.id.btn_start_qr_scan, pendingIntent);
         Intent intent1 = new Intent(context, OpenVirtualCardActivity.class);
         @SuppressLint("UnspecifiedImmutableFlag")
-        PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, 0);
+        PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
         remoteViews.setOnClickPendingIntent(R.id.btn_start_virtual_card, pendingIntent1);
 
         final int list_course = R.id.list_course;
