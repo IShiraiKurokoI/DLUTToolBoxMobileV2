@@ -5,12 +5,14 @@
 首页</br>
 ![Screenshot_20220907_160540_com Shirai_Kuroko DLUT](https://user-images.githubusercontent.com/73374735/188825159-db56637d-668a-49b5-97a6-c03ad354d825.jpg)
 消息</br>
-![Screenshot_20220907_160249_com Shirai_Kuroko DLUT](https://user-images.githubusercontent.com/73374735/188824481-18547a9b-1b22-4f8c-a1fe-a2d9b0262ea7.jpg)
+![Screenshot_20221114_135740_com Shirai_Kuroko DLUT](https://user-images.githubusercontent.com/73374735/201586750-71156b9b-0e35-46e3-a9f7-850b85599dd4.jpg)
 服务大厅</br>
 ![Screenshot_20220804_071902_com Shirai_Kuroko DLUT](https://user-images.githubusercontent.com/73374735/182729396-81f2cc28-ed5c-4121-a5fd-f5171224b23e.jpg)
 我的</br>
 ![Screenshot_20220804_071908_com Shirai_Kuroko DLUT](https://user-images.githubusercontent.com/73374735/182729406-701c30f2-d2f5-486d-9076-96a8f239b550.jpg)
 浏览器界面</br>
 ![Screenshot_20220919_074136_com Shirai_Kuroko DLUT](https://user-images.githubusercontent.com/73374735/190933482-4929eb4c-f931-497c-bbfa-6aa667566267.jpg)
+通知栏</br>
+![Screenshot_20221114_135834_com Shirai_Kuroko DLUT](https://user-images.githubusercontent.com/73374735/201586843-d2e71768-9ae3-4afa-ace8-7aad1783c370.jpg)
 </br>
 如有问题，BUG反馈及建议请提Issue或者联系作者邮箱：ishirai_kurokoi@foxmail.com
