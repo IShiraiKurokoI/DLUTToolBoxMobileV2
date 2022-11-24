@@ -52,8 +52,10 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                     assert mWifiManager != null;
                     WifiInfo info = mWifiManager.getConnectionInfo();
                     String ssid = info.getSSID();
+                    String ssid1 = networkInfo.getExtraInfo();
                     Log.i("连接到的WIFI为", ssid);
-                    if (ssid.contains("DLUT-EDA")) {
+                    Log.i("连接到的WIFI为", ssid1);
+                    if (ssid.contains("DLUT-EDA")||ssid1.contains("DLUT-EDA")) {
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                         String un = prefs.getString("Username", "");
                         String pd = prefs.getString("NetworkPassword", "");
@@ -132,7 +134,7 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                             Log.i("校园网WIFI连接", "开发区校区,未配置账户密码，停止认证");
                             new NotificationHelper().Notify(context, null, "2042", "联网消息通知", "校园网连接失败", "未配置校园网账户密码", (int) (System.currentTimeMillis() + Math.random()));
                         }
-                    } else if (ssid.contains("DLUT-L")) {
+                    } else if (ssid.contains("DLUT-L")||ssid1.contains("DLUT-L")) {
                         DoNotification(context,ssid+"已连接","抱歉，暂不支持主校区自动认证");
                         Log.i("校园网WIFI连接", "主校区");
                         //ToDo:自动连接主校区校园网
@@ -148,9 +150,13 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
             assert mWifiManager != null;
             WifiInfo info = mWifiManager.getConnectionInfo();
             String ssid = info.getSSID();
+            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+            String ssid1 = networkInfo.getExtraInfo();
             Log.i("连接到的WIFI为", ssid);
+            Log.i("连接到的WIFI为", ssid1);
             DoNotification(context,ssid+"已连接","正在尝试执行手动登录");
-            if (ssid.contains("DLUT-EDA")) {
+            if (ssid.contains("DLUT-EDA")||ssid1.contains("DLUT-EDA")) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                 String un = prefs.getString("Username", "");
                 String pd = prefs.getString("NetworkPassword", "");
@@ -229,7 +235,7 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                     Log.i("校园网WIFI连接", "开发区校区,未配置账户密码，停止认证");
                     new NotificationHelper().Notify(context, null, "2042", "联网消息通知", "校园网连接失败", "未配置校园网账户密码", (int) (System.currentTimeMillis() + Math.random()));
                 }
-            } else if (ssid.contains("DLUT-L")) {
+            } else if (ssid.contains("DLUT-L")||ssid1.contains("DLUT-L")) {
                 DoNotification(context,ssid+"已连接","抱歉，暂不支持主校区自动认证");
                 Log.i("校园网WIFI连接", "主校区");
                 //ToDo:自动连接主校区校园网
@@ -241,7 +247,10 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
             assert mWifiManager != null;
             WifiInfo info = mWifiManager.getConnectionInfo();
             String ssid = info.getSSID();
-            if (ssid.contains("DLUT-EDA")) {
+            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+            String ssid1 = networkInfo.getExtraInfo();
+            if (ssid.contains("DLUT-EDA")||ssid1.contains("DLUT-EDA")) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                 String un = prefs.getString("Username", "");
                 String pd = prefs.getString("NetworkPassword", "");
@@ -269,7 +278,7 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                     Log.i("校园网WIFI注销", "开发区校区,未配置账户密码，停止注销");
                     new NotificationHelper().Notify(context, null, "2042", "联网消息通知", "校园网连接失败", "未配置校园网账户密码", (int) (System.currentTimeMillis() + Math.random()));
                 }
-            } else if (ssid.contains("DLUT-L")) {
+            } else if (ssid.contains("DLUT-L")||ssid1.contains("DLUT-L")) {
                 DoNotification(context,ssid+"已连接","抱歉，暂不支持主校区注销功能");
             }
             DoNotification(context,"正在后台监测校园网网络连接",null);

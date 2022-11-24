@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,6 +24,7 @@ public class NotificationManageActivity extends AppCompatActivity {
         Return.setOnClickListener(v -> finish());
         TextView tv_more = requireViewById(R.id.tv_more);
         tv_more.setOnClickListener(this::showPopupWindow);
+        Toast.makeText(this, "抱歉，此页面功能尚未实现！", Toast.LENGTH_LONG).show();
     }
 
     public void showPopupWindow(View view) {
