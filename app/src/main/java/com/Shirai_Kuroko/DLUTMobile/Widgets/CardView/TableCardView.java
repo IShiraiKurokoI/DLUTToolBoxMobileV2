@@ -41,7 +41,7 @@ public class TableCardView extends ListCardContentView<TableCardRowBean>
 
     @Override
     public View f(TableCardRowBean p0, int p1) {
-        return this.g((TableCardRowBean)p0);
+        return this.g(p0);
     }
 
     public View g(TableCardRowBean tableCardRowBean) {
@@ -56,7 +56,7 @@ public class TableCardView extends ListCardContentView<TableCardRowBean>
                     final Iterator<TableCardRowBean.TableCellBean> iterator = data.iterator();
                     int n = 0;
                     while (iterator.hasNext()) {
-                        n += ((TableCardRowBean.TableCellBean)iterator.next()).getSpan();
+                        n += iterator.next().getSpan();
                     }
                     int n2;
                     if ((n2 = n) == 0) {
@@ -71,7 +71,7 @@ public class TableCardView extends ListCardContentView<TableCardRowBean>
                     final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-1, (int)(super.f.getResources().getDimension(R.dimen.card_table_row_height) * super.d + 0.5));
                     final LinearLayout linearLayout = new LinearLayout(super.f);
                     linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                    linearLayout.setLayoutParams((ViewGroup.LayoutParams)layoutParams);
+                    linearLayout.setLayoutParams(layoutParams);
                     linearLayout.setWeightSum(12.0f);
                     final Iterator<TableCardRowBean.TableCellBean> iterator3 = data.iterator();
                     while (true) {
@@ -83,11 +83,11 @@ public class TableCardView extends ListCardContentView<TableCardRowBean>
                         final LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(0, -1);
                         layoutParams2.weight = (float)tableCellBean.getSpan();
                         TextView tableCardRowBean1 = new TextView(super.f);
-                        ((TextView)tableCardRowBean1).setTextSize(1, super.d * 12.0f);
-                        ((TextView)tableCardRowBean1).setText((CharSequence)tableCellBean.getText());
-                        ((TextView)tableCardRowBean1).setSingleLine();
-                        ((TextView)tableCardRowBean1).setEllipsize(TextUtils.TruncateAt.END);
-                        ((TextView)tableCardRowBean1).setLayoutParams((ViewGroup.LayoutParams)layoutParams2);
+                        tableCardRowBean1.setTextSize(1, super.d * 12.0f);
+                        tableCardRowBean1.setText(tableCellBean.getText());
+                        tableCardRowBean1.setSingleLine();
+                        tableCardRowBean1.setEllipsize(TextUtils.TruncateAt.END);
+                        tableCardRowBean1.setLayoutParams(layoutParams2);
 //                        try {
 ////                            ((TextView)tableCardRowBean1).setTextColor(f(tableCellBean.getColor()));
 //                        }

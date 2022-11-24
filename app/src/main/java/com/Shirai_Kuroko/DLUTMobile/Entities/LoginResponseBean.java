@@ -41,10 +41,6 @@ public class LoginResponseBean {
         private List<TgtinfoDTO> tgtinfo;
         @JsonProperty("pword")
         private String pword;
-        @JsonProperty("USER_FIRST_LOGIN")
-        private String USER_FIRST_LOGIN;
-        @JsonProperty("cas_IS_EXPIRED_PWD")
-        private String cas_IS_EXPIRED_PWD;
         @JsonProperty("expires_skey")
         private String expires_skey;
 
@@ -57,11 +53,9 @@ public class LoginResponseBean {
         }
 
         public void setCas_IS_EXPIRED_PWD(String cas_IS_EXPIRED_PWD) {
-            this.cas_IS_EXPIRED_PWD = cas_IS_EXPIRED_PWD;
         }
 
         public void setUSER_FIRST_LOGIN(String USER_FIRST_LOGIN) {
-            this.USER_FIRST_LOGIN = USER_FIRST_LOGIN;
         }
 
         public void setTgtinfo(List<TgtinfoDTO> tgtinfo) {

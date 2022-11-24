@@ -45,7 +45,7 @@ public class CenterToast extends Toast
         this.b.setText(text);
         this.setDuration(Toast.LENGTH_SHORT);
         int tvToastId = Resources.getSystem().getIdentifier("message", "id", "android");
-        TextView tvToast = ((TextView) this.getView().findViewById(tvToastId));
+        TextView tvToast = this.getView().findViewById(tvToastId);
         if(tvToast != null){
             tvToast.setGravity(Gravity.CENTER);
         }

@@ -42,12 +42,12 @@ public class DataCardView extends ExpandableCardContentView<DataCardItemBean>
         final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-1, -2);
         (this.j = new LinearLayout(super.f)).setLayoutTransition(new LayoutTransition());
         this.j.setOrientation(LinearLayout.VERTICAL);
-        this.j.setLayoutParams((ViewGroup.LayoutParams)layoutParams);
+        this.j.setLayoutParams(layoutParams);
         this.j.addView(this.f(0));
         if (super.c.size() > 3) {
             super.e = true;
         }
-        return (View)this.j;
+        return this.j;
     }
 
     @Override
@@ -67,40 +67,40 @@ public class DataCardView extends ExpandableCardContentView<DataCardItemBean>
     public final View f(final int n) {
         final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-1, (int)(super.f.getResources().getDimension(R.dimen.card_data_row_height) * super.d + 0.5));
         final LinearLayout linearLayout = new LinearLayout(super.f);
-        linearLayout.setLayoutParams((ViewGroup.LayoutParams)layoutParams);
+        linearLayout.setLayoutParams(layoutParams);
         linearLayout.setWeightSum(3.0f);
         for (int i = 0; i < 3; ++i) {
             final int n2 = n * 3 + i;
             DataCardItemBean dataCardItemBean;
             if (n2 < super.c.size()) {
-                dataCardItemBean = (DataCardItemBean)super.c.get(n2);
+                dataCardItemBean = super.c.get(n2);
             }
             else {
                 dataCardItemBean = null;
             }
-            final View inflate = LayoutInflater.from(super.f).inflate(R.layout.item_card_data, (ViewGroup)null);
-            final TextView textView = (TextView)inflate.findViewById(R.id.tv_card_data_value);
-            final TextView textView2 = (TextView)inflate.findViewById(R.id.tv_card_data_des);
+            final View inflate = LayoutInflater.from(super.f).inflate(R.layout.item_card_data, null);
+            final TextView textView = inflate.findViewById(R.id.tv_card_data_value);
+            final TextView textView2 = inflate.findViewById(R.id.tv_card_data_des);
             if (super.d != 1.0f) {
                 textView.setTextSize(0, textView.getTextSize() * super.d);
                 textView2.setTextSize(0, textView2.getTextSize() * super.d);
             }
             if (dataCardItemBean != null) {
-                textView.setText((CharSequence)dataCardItemBean.getValue());
+                textView.setText(dataCardItemBean.getValue());
                 try {
                     textView.setTextColor(f(dataCardItemBean.getColor()));
                 }
                 catch (Exception ex) {
                     ex.printStackTrace();
                 }
-                textView2.setText((CharSequence)dataCardItemBean.getTitle());
+                textView2.setText(dataCardItemBean.getTitle());
             }
             final LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(0, -1);
             layoutParams2.weight = 1.0f;
-            inflate.setLayoutParams((ViewGroup.LayoutParams)layoutParams2);
+            inflate.setLayoutParams(layoutParams2);
             linearLayout.addView(inflate);
         }
-        return (View)linearLayout;
+        return linearLayout;
     }
 
     public static int f(final String s) {

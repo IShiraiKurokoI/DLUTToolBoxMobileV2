@@ -63,7 +63,7 @@ public class PullDownScrollView extends ScrollView
                     }
                 }
             }
-            else if (this.c.isEmpty() ^ true) {
+            else if (!this.c.isEmpty()) {
                 final TranslateAnimation translateAnimation = new TranslateAnimation(0.0f, 0.0f, (float)(this.a.getTop() - this.c.top), 0.0f);
                 translateAnimation.setDuration(200L);
                 this.a.startAnimation(translateAnimation);

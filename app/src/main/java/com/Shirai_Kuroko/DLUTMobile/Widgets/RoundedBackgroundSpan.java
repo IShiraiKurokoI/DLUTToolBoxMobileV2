@@ -10,8 +10,6 @@ import com.Shirai_Kuroko.DLUTMobile.R;
 
 public class RoundedBackgroundSpan extends ReplacementSpan {
 
-    private static int CORNER_RADIUS = 8;
-
     private int backgroundColor = 0;
 
     private int textColor = 0;
@@ -34,6 +32,7 @@ public class RoundedBackgroundSpan extends ReplacementSpan {
 
         paint.setColor(backgroundColor);
 
+        int CORNER_RADIUS = 8;
         canvas.drawRoundRect(rect, CORNER_RADIUS, CORNER_RADIUS, paint);
 
         paint.setColor(textColor);

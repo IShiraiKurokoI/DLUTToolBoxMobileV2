@@ -48,10 +48,10 @@ public class TextCardView extends ListCardContentView<TextCardItemBean>
 
     @Override
     public View f(TextCardItemBean o, int n) {
-        final View inflate = LayoutInflater.from(super.f).inflate(R.layout.item_card_text, (ViewGroup)null);
-        final TextView textView = (TextView)inflate.findViewById(R.id.tv_card_text_tittle);
-        final TextView textView2 = (TextView)inflate.findViewById(R.id.tv_content);
-        final TextView textView3 = (TextView)inflate.findViewById(R.id.tv_card_text_date);
+        final View inflate = LayoutInflater.from(super.f).inflate(R.layout.item_card_text, null);
+        final TextView textView = inflate.findViewById(R.id.tv_card_text_tittle);
+        final TextView textView2 = inflate.findViewById(R.id.tv_content);
+        final TextView textView3 = inflate.findViewById(R.id.tv_card_text_date);
         final View viewById = inflate.findViewById(R.id.divider);
         if (n == 0) {
             viewById.setVisibility(View.GONE);
@@ -60,24 +60,24 @@ public class TextCardView extends ListCardContentView<TextCardItemBean>
             viewById.setVisibility(View.VISIBLE);
         }
         final View viewById2 = inflate.findViewById(R.id.iv_unread_tip);
-        if (((TextCardItemBean)o).isRead()) {
+        if (o.isRead()) {
             viewById2.setVisibility(View.INVISIBLE);
         }
         else {
             viewById2.setVisibility(View.VISIBLE);
         }
         viewById2.setVisibility(n);
-        textView.setText((CharSequence) ((TextCardItemBean)o).getTitle());
-        final String text = ((TextCardItemBean)o).getText();
-        if (TextUtils.isEmpty((CharSequence)text)) {
-            textView2.setText((CharSequence)"暂无内容");
+        textView.setText(o.getTitle());
+        final String text = o.getText();
+        if (TextUtils.isEmpty(text)) {
+            textView2.setText("暂无内容");
 //            textView2.setTextColor(-6710887);
         }
         else {
-            textView2.setText((CharSequence)text);
+            textView2.setText(text);
 //            textView2.setTextColor(-13421773);
         }
-        textView3.setText((CharSequence)TextCardView.m.format(((TextCardItemBean)o).getTime()));
+        textView3.setText(TextCardView.m.format(o.getTime()));
         if (super.d != 1.0f) {
             viewById2.setVisibility(View.INVISIBLE);
             final LinearLayout.LayoutParams linearLayout$LayoutParams = (LinearLayout.LayoutParams)textView.getLayoutParams();
@@ -93,8 +93,8 @@ public class TextCardView extends ListCardContentView<TextCardItemBean>
             textView3.setTextSize(0, textView3.getTextSize() * super.d);
             textView3.requestLayout();
         }
-        if (!TextUtils.isEmpty((CharSequence) ((TextCardItemBean)o).getUrl())) {
-            inflate.setOnClickListener((View.OnClickListener) new d(this.getContext(), ((TextCardItemBean) o).getUrl()));
+        if (!TextUtils.isEmpty(o.getUrl())) {
+            inflate.setOnClickListener(new d(this.getContext(), o.getUrl()));
         }
         return inflate;
     }

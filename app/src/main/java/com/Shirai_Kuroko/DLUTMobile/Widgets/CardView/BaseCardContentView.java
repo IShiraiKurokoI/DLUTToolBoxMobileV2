@@ -49,7 +49,7 @@ public class BaseCardContentView<T> extends LinearLayout {
     public TextView b() {
         final FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(-1, (int) (getResources().getDimension(R.dimen.card_loading_view_height) * this.d + 0.5));
         final TextView textView = new TextView(getContext());
-        textView.setLayoutParams((ViewGroup.LayoutParams) layoutParams);
+        textView.setLayoutParams(layoutParams);
         textView.setGravity(17);
         textView.setTextSize(1, this.d * 12.0f);
         textView.setTextColor(Color.parseColor("#999999"));
@@ -83,7 +83,7 @@ public class BaseCardContentView<T> extends LinearLayout {
                         if (noDataText.size() <= 1) {
                             break Label_0313;
                         }
-                        if (!TextUtils.isEmpty((CharSequence) noDataText.get(1))) {
+                        if (!TextUtils.isEmpty(noDataText.get(1))) {
                             string2 = noDataText.get(0) +
                                     "\r\n" +
                                     noDataText.get(1);

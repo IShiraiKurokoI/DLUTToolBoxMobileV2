@@ -340,10 +340,7 @@ public class AppBean implements Serializable
 
     public boolean getIsCanelRecomend() {
         final int isCelRe = this.isCelRe;
-        boolean b = true;
-        if (isCelRe != 1) {
-            b = false;
-        }
+        boolean b = isCelRe == 1;
         return b;
     }
 
@@ -361,10 +358,7 @@ public class AppBean implements Serializable
 
     public boolean getIs_sso() {
         final int is_sso = this.is_sso;
-        boolean b = true;
-        if (is_sso != 1) {
-            b = false;
-        }
+        boolean b = is_sso == 1;
         return b;
     }
 
@@ -407,7 +401,7 @@ public class AppBean implements Serializable
     public List<String> getScreenshot() {
         final ArrayList<String> list = new ArrayList<String>();
         for (final String e : this.screenshot) {
-            if (!TextUtils.isEmpty((CharSequence)e)) {
+            if (!TextUtils.isEmpty(e)) {
                 list.add(e);
             }
         }
@@ -558,19 +552,13 @@ public class AppBean implements Serializable
 
     public boolean isAddCard() {
         final int is_add_card = this.is_add_card;
-        boolean b = true;
-        if (is_add_card != 1) {
-            b = false;
-        }
+        boolean b = is_add_card == 1;
         return b;
     }
 
     public boolean isCollection() {
         final int iscollection = this.iscollection;
-        boolean b = true;
-        if (iscollection != 1) {
-            b = false;
-        }
+        boolean b = iscollection == 1;
         return b;
     }
 
@@ -584,10 +572,7 @@ public class AppBean implements Serializable
 
     public boolean isNewApp() {
         final int isNewApp = this.isNewApp;
-        boolean b = true;
-        if (isNewApp != 1) {
-            b = false;
-        }
+        boolean b = isNewApp == 1;
         return b;
     }
 
@@ -597,10 +582,7 @@ public class AppBean implements Serializable
 
     public boolean isSubscribe() {
         final int issubscription = this.issubscription;
-        boolean b = true;
-        if (issubscription != 1) {
-            b = false;
-        }
+        boolean b = issubscription == 1;
         return b;
     }
 
@@ -661,7 +643,7 @@ public class AppBean implements Serializable
     }
 
     public void setIsRecommend(final boolean b) {
-        this.isCelRe = ((b ^ true) ? 1 : 0);
+        this.isCelRe = ((!b) ? 1 : 0);
     }
 
     public void setIs_school_official(final int is_school_official) {
@@ -685,7 +667,7 @@ public class AppBean implements Serializable
     }
 
     public void setIssubscription(final Boolean b) {
-        this.issubscription = (((boolean)b) ? 1 : 0);
+        this.issubscription = (b ? 1 : 0);
     }
 
     public void setIssupport(final int issupport) {

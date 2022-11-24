@@ -33,7 +33,6 @@ public class ChooseImageCommand {
     public String cmdName;
     public BrowserProxy proxy;
     public String cmdId;
-    private JSONObject jsonObject;
 
     public ChooseImageCommand(final BrowserProxy browserProxy, final String s, final String s2) {
         super();
@@ -43,7 +42,6 @@ public class ChooseImageCommand {
     }
 
     public void execute(final JSONObject jsonObject) {
-        this.jsonObject = jsonObject;
         int count;
         try {
             count = jsonObject.getInt("count");

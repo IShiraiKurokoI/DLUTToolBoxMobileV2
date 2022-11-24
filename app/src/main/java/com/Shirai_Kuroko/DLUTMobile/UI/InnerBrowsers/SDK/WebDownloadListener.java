@@ -15,24 +15,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class WebDownloadListener implements DownloadListener {
-    private Context mContext;
     private DownloadService.DownloadBinder downloadBinder;
-    private final ServiceConnection connection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            //获取实例以便于在活动中调用其中的方法
-            downloadBinder = (DownloadService.DownloadBinder) service;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-        }
-    };
 
     public WebDownloadListener(Context context) {
-        mContext = context;
-        Intent intent = new Intent(mContext, DownloadService.class);
-        mContext.bindService(intent, connection, BIND_AUTO_CREATE);//绑定服务保证数据在服务和活动中传递
+        Intent intent = new Intent(context, DownloadService.class);
+        //获取实例以便于在活动中调用其中的方法
+        ServiceConnection connection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                //获取实例以便于在活动中调用其中的方法
+                downloadBinder = (DownloadService.DownloadBinder) service;
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+            }
+        };
+        context.bindService(intent, connection, BIND_AUTO_CREATE);//绑定服务保证数据在服务和活动中传递
     }
 
     public static String getExtensionName(String filename) {

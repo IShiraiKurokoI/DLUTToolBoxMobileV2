@@ -42,13 +42,13 @@ public abstract class ListCardContentView<T> extends ExpandableCardContentView<T
     @NonNull
     @Override
     public View c() {
-        (this.j = new LinearLayout(super.f)).setLayoutParams((ViewGroup.LayoutParams) new LinearLayout.LayoutParams(-1, -2));
+        (this.j = new LinearLayout(super.f)).setLayoutParams(new LayoutParams(-1, -2));
         this.j.setOrientation(LinearLayout.VERTICAL);
         if (this.l) {
             this.j.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
             this.j.setDividerDrawable(super.f.getResources().getDrawable(R.drawable.divider_hor));
         }
-        final List<T> c = (List<T>) super.c;
+        final List<T> c = super.c;
         if (c != null && c.size() > 0) {
             for (int i = 0; i < super.c.size(); ++i) {
                 final T value = super.c.get(i);
@@ -65,7 +65,7 @@ public abstract class ListCardContentView<T> extends ExpandableCardContentView<T
                 }
             }
         }
-        return (View) this.j;
+        return this.j;
     }
 
     @Override

@@ -11,7 +11,6 @@ public class UploadImageCommand {
     public String cmdName;
     public BrowserProxy proxy;
     public String cmdId;
-    private JSONObject jsonObject;
 
     public UploadImageCommand(final BrowserProxy browserProxy, final String s, final String s2) {
         super();
@@ -21,7 +20,6 @@ public class UploadImageCommand {
     }
 
     public void execute(final JSONObject jsonObject) {
-        this.jsonObject = jsonObject;
         String Path;
         try {
             Path = jsonObject.getString("localId");

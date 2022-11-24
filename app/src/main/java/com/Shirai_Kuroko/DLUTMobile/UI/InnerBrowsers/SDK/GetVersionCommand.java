@@ -27,7 +27,7 @@ public class GetVersionCommand {
             final JSONObject jsonObject2 = new JSONObject();
             String s;
             final String input = s = D(this.proxy.context);
-            if (!TextUtils.isEmpty((CharSequence) input)) {
+            if (!TextUtils.isEmpty(input)) {
                 final Matcher matcher = Pattern.compile(".*\\..*\\..*\\.").matcher(input);
                 s = input;
                 if (matcher.find()) {

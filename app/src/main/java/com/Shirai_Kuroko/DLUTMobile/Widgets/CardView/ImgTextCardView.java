@@ -41,14 +41,14 @@ public class ImgTextCardView extends ListCardContentView<ImgTextCardItemBean> {
 
     @Override
     public View f(ImgTextCardItemBean p0, int p1) {
-        return this.g((ImgTextCardItemBean) p0);
+        return this.g(p0);
     }
 
     public View g(final ImgTextCardItemBean imgTextCardItemBean) {
-        final View inflate = LayoutInflater.from(super.f).inflate(R.layout.item_card_img_text, (ViewGroup) null);
-        final ImageView imageView = (ImageView) inflate.findViewById(R.id.iv_card_img_icon);
-        final TextView textView = (TextView) inflate.findViewById(R.id.tv_card_img_tittle);
-        final TextView textView2 = (TextView) inflate.findViewById(R.id.tv_card_img_content);
+        final View inflate = LayoutInflater.from(super.f).inflate(R.layout.item_card_img_text, null);
+        final ImageView imageView = inflate.findViewById(R.id.iv_card_img_icon);
+        final TextView textView = inflate.findViewById(R.id.tv_card_img_tittle);
+        final TextView textView2 = inflate.findViewById(R.id.tv_card_img_content);
         if (super.d != 1.0f) {
             final RelativeLayout.LayoutParams relativeLayout$LayoutParams = (RelativeLayout.LayoutParams) imageView.getLayoutParams();
             final float n = (float) relativeLayout$LayoutParams.width;
@@ -73,8 +73,8 @@ public class ImgTextCardView extends ListCardContentView<ImgTextCardItemBean> {
             textView2.requestLayout();
             textView2.setTextSize(0, textView2.getTextSize() * super.d);
         }
-        textView.setText((CharSequence) imgTextCardItemBean.getTitle());
-        textView2.setText((CharSequence) imgTextCardItemBean.getContent());
+        textView.setText(imgTextCardItemBean.getTitle());
+        textView2.setText(imgTextCardItemBean.getContent());
         if (imgTextCardItemBean.getImage().equals("http://www.dlut.edu.cn"))
         {
             imageView.setImageResource(R.drawable.icon);
@@ -83,8 +83,8 @@ public class ImgTextCardView extends ListCardContentView<ImgTextCardItemBean> {
         {
             Glide.with(this.f).load(imgTextCardItemBean.getImage()).into(imageView);
         }
-        if (!TextUtils.isEmpty((CharSequence) imgTextCardItemBean.getUrl())) {
-            inflate.setOnClickListener((View.OnClickListener) new d(this.getContext(), imgTextCardItemBean.getUrl()));
+        if (!TextUtils.isEmpty(imgTextCardItemBean.getUrl())) {
+            inflate.setOnClickListener(new d(this.getContext(), imgTextCardItemBean.getUrl()));
         }else
         {
             inflate.setOnClickListener(view -> CenterToast.makeText(getContext(),"无可打开内容", Toast.LENGTH_SHORT).show());

@@ -58,7 +58,7 @@ public class AppGridManageActivity extends AppCompatActivity {
             Intent intent = new Intent(mContext, AppcenterActivity.class);
             startActivity(intent);
         });
-        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.ManageGrid);
+        RecyclerView mRecyclerView = findViewById(R.id.ManageGrid);
         mDatas = ConfigHelper.GetGridIDList(this);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         mAdapter = new MainGridManageAdapter(this, mDatas);

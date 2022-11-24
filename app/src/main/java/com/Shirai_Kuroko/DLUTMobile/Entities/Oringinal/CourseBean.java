@@ -139,7 +139,7 @@ public class CourseBean implements Serializable, Cloneable
 
     public String getBeginTime() {
         String s;
-        if (TextUtils.isEmpty((CharSequence)this.event_begintime)) {
+        if (TextUtils.isEmpty(this.event_begintime)) {
             s = "";
         }
         else if (this.event_begintime.length() > 5) {
@@ -161,7 +161,7 @@ public class CourseBean implements Serializable, Cloneable
 
     public String getEndTime() {
         String s;
-        if (TextUtils.isEmpty((CharSequence)this.event_endtime)) {
+        if (TextUtils.isEmpty(this.event_endtime)) {
             s = "";
         }
         else if (this.event_endtime.length() > 5) {

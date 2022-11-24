@@ -36,8 +36,8 @@ public class LoginConfirmActivity extends AppCompatActivity {
         btn_login_qrcode.setOnClickListener(view -> BackendUtils.QRLogin(this,URL));
         TextView tv_qrcode_login_cancel =requireViewById(R.id.tv_qrcode_login_cancel);
         tv_qrcode_login_cancel.setOnClickListener(view -> finish());
-        d1.setWebChromeClient((WebChromeClient) new initWebView$1());
-        d1.setWebViewClient((WebViewClient) new initWebView$2(this));
+        d1.setWebChromeClient(new initWebView$1());
+        d1.setWebViewClient(new initWebView$2(this));
         final WebSettings settings = d1.getSettings();
         settings.setUserAgentString(getString(R.string.UserAgent));
         settings.setJavaScriptCanOpenWindowsAutomatically(true);

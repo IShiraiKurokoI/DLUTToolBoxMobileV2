@@ -33,14 +33,13 @@ public class AccountSafeActivity extends AppCompatActivity {
 
     private WebView webView;
     private LoadingView loadingView;
-    private Context context;
 
     @SuppressLint({"SetJavaScriptEnabled", "NewApi"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_safe);
-        context = this;
+        Context context = this;
         TextView Return = requireViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
         loadingView = new LoadingView(this, R.style.CustomDialog);

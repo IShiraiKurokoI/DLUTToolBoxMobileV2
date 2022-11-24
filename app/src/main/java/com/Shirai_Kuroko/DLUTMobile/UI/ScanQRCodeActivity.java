@@ -229,12 +229,11 @@ public class ScanQRCodeActivity extends AppCompatActivity {
             if (one) {
                 one = false;
                 switcher.setText("切换至条形码识别");
-                initView();
             } else {
                 one = true;
                 switcher.setText("切换至二维码识别");
-                initView();
             }
+            initView();
         });
     }
 

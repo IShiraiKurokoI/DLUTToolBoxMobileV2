@@ -66,21 +66,15 @@ public class AppDetailActivity extends BaseActivity {
         if (thisapp.getType() != null) {
             if (thisapp.getType().contains("custom")) {
                 tda.setText("自制应用");
-                app_user_comment.setOnClickListener(view -> {
-                    CenterToast.makeText(this, "抱歉，该应用暂不支持评论", Toast.LENGTH_SHORT).show();
-                    app_instruction.setChecked(true);
-                    app_user_comment.setChecked(false);
-                });
-                app_user_comment.setEnabled(true);
             } else {
                 tda.setText("校方应用");
-                app_user_comment.setOnClickListener(view -> {
-                    CenterToast.makeText(this, "抱歉，该应用暂不支持评论", Toast.LENGTH_SHORT).show();
-                    app_instruction.setChecked(true);
-                    app_user_comment.setChecked(false);
-                });
-                app_user_comment.setEnabled(true);
             }
+            app_user_comment.setOnClickListener(view -> {
+                CenterToast.makeText(this, "抱歉，该应用暂不支持评论", Toast.LENGTH_SHORT).show();
+                app_instruction.setChecked(true);
+                app_user_comment.setChecked(false);
+            });
+            app_user_comment.setEnabled(true);
         } else {
             if (thisapp.getApp_id() == null) {
                 tda.setText("替换应用");

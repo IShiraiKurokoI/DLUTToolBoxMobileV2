@@ -50,9 +50,9 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ((ViewHolder) holder).user_name.setText(mDatas.get(position).getName());
-        ((ViewHolder) holder).user_org.setText(mDatas.get(position).getOrgName());
-        ((ViewHolder) holder).tv_count.setText(mDatas.get(position).getPoints());
+        holder.user_name.setText(mDatas.get(position).getName());
+        holder.user_org.setText(mDatas.get(position).getOrgName());
+        holder.tv_count.setText(mDatas.get(position).getPoints());
         if(b)
         {
             @SuppressLint("UseCompatLoadingForDrawables")
@@ -66,9 +66,9 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
         }
         if(mDatas.get(position).getHead().length()>4)
         {
-            Glide.with(mContext).load(mDatas.get(position).getHead()).into(((ViewHolder) holder).user_head);
+            Glide.with(mContext).load(mDatas.get(position).getHead()).into(holder.user_head);
         }
-        ((ViewHolder) holder).tv_top.setText(String.valueOf(position+1));
+        holder.tv_top.setText(String.valueOf(position+1));
     }
     @Override
     public int getItemCount() {
