@@ -16,6 +16,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Parcelable;
 import android.util.Log;
 import android.widget.Toast;
@@ -52,10 +53,8 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                     assert mWifiManager != null;
                     WifiInfo info = mWifiManager.getConnectionInfo();
                     String ssid = info.getSSID();
-                    String ssid1 = networkInfo.getExtraInfo();
                     Log.i("连接到的WIFI为", ssid);
-                    Log.i("连接到的WIFI为", ssid1);
-                    if (ssid.contains("DLUT-EDA")||ssid1.contains("DLUT-EDA")) {
+                    if (ssid.contains("DLUT-EDA")) {
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                         String un = prefs.getString("Username", "");
                         String pd = prefs.getString("NetworkPassword", "");
@@ -134,7 +133,7 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                             Log.i("校园网WIFI连接", "开发区校区,未配置账户密码，停止认证");
                             new NotificationHelper().Notify(context, null, "2042", "联网消息通知", "校园网连接失败", "未配置校园网账户密码", (int) (System.currentTimeMillis() + Math.random()));
                         }
-                    } else if (ssid.contains("DLUT-L")||ssid1.contains("DLUT-L")) {
+                    } else if (ssid.contains("DLUT-L")) {
                         DoNotification(context,ssid+"已连接","抱歉，暂不支持主校区自动认证");
                         Log.i("校园网WIFI连接", "主校区");
                         //ToDo:自动连接主校区校园网
@@ -150,13 +149,9 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
             assert mWifiManager != null;
             WifiInfo info = mWifiManager.getConnectionInfo();
             String ssid = info.getSSID();
-            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-            String ssid1 = networkInfo.getExtraInfo();
             Log.i("连接到的WIFI为", ssid);
-            Log.i("连接到的WIFI为", ssid1);
             DoNotification(context,ssid+"已连接","正在尝试执行手动登录");
-            if (ssid.contains("DLUT-EDA")||ssid1.contains("DLUT-EDA")) {
+            if (ssid.contains("DLUT-EDA")) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                 String un = prefs.getString("Username", "");
                 String pd = prefs.getString("NetworkPassword", "");
@@ -235,7 +230,7 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                     Log.i("校园网WIFI连接", "开发区校区,未配置账户密码，停止认证");
                     new NotificationHelper().Notify(context, null, "2042", "联网消息通知", "校园网连接失败", "未配置校园网账户密码", (int) (System.currentTimeMillis() + Math.random()));
                 }
-            } else if (ssid.contains("DLUT-L")||ssid1.contains("DLUT-L")) {
+            } else if (ssid.contains("DLUT-L")) {
                 DoNotification(context,ssid+"已连接","抱歉，暂不支持主校区自动认证");
                 Log.i("校园网WIFI连接", "主校区");
                 //ToDo:自动连接主校区校园网
@@ -247,10 +242,7 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
             assert mWifiManager != null;
             WifiInfo info = mWifiManager.getConnectionInfo();
             String ssid = info.getSSID();
-            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-            String ssid1 = networkInfo.getExtraInfo();
-            if (ssid.contains("DLUT-EDA")||ssid1.contains("DLUT-EDA")) {
+            if (ssid.contains("DLUT-EDA")) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                 String un = prefs.getString("Username", "");
                 String pd = prefs.getString("NetworkPassword", "");
@@ -268,7 +260,7 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                             String respon = response.body().string();
                             DoNotification(context,ssid+"已连接",respon);
                         } catch (Exception e) {
-
+                            e.printStackTrace();
                         }
                     };
                     Log.i("校园网WIFI注销", "开发区校区");
@@ -278,7 +270,7 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                     Log.i("校园网WIFI注销", "开发区校区,未配置账户密码，停止注销");
                     new NotificationHelper().Notify(context, null, "2042", "联网消息通知", "校园网连接失败", "未配置校园网账户密码", (int) (System.currentTimeMillis() + Math.random()));
                 }
-            } else if (ssid.contains("DLUT-L")||ssid1.contains("DLUT-L")) {
+            } else if (ssid.contains("DLUT-L")) {
                 DoNotification(context,ssid+"已连接","抱歉，暂不支持主校区注销功能");
             }
             DoNotification(context,"正在后台监测校园网网络连接",null);
@@ -341,9 +333,16 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
             if (content != null) {
                 builder.setContentText(content);
             }
-            builder.addAction(R.drawable.icon,"手动连接", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.ManualConnect"), PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
-            builder.addAction(R.drawable.icon,"断开连接", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.ManualDisconnect"), PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
-            builder.addAction(R.drawable.icon,"打开自服务", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.OpenService"), PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                builder.addAction(R.drawable.icon,"手动连接", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.ManualConnect"), PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
+                builder.addAction(R.drawable.icon,"断开连接", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.ManualDisconnect"), PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
+                builder.addAction(R.drawable.icon,"打开自服务", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.OpenService"), PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
+            }else
+            {
+                builder.addAction(R.drawable.icon,"手动连接", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.ManualConnect"), PendingIntent.FLAG_IMMUTABLE));
+                builder.addAction(R.drawable.icon,"断开连接", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.ManualDisconnect"), PendingIntent.FLAG_IMMUTABLE));
+                builder.addAction(R.drawable.icon,"打开自服务", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.OpenService"), PendingIntent.FLAG_IMMUTABLE));
+            }
             Notification NewNotification = builder
                     .setShowWhen(false)
                     .setContentIntent(null)
