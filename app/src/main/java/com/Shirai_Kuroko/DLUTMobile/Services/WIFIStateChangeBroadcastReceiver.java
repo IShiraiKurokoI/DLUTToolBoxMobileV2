@@ -71,8 +71,8 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                                         return;
                                     }
                                     Request request = new Request.Builder()
-                                            .url("http://172.20.20.1:801/srun_portal_pc.php?ac_id=3&")
-                                            .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), "action=login&ac_id=3&user_ip=&nas_ip=&user_mac=&url=&username=" + un + "&password=" + pd + "&save_me=1"))
+                                            .url("http://172.20.20.1:801/include/auth_action.php")
+                                            .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), "action=login&ac_id=3&user_ip=&nas_ip=&user_mac=&url=&username=" + un + "&password=" + pd + "&save_me=1&ajax=1"))
                                             .build();//创建Request 对象
                                     try {
                                         new OkHttpClient().newCall(request).execute();
@@ -168,8 +168,8 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                                 return;
                             }
                             Request request = new Request.Builder()
-                                    .url("http://172.20.20.1:801/srun_portal_pc.php?ac_id=3&")
-                                    .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), "action=login&ac_id=3&user_ip=&nas_ip=&user_mac=&url=&username=" + un + "&password=" + pd + "&save_me=1"))
+                                    .url("http://172.20.20.1:801/include/auth_action.php")
+                                    .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), "action=login&ac_id=3&user_ip=&nas_ip=&user_mac=&url=&username=" + un + "&password=" + pd + "&save_me=1&ajax=1"))
                                     .build();//创建Request 对象
                             try {
                                 new OkHttpClient().newCall(request).execute();
