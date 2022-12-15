@@ -75,7 +75,12 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                                             .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), "action=login&ac_id=3&user_ip=&nas_ip=&user_mac=&url=&username=" + un + "&password=" + pd + "&save_me=1&ajax=1"))
                                             .build();//创建Request 对象
                                     try {
-                                        new OkHttpClient().newCall(request).execute();
+                                        String resp = new OkHttpClient().newCall(request).execute().body().string();
+                                        if(!resp.contains("login_ok")&&!resp.contains("IP has been online, please logout."))
+                                        {
+                                            DoNotification(context,ssid+"认证出错",resp);
+                                            return;
+                                        };
                                     } catch (Exception e) {
                                         TriedTimes++;
                                         run();
@@ -100,7 +105,7 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                                             if (data.length > 2) {
                                                 Text = "套餐余额:" + data[2] + " | 已用流量:" + formatdataflow(data[0]);
                                                 if (datawarn) {
-                                                    Text += "\n|本月流量使用已超过90G，请留意！！|";
+                                                    Text = "套餐余额:" + data[2] + " | 已用流量:⚠" +formatdataflow(data[0])+"⚠";
                                                 }
                                                 DoNotification(context,ssid+"已连接并自动认证",Text);
                                             } else {
@@ -172,7 +177,12 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                                     .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), "action=login&ac_id=3&user_ip=&nas_ip=&user_mac=&url=&username=" + un + "&password=" + pd + "&save_me=1&ajax=1"))
                                     .build();//创建Request 对象
                             try {
-                                new OkHttpClient().newCall(request).execute();
+                                String resp = new OkHttpClient().newCall(request).execute().body().string();
+                                if(!resp.contains("login_ok")&&!resp.contains("IP has been online, please logout."))
+                                {
+                                    DoNotification(context,ssid+"认证出错",resp);
+                                    return;
+                                };
                             } catch (Exception e) {
                                 TriedTimes++;
                                 run();
@@ -197,7 +207,7 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                                     if (data.length > 2) {
                                         Text = "套餐余额:" + data[2] + " | 已用流量:" + formatdataflow(data[0]);
                                         if (datawarn) {
-                                            Text += "\n|本月流量使用已超过90G，请留意！！|";
+                                            Text = "套餐余额:" + data[2] + " | 已用流量:⚠" +formatdataflow(data[0])+"⚠";
                                         }
                                         DoNotification(context,ssid+"已连接并自动认证",Text);
                                     } else {
@@ -251,14 +261,32 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                         if (isWifiAvailable(context)) {
                             return;
                         }
-                        Request request = new Request.Builder()
-                                .url("http://172.20.20.1:801/include/auth_action.php")
-                                .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), "action=logout&username=" + un + "&password=" + pd + "&ajax=1"))
-                                .build();//创建Request 对象
+                        Request result = new Request.Builder()
+                                .url("http://172.20.20.1:801/include/auth_action.php?action=get_online_info")
+                                .get()
+                                .build();
                         try {
-                            Response response = new OkHttpClient().newCall(request).execute();
-                            String respon = response.body().string();
-                            DoNotification(context,ssid+"已连接",respon);
+                            Response response = new OkHttpClient().newCall(result).execute();
+                            if (response.isSuccessful()) {
+                                String NetInfo = Objects.requireNonNull(response.body()).string();
+                                String[] data = NetInfo.split(",");
+                                String Text;
+                                if (data.length > 2) {
+                                    Request request = new Request.Builder()
+                                            .url("http://172.20.20.1:801/include/auth_action.php")
+                                            .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), "action=logout&ac_id=3&user_ip=" + data[5] + "&user_mac="+ data[3] + "&username=" + un + "&password=" + pd + "&ajax=1"))
+                                            .build();//创建Request 对象
+                                    try {
+                                        Response response1 = new OkHttpClient().newCall(request).execute();
+                                        String respon = response1.body().string();
+                                        DoNotification(context,ssid+"已连接",respon);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    DoNotification(context,ssid+"已连接",NetInfo);
+                                }
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

@@ -35,9 +35,9 @@ android {
     defaultConfig {
         applicationId "com.Shirai_Kuroko.DLUTMobile"
         minSdk 29
-        targetSdk 31
+        targetSdk 32
         versionCode 1
-        versionName "1.7.2.4"
+        versionName "1.7.2.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders =[
                 PUSH_APPID:"EM2xtY6UCM64MPEoE4cEZ1",
@@ -64,24 +64,13 @@ android {
     buildFeatures {
         viewBinding true
     }
-
     packagingOptions {
-        exclude 'META-INF/DEPENDENCIES.txt'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/notice.txt'
-        exclude 'META-INF/license.txt'
-        exclude 'META-INF/dependencies.txt'
-        exclude 'META-INF/LGPL2.1'
-        exclude 'release-timestamp.txt'
-        exclude 'latestchanges.html'
-        exclude 'changelog.txt'
-        exclude 'AUTHORS'
-        exclude 'DebugProbesKt.bin'
+        resources {
+            excludes += ['META-INF/DEPENDENCIES.txt', 'META-INF/LICENSE.txt', 'META-INF/NOTICE.txt', 'META-INF/NOTICE', 'META-INF/LICENSE', 'META-INF/DEPENDENCIES', 'META-INF/notice.txt', 'META-INF/license.txt', 'META-INF/dependencies.txt', 'META-INF/LGPL2.1', 'release-timestamp.txt', 'latestchanges.html', 'changelog.txt', 'AUTHORS', 'DebugProbesKt.bin']
+        }
     }
+
+    namespace 'com.Shirai_Kuroko.DLUTMobile'
 }
 
 dependencies {

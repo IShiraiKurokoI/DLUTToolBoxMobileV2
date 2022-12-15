@@ -60,7 +60,7 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
         SpannableStringBuilder style=new SpannableStringBuilder("【未读】");
         style.setSpan(new ForegroundColorSpan(Color.RED),0,4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         holder.tv_notice_title.setText((payload.getIs_read())==1?"":style);
-        holder.tv_notice_title.append(dlutNoticeContentBean.getTitle());
+        holder.tv_notice_title.append(URLDecoder.decode(payload.getTitle()));
         if (URLDecoder.decode(dlutNoticeContentBean.getDescription()).length()!=0) {
             holder.tv_notice_desc.setVisibility(View.VISIBLE);
             holder.tv_notice_desc.setText(URLDecoder.decode(dlutNoticeContentBean.getDescription()));
