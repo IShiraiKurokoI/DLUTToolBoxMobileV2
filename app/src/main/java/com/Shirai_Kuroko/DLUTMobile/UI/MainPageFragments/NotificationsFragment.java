@@ -223,7 +223,7 @@ public class NotificationsFragment extends Fragment {
     }
 
     @SuppressWarnings("ALL")
-    public class SimplePaddingDecoration extends RecyclerView.ItemDecoration {
+    public static class SimplePaddingDecoration extends RecyclerView.ItemDecoration {
 
         public SimplePaddingDecoration(Context context) {
         }

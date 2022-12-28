@@ -173,6 +173,17 @@
         <item name="android:drawableLeft">@drawable/item_notice_check_box_src</item>
     </style>
 
+    <style name="notice_check_box_new">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:paddingTop">16.0dip</item>
+        <item name="android:paddingRight">8.0dip</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">16.0dip</item>
+        <item name="android:button">@null</item>
+        <item name="android:drawableLeft">@drawable/item_notice_check_box_src</item>
+    </style>
+
     <style name="notice_item_root_style">
         <item name="android:orientation">vertical</item>
         <item name="android:layout_width">fill_parent</item>

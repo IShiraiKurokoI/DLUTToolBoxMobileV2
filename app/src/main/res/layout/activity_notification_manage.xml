@@ -65,4 +65,29 @@
         android:scrollbarSize="4dp"
         android:scrollbars="vertical" />
 
+    <LinearLayout
+    android:id="@+id/NoticeEmptyView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="100dp"
+    android:orientation="vertical"
+    android:visibility="gone"
+    tools:ignore="UseCompoundDrawables">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/icon_my_received_notice_empty"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="@string/NoNoticeYet" />
+</LinearLayout>
+
 </androidx.appcompat.widget.LinearLayoutCompat>

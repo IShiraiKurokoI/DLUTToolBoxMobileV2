@@ -20,10 +20,10 @@ public class MsgHistoryManager {
         db = sql.getReadableDatabase();
     }
 
-    public void insert(String msg_id,String create_time,String app_id,int is_read,String title, String msg_content) {
+    public void insert(String msg_id, String create_time, String app_id, int is_read, String title, String msg_content) {
         String sql = "insert into message values(null,?,?,?,?,?,?)";
         db.beginTransaction();
-        db.execSQL(sql, new Object[]{msg_id, create_time,app_id,is_read,title,msg_content});
+        db.execSQL(sql, new Object[]{msg_id, create_time, app_id, is_read, title, msg_content});
         db.setTransactionSuccessful();
         db.endTransaction();
         db.close();
@@ -63,10 +63,10 @@ public class MsgHistoryManager {
     }
 
     //修改
-    public void update(String msg_id, String content,String appid) {
+    public void update(String msg_id, String content, String appid) {
         try {
             String sql = "update message set msg_content=?,app_id=? where msg_id=?";
-            db.execSQL(sql, new Object[]{content,appid,msg_id});
+            db.execSQL(sql, new Object[]{content, appid, msg_id});
             db.close();
         } catch (Exception e) {
             db.close();
