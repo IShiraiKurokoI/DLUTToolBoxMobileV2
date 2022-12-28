@@ -24,7 +24,7 @@
                 android:layout_height="60.0dip"
                 android:gravity="center"
                 android:includeFontPadding="false"
-                android:text="@string/newnickname"
+                android:text="请输入家长手机号"
                 android:textColor="@color/text_color_50"
                 android:textSize="16.0sp"
                 android:textStyle="bold" />
