@@ -85,6 +85,17 @@ public class MsgHistoryManager {
     }
 
     //修改
+    public void SetUnRead(String msg_id) {
+        try {
+            String sql = "update message set is_read=0 where msg_id=?";
+            db.execSQL(sql, new Object[]{msg_id});
+            db.close();
+        } catch (Exception e) {
+            db.close();
+        }
+    }
+
+    //修改
     public void SetReadAll() {
         try {
             String sql = "update message set is_read=1 where is_read=0";

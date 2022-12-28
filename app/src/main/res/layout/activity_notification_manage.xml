@@ -54,4 +54,15 @@
             app:drawableStartCompat="@drawable/selector_btn_browser_menu" />
     </RelativeLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@id/rv_notice_list"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:background="@android:color/transparent"
+        android:fadeScrollbars="false"
+        android:overScrollMode="never"
+        android:scrollbarSize="4dp"
+        android:scrollbars="vertical" />
+
 </androidx.appcompat.widget.LinearLayoutCompat>

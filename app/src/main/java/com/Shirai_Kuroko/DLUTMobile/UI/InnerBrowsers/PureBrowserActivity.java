@@ -38,6 +38,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.PreferenceManager;
 
+import com.Shirai_Kuroko.DLUTMobile.Common.LogToFile;
 import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.NotificationHelper;
@@ -72,6 +73,8 @@ public class PureBrowserActivity extends BaseActivity {
             String MsgID = intent.getStringExtra("MsgID");
             if (MsgID!=null)
             {
+                Log.i("PureBrowser", "Msgid: "+MsgID);
+                LogToFile.i("PureBrowser", "Msgid: "+MsgID);
                 new MsgHistoryManager(this).SetRead(MsgID);
                 new NotificationHelper().Cancel(this, "1919810", "消息通知", Integer.parseInt(MsgID));
             }

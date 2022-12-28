@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/dialog"
+    android:layout_width="282.0dip"
+    android:layout_height="wrap_content"
+    android:paddingLeft="16.0dip"
+    android:paddingRight="16.0dip">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_personal_info_card_bg"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@id/title"
+                android:layout_width="fill_parent"
+                android:layout_height="60.0dip"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/newnickname"
+                android:textColor="@color/text_color_50"
+                android:textSize="16.0sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@id/btn_close"
+                android:layout_width="44.0dip"
+                android:layout_height="44.0dip"
+                android:layout_alignParentEnd="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/browser_quit"
+                tools:ignore="ContentDescription" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="230.0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/shape_border_d8"
+            android:orientation="horizontal"
+            android:text="请输入手机号"
+            android:padding="1.0px"
+            tools:ignore="PxUsage" />
+
+        <EditText
+            android:id="@+id/Phone"
+            android:layout_width="230.0dip"
+            android:layout_height="40.0dip"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12.0dip"
+            android:background="@color/background_color_fa"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:inputType="phone"
+            android:textColor="#ff404040"
+            android:textSize="18.0sp"
+            tools:ignore="Autofill,LabelFor,PxUsage" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/confirm"
+            android:textColor="#ffcf3939"
+            android:textSize="14.0sp" />
+    </LinearLayout>
+</RelativeLayout>
