@@ -690,7 +690,7 @@ public class BrowserActivity extends BaseActivity {
             Intent intent = getIntent();
             intent.setAction(Intent.ACTION_DEFAULT);
             intent.putExtra("Remain", false);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
             ShortcutInfoCompat info = new ShortcutInfoCompat.Builder(mContext, thisapp.getId() + thisapp.getAppName()) //设置图标icon
                     .setIcon(IconCompat.createWithBitmap(bitmap)) //设置名称
                     .setShortLabel(thisapp.getAppName())
@@ -709,8 +709,9 @@ public class BrowserActivity extends BaseActivity {
         } else {
             if (getIntent().getBooleanExtra("Remain", true)) {
                 super.onBackPressed();
+                this.finish();
             } else {
-                finish();
+                super.onBackPressed();
             }
         }
     }
