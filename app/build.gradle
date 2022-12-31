@@ -107,6 +107,15 @@ dependencies {
     //zxing 3.4.0 不兼容7.0以下版本，必须java8+
     implementation 'com.google.zxing:core:3.4.0'
     implementation 'com.github.maning0303:MNZXingCode:V2.1.9'
+
+    implementation 'com.github.maning0303:MNMLKitScanner:V1.0.4'
+    //下面版本自己控制，barcode-scanning>=17.0.2
+    implementation 'com.google.mlkit:barcode-scanning:17.0.2'
+    implementation "androidx.camera:camera-core:1.0.2"
+    implementation "androidx.camera:camera-camera2:1.0.2"
+    implementation "androidx.camera:camera-lifecycle:1.0.2"
+    implementation "androidx.camera:camera-view:1.0.0-alpha25"
+
     implementation 'com.getui:gtsdk:3.2.10.0'  //个推SDK
     implementation 'com.getui:gtc:3.1.9.0' //个推核心组件
     implementation 'pub.devrel:easypermissions:3.0.0'

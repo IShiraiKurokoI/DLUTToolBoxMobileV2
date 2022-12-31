@@ -80,7 +80,8 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
                 intent.putExtra("Url", dlutNoticeContentBean.getUrl());
                 intent.putExtra("MsgID", payload.getMsg_id());
                 mContext.startActivity(intent);
-                holder.tv_notice_title.setText(dlutNoticeContentBean.getTitle());
+                holder.tv_notice_title.setText(URLDecoder.decode(payload.getTitle()));
+                //修复点击前后名字不一致
             }
         });
     }

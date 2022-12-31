@@ -176,13 +176,13 @@ public class StartScanActivity extends AppCompatActivity {
                 Light_On = false;
                 mScanSurfaceView.getCameraManager().offLight();
                 Drawable drawable = this.getResources().getDrawable(R.drawable.icon_custom_light_close);
-                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                drawable.setBounds(0, 0,100, 100);
                 button.setCompoundDrawables(null, drawable, null, null);
             } else {
                 Light_On = true;
                 mScanSurfaceView.getCameraManager().openLight();
                 Drawable drawable = this.getResources().getDrawable(R.drawable.icon_custom_light_open);
-                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                drawable.setBounds(0, 0, 100, 100);
                 button.setCompoundDrawables(null, drawable, null, null);
             }
         });

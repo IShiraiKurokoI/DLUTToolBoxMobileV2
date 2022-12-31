@@ -1,6 +1,7 @@
 package com.Shirai_Kuroko.DLUTMobile.UI;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PermissionInfo;
@@ -163,7 +164,7 @@ public class ScanQRCodeActivity extends AppCompatActivity {
             } else {
                 Light_On = true;
                 mScanSurfaceView.getCameraManager().openLight();
-                Drawable drawable = this.getResources().getDrawable(R.drawable.icon_custom_light_open);
+                @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable = this.getResources().getDrawable(R.drawable.icon_custom_light_open);
                 drawable.setBounds(0, 0, 100, 100);
                 button.setCompoundDrawables(null, drawable, null, null);
             }
