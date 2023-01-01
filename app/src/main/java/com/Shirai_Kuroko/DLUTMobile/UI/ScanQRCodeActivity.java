@@ -37,6 +37,7 @@ import com.luck.picture.lib.utils.MediaUtils;
 
 import java.util.ArrayList;
 
+@Deprecated
 public class ScanQRCodeActivity extends AppCompatActivity {
     private ScanSurfaceView mScanSurfaceView;
     private boolean Light_On = false;

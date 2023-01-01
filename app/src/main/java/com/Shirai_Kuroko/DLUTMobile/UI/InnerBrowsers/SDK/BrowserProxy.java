@@ -71,7 +71,7 @@ public class BrowserProxy{
         }
         catch (ClassNotFoundException | InstantiationException | InvocationTargetException | IllegalAccessException | NoSuchMethodException e)
         {
-            Toast.makeText(context, "方法暂未实现"+s, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "方法暂未实现"+s+"\n"+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             Log.e(TAG, "issueCommand: ", e);
         }
     }

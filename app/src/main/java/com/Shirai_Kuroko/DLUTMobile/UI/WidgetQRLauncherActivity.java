@@ -4,16 +4,23 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
 
+import com.Shirai_Kuroko.DLUTMobile.Configurations.QRCodeScanConfig;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.PermissionHelper;
+import com.Shirai_Kuroko.DLUTMobile.Managers.CustomMNScanManager;
 import com.Shirai_Kuroko.DLUTMobile.Services.BackgroudWIFIMonitorService;
+import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.PureBrowserActivity;
 import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
+import com.maning.mlkitscanner.scan.MNScanManager;
+
+import java.util.ArrayList;
 
 public class WidgetQRLauncherActivity extends AppCompatActivity {
 
@@ -46,10 +53,43 @@ public class WidgetQRLauncherActivity extends AppCompatActivity {
         } else {
             Log.i("启动初始化", "刷新用户数据");
             BackendUtils.ReSendUserInfo(this);
-            Intent intent = new Intent(this, ScanQRCodeActivity.class);
-            startActivity(intent);
-            finish();
+            CustomMNScanManager.startScan(this, QRCodeScanConfig.scanConfig, (resultCode, data) -> {
+                switch (resultCode) {
+                    case MNScanManager.RESULT_SUCCESS:
+                        ArrayList<String> results = data.getStringArrayListExtra(MNScanManager.INTENT_KEY_RESULT_SUCCESS);
+                        String resultTxt = results.get(0);
+                        Log.i("扫码结果", resultTxt);
+                        if (resultTxt.contains("whistle_info")) {
+                            Intent intent1 = new Intent(this, ApiQRLoginActivity.class);
+                            intent1.putExtra("whistle_info", resultTxt);
+                            startActivity(intent1);
+                        } else if (resultTxt.contains("qrLogin")) {
+                            Intent intent1 = new Intent(this, LoginConfirmActivity.class);
+                            intent1.putExtra("UUID", resultTxt);
+                            startActivity(intent1);
+                        } else if (resultTxt.startsWith("http") || resultTxt.startsWith("www")) {
+                            Intent intent1 = new Intent(this, PureBrowserActivity.class);
+                            intent1.putExtra("Name", "");
+                            intent1.putExtra("Url", resultTxt);
+                            startActivity(intent1);
+                        } else {
+                            Toast.makeText(this, "无法解析的二维码", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    case MNScanManager.RESULT_FAIL:
+                        String resultError = data.getStringExtra(MNScanManager.INTENT_KEY_RESULT_ERROR);
+                        showToast(resultError);
+                        break;
+                    case MNScanManager.RESULT_CANCLE:
+                        break;
+                }
+                finish();
+            });
         }
+    }
+
+    private void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     private void setBaseTheme() {

@@ -39,6 +39,7 @@ import com.luck.picture.lib.utils.MediaUtils;
 
 import java.util.ArrayList;
 
+@Deprecated
 public class StartScanActivity extends AppCompatActivity {
     public String cmdName;
     public String cmdId;

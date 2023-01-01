@@ -3,14 +3,23 @@ package com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PermissionInfo;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.Shirai_Kuroko.DLUTMobile.Configurations.QRCodeScanConfig;
+import com.Shirai_Kuroko.DLUTMobile.Managers.CustomMNScanManager;
+import com.Shirai_Kuroko.DLUTMobile.UI.ApiQRLoginActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.BrowserActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.LoginConfirmActivity;
+import com.maning.mlkitscanner.scan.MNScanManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 @SuppressWarnings("ALL")
 public class ScanQRCodeCommand {
@@ -32,31 +41,49 @@ public class ScanQRCodeCommand {
         this.jsonObject = jsonObject;
         final Intent intent = new Intent(proxy.context, StartScanActivity.class);
         BrowserActivity browserActivity = (BrowserActivity)this.proxy.context;
-        browserActivity.startActivityForResultHere(intent, 1, (i, i1, intent1) -> {
-            if (intent1 != null) {
-                if (intent1.getIntExtra("resultcode", -1) == 1) {//succeed
-                    final JSONObject jsonObject1 = new JSONObject();
-                    try {
-                        Log.i("扫码返回内容", intent1.getStringExtra("content"));
-                        jsonObject1.put("resultStr", URLEncoder.encode(intent1.getStringExtra("content").replaceAll("\n", "%5cn").replaceAll("\r", "%5cr").replaceAll("\t", "%5ct").replaceAll("\\\\", "%5c")));
-                        jsonObject1.put("type", "raw");
-                        this.sendSucceedResult(jsonObject1);
-                    } catch (JSONException e) {
-                        this.sendFailedResult("Decode Error");
-                        e.printStackTrace();
-                    }
-                    return true;
-                } else if (intent1.getIntExtra("resultcode", -1) == 0) {
-                    Log.i("扫码返回内容", "已经处理");
-                    this.sendCancelResult();
-                    return false;
-                } else {
-                    this.sendCancelResult();
-                    return false;
+        Handler handler =new Handler(Looper.getMainLooper());
+        handler.post(()->{
+            CustomMNScanManager.startScan(proxy.context, QRCodeScanConfig.scanConfig, (resultCode, data) -> {
+                switch (resultCode) {
+                    case MNScanManager.RESULT_SUCCESS:
+                        ArrayList<String> results = data.getStringArrayListExtra(MNScanManager.INTENT_KEY_RESULT_SUCCESS);
+                        String resultTxt = results.get(0);
+                        Log.i("扫码结果", resultTxt);
+                        if (resultTxt.contains("whistle_info")) {
+                            Intent intent1 = new Intent(proxy.context, ApiQRLoginActivity.class);
+                            intent1.putExtra("whistle_info", resultTxt);
+                            proxy.context.startActivity(intent1);
+                        } else if (resultTxt.contains("qrLogin")) {
+                            Intent intent1 = new Intent(proxy.context, LoginConfirmActivity.class);
+                            intent1.putExtra("UUID", resultTxt);
+                            proxy.context.startActivity(intent1);
+                        } else {
+                            final JSONObject jsonObject1 = new JSONObject();
+                            try {
+                                Log.i("扫码返回内容", resultTxt);
+                                jsonObject1.put("resultStr", URLEncoder.encode(resultTxt.replaceAll("\n", "%5cn").replaceAll("\r", "%5cr").replaceAll("\t", "%5ct").replaceAll("\\\\", "%5c")));
+                                jsonObject1.put("type", "raw");
+                                this.sendSucceedResult(jsonObject1);
+                            } catch (JSONException e) {
+                                this.sendFailedResult("Decode Error");
+                                e.printStackTrace();
+                            }
+                        }
+                        break;
+                    case MNScanManager.RESULT_FAIL:
+                        String resultError = data.getStringExtra(MNScanManager.INTENT_KEY_RESULT_ERROR);
+                        this.sendFailedResult(resultError);
+                        break;
+                    case MNScanManager.RESULT_CANCLE:
+                        this.sendCancelResult();
+                        break;
                 }
-            }
-            return false;
+            });
         });
+    }
+
+    private void showToast(String msg) {
+        Toast.makeText(proxy.context, msg, Toast.LENGTH_SHORT).show();
     }
 
     public void sendCancelResult() {

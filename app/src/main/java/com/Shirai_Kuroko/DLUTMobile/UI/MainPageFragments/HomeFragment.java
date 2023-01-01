@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,17 +27,22 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.Shirai_Kuroko.DLUTMobile.Adapters.MainCardAdapter;
 import com.Shirai_Kuroko.DLUTMobile.Common.CenterToast;
+import com.Shirai_Kuroko.DLUTMobile.Configurations.QRCodeScanConfig;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ID;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
+import com.Shirai_Kuroko.DLUTMobile.Managers.CustomMNScanManager;
 import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.UI.ApiQRLoginActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.CardManageActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.BrowserActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.PureBrowserActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.LoginConfirmActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.OpenVirtualCardActivity;
-import com.Shirai_Kuroko.DLUTMobile.UI.ScanQRCodeActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.SearchActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.ServiceManagement.AppGridManageActivity;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 import com.bumptech.glide.Glide;
+import com.maning.mlkitscanner.scan.MNScanManager;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -121,8 +127,38 @@ public class HomeFragment extends Fragment {
         window.setAnimationStyle(R.style.main_more_anim);
         window.showAsDropDown(view, 0, 0);
         v.findViewById(R.id.btn_start_qr).setOnClickListener(v1 -> {
-            Intent intent = new Intent(requireContext(), ScanQRCodeActivity.class);
-            startActivity(intent);
+            CustomMNScanManager.startScan(requireActivity(), QRCodeScanConfig.scanConfig, (resultCode, data) -> {
+                switch (resultCode) {
+                    case MNScanManager.RESULT_SUCCESS:
+                        ArrayList<String> results = data.getStringArrayListExtra(MNScanManager.INTENT_KEY_RESULT_SUCCESS);
+                        String resultTxt = results.get(0);
+                        Log.i("扫码结果", resultTxt);
+                        if (resultTxt.contains("whistle_info")) {
+                            Intent intent1 = new Intent(requireContext(), ApiQRLoginActivity.class);
+                            intent1.putExtra("whistle_info", resultTxt);
+                            startActivity(intent1);
+                        } else if (resultTxt.contains("qrLogin")) {
+                            Intent intent1 = new Intent(requireContext(), LoginConfirmActivity.class);
+                            intent1.putExtra("UUID", resultTxt);
+                            startActivity(intent1);
+                        } else if (resultTxt.startsWith("http") || resultTxt.startsWith("www")) {
+                            Intent intent1 = new Intent(requireContext(), PureBrowserActivity.class);
+                            intent1.putExtra("Name", "");
+                            intent1.putExtra("Url", resultTxt);
+                            startActivity(intent1);
+                        } else {
+                            Toast.makeText(requireContext(), "无法解析的二维码", Toast.LENGTH_SHORT).show();
+                            Handler handler = new Handler();
+                        }
+                        break;
+                    case MNScanManager.RESULT_FAIL:
+                        String resultError = data.getStringExtra(MNScanManager.INTENT_KEY_RESULT_ERROR);
+                        showToast(resultError);
+                        break;
+                    case MNScanManager.RESULT_CANCLE:
+                        break;
+                }
+            });
             window.dismiss(); //控制弹窗消失
         });
         v.findViewById(R.id.btn_start_virtual_card).setOnClickListener(v12 -> {
@@ -134,6 +170,10 @@ public class HomeFragment extends Fragment {
             Intent intent = new Intent(requireContext(), CardManageActivity.class);
             startActivity(intent);
         });
+    }
+
+    private void showToast(String msg) {
+        Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     public void CallRemoveAndUpdate(int Position) {
