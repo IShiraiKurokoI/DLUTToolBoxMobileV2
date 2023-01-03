@@ -115,12 +115,16 @@ public class MainActivity extends AppCompatActivity {
             Log.i("收到广播", intent.getAction());
             if (Objects.equals(intent.getAction(), "com.Shirai_Kuroko.DLUTMobile.ReceivedNew")) {
                 List<Integer> list = ConfigHelper.GetUnreadCount(getBaseContext());
+                BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
                 if (list.get(0)!=-1) {
-                    BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
                     BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(bottomNavigationView.getMenu().getItem(1).getItemId());
                     badgeDrawable.setBackgroundColor(Color.RED);
                     badgeDrawable.setVisible(true);
                     badgeDrawable.setNumber(list.get(1));
+                }
+                else
+                {
+                    bottomNavigationView.removeBadge(bottomNavigationView.getMenu().getItem(1).getItemId());
                 }
             }
         }

@@ -36,6 +36,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.preference.PreferenceManager;
 
 import com.Shirai_Kuroko.DLUTMobile.Common.LogToFile;
@@ -77,6 +78,8 @@ public class PureBrowserActivity extends BaseActivity {
                 LogToFile.i("PureBrowser", "Msgid: "+MsgID);
                 new MsgHistoryManager(this).SetRead(MsgID);
                 new NotificationHelper().Cancel(this, "1919810", "消息通知", Integer.parseInt(MsgID));
+                Intent Updateintent = new Intent("com.Shirai_Kuroko.DLUTMobile.ReceivedNew");
+                LocalBroadcastManager.getInstance(this).sendBroadcast(Updateintent);
             }
         }catch (Exception e)
         {

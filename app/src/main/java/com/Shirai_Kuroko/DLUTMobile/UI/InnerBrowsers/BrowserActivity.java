@@ -525,6 +525,22 @@ public class BrowserActivity extends BaseActivity {
         }
 
         @Override
+        public void onShowCustomView(View view, CustomViewCallback callback) {
+            super.onShowCustomView(view, callback);
+        }
+
+        @Override
+        public void onHideCustomView() {
+            super.onHideCustomView();
+        }
+
+        @Nullable
+        @Override
+        public View getVideoLoadingProgressView() {
+            return super.getVideoLoadingProgressView();
+        }
+
+        @Override
         public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
             progressBar.setProgress(newProgress,true);

@@ -633,7 +633,7 @@
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/25/ynZM2Vv97QaAZQDFAAAXvITm0Jg604.png",
     "describe": "自助打印服务平台为师生提供线上电子成绩单和电子证明文件申请，线下自助打印情况及自助打印终端位置查看等服务。",
     "popularity": "22572",
-    "url": "http://eproof.dlut.edu.cn/sso/login_sj.jsp?from=rj",
+    "url": "https://sso.dlut.edu.cn/cas/login?from=rj&service=http%3A%2F%2Feproof.dlut.edu.cn%2Fsso%2Flogin.jsp",
     "issubscription": 0
   },
   {
