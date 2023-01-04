@@ -2,6 +2,7 @@ package com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
@@ -16,10 +17,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
@@ -60,6 +64,7 @@ public class PureBrowserActivity extends BaseActivity {
 //    private LoadingView loading;
     boolean NoTitle = false;
     private ProgressBar progressBar;
+    private Activity mContext;
 
     @SuppressLint({"SetJavaScriptEnabled", "NewApi"})
     @Override
@@ -67,6 +72,7 @@ public class PureBrowserActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         WebView.enableSlowWholeDocumentDraw();
         setContentView(R.layout.activity_pure_browser);
+        mContext=this;
         Intent intent = getIntent();
         String Url = intent.getStringExtra("Url");
         String Name = intent.getStringExtra("Name");
@@ -367,6 +373,43 @@ public class PureBrowserActivity extends BaseActivity {
                 return false;
             });
             return true;
+        }
+
+
+
+        CustomViewCallback customViewCallback;
+        Dialog dialog;
+
+        @Override
+        public void onShowCustomView(View view, CustomViewCallback callback) {
+            if (dialog!=null)
+            {
+                callback.onCustomViewHidden();
+                return;
+            }
+            customViewCallback=callback;
+            dialog = new Dialog(mContext, R.style.CustomDialog);
+            Window window = dialog.getWindow();
+            window.setContentView(view);
+            window.setGravity(Gravity.CENTER);
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,android.view.WindowManager.LayoutParams.MATCH_PARENT);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.setOnDismissListener(dialogInterface -> {
+                mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+                mContext.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            });
+            mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN);
+            mContext.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            dialog.show();
+        }
+
+        @Override
+        public void onHideCustomView() {
+            if (dialog==null)
+                return;
+            dialog.dismiss();
+            dialog=null;
+            customViewCallback.onCustomViewHidden();
         }
     };
 

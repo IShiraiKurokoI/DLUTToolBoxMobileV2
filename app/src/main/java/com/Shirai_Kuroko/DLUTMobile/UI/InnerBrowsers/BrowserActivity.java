@@ -2,6 +2,7 @@ package com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
@@ -16,8 +17,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
@@ -524,14 +527,39 @@ public class BrowserActivity extends BaseActivity {
             return true;
         }
 
+        CustomViewCallback customViewCallback;
+        Dialog dialog;
+
         @Override
         public void onShowCustomView(View view, CustomViewCallback callback) {
-            super.onShowCustomView(view, callback);
+            if (dialog!=null)
+            {
+                callback.onCustomViewHidden();
+                return;
+            }
+            customViewCallback=callback;
+            dialog = new Dialog(mContext, R.style.CustomDialog);
+            Window window = dialog.getWindow();
+            window.setContentView(view);
+            window.setGravity(Gravity.CENTER);
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,android.view.WindowManager.LayoutParams.MATCH_PARENT);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.setOnDismissListener(dialogInterface -> {
+                ((BrowserActivity)mContext).getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+                ((BrowserActivity)mContext).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            });
+            ((BrowserActivity)mContext).getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN);
+            ((BrowserActivity)mContext).getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            dialog.show();
         }
 
         @Override
         public void onHideCustomView() {
-            super.onHideCustomView();
+            if (dialog==null)
+                return;
+            dialog.dismiss();
+            dialog=null;
+            customViewCallback.onCustomViewHidden();
         }
 
         @Nullable
