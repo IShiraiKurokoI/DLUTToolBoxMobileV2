@@ -22,9 +22,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.ConsoleMessage;
 import android.webkit.CookieManager;
+import android.webkit.GeolocationPermissions;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
+import android.webkit.PermissionRequest;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -44,6 +47,7 @@ import androidx.core.content.pm.ShortcutManagerCompat;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.preference.PreferenceManager;
 
+import com.Shirai_Kuroko.DLUTMobile.Common.LogToFile;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
 import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
@@ -66,7 +70,7 @@ public class BrowserActivity extends BaseActivity {
     int numid = 0;
     ApplicationConfig thisapp;
     private WebView webView;
-//    private LoadingView loading;
+    //    private LoadingView loading;
     private Context mContext;
     private ProgressBar progressBar;
 
@@ -92,9 +96,9 @@ public class BrowserActivity extends BaseActivity {
         SyncCookie(this);
         webView = findViewById(R.id.BrowserWebView);
 //        loading = new LoadingView(this, R.style.CustomDialog);
-        progressBar=findViewById(R.id.progressbar);
+        progressBar = findViewById(R.id.progressbar);
 //        if (!thisapp.getUrl().contains("rj")) {
-            progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
 //        }
         BrowserProxy browserProxy = new BrowserProxy(this, webView);
         webView.addJavascriptInterface(browserProxy, "__nativeWhistleProxy");
@@ -139,6 +143,7 @@ public class BrowserActivity extends BaseActivity {
         webSettings.setAllowUniversalAccessFromFileURLs(true);
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         webSettings.setSupportMultipleWindows(false);
+        webSettings.setGeolocationEnabled(true);
         if (ConfigHelper.GetThemeType(this)) { //判断如果系统是深色主题
             webSettings.setForceDark(WebSettings.FORCE_DARK_ON);//强制开启webview深色主题模式
         } else {
@@ -336,7 +341,7 @@ public class BrowserActivity extends BaseActivity {
                 default://默认加载完成隐藏加载条
                 {
 //                    if (!url.contains("https://api.m.dlut.edu.cn/login?")) {
-                        progressBar.setVisibility(View.VISIBLE);//显示加载条
+                    progressBar.setVisibility(View.VISIBLE);//显示加载条
 //                    }
                     break;
                 }
@@ -515,6 +520,33 @@ public class BrowserActivity extends BaseActivity {
 
     //WebChromeClient主要辅助WebView处理Javascript的对话框、网站图标、网站title、加载进度等
     public final WebChromeClient webChromeClient = new WebChromeClient() {
+
+        @Override
+        public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+            LogToFile.i("Webview:" + consoleMessage.messageLevel().toString(), consoleMessage.message());
+            Log.i("Webview:" + consoleMessage.messageLevel().toString(), consoleMessage.message());
+            return super.onConsoleMessage(consoleMessage);
+        }
+
+        @Override
+        public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+            final boolean remember = true;
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            builder.setTitle("位置信息");
+            builder.setMessage(origin + "允许获取您的地理位置信息吗？").setCancelable(true).setPositiveButton("允许",
+                            (dialog, id) -> callback.invoke(origin, true, remember))
+                    .setNegativeButton("不允许",
+                            (dialog, id) -> callback.invoke(origin, false, remember));
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+
+        @Override
+        public void onPermissionRequest(PermissionRequest request) {
+            //直接同意即可     deny是拒绝
+            request.grant(request.getResources());
+        }
+
         //不支持js的alert弹窗，需要自己监听然后通过dialog弹窗
         @Override
         public boolean onJsAlert(WebView webView, String url, String message, JsResult result) {
@@ -532,33 +564,32 @@ public class BrowserActivity extends BaseActivity {
 
         @Override
         public void onShowCustomView(View view, CustomViewCallback callback) {
-            if (dialog!=null)
-            {
+            if (dialog != null) {
                 callback.onCustomViewHidden();
                 return;
             }
-            customViewCallback=callback;
+            customViewCallback = callback;
             dialog = new Dialog(mContext, R.style.CustomDialog);
             Window window = dialog.getWindow();
             window.setContentView(view);
             window.setGravity(Gravity.CENTER);
-            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,android.view.WindowManager.LayoutParams.MATCH_PARENT);
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, android.view.WindowManager.LayoutParams.MATCH_PARENT);
             dialog.setCanceledOnTouchOutside(false);
             dialog.setOnDismissListener(dialogInterface -> {
-                ((BrowserActivity)mContext).getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-                ((BrowserActivity)mContext).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                ((BrowserActivity) mContext).getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+                ((BrowserActivity) mContext).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             });
-            ((BrowserActivity)mContext).getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN);
-            ((BrowserActivity)mContext).getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            ((BrowserActivity) mContext).getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN);
+            ((BrowserActivity) mContext).getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
             dialog.show();
         }
 
         @Override
         public void onHideCustomView() {
-            if (dialog==null)
+            if (dialog == null)
                 return;
             dialog.dismiss();
-            dialog=null;
+            dialog = null;
             customViewCallback.onCustomViewHidden();
         }
 
@@ -571,7 +602,7 @@ public class BrowserActivity extends BaseActivity {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
-            progressBar.setProgress(newProgress,true);
+            progressBar.setProgress(newProgress, true);
         }
 
         @Override

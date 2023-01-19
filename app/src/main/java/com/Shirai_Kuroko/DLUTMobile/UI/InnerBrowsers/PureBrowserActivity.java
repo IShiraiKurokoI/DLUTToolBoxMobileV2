@@ -24,9 +24,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.ConsoleMessage;
 import android.webkit.CookieManager;
+import android.webkit.GeolocationPermissions;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
+import android.webkit.PermissionRequest;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -312,6 +315,31 @@ public class PureBrowserActivity extends BaseActivity {
 
     //WebChromeClient主要辅助WebView处理Javascript的对话框、网站图标、网站title、加载进度等
     private final WebChromeClient webChromeClient = new WebChromeClient() {
+        @Override
+        public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+            LogToFile.i("Webview:" + consoleMessage.messageLevel().toString(), consoleMessage.message());
+            Log.i("Webview:" + consoleMessage.messageLevel().toString(), consoleMessage.message());
+            return super.onConsoleMessage(consoleMessage);
+        }
+
+        @Override
+        public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+            final boolean remember = true;
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            builder.setTitle("位置信息");
+            builder.setMessage(origin + "允许获取您的地理位置信息吗？").setCancelable(true).setPositiveButton("允许",
+                            (dialog, id) -> callback.invoke(origin, true, remember))
+                    .setNegativeButton("不允许",
+                            (dialog, id) -> callback.invoke(origin, false, remember));
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+
+        @Override
+        public void onPermissionRequest(PermissionRequest request) {
+            //直接同意即可     deny是拒绝
+            request.grant(request.getResources());
+        }
         //不支持js的alert弹窗，需要自己监听然后通过dialog弹窗
         @Override
         public boolean onJsAlert(WebView webView, String url, String message, JsResult result) {
