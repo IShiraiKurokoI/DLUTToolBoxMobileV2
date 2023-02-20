@@ -23,16 +23,6 @@
             app:dialogTitle="设置密码"
             app:useSimpleSummaryProvider="true"/>
         <EditTextPreference
-            android:id="@+id/NetworkPassword"
-            android:key="NetworkPassword"
-            android:selectAllOnFocus="false"
-            android:singleLine="true"
-            android:title="@string/Network_title"
-            android:inputType="textPassword"
-            app:dialogMessage="请设置登陆校园网使用的密码"
-            app:dialogTitle="设置校园网密码"
-            app:useSimpleSummaryProvider="true" />
-        <EditTextPreference
             android:id="@+id/MailAddress"
             android:key="MailAddress"
             android:selectAllOnFocus="false"

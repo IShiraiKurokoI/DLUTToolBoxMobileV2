@@ -95,24 +95,6 @@ public class SettingsActivity extends AppCompatActivity {
                 });
             }
 
-            EditTextPreference NetworkPasswordPreference = findPreference("NetworkPassword");
-            if (NetworkPasswordPreference != null) {
-                NetworkPasswordPreference.setOnBindEditTextListener(
-                        editText -> editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD));
-                NetworkPasswordPreference.setSummaryProvider(preference -> {
-
-                    String getPassword = PreferenceManager.getDefaultSharedPreferences(requireContext()).getString("NetworkPassword", "not set");
-
-                    assert getPassword != null;
-
-                    if (getPassword.equals("not set")) {
-                        return "未设置";
-                    } else {
-                        return (setAsterisks(getPassword.length()));
-                    }
-                });
-            }
-
             EditTextPreference MailAddressPreference = findPreference("MailAddress");
             if (MailAddressPreference != null) {
                 MailAddressPreference.setOnBindEditTextListener(
@@ -159,9 +141,6 @@ public class SettingsActivity extends AppCompatActivity {
                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
                     boolean Autologin = prefs.getBoolean("AutoLogin", false);
                     if (Autologin) {
-                        if (prefs.getString("NetworkPassword", "").equals("")) {
-                            Toast.makeText(getContext(), "请不要忘记配置校园网密码哦", Toast.LENGTH_LONG).show();
-                        }
                         Dialog Dialog = new Dialog(requireContext(), R.style.CustomDialog);
                         @SuppressLint("InflateParams") View view = LayoutInflater.from(requireContext()).inflate(
                                 R.layout.dialog_center_single_btn, null);

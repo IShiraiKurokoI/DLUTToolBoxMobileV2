@@ -62,7 +62,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 
 import java.util.Date;
-import java.util.Objects;
 
 @SuppressWarnings("ALL")
 public class BrowserActivity extends BaseActivity {
@@ -93,7 +92,10 @@ public class BrowserActivity extends BaseActivity {
         thisapp = ConfigHelper.Getmlist(this).get(numid);
         tv_title.setText(thisapp.getAppName());
         tv_more.setOnClickListener(this::showPopupWindow);
-        SyncCookie(this);
+        if(thisapp.getId()!=78)
+        {
+            SyncCookie(this);
+        }
         webView = findViewById(R.id.BrowserWebView);
 //        loading = new LoadingView(this, R.style.CustomDialog);
         progressBar = findViewById(R.id.progressbar);
@@ -157,7 +159,10 @@ public class BrowserActivity extends BaseActivity {
         } else {
             webView.loadUrl("https://news.dlut.edu.cn/ttgz.htm");
         }
-        SyncCookie(this);
+        if(thisapp.getId()!=78)
+        {
+            SyncCookie(this);
+        }
     }
 
     public void SyncCookie(Context context) {
@@ -463,29 +468,29 @@ public class BrowserActivity extends BaseActivity {
                 }
                 break;
             }
-            case 78://校园网自服务跳转处理
-            {
-                if (Objects.equals(url, "http://172.20.20.1:8800/user/operate/index")) {
-                    webView.evaluateJavascript("document.getElementsByClassName('radio')[0].innerHTML='<label><input type=\"radio\" name=\"OperateForm[shiftType]\" value=\"1\"> 立即生效</label><label><input type=\"radio\" name=\"OperateForm[shiftType]\" value=\"2\"> 下个周期生效</label>'", null);
-                    webView.evaluateJavascript("document.getElementsByTagName('select')[1].innerHTML+='<option value=\"13\">包月限100G</option>'", null);
-                }
-                if (Objects.equals(url, "http://172.20.20.1:8800/")) {
-                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                    String Un = prefs.getString("Username", "");
-                    String NPd = prefs.getString("NetworkPassword", "");
-                    final boolean c = Un.length() * NPd.length() != 0;
-                    if (c) {
-                        webView.evaluateJavascript("document.getElementById('loginform-username').value=" + Un, null);
-                        webView.evaluateJavascript("document.getElementById('loginform-password').value='" + NPd + "'", null);
-                    } else {
-                        AlertDialog.Builder localBuilder = new AlertDialog.Builder(webView.getContext());
-                        localBuilder.setMessage("校园网信息未配置完全，集成认证失败，请手动认证并前往设置界面补全信息！").setPositiveButton("确定", null);
-                        localBuilder.setCancelable(false);
-                        localBuilder.create().show();
-                    }
-                }
-                break;
-            }
+//            case 78://校园网自服务跳转处理
+//            {
+//                if (Objects.equals(url, "http://172.20.20.1:8800/user/operate/index")) {
+//                    webView.evaluateJavascript("document.getElementsByClassName('radio')[0].innerHTML='<label><input type=\"radio\" name=\"OperateForm[shiftType]\" value=\"1\"> 立即生效</label><label><input type=\"radio\" name=\"OperateForm[shiftType]\" value=\"2\"> 下个周期生效</label>'", null);
+//                    webView.evaluateJavascript("document.getElementsByTagName('select')[1].innerHTML+='<option value=\"13\">包月限100G</option>'", null);
+//                }
+//                if (Objects.equals(url, "http://172.20.20.1:8800/")) {
+//                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+//                    String Un = prefs.getString("Username", "");
+//                    String NPd = prefs.getString("NetworkPassword", "");
+//                    final boolean c = Un.length() * NPd.length() != 0;
+//                    if (c) {
+//                        webView.evaluateJavascript("document.getElementById('loginform-username').value=" + Un, null);
+//                        webView.evaluateJavascript("document.getElementById('loginform-password').value='" + NPd + "'", null);
+//                    } else {
+//                        AlertDialog.Builder localBuilder = new AlertDialog.Builder(webView.getContext());
+//                        localBuilder.setMessage("校园网信息未配置完全，集成认证失败，请手动认证并前往设置界面补全信息！").setPositiveButton("确定", null);
+//                        localBuilder.setCancelable(false);
+//                        localBuilder.create().show();
+//                    }
+//                }
+//                break;
+//            }
             case 79://开课查询自动跳转
             {
                 if (url.contains("lesson-search")) {

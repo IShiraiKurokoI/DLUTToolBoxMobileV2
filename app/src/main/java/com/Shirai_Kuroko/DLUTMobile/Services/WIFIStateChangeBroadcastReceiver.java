@@ -30,10 +30,8 @@ import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.BrowserActivity;
 
 import java.util.Objects;
 
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
@@ -57,7 +55,7 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                     if (ssid.contains("DLUT-EDA")) {
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                         String un = prefs.getString("Username", "");
-                        String pd = prefs.getString("NetworkPassword", "");
+                        String pd = prefs.getString("Password", "");
                         if (un.length() * pd.length() != 0) {
                             Runnable Login = new Runnable() {
                                 int TriedTimes = 0;
@@ -70,65 +68,9 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                                         new NotificationHelper().Notify(context, null, "2042", "联网消息通知", "校园网连接失败", "", (int) (System.currentTimeMillis() + Math.random()));
                                         return;
                                     }
-                                    Request request = new Request.Builder()
-                                            .url("http://172.20.20.1:801/include/auth_action.php")
-                                            .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), "action=login&ac_id=3&user_ip=&nas_ip=&user_mac=&url=&username=" + un + "&password=" + pd + "&save_me=1&ajax=1"))
-                                            .build();//创建Request 对象
-                                    try {
-                                        String resp = new OkHttpClient().newCall(request).execute().body().string();
-                                        if(!resp.contains("login_ok")&&!resp.contains("IP has been online, please logout."))
-                                        {
-                                            DoNotification(context,ssid+"认证出错",resp);
-                                            return;
-                                        };
-                                    } catch (Exception e) {
-                                        TriedTimes++;
-                                        run();
-                                        return;
-                                    }
-                                    Request result = new Request.Builder()
-                                            .url("http://172.20.20.1:801/include/auth_action.php?action=get_online_info")
-                                            .get()
-                                            .build();
-                                    try {
-                                        Response response = new OkHttpClient().newCall(result).execute();
-                                        if (response.isSuccessful()) {
-                                            String NetInfo = Objects.requireNonNull(response.body()).string();
-                                            if (NetInfo.equals("not_online")) {
-                                                Thread.sleep(4000);
-                                                TriedTimes++;
-                                                run();
-                                                return;
-                                            }
-                                            String[] data = NetInfo.split(",");
-                                            String Text;
-                                            if (data.length > 2) {
-                                                Text = "套餐余额:" + data[2] + " | 已用流量:" + formatdataflow(data[0]);
-                                                if (datawarn) {
-                                                    Text = "套餐余额:" + data[2] + " | 已用流量:⚠" +formatdataflow(data[0])+"⚠";
-                                                }
-                                                DoNotification(context,ssid+"已连接并自动认证",Text);
-                                            } else {
-                                                Thread.sleep(4000);
-                                                TriedTimes++;
-                                                run();
-                                            }
-                                        } else {
-                                            Thread.sleep(4000);
-                                            TriedTimes++;
-                                            run();
-                                        }
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                        DoNotification(context,ssid+"认证出错",e.getLocalizedMessage());
-                                        try {
-                                            Thread.sleep(4000);
-                                        } catch (InterruptedException ex) {
-                                            ex.printStackTrace();
-                                        }
-                                        TriedTimes++;
-                                        run();
-                                    }
+                                    //Todo:登陆功能
+                                    DoNotification(context,ssid+"已连接","");
+                                    TriedTimes++;
                                 }
                             };
                             Log.i("校园网WIFI连接", "开发区校区");
@@ -159,7 +101,7 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
             if (ssid.contains("DLUT-EDA")) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                 String un = prefs.getString("Username", "");
-                String pd = prefs.getString("NetworkPassword", "");
+                String pd = prefs.getString("Password", "");
                 if (un.length() * pd.length() != 0) {
                     Runnable Login = new Runnable() {
                         int TriedTimes = 0;
@@ -172,65 +114,9 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                                 new NotificationHelper().Notify(context, null, "2042", "联网消息通知", "校园网连接失败", "", (int) (System.currentTimeMillis() + Math.random()));
                                 return;
                             }
-                            Request request = new Request.Builder()
-                                    .url("http://172.20.20.1:801/include/auth_action.php")
-                                    .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), "action=login&ac_id=3&user_ip=&nas_ip=&user_mac=&url=&username=" + un + "&password=" + pd + "&save_me=1&ajax=1"))
-                                    .build();//创建Request 对象
-                            try {
-                                String resp = new OkHttpClient().newCall(request).execute().body().string();
-                                if(!resp.contains("login_ok")&&!resp.contains("IP has been online, please logout."))
-                                {
-                                    DoNotification(context,ssid+"认证出错",resp);
-                                    return;
-                                };
-                            } catch (Exception e) {
-                                TriedTimes++;
-                                run();
-                                return;
-                            }
-                            Request result = new Request.Builder()
-                                    .url("http://172.20.20.1:801/include/auth_action.php?action=get_online_info")
-                                    .get()
-                                    .build();
-                            try {
-                                Response response = new OkHttpClient().newCall(result).execute();
-                                if (response.isSuccessful()) {
-                                    String NetInfo = Objects.requireNonNull(response.body()).string();
-                                    if (NetInfo.equals("not_online")) {
-                                        Thread.sleep(4000);
-                                        TriedTimes++;
-                                        run();
-                                        return;
-                                    }
-                                    String[] data = NetInfo.split(",");
-                                    String Text;
-                                    if (data.length > 2) {
-                                        Text = "套餐余额:" + data[2] + " | 已用流量:" + formatdataflow(data[0]);
-                                        if (datawarn) {
-                                            Text = "套餐余额:" + data[2] + " | 已用流量:⚠" +formatdataflow(data[0])+"⚠";
-                                        }
-                                        DoNotification(context,ssid+"已连接并自动认证",Text);
-                                    } else {
-                                        Thread.sleep(4000);
-                                        TriedTimes++;
-                                        run();
-                                    }
-                                } else {
-                                    Thread.sleep(4000);
-                                    TriedTimes++;
-                                    run();
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                DoNotification(context,ssid+"认证出错",e.getLocalizedMessage());
-                                try {
-                                    Thread.sleep(4000);
-                                } catch (InterruptedException ex) {
-                                    ex.printStackTrace();
-                                }
-                                TriedTimes++;
-                                run();
-                            }
+                            //Todo:登陆功能
+                            DoNotification(context,ssid+"已连接","");
+                            TriedTimes++;
                         }
                     };
                     Log.i("校园网WIFI连接", "开发区校区");
@@ -255,36 +141,25 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
             if (ssid.contains("DLUT-EDA")) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                 String un = prefs.getString("Username", "");
-                String pd = prefs.getString("NetworkPassword", "");
+                String pd = prefs.getString("Password", "");
                 if (un.length() * pd.length() != 0) {
                     Runnable Login = () -> {
                         if (isWifiAvailable(context)) {
                             return;
                         }
                         Request result = new Request.Builder()
-                                .url("http://172.20.20.1:801/include/auth_action.php?action=get_online_info")
+                                .url("http://172.20.30.1/drcom/chkstatus?callback=")
                                 .get()
                                 .build();
                         try {
                             Response response = new OkHttpClient().newCall(result).execute();
                             if (response.isSuccessful()) {
                                 String NetInfo = Objects.requireNonNull(response.body()).string();
-                                String[] data = NetInfo.split(",");
                                 String Text;
-                                if (data.length > 2) {
-                                    Request request = new Request.Builder()
-                                            .url("http://172.20.20.1:801/include/auth_action.php")
-                                            .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), "action=logout&ac_id=3&user_ip=" + data[5] + "&user_mac="+ data[3] + "&username=" + un + "&password=" + pd + "&ajax=1"))
-                                            .build();//创建Request 对象
-                                    try {
-                                        Response response1 = new OkHttpClient().newCall(request).execute();
-                                        String respon = response1.body().string();
-                                        DoNotification(context,ssid+"已连接",respon);
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
+                                if (!NetInfo.contains("\"result\":1,")) {
+                                    //Todo:注销功能
                                 } else {
-                                    DoNotification(context,ssid+"已连接",NetInfo);
+                                    DoNotification(context,ssid+"已连接","");
                                 }
                             }
                         } catch (Exception e) {

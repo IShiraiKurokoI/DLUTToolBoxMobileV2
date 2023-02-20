@@ -862,7 +862,7 @@
     "describe": "开发区校区的校园网自服务",
     "type": "custom",
     "popularity": "16060060",
-    "url": "http://172.20.20.1:8800",
+    "url": "https://sso.dlut.edu.cn/cas/login?service=http%3A%2F%2F172.20.30.2%3A8080%2FSelf%2Fsso_login%3Flogin_method%3D1",
     "issubscription": 0
   },
   {
