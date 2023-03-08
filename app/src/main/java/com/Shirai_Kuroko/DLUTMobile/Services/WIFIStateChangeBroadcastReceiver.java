@@ -126,52 +126,6 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
         }
     };
 
-    public final WebViewClient webViewClient1 = new WebViewClient() {
-        @Override
-        public void onPageFinished(WebView view, String url) {//页面加载完成
-            Log.i("TAG", "onPageFinished: " + url);
-            view.evaluateJavascript("user.unbind_mac(\"\", \"\", 1);", s -> {
-            });
-            Runnable GetInfo = () -> {
-                Request result = new Request.Builder()
-                        .url("http://172.20.30.1/drcom/chkstatus?callback=")
-                        .get()
-                        .build();
-                try {
-                    Response response = new OkHttpClient().newCall(result).execute();
-                    if (response.isSuccessful()) {
-                        String NetInfo = Objects.requireNonNull(response.body()).string();
-                        if (!NetInfo.contains("\"result\":1,")) {
-                            WifiManager mWifiManager = (WifiManager) _context.getSystemService(Context.WIFI_SERVICE);
-                            assert mWifiManager != null;
-                            WifiInfo info = mWifiManager.getConnectionInfo();
-                            String ssid = info.getSSID();
-                            DoNotification(_context, ssid + "已连接", "校园网尚未认证");
-                        } else {
-                            Handler handler = new Handler(Looper.getMainLooper());
-                            handler.post(() -> {
-                                view.reload();
-                            });
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            };
-            new
-
-                    Thread(GetInfo).
-
-                    start();
-        }
-
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            Log.i("TAG", "onPageStarted: " + url);
-            super.onPageStarted(view, url, favicon);
-        }
-    };
-
     @Override
     public void onReceive(Context context, Intent intent) {
         _context = context;
@@ -356,22 +310,21 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                         if (response.isSuccessful()) {
                             String NetInfo = Objects.requireNonNull(response.body()).string();
                             if (NetInfo.contains("\"result\":1,")) {
-                                Handler handler = new Handler(Looper.getMainLooper());
-                                handler.post(() -> {
-                                    CookieSyncManager cookieSyncMngr =
-                                            CookieSyncManager.createInstance(context);
-                                    CookieManager cookieManager = CookieManager.getInstance();
-                                    cookieManager.removeAllCookie();
-                                    WebView webView = new WebView(context);
-                                    webView.getSettings().setJavaScriptEnabled(true);
-                                    webView.getSettings().setSupportMultipleWindows(false);
-                                    webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-                                    webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-                                    webView.getSettings().setDomStorageEnabled(true);
-                                    webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-                                    webView.setWebViewClient(webViewClient1);
-                                    webView.loadUrl("http://172.20.30.1");
-                                });
+                                String InfoJson = NetInfo.replace("     (", "").replace(")", "");
+                                DrcomStatusBean drcomStatusBean = JSON.parseObject(InfoJson, DrcomStatusBean.class);
+                                Request Logout = new Request.Builder()
+                                        .url("http://172.20.30.1:801/eportal/portal/logout?callback=&wlan_user_ip=" + drcomStatusBean.getV4ip())
+                                        .get()
+                                        .build();
+                                Response response1 = new OkHttpClient().newCall(Logout).execute();
+                                if (response1.isSuccessful())
+                                {
+                                    String re = Objects.requireNonNull(response1.body()).string();
+                                    if (re.contains("成功"))
+                                    {
+                                        DoNotification(_context, ssid + "已连接", "校园网尚未认证");
+                                    }
+                                }
                             } else {
                                 DoNotification(context, ssid + "已连接", "校园网尚未认证");
                             }

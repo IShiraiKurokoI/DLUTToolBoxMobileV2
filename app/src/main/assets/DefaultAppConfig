@@ -425,7 +425,7 @@
     "icon": "https://store.m.dlut.edu.cn/group1/M00/02/A1/ynZM2WBYEe-ALSxiAAA-gtcEwFw355.png",
     "describe": "为学生提供心理健康相关服务，包括心理测试、报告查询、心理咨询预约、个人信息查询等相关服务。",
     "popularity": "100351",
-    "url": "https://sso.dlut.edu.cn/cas/login?from=rj&service=http://xinli.dlut.edu.cn/psym/Default/Index",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421e8fe4f902e7e6c5c6b1cc7a99c406d3668/psym/Default/Index?filter=app&from=rj",
     "issubscription": 0
   },
   {

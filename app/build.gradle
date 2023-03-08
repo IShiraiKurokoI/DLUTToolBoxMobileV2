@@ -37,7 +37,7 @@ android {
         minSdk 29
         targetSdk 32
         versionCode 1
-        versionName "1.7.4.2"
+        versionName "1.7.4.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders =[
                 PUSH_APPID:"EM2xtY6UCM64MPEoE4cEZ1",
