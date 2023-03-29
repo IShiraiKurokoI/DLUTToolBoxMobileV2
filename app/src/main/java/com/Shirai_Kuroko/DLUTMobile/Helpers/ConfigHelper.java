@@ -4,12 +4,14 @@ import android.annotation.SuppressLint;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
 
 import com.Shirai_Kuroko.DLUTMobile.Common.CenterToast;
+import com.Shirai_Kuroko.DLUTMobile.Common.LogToFile;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ApplicationConfig;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ID;
 import com.Shirai_Kuroko.DLUTMobile.Entities.IDPhotoResult;
@@ -68,9 +70,19 @@ public class ConfigHelper {
         StringBuilder termsString = new StringBuilder();
         BufferedReader reader;
         try {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            if (prefs.getString("DynamicAppDefaultConfig", null)!=null)
+            {
+                Log.i("读取配置", "动态网络配置存在，加载网络配置");
+                return prefs.getString("DynamicAppDefaultConfig", null);
+            }
+            else
+            {
+                Log.i("读取配置", "动态网络配置为空，加载内置默认配置");
+                LogToFile.i("读取配置", "动态网络配置为空，加载内置默认配置");
+            }
             reader = new BufferedReader(
                     new InputStreamReader(context.getAssets().open("DefaultAppConfig")));
-
             String str;
             while ((str = reader.readLine()) != null) {
                 termsString.append(str);

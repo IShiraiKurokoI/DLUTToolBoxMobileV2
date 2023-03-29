@@ -247,9 +247,20 @@ public class MobileUtils {
                     if (response.body() != null) {
                         String ResponseBody = Objects.requireNonNull(response.body()).string();
                         LogToFile.i("请求返回", ResponseBody);
-                        Log.i("请求返回", ResponseBody);
                         handler.post(() -> {
-
+                            if (ResponseBody.contains("\"app_name\": \"玉兰卡\""))
+                            {
+                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+                                prefs.edit().putString("DynamicAppDefaultConfig",ResponseBody).apply();
+                                Log.i("读取配置", "新的配置写入成功");
+                                LogToFile.i("读取配置", "新的配置写入成功");
+                                MobileUtils.CheckConfigUpdates(context);
+                            }
+                            else
+                            {
+                                LogToFile.i("请求返回", "ResponseBody 无效");
+                                Log.i("请求返回", "ResponseBody 无效");
+                            }
                         });
                     }
                 } else {
