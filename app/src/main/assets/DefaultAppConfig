@@ -985,5 +985,27 @@
     "popularity": "4201",
     "url": "http://jxgl.dlut.edu.cn/cas-auth/jasig/cas/login?from=rj",
     "issubscription": 0
+  },
+  {
+    "id": 90,
+    "app_id": "83c74b42ef9d2a20",
+    "category": "life",
+    "app_name": "开发区体育场馆预约",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/05/98/ynZM2WQXGdqAbC_DAABeZ4Nr-vE528.png",
+    "describe": "提供开发区校区运动场馆场地的线上预约、次卡的购买等功能，方便师生预约开发区校区运动场地。",
+    "popularity": "2350",
+    "url": "https://webvpn.dlut.edu.cn/http/77726476706e69737468656265737421fbf150883e372654721d9de29d51367b3176/prod-api/ssoAuth?filter=app&from=rj",
+    "issubscription": 0
+  },
+  {
+    "id": 91,
+    "app_id": "deca4eb51ad52f57",
+    "category": "office",
+    "app_name": "试剂耗材采购",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/05/97/ynZM2WQRl1SATUGsAAC2LMYE5UY141.png",
+    "describe": "试剂耗材综合管理系统是集线上采购（化学药品、实验气体、生物制品、实验耗材）、审批、库房管理，信息查询等功能于一体，实现科研物资采购“事前可预警，事后可追溯，管理透明化”，进一步规范学校的试剂耗材全流程的数字化管理的系统。",
+    "popularity": "2568",
+    "url": "http://hxpgl.dlut.edu.cn/dist/?from=rj",
+    "issubscription": 0
   }
 ]

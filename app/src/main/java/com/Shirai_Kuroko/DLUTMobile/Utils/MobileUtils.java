@@ -65,6 +65,7 @@ import com.youth.banner.indicator.RectangleIndicator;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -72,6 +73,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MobileUtils {
     public static String GetAppVersion(Context context) {
@@ -225,6 +230,38 @@ public class MobileUtils {
                         ShowUpdateDialog(context, msgList.get(0), msgList.get(1), msgList.get(2), msgList.get(3), (Activity) context);//自定义的方法，真正需要参数的地方
                     });
                 }
+            }
+        }).start();
+    }
+
+    public static void CheckAppConfigUpDateOnStartUp(Context context) {
+        Handler handler = new Handler(Looper.getMainLooper());
+        new Thread(() -> {
+            Request request = new Request.Builder()
+                    .url("https://github.com/IShiraiKurokoI/DLUTToolBoxMobileV2/releases/download/AppConfig/DefaultAppConfig.json")
+                    .build();
+            Response response;
+            try {
+                response = new OkHttpClient().newCall(request).execute();
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        String ResponseBody = Objects.requireNonNull(response.body()).string();
+                        LogToFile.i("请求返回", ResponseBody);
+                        Log.i("请求返回", ResponseBody);
+                        handler.post(() -> {
+
+                        });
+                    }
+                } else {
+                    String ResponseBody = null;
+                    if (response.body() != null) {
+                        ResponseBody = response.body().string();
+                        LogToFile.i("请求返回", ResponseBody);
+                    }
+                    Log.i("后端交互日志 应用配置获取失败", ResponseBody);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }).start();
     }

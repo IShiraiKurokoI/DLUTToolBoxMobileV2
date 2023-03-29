@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
         MobileUtils.CheckUpDateOnStartUp(this);
         MobileUtils.CheckConfigUpdates(this);
+        MobileUtils.CheckAppConfigUpDateOnStartUp(this);
         //功能测试用代码，除了测试debug没有任何用处
 //        new Thread(()->{
 //            BackendUtils.TestFuction(this,"15998632701");
