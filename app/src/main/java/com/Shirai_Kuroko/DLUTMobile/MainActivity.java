@@ -59,14 +59,6 @@ public class MainActivity extends AppCompatActivity {
         MobileUtils.CheckUpDateOnStartUp(this);
         MobileUtils.CheckConfigUpdates(this);
         MobileUtils.CheckAppConfigUpDateOnStartUp(this);
-        //功能测试用代码，除了测试debug没有任何用处
-//        new Thread(()->{
-//            BackendUtils.TestFuction(this,"15998632701");
-//        }).start();
-//        SharedPreferences prefs1 = PreferenceManager.getDefaultSharedPreferences(this);
-//        int unreadcount = prefs1.getInt("unreadcount", 0);
-//        prefs1.edit().putBoolean("unread", true).apply();
-//        prefs1.edit().putInt("unreadcount", 3).apply();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         boolean Autologin = prefs.getBoolean("AutoLogin", false);
         if (ConfigHelper.NeedLogin(this)) {
