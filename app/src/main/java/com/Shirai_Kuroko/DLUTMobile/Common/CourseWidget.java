@@ -57,7 +57,6 @@ public class CourseWidget extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         LogToFile.init(context);
-        BackendUtils.GainScore(context);
         for (int length = appWidgetIds.length, i = 0; i < length; ++i) {
             b(context, appWidgetManager, appWidgetIds[i], State.LOADING);
         }
@@ -226,12 +225,17 @@ public class CourseWidget extends AppWidgetProvider {
                         if (courseResult.getData() != null) {
                             CourseBean.updateLocalList(duplicateRemovalByCircle(courseResult.getData()));
                             b.c(context, State.DEFAULT);
+                            Log.i("课表微件", "加载成功");
+                            LogToFile.i("课表微件", "加载成功");
+                            BackendUtils.GainScore(context);
                         } else {
                             final State data_NULL = State.DATA_NULL;
                             b.c(context, data_NULL);
                         }
                     } else {
                         b.c(context, "服务器端错误消息：\n"+courseResult.getErrmsg());
+                        Log.e("课表微件", "服务器端错误消息："+courseResult.getErrmsg());
+                        LogToFile.e("课表微件", "服务器端错误消息："+courseResult.getErrmsg());
                     }
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -259,6 +263,8 @@ public class CourseWidget extends AppWidgetProvider {
                             else
                             {
                                 b.c(context, "连接服务器失败");
+                                Log.e("课表微件", "连接服务器失败");
+                                LogToFile.e("课表微件", "连接服务器失败");
                             }
                         }).start();
                     } else {
@@ -283,6 +289,8 @@ public class CourseWidget extends AppWidgetProvider {
             else
             {
                 b.c(context, "连接服务器失败");
+                Log.e("课表微件", "连接服务器失败");
+                LogToFile.e("课表微件", "连接服务器失败");
             }
         }).start();
     }

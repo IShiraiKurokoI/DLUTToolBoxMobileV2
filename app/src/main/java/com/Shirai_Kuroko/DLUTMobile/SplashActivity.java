@@ -41,6 +41,8 @@ public class SplashActivity extends AppCompatActivity {
         AutoCleaner.Clean(this);
         CrashHandler.getInstance().init(this);
         MobileUtils.SetShortCuts(this);
+        //测试代码
+//      //PreferenceManager.getDefaultSharedPreferences(this).edit().remove("GainDate").apply();
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setNavigationBarColor(getResources().getColor(R.color.main_theme_color));

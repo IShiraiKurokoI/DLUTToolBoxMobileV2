@@ -7,7 +7,6 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
-/app/src/main/java/com/Shirai_Kuroko/DLUTMobile/Utils/BackendUtils.java
 /app/src/main/java/com/Shirai_Kuroko/DLUTMobile/Utils/GithubUtils.java
 /app/src/main/java/com/Shirai_Kuroko/DLUTMobile/Utils/StreamHandler.java
 /app/src/main/java/com/Shirai_Kuroko/DLUTMobile/Utils/a.java
@@ -22,3 +21,4 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app/src/main/java/com/Shirai_Kuroko/DLUTMobile/Utils/c.java
