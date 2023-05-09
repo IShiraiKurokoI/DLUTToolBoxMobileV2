@@ -2607,17 +2607,7 @@ public class BackendUtils {
         }).start();
     }
 
-    public static boolean gaining = false;
-
     public static synchronized void GainScore(Context context) {
-        if (!gaining)
-        {
-            gaining = true;
-        }
-        else
-        {
-            return;
-        }
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String Gain = prefs.getString("GainDate", "");
         if (!Gain.equals("")) {
@@ -2667,10 +2657,13 @@ public class BackendUtils {
                 AddCardFunInfo(context);
                 Thread.sleep(500);
                 RemoveCardFunInfo(context);
+                Thread.sleep(500);
+                AddCardFunInfo(context);
+                Thread.sleep(500);
+                RemoveCardFunInfo(context);
                 handler.post(() -> {
                     LocalDate date = LocalDate.now();
                     prefs.edit().putString("GainDate", date.toString()).apply();
-                    gaining = false;
                     Log.i("积分获取", "积分获取完成");
                     LogToFile.i("积分获取", "积分获取完成");
                     GetScore(context);
@@ -2679,12 +2672,10 @@ public class BackendUtils {
                 e.printStackTrace();
                 Log.e("间隔错误",e.toString());
                 LogToFile.e("间隔错误",e.toString());
-                gaining = false;
             } catch (IOException e) {
                 e.printStackTrace();
                 Log.e("输入输出错误",e.toString());
                 LogToFile.e("输入输出错误",e.toString());
-                gaining = false;
             }
         }).start();
     }
