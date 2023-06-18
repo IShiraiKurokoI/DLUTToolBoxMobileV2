@@ -1007,5 +1007,16 @@
     "popularity": "2568",
     "url": "http://hxpgl.dlut.edu.cn/dist/?from=rj",
     "issubscription": 0
+  },
+  {
+    "id": 92,
+    "app_id": "1fb0c6d69f5a2d96",
+    "category": "office",
+    "app_name": "毕业生档案服务",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/05/AC/ynZM2WSMFYqAc3pzAAA8vJJqrM8325.png",
+    "describe": "档案馆毕业生档案服务",
+    "popularity": "1194",
+    "url": "https://webvpn.dlut.edu.cn/https/57787a7876706e323032336b657940247c190856f80f865ae449fe2ddfb88b/jsp/archivesweb/custom/dlut/sso/index.jsp?filter=app",
+    "issubscription": 0
   }
 ]
