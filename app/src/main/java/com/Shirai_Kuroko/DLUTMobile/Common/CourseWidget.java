@@ -265,6 +265,13 @@ public class CourseWidget extends AppWidgetProvider {
                                 b.c(context, "连接服务器失败");
                                 Log.e("课表微件", "连接服务器失败");
                                 LogToFile.e("课表微件", "连接服务器失败");
+                                if(CourseBean.getLocalList()!=null){
+                                    if (CourseBean.getLocalList().size()!=0){
+                                        Log.i("课表微件", "显示缓存数据");
+                                        LogToFile.i("课表微件", "显示缓存数据");
+                                        b.c(context, State.DEFAULT);
+                                    }
+                                }
                             }
                         }).start();
                     } else {
@@ -291,6 +298,13 @@ public class CourseWidget extends AppWidgetProvider {
                 b.c(context, "连接服务器失败");
                 Log.e("课表微件", "连接服务器失败");
                 LogToFile.e("课表微件", "连接服务器失败");
+                if(CourseBean.getLocalList()!=null){
+                    if (CourseBean.getLocalList().size()!=0){
+                        Log.i("课表微件", "显示缓存数据");
+                        LogToFile.i("课表微件", "显示缓存数据");
+                        b.c(context, State.DEFAULT);
+                    }
+                }
             }
         }).start();
     }
