@@ -33,17 +33,17 @@ public class ParentBindActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_bind);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
-        TextView tv_intro = requireViewById(R.id.tv_intro);
+        TextView tv_intro = findViewById(R.id.tv_intro);
         tv_intro.setOnClickListener(view -> {
             Intent intent = new Intent(ParentBindActivity.this, PureBrowserActivity.class);
             intent.putExtra("Name", "");
             intent.putExtra("Url", "https://apps-xiaoyuan.m.dlut.edu.cn/explain");
             startActivity(intent);
         });
-        TextView tv_activated_wording = requireViewById(R.id.tv_activated_wording);
-        TextView tv_activated_time = requireViewById(R.id.tv_activated_time);
+        TextView tv_activated_wording = findViewById(R.id.tv_activated_wording);
+        TextView tv_activated_time = findViewById(R.id.tv_activated_time);
         LoginResponseBean userbean = ConfigHelper.GetUserBean(this);
         LoginResponseBean.DataDTO.MyInfoDTO infoDTO = userbean.getData().getMy_info();
         if(Objects.equals(infoDTO.getParent_active(), "1"))

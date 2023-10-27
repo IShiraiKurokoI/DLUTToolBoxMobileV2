@@ -23,7 +23,7 @@ public class GiftActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gift);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
         TextView Score = findViewById(R.id.tv_gift_home_my_score);
         TextView Rank = findViewById(R.id.tv_gift_home_rank);

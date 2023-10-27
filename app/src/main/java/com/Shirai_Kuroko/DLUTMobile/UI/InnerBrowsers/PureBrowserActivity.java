@@ -95,11 +95,11 @@ public class PureBrowserActivity extends BaseActivity {
             Log.i("Purebrowser", "无需设置已读");
         }
         webView = findViewById(R.id.PureBrowser);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
-        TextView tv_title = requireViewById(R.id.tv_title);
+        TextView tv_title = findViewById(R.id.tv_title);
         tv_title.setText(Name);
-        TextView tv_more = requireViewById(R.id.tv_more);
+        TextView tv_more = findViewById(R.id.tv_more);
         tv_more.setOnClickListener(this::showPopupWindow);
         if (Objects.equals(Name, "")) {
             NoTitle = true;
@@ -225,7 +225,7 @@ public class PureBrowserActivity extends BaseActivity {
 //            loading.dismiss();
             progressBar.setVisibility(View.GONE);
             if (NoTitle) {
-                TextView tv_title = requireViewById(R.id.tv_title);
+                TextView tv_title = findViewById(R.id.tv_title);
                 String title = webView.getTitle();
                 if (!title.startsWith("https://")&&!title.startsWith("http://"))
                 {
@@ -363,7 +363,7 @@ public class PureBrowserActivity extends BaseActivity {
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
             if (NoTitle) {
-                TextView tv_title = requireViewById(R.id.tv_title);
+                TextView tv_title = findViewById(R.id.tv_title);
                 Log.i("TAG", "onReceivedTitle: "+title);
                 if (!title.startsWith("https://")&&!title.startsWith("http://"))
                 {

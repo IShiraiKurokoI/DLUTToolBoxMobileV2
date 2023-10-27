@@ -21,13 +21,13 @@ public class ExchangeRecordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exchange_record);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
-        TextView btn_to_get = requireViewById(R.id.btn_to_get);
-        TextView btn_geted = requireViewById(R.id.btn_geted);
-        RecyclerView recyclerView = requireViewById(R.id.RecordList);
+        TextView btn_to_get = findViewById(R.id.btn_to_get);
+        TextView btn_geted = findViewById(R.id.btn_geted);
+        RecyclerView recyclerView = findViewById(R.id.RecordList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        LinearLayout emptyview = requireViewById(R.id.RecordEmptyView);
+        LinearLayout emptyview = findViewById(R.id.RecordEmptyView);
         ExchangeRecordAdapter exchangeRecordAdapter = new ExchangeRecordAdapter(this,null,recyclerView,emptyview);
         recyclerView.setAdapter(exchangeRecordAdapter);
         LoadingView loadingView = new LoadingView(this, R.style.CustomDialog);

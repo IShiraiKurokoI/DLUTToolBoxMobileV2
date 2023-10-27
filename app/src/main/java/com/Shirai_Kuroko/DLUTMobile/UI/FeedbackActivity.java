@@ -38,17 +38,17 @@ public class FeedbackActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
         context = this;
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
-        Button Submit = requireViewById(R.id.Submit);
-        TextView Email = requireViewById(R.id.tv_feedback_qq_group);
+        Button Submit = findViewById(R.id.Submit);
+        TextView Email = findViewById(R.id.tv_feedback_qq_group);
         Email.setOnClickListener(v -> {
             ClipboardManager cm = (ClipboardManager) this.getSystemService(Context.CLIPBOARD_SERVICE);
             // 将文本内容放到系统剪贴板里。
             cm.setText("ishirai_kurokoi@foxmail.com");
             Toast.makeText(this, "已复制作者邮箱到剪切板", Toast.LENGTH_SHORT).show();
         });
-        EditText number_et = requireViewById(R.id.number_et);
+        EditText number_et = findViewById(R.id.number_et);
         number_et.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -63,8 +63,8 @@ public class FeedbackActivity extends AppCompatActivity {
                 Contact = editable.toString();
             }
         });
-        EditText content_et = requireViewById(R.id.content_et);
-        TextView comment_words_limit = requireViewById(R.id.comment_words_limit);
+        EditText content_et = findViewById(R.id.content_et);
+        TextView comment_words_limit = findViewById(R.id.comment_words_limit);
         content_et.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

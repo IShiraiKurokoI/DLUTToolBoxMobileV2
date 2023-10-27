@@ -33,18 +33,18 @@ public class CardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card);
         context = this;
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
-        ImageView bg = requireViewById(R.id.iv_school_card);
+        ImageView bg = findViewById(R.id.iv_school_card);
         LoginResponseBean loginResponseBean = ConfigHelper.GetUserBean(this);
         String Identity = loginResponseBean.getData().getMy_info().getAuthority_identity();
         String Name = loginResponseBean.getData().getMy_info().getName();
-        TextView name = requireViewById(R.id.tv_school_card_name);
+        TextView name = findViewById(R.id.tv_school_card_name);
         String Number = loginResponseBean.getData().getMy_info().getStudentNumber();
-        TextView number = requireViewById(R.id.tv_school_card_second_line);
+        TextView number = findViewById(R.id.tv_school_card_second_line);
         String Org = loginResponseBean.getData().getMy_info().getOrg().get(0).getName();
-        TextView org = requireViewById(R.id.tv_school_card_three_line);
-        ImageView idp = requireViewById(R.id.iv_school_card_head);
+        TextView org = findViewById(R.id.tv_school_card_three_line);
+        ImageView idp = findViewById(R.id.iv_school_card_head);
         IDPhotoResult idPhotoResult = ConfigHelper.GetIDPhoto(this);
         if (idPhotoResult != null) {
             String base64 = idPhotoResult.getData().getId_photo();
@@ -70,7 +70,7 @@ public class CardActivity extends AppCompatActivity {
         name.setText(" 姓 名：" + Name);
         number.setText(" 学 号：" + Number);
         org.setText(" 院 系：" + Org);
-        ImageView qrcode = requireViewById(R.id.iv_act_my_card_qrcode);
+        ImageView qrcode = findViewById(R.id.iv_act_my_card_qrcode);
         BackendUtils.LoadQRCode(this, qrcode);
         qrcode.setOnClickListener(view -> BackendUtils.LoadQRCode(context, qrcode));
         BackendUtils.LoadIDPhoto(this, idp);

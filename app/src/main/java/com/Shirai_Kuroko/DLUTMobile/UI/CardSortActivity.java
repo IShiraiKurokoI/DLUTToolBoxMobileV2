@@ -28,7 +28,7 @@ public class CardSortActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_sort);
         mContext=this;
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
         RecyclerView SortView = findViewById(R.id.SortView);
         mDatas = ConfigHelper.GetCardIDList(this);

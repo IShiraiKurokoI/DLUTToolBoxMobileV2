@@ -44,12 +44,12 @@ public class NotificationManageActivity extends AppCompatActivity {
         Temp = new ArrayList<>();
         SelectedList = new ArrayList<>();
         setContentView(R.layout.activity_notification_manage);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
-        TextView tv_more = requireViewById(R.id.tv_more);
+        TextView tv_more = findViewById(R.id.tv_more);
         tv_more.setOnClickListener(this::showPopupWindow);
-        recyclerView = requireViewById(R.id.rv_notice_list);
-        LinearLayout NoticeEmptyView = requireViewById(R.id.NoticeEmptyView);
+        recyclerView = findViewById(R.id.rv_notice_list);
+        LinearLayout NoticeEmptyView = findViewById(R.id.NoticeEmptyView);
         try {
             notificationPayloadhistoryList = ConfigHelper.GetNotificationHistoryList(this);
         } catch (Exception e) {

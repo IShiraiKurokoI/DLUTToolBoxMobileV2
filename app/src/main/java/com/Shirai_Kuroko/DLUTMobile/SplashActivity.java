@@ -49,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
         setBaseTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        TextView Version = requireViewById(R.id.Version);
+        TextView Version = findViewById(R.id.Version);
         Version.setText("Version " + MobileUtils.GetAppVersion(this));
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (ConfigHelper.FPStatus(this)) {

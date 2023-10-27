@@ -47,9 +47,9 @@ public class HeadActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_head);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
-        ImageView head = requireViewById(R.id.headview);
+        ImageView head = findViewById(R.id.headview);
         try {
             Glide.with(this).load(ConfigHelper.GetUserBean(this).getData().getMy_info().getHead()).into(head);
         }
@@ -57,7 +57,7 @@ public class HeadActivity extends AppCompatActivity {
         {
             Toast.makeText(this, "加载出错，请重新打开此页面", Toast.LENGTH_SHORT).show();
         }
-        Button Btn_Modify = requireViewById(R.id.Btn_Modify);
+        Button Btn_Modify = findViewById(R.id.Btn_Modify);
         Btn_Modify.setOnClickListener(view -> showPop(head, this));
     }
 

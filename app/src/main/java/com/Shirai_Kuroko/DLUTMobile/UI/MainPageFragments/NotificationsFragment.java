@@ -62,16 +62,16 @@ public class NotificationsFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     public void init() {
-        RecyclerView recyclerView = requireView().requireViewById(R.id.rv_notice_list);
+        RecyclerView recyclerView = requireView().findViewById(R.id.rv_notice_list);
         if (recyclerView == null) {
             return;
         }
-        TextView iv_manage = requireView().requireViewById(R.id.iv_manage);
+        TextView iv_manage = requireView().findViewById(R.id.iv_manage);
         iv_manage.setOnClickListener(view -> {
             Intent intent = new Intent(getContext(), NotificationManageActivity.class);
             startActivity(intent);
         });
-        TextView tv_ReadAll = requireView().requireViewById(R.id.tv_ReadAll);
+        TextView tv_ReadAll = requireView().findViewById(R.id.tv_ReadAll);
         tv_ReadAll.setOnClickListener(view2 -> {
             Dialog Dialog = new Dialog(getActivity(), R.style.CustomDialog);
             @SuppressLint("InflateParams") View view = LayoutInflater.from(getActivity()).inflate(
@@ -104,7 +104,7 @@ public class NotificationsFragment extends Fragment {
             });
             Dialog.show();
         });
-        LinearLayout NoticeEmptyView = requireView().requireViewById(R.id.NoticeEmptyView);
+        LinearLayout NoticeEmptyView = requireView().findViewById(R.id.NoticeEmptyView);
         List<NotificationHistoryDataBaseBean> notificationPayloadhistoryList;
         try {
             notificationPayloadhistoryList = ConfigHelper.GetNotificationHistoryList(getContext());
@@ -141,7 +141,7 @@ public class NotificationsFragment extends Fragment {
                 }
             };
             if (unreadcount > 0) {
-                TextView unreadbutton = requireView().requireViewById(R.id.tv_tips_unread_new_msg);
+                TextView unreadbutton = requireView().findViewById(R.id.tv_tips_unread_new_msg);
                 unreadbutton.setText(unreadcount + "条未读消息");
                 unreadbutton.setVisibility(View.VISIBLE);
                 unreadbutton.setOnClickListener(view1 -> {
@@ -162,11 +162,11 @@ public class NotificationsFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     public void Resumeinit() {
-        RecyclerView recyclerView = requireView().requireViewById(R.id.rv_notice_list);
+        RecyclerView recyclerView = requireView().findViewById(R.id.rv_notice_list);
         if (recyclerView == null) {
             return;
         }
-        LinearLayout NoticeEmptyView = requireView().requireViewById(R.id.NoticeEmptyView);
+        LinearLayout NoticeEmptyView = requireView().findViewById(R.id.NoticeEmptyView);
         List<NotificationHistoryDataBaseBean> notificationPayloadhistoryList;
         try {
             notificationPayloadhistoryList = ConfigHelper.GetNotificationHistoryList(getContext());
@@ -202,7 +202,7 @@ public class NotificationsFragment extends Fragment {
                 }
             };
             if (unreadcount > 0) {
-                TextView unreadbutton = requireView().requireViewById(R.id.tv_tips_unread_new_msg);
+                TextView unreadbutton = requireView().findViewById(R.id.tv_tips_unread_new_msg);
                 unreadbutton.setText(unreadcount + "条未读消息");
                 unreadbutton.setVisibility(View.VISIBLE);
                 unreadbutton.setOnClickListener(view1 -> {

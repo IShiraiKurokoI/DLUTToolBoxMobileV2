@@ -34,7 +34,7 @@ public class OpenVirtualCardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_virtual_card);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
         String Url = "https://card.m.dlut.edu.cn/virtualcardrj/openRjQrcodePage";
         webView = findViewById(R.id.VirtualCardWebview);
@@ -54,11 +54,6 @@ public class OpenVirtualCardActivity extends AppCompatActivity {
         //禁止系统缩放字体
         webSettings.setTextZoom(100);
         webView.setDrawingCacheEnabled(true);
-        if (ConfigHelper.GetThemeType(this)) { //判断如果系统是深色主题
-            webSettings.setForceDark(WebSettings.FORCE_DARK_ON);//强制开启webview深色主题模式
-        } else {
-            webSettings.setForceDark(WebSettings.FORCE_DARK_OFF);
-        }
         //背景透明
         SyncCookie(this);
         webView.loadUrl(Url);

@@ -159,7 +159,7 @@ public class StartScanActivity extends AppCompatActivity {
         cmdName = getIntent().getStringExtra("cmdName");
         cmdId = getIntent().getStringExtra("cmdId");
         setContentView(R.layout.activity_scan_qrcode);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.putExtra("resultcode", -1);

@@ -25,11 +25,11 @@ public class ScoreRankActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score_rank);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
-        TextView btn_received_gifts = requireViewById(R.id.btn_received_gifts);
-        TextView btn_sent_gifts = requireViewById(R.id.btn_sent_gifts);
-        RecyclerView recyclerView = requireViewById(R.id.RankList);
+        TextView btn_received_gifts = findViewById(R.id.btn_received_gifts);
+        TextView btn_sent_gifts = findViewById(R.id.btn_sent_gifts);
+        RecyclerView recyclerView = findViewById(R.id.RankList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         RankAdapter rankAdapter = new RankAdapter(this, null);
         recyclerView.setAdapter(rankAdapter);

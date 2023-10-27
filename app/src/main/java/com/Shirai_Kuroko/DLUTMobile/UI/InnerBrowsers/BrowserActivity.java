@@ -81,10 +81,10 @@ public class BrowserActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         WebView.enableSlowWholeDocumentDraw();
         setContentView(R.layout.activity_browser);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
-        TextView tv_title = requireViewById(R.id.tv_title);
-        TextView tv_more = requireViewById(R.id.tv_more);
+        TextView tv_title = findViewById(R.id.tv_title);
+        TextView tv_more = findViewById(R.id.tv_more);
         mContext = this;
         Intent intent = getIntent();
         String id = intent.getStringExtra("App_ID");

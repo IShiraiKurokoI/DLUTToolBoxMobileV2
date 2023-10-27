@@ -49,9 +49,9 @@ public class PersonalInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
-        MobileUtils.InitializePersonalInfo(this, requireViewById(R.id.InfoScrollView));
+        MobileUtils.InitializePersonalInfo(this, findViewById(R.id.InfoScrollView));
         RelativeLayout head_panel = findViewById(R.id.head_panel);
         ImageView user_head = findViewById(R.id.user_head);
         head_panel.setOnClickListener(view -> showPop(user_head, this));

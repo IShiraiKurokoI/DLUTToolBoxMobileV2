@@ -34,7 +34,7 @@ android {
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.Shirai_Kuroko.DLUTMobile"
-        minSdk 29
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "1.7.6.3"

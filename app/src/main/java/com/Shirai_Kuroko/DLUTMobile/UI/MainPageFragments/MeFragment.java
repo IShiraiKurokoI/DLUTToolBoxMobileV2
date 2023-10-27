@@ -34,7 +34,7 @@ public class MeFragment extends Fragment {
     public void UIInitialize() {
         Button button_Info;
         try {
-            button_Info = getActivity().requireViewById(R.id.button_Info);//打开个人信息页面
+            button_Info = getActivity().findViewById(R.id.button_Info);//打开个人信息页面
         } catch (Exception e) {
             return;
         }
@@ -42,37 +42,37 @@ public class MeFragment extends Fragment {
             Intent intent = new Intent(getActivity(), PersonalInfoActivity.class);
             startActivity(intent);
         });
-        Button button_Card = requireActivity().requireViewById(R.id.button_Card);//打开证件页面
+        Button button_Card = requireActivity().findViewById(R.id.button_Card);//打开证件页面
         button_Card.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), CardActivity.class);
             startActivity(intent);
         });
-        Button button_Security = requireActivity().requireViewById(R.id.button_Security);//打开重置密码界面
+        Button button_Security = requireActivity().findViewById(R.id.button_Security);//打开重置密码界面
         button_Security.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), AccountSafeActivity.class);
             startActivity(intent);
         });
-        Button button_Gift = requireActivity().requireViewById(R.id.button_Gift);//打开礼物界面
+        Button button_Gift = requireActivity().findViewById(R.id.button_Gift);//打开礼物界面
         button_Gift.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), GiftActivity.class);
             startActivity(intent);
         });
-        Button button_Feedback = requireActivity().requireViewById(R.id.button_Feedback);//发送反馈邮件
+        Button button_Feedback = requireActivity().findViewById(R.id.button_Feedback);//发送反馈邮件
         button_Feedback.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), FeedbackActivity.class);
             startActivity(intent);
         });
-        Button button_Setting = requireActivity().requireViewById(R.id.button_Setting);//打开设置界面
+        Button button_Setting = requireActivity().findViewById(R.id.button_Setting);//打开设置界面
         button_Setting.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), SettingsActivity.class);
             startActivity(intent);
         });
-        Button button_Parent = requireActivity().requireViewById(R.id.button_Parent);//打开设置界面
+        Button button_Parent = requireActivity().findViewById(R.id.button_Parent);//打开设置界面
         button_Parent.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), ParentBindActivity.class);
             startActivity(intent);
         });
-        Button button_About = requireActivity().requireViewById(R.id.button_About);//打开关于界面
+        Button button_About = requireActivity().findViewById(R.id.button_About);//打开关于界面
         button_About.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), AboutActivity.class);
             startActivity(intent);

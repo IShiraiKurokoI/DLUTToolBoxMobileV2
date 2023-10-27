@@ -21,11 +21,11 @@ public class GiftShopActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gift_shop);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
-        TextView tv_user_points = requireViewById(R.id.tv_user_points);
+        TextView tv_user_points = findViewById(R.id.tv_user_points);
         tv_user_points.setText(ConfigHelper.GetUserScoreBean(this).getData().getUser_points().toString());
-        RecyclerView recyclerView = requireViewById(R.id.PresentList);
+        RecyclerView recyclerView = findViewById(R.id.PresentList);
         recyclerView.setLayoutManager(new GridLayoutManager(this,3));
         PresentListAdapter presentListAdapter = new PresentListAdapter(this,null);
         recyclerView.setAdapter(presentListAdapter);

@@ -25,7 +25,7 @@ public class CardManageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_manage);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
         TextView tv_sort = findViewById(R.id.tv_sort);
         tv_sort.setOnClickListener(view -> {

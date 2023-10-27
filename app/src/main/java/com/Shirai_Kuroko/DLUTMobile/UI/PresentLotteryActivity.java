@@ -23,9 +23,9 @@ public class PresentLotteryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_present_lottery);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
-        webView = requireViewById(R.id.LoteryWebview);
+        webView = findViewById(R.id.LoteryWebview);
         webView.addJavascriptInterface(new BrowserProxy(this,webView), "__nativeWhistleProxy");
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);//允许使用js
@@ -55,11 +55,6 @@ public class PresentLotteryActivity extends AppCompatActivity {
         webSettings.setAllowUniversalAccessFromFileURLs(true);
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         webSettings.setSupportMultipleWindows(false);
-        if (ConfigHelper.GetThemeType(this)) { //判断如果系统是深色主题
-            webSettings.setForceDark(WebSettings.FORCE_DARK_ON);//强制开启webview深色主题模式
-        } else {
-            webSettings.setForceDark(WebSettings.FORCE_DARK_OFF);
-        }
         String url ="https://lightapp.m.dlut.edu.cn/lottery";
         synCookies(url);
         webView.setWebViewClient(this.webViewClient);

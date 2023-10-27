@@ -22,13 +22,13 @@ public class ScoreDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score_detail);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
-        TextView btn_in = requireViewById(R.id.btn_in);
-        TextView btn_out = requireViewById(R.id.btn_out);
-        RecyclerView recyclerView = requireViewById(R.id.DetailList);
+        TextView btn_in = findViewById(R.id.btn_in);
+        TextView btn_out = findViewById(R.id.btn_out);
+        RecyclerView recyclerView = findViewById(R.id.DetailList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        LinearLayout emptyview = requireViewById(R.id.RecordEmptyView);
+        LinearLayout emptyview = findViewById(R.id.RecordEmptyView);
         ScoreDetailAdapter scoreDetailAdapter = new ScoreDetailAdapter(this,null,recyclerView,emptyview);
         recyclerView.setAdapter(scoreDetailAdapter);
         LoadingView loadingView = new LoadingView(this, R.style.CustomDialog);

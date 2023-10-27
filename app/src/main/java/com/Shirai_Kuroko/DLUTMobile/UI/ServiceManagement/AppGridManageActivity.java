@@ -53,7 +53,7 @@ public class AppGridManageActivity extends AppCompatActivity {
     }
 
     private void init() {
-        Button btn = requireViewById(R.id.add_more);
+        Button btn = findViewById(R.id.add_more);
         btn.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, AppcenterActivity.class);
             startActivity(intent);

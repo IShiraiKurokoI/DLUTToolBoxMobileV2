@@ -48,7 +48,7 @@ public class SearchActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
         this.a = this.findViewById(R.id.item_search_et);
         RecyclerView recyclerView = this.findViewById(R.id.SearchList);

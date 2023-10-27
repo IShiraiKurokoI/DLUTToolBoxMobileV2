@@ -404,7 +404,6 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
             Notification NewNotification = builder
                     .setShowWhen(false)
                     .setContentIntent(null)
-                    .setAllowSystemGeneratedContextualActions(false)
                     .setVisibility(Notification.VISIBILITY_SECRET)
                     .build();
             manager.notify(2, NewNotification);

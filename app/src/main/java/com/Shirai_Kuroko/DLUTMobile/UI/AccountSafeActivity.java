@@ -40,7 +40,7 @@ public class AccountSafeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_safe);
         Context context = this;
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
         loadingView = new LoadingView(this, R.style.CustomDialog);
         loadingView.show();

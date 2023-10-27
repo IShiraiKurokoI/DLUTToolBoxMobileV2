@@ -43,7 +43,7 @@ public class AppDetailActivity extends BaseActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         ThemeType = prefs.getBoolean("Dark", false);
         thisapp = ConfigHelper.Getmlist(this).get(numid);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
         ImageView di = findViewById(R.id.DetailImage);
         Glide.with(this).load(thisapp.getIcon()).into(di);

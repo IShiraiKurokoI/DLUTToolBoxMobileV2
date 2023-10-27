@@ -60,7 +60,6 @@ public class BackgroudWIFIMonitorService extends Service {
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle("正在后台监测校园网网络连接")
                 .setShowWhen(false)
-                .setAllowSystemGeneratedContextualActions(false)
                 .setVisibility(Notification.VISIBILITY_SECRET)
                 .setContentIntent(null)
                 .build();

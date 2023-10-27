@@ -147,7 +147,7 @@ public class ScanQRCodeActivity extends AppCompatActivity {
             }
         }
         setContentView(R.layout.activity_scan_qrcode);
-        TextView Return = requireViewById(R.id.iv_back);
+        TextView Return = findViewById(R.id.iv_back);
         Return.setOnClickListener(v -> finish());
         mScanSurfaceView = findViewById(R.id.scan_surface_view);
         initView();

@@ -30,11 +30,11 @@ public class LoginConfirmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_confirm);
         String URL = getIntent().getStringExtra("UUID");
         Log.i("二维码地址", URL);
-        WebView d1 = requireViewById(R.id.webView);
-        Button btn_login_qrcode =requireViewById(R.id.btn_login_qrcode);
+        WebView d1 = findViewById(R.id.webView);
+        Button btn_login_qrcode =findViewById(R.id.btn_login_qrcode);
         a=btn_login_qrcode;
         btn_login_qrcode.setOnClickListener(view -> BackendUtils.QRLogin(this,URL));
-        TextView tv_qrcode_login_cancel =requireViewById(R.id.tv_qrcode_login_cancel);
+        TextView tv_qrcode_login_cancel =findViewById(R.id.tv_qrcode_login_cancel);
         tv_qrcode_login_cancel.setOnClickListener(view -> finish());
         d1.setWebChromeClient(new initWebView$1());
         d1.setWebViewClient(new initWebView$2(this));

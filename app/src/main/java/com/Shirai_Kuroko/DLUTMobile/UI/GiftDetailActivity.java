@@ -33,22 +33,22 @@ public class GiftDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gift_detail);
         PresentListResult.DataDTO.ListDTO Gift = JSON.parseObject(getIntent().getStringExtra("GiftObject"),PresentListResult.DataDTO.ListDTO.class);
         Log.i("礼物数据", JSON.toJSONString(Gift));
-        TextView back = requireViewById(R.id.back);
+        TextView back = findViewById(R.id.back);
         back.setOnClickListener(view -> finish());
-        Banner banner = requireViewById(R.id.viewpager);
+        Banner banner = findViewById(R.id.viewpager);
         banner.setAdapter(new GiftDetailBannerAdapter(Gift.getImage(),this));
         banner.addBannerLifecycleObserver(this);
         banner.setIndicator(new RectangleIndicator(this));
-        TextView tv_gift_name = requireViewById(R.id.tv_gift_name);
+        TextView tv_gift_name = findViewById(R.id.tv_gift_name);
         tv_gift_name.setText(Gift.getName());
-        TextView tv_gift_score = requireViewById(R.id.tv_gift_score);
+        TextView tv_gift_score = findViewById(R.id.tv_gift_score);
         tv_gift_score.setText(Gift.getNeedPoints());
-        TextView tv_gift_price = requireViewById(R.id.tv_gift_price);
+        TextView tv_gift_price = findViewById(R.id.tv_gift_price);
         tv_gift_price.setText("市场价"+Gift.getPrice());
         tv_gift_price.setPaintFlags(tv_gift_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        TextView tv_gift_store_count = requireViewById(R.id.tv_gift_store_count);
+        TextView tv_gift_store_count = findViewById(R.id.tv_gift_store_count);
         tv_gift_store_count.setText("已售出"+Gift.getSaleCount()+"件，库存"+Gift.getStoreCount()+"件");
-        WebView tv_gift_intro = requireViewById(R.id.tv_gift_intro);
+        WebView tv_gift_intro = findViewById(R.id.tv_gift_intro);
         tv_gift_intro.getSettings().setTextZoom(100);
         tv_gift_intro.setForceDarkAllowed(true);
         tv_gift_intro.getSettings().setDisabledActionModeMenuItems(DEFAULT_KEYS_DISABLE);
@@ -66,7 +66,7 @@ public class GiftDetailActivity extends AppCompatActivity {
         }
         tv_gift_intro.loadDataWithBaseURL(null, URLDecoder.decode(Gift.getRemark()), "text/html", "utf-8", null);
         tv_gift_intro.setScrollBarSize(0);
-        Button btn_exchange= requireViewById(R.id.btn_exchange);
+        Button btn_exchange= findViewById(R.id.btn_exchange);
         if(ConfigHelper.GetUserScoreBean(this).getData().getUser_points()<Integer.parseInt(Gift.getNeedPoints()))
         {
             btn_exchange.setEnabled(false);
