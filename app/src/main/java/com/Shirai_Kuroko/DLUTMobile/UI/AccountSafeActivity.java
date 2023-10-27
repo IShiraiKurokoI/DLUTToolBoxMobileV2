@@ -49,11 +49,6 @@ public class AccountSafeActivity extends AppCompatActivity {
         webView.setWebChromeClient(webChromeClient);
         webView.setWebViewClient(webViewClient);
         WebSettings webSettings = webView.getSettings();
-        if (ConfigHelper.GetThemeType(this)) { //判断如果系统是深色主题
-            webSettings.setForceDark(WebSettings.FORCE_DARK_ON);//强制开启webview深色主题模式
-        } else {
-            webSettings.setForceDark(WebSettings.FORCE_DARK_OFF);
-        }
         webSettings.setJavaScriptEnabled(true);//允许使用js
         /*
           LOAD_CACHE_ONLY: 不使用网络，只读取本地缓存数据

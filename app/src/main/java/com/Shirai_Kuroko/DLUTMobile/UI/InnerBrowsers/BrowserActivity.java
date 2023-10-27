@@ -146,11 +146,6 @@ public class BrowserActivity extends BaseActivity {
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         webSettings.setSupportMultipleWindows(false);
         webSettings.setGeolocationEnabled(true);
-        if (ConfigHelper.GetThemeType(this)) { //判断如果系统是深色主题
-            webSettings.setForceDark(WebSettings.FORCE_DARK_ON);//强制开启webview深色主题模式
-        } else {
-            webSettings.setForceDark(WebSettings.FORCE_DARK_OFF);
-        }
         //背景透明
         webView.setBackgroundColor(0); // 设置背景色
         webView.getBackground().setAlpha(0); // 设置透明度 范围：0-255

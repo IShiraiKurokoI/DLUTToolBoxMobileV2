@@ -127,11 +127,6 @@ public class PureBrowserActivity extends BaseActivity {
         //禁止系统缩放字体
         webSettings.setTextZoom(100);
         webView.setDrawingCacheEnabled(true);
-        if (ConfigHelper.GetThemeType(this)) { //判断如果系统是深色主题
-            webSettings.setForceDark(WebSettings.FORCE_DARK_ON);//强制开启webview深色主题模式
-        } else {
-            webSettings.setForceDark(WebSettings.FORCE_DARK_OFF);
-        }
         //背景透明
         webView.setBackgroundColor(Color.WHITE); // 设置背景色
         webView.getBackground().setAlpha(125); // 设置透明度 范围：0-255

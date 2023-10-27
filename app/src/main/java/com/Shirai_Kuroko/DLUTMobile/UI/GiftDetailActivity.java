@@ -5,7 +5,6 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -59,11 +58,6 @@ public class GiftDetailActivity extends AppCompatActivity {
                 return true;
             }
         });
-        if (ConfigHelper.GetThemeType(this)) { //判断如果系统是深色主题
-            tv_gift_intro.getSettings().setForceDark(WebSettings.FORCE_DARK_ON);//强制开启webview深色主题模式
-        } else {
-            tv_gift_intro.getSettings().setForceDark(WebSettings.FORCE_DARK_OFF);
-        }
         tv_gift_intro.loadDataWithBaseURL(null, URLDecoder.decode(Gift.getRemark()), "text/html", "utf-8", null);
         tv_gift_intro.setScrollBarSize(0);
         Button btn_exchange= findViewById(R.id.btn_exchange);
