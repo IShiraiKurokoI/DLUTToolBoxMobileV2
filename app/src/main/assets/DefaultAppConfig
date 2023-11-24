@@ -375,13 +375,13 @@
   },
   {
     "id": 34,
-	"app_id": "a8f5cb0d15208c41",
+	"app_id": "c1c892dd06457291",
     "category": "life",
-    "app_name": "校内点餐(已弃用)",
-    "icon": "https://store.m.dlut.edu.cn/group1/M00/01/50/ynZM2V0iBPCAD9VwAAAqiXkNdzA224.png",
-    "describe": "点餐系统可以方便师生进行线上预约点餐，预约后线下通过取餐码便捷取餐",
+    "app_name": "点餐系统",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/06/07/ynZM2WUwgcWANYGoAAAfjQxTzx4650.png",
+    "describe": "智慧点餐系统针对学校食堂大量人员的就餐情况，缓解人群聚集和排队，实现线上点餐、限流取餐，分时就餐。打造一个安全卫生、科学高效、灵活方便的师生就餐环境，有效减少人员接触，保障校内师生的健康与安全。",
     "popularity": "137686",
-    "url": "http://webvpn.dlut.edu.cn/http-8088/77726476706e69737468656265737421a2a713d27661301e295cc7fb/openHomeRJPage?from=rj&filter=app",
+    "url": "https://webvpn.dlut.edu.cn/http/57787a7876706e323032336b657940247009011eeb078700ae40ef2cdfbe81320c5fe6/diancanPhone/sso/login?from=rj&filter=app",
     "issubscription": 0
   },
   {
