@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,6 +81,18 @@ public class HomeFragment extends Fragment {
         mgv.setNestedScrollingEnabled(false);
         Banner banner = requireView().findViewById(R.id.banner);
         if (banner != null) {
+            //设置宽高
+            int ratioWidth = 752;
+            int ratioHeight = 376;
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            int screenWidth = displayMetrics.widthPixels;
+            int calculatedHeight = (screenWidth * ratioHeight) / ratioWidth;
+            ViewGroup.LayoutParams layoutParams = banner.getLayoutParams();
+            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            layoutParams.height = calculatedHeight;
+            banner.setLayoutParams(layoutParams);
+            //加载轮播
             MobileUtils.GetGalllery(requireActivity(), banner);
         }
 
