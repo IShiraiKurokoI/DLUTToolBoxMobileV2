@@ -2428,7 +2428,7 @@ public class BackendUtils {
         }).start();
     }
 
-    public static synchronized void cancelGiftExchange(Context context, int id) {
+    public static synchronized void cancelGiftExchange(Context context, long id) {
         Handler handler = new Handler(Looper.getMainLooper());
         new Thread(() -> {
             LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
@@ -2468,6 +2468,52 @@ public class BackendUtils {
                     LogToFile.i("后端交互日志 取消兑换返回", JSON.toJSONString(responseError));
                     if (responseError.getErrcode()==0){
                         handler.post(()->Toast.makeText(context,"取消兑换成功，请等待一个小时后再次查看！",Toast.LENGTH_LONG).show());
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public static synchronized void GiftExchange(Context context, int present_id) {
+        Handler handler = new Handler(Looper.getMainLooper());
+        new Thread(() -> {
+            LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
+            if (UserBean == null) {
+                return;
+            }
+            LoginResponseBean.DataDTO.MyInfoDTO infoDTO = UserBean.getData().getMy_info();
+            if (infoDTO == null) {
+                return;
+            }
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=exchangePresent&present_id="+present_id+"&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
+            Request request = CommonGetRequsetBuilder(url);
+            LogToFile.i("请求方法体", request.toString());
+            Response response;
+            try {
+                response = new OkHttpClient().newCall(request).execute();
+            } catch (IOException e) {
+                handler.post(() -> GiftExchange(context, present_id));
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
+                return;
+            }
+            String ResponseBody;
+            if (response.body() != null) {
+                try {
+                    ResponseBody = Objects.requireNonNull(response.body()).string();
+                } catch (IOException e) {
+                    handler.post(() -> GiftExchange(context, present_id));
+                    e.printStackTrace();
+                    LogToFile.e("错误", e.toString());
+                    return;
+                }
+                String result = ResponseBody;
+                if (!result.contains("verify failed")) {
+                    Log.i("后端交互日志 兑换返回", result);
+                    LogToFile.i("后端交互日志 兑换返回", result);
+                    ResponseErrorBean responseError = JSON.parseObject(result,ResponseErrorBean.class);
+                    if (responseError.getErrcode()==0){
+                        handler.post(()->Toast.makeText(context,"兑换成功,请前往兑换记录查看！",Toast.LENGTH_LONG).show());
                     }
                 }
             }

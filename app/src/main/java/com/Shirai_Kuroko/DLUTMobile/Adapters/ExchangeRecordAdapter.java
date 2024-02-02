@@ -3,7 +3,6 @@ package com.Shirai_Kuroko.DLUTMobile.Adapters;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,8 +75,7 @@ public class ExchangeRecordAdapter extends RecyclerView.Adapter<ExchangeRecordAd
         }
         Glide.with(mContext).load(listDTO.getImage().get(0)).into(holder.icon_gift);
         int is_exchange = listDTO.getIs_exchange();
-        int id = Integer.parseInt(listDTO.getId());
-        Log.d("TAG", "onBindViewHolder: "+listDTO);
+        long id = Long.parseLong(listDTO.getId());
         switch (is_exchange){
             case 0:{
                 holder.cancel_text.setVisibility(View.VISIBLE);

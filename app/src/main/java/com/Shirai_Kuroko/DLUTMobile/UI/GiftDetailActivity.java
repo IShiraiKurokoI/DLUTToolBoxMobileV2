@@ -1,15 +1,19 @@
 package com.Shirai_Kuroko.DLUTMobile.UI;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +21,7 @@ import com.Shirai_Kuroko.DLUTMobile.Adapters.GiftDetailBannerAdapter;
 import com.Shirai_Kuroko.DLUTMobile.Entities.PresentListResult;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.alibaba.fastjson.JSON;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.RectangleIndicator;
@@ -72,7 +77,37 @@ public class GiftDetailActivity extends AppCompatActivity {
             btn_exchange.setEnabled(false);
             btn_exchange.setText("积分不足");
         }
-        btn_exchange.setOnClickListener(view -> Toast.makeText(getBaseContext(), "请使用原版i大工进行兑换！", Toast.LENGTH_LONG).show());
+        btn_exchange.setOnClickListener(v -> {
+            Dialog Dialog = new Dialog(this, R.style.CustomDialog);
+            @SuppressLint("InflateParams") View view = LayoutInflater.from(this).inflate(
+                    R.layout.dialog_confirm_center, null);
+            final TextView title = view.findViewById(R.id.title);
+            title.setText("请确认兑换");
+            final TextView msg = view.findViewById(R.id.msg);
+            msg.setText("是否使用" + Gift.getNeedPoints() + "积分兑换"+Gift.getName()+"?");
+            final Button ok = view.findViewById(R.id.ok);
+            ok.setOnClickListener(view1 -> {
+                BackendUtils.GiftExchange(this,Integer.parseInt(Gift.getPresentId()));
+                Dialog.dismiss();
+            });
+            final Button cancel = view.findViewById(R.id.cancel);
+            cancel.setOnClickListener(view12 -> Dialog.dismiss());
+            Window window = Dialog.getWindow();
+            window.setContentView(view);
+            window.setGravity(Gravity.CENTER);
+            window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT,
+                    android.view.WindowManager.LayoutParams.WRAP_CONTENT);
+            Dialog.setCanceledOnTouchOutside(false);
+            WindowManager.LayoutParams lp = this.getWindow().getAttributes();
+            lp.alpha = 0.5f;
+            this.getWindow().setAttributes(lp);
+            Dialog.setOnDismissListener(dialogInterface -> {
+                WindowManager.LayoutParams lp1 = this.getWindow().getAttributes();
+                lp1.alpha = 1f;
+                this.getWindow().setAttributes(lp1);
+            });
+            Dialog.show();
+        });
 
     }
 }
