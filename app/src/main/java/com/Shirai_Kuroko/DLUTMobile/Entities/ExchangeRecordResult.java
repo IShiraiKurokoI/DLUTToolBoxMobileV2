@@ -77,7 +77,7 @@ public class ExchangeRecordResult {
             @JsonProperty("end_time")
             private long end_time;
             @JsonProperty("exchange_time")
-            private String exchange_time;
+            private long exchange_time;
             @JsonProperty("id")
             private String id;
             @JsonProperty("image")
@@ -129,7 +129,7 @@ public class ExchangeRecordResult {
                 return end_time;
             }
 
-            public String getExchange_time() {
+            public long getExchange_time() {
                 return exchange_time;
             }
         }

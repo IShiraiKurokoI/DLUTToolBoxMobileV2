@@ -154,4 +154,5 @@
     <string name="comment_rating_null">星评不能为空</string>
     <string name="comment_star">星评</string>
     <string name="comment_succeed">评论添加成功</string>
+    <string name="cancel_exchange">撤销  </string>
 </resources>

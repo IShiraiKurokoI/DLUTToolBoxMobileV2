@@ -117,7 +117,7 @@ public class BackendUtils {
     }
 
     public static int I0(final int n, final int n2) {
-       return c.I0(n,n2);
+        return c.I0(n, n2);
     }
 
     public static String GetHeaderForVersion() {
@@ -128,26 +128,25 @@ public class BackendUtils {
         return c.GetHeaderForNonce();
     }
 
-    public static String GetwhistleVersion()
-    {
+    public static String GetwhistleVersion() {
         return c.GetwhistleVersion();
     }
 
     @SuppressWarnings("ALL")
     public static String[] GetHeaderForTimeStamp() {
-        return  c.GetHeaderForTimeStamp();
+        return c.GetHeaderForTimeStamp();
     }
 
     public static String GetHeaderForSign(String str, String timestamp, String nonce, String a) {
-        return  c.GetHeaderForSign(str,timestamp,nonce,a);
+        return c.GetHeaderForSign(str, timestamp, nonce, a);
     }
 
     public static String aa(final String s, final String s2) throws Exception {
-        return c.aa(s,s2);
+        return c.aa(s, s2);
     }
 
     public static String GetEncodedPassword(String password) {
-       return c.GetEncodedPassword(password);
+        return c.GetEncodedPassword(password);
     }
 
     public static String GetDeviceName() {
@@ -202,10 +201,10 @@ public class BackendUtils {
             try {
                 PasswordEncoded = GetEncodedPassword(Password);
             } catch (Exception e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=userLoginCas&phone_type=" + GetDeviceName() + "&verfiy_image_code=&app_version="+GetwhistleVersion()+"&stu_identity=&os_version=10&device_type=android&equipment_type=phone&client_id=" + PushManager.getInstance().getClientid(context) + "&platform=android&uid=0&password=" + PasswordEncoded + "&student_number=" + Username + "&school=dlut&identity=&equipment_id=null&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=userLoginCas&phone_type=" + GetDeviceName() + "&verfiy_image_code=&app_version=" + GetwhistleVersion() + "&stu_identity=&os_version=10&device_type=android&equipment_type=phone&client_id=" + PushManager.getInstance().getClientid(context) + "&platform=android&uid=0&password=" + PasswordEncoded + "&student_number=" + Username + "&school=dlut&identity=&equipment_id=null&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -254,23 +253,23 @@ public class BackendUtils {
                     Toast.makeText(context, "后端服务器无响应，正在重试", Toast.LENGTH_SHORT).show();
                     Login(context, Username, Password);
                 });
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
         }).start();
     }
 
     public static void LoginForLogin(Context context, String Username, String Password, LoginActivity loginactivity, LoadingView load, String VerifyCode) {
-        Handler handler =new Handler(Looper.getMainLooper());
+        Handler handler = new Handler(Looper.getMainLooper());
         new Thread(() -> {
             String PasswordEncoded = null;
             try {
                 PasswordEncoded = GetEncodedPassword(Password);
             } catch (Exception e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=userLoginCas&phone_type=" + GetDeviceName() + "&verfiy_image_code=" + URLEncoder.encode(VerifyCode) + "&app_version="+GetwhistleVersion()+"&stu_identity=&os_version=10&device_type=android&equipment_type=phone&client_id=" + PushManager.getInstance().getClientid(context) + "&platform=android&uid=0&password=" + PasswordEncoded + "&student_number=" + Username + "&school=dlut&identity=&equipment_id=null&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=userLoginCas&phone_type=" + GetDeviceName() + "&verfiy_image_code=" + URLEncoder.encode(VerifyCode) + "&app_version=" + GetwhistleVersion() + "&stu_identity=&os_version=10&device_type=android&equipment_type=phone&client_id=" + PushManager.getInstance().getClientid(context) + "&platform=android&uid=0&password=" + PasswordEncoded + "&student_number=" + Username + "&school=dlut&identity=&equipment_id=null&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Log.i("请求方法体", request.toString());
@@ -282,53 +281,54 @@ public class BackendUtils {
                         String ResponseBody = Objects.requireNonNull(response.body()).string();
                         Log.i("返回结果", ResponseBody);
                         LogToFile.i("返回结果", ResponseBody);
-                        if (ResponseBody.contains("{\"ret\":-1,\"")) {handler.post(() -> {
-                            ResponseErrorBean responseErrorBean = JSON.parseObject(ResponseBody, ResponseErrorBean.class);
-                            Toast.makeText(context, responseErrorBean.getErrmsg(), Toast.LENGTH_LONG).show();
-                            if (!Objects.equals(responseErrorBean.getData().getImage(), "")) {
-                                Log.i("后端交互日志", "需要验证码" + responseErrorBean.getData().getImage());
-                                LogToFile.i("后端交互日志", "需要验证码" + responseErrorBean.getData().getImage());
-                                Dialog dialog = new Dialog(context, R.style.CustomDialog);
-                                @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(
-                                        R.layout.dialog_identify_code, null);
-                                final ImageView iv_identify_code = view.findViewById(R.id.iv_identify_code);
-                                String base64 = responseErrorBean.getData().getImage();
-                                base64 = base64.replace("\\/", "/");
-                                byte[] bytes = Base64.decode(base64, Base64.DEFAULT);
-                                Bitmap Code = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                iv_identify_code.setImageBitmap(Code);
-                                final PinView pv_identify_code = view.findViewById(R.id.pv_identify_code);
-                                final AppCompatButton btn_refresh = view.findViewById(R.id.btn_refresh);
-                                btn_refresh.setOnClickListener(view12 ->
-                                        RefreshVerifyCode(context, iv_identify_code, Username, load));
-                                final AppCompatButton submit = view.findViewById(R.id.submit);
-                                submit.setOnClickListener(view1 -> {
-                                    if (pv_identify_code.getText().toString().length() == 4) {
-                                        loginactivity.Verify_code = pv_identify_code.getText().toString();
-                                        dialog.dismiss();
-                                    } else {
-                                        Toast.makeText(context, "无效的验证码", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                                final View btn_close = view.findViewById(R.id.btn_close);
-                                btn_close.setOnClickListener(v -> dialog.dismiss());
-                                Window window = dialog.getWindow();
-                                window.setContentView(view);
-                                window.setGravity(Gravity.CENTER);
-                                window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT,
-                                        WindowManager.LayoutParams.WRAP_CONTENT);
-                                dialog.setCanceledOnTouchOutside(false);
-                                WindowManager.LayoutParams lp = loginactivity.getWindow().getAttributes();
-                                lp.alpha = 0.5f;
-                                loginactivity.getWindow().setAttributes(lp);
-                                dialog.setOnDismissListener(dialogInterface -> {
-                                    WindowManager.LayoutParams lp1 = loginactivity.getWindow().getAttributes();
-                                    lp1.alpha = 1f;
-                                    loginactivity.getWindow().setAttributes(lp1);
-                                });
-                                dialog.show();
-                            }
-                        });
+                        if (ResponseBody.contains("{\"ret\":-1,\"")) {
+                            handler.post(() -> {
+                                ResponseErrorBean responseErrorBean = JSON.parseObject(ResponseBody, ResponseErrorBean.class);
+                                Toast.makeText(context, responseErrorBean.getErrmsg(), Toast.LENGTH_LONG).show();
+                                if (!Objects.equals(responseErrorBean.getData().getImage(), "")) {
+                                    Log.i("后端交互日志", "需要验证码" + responseErrorBean.getData().getImage());
+                                    LogToFile.i("后端交互日志", "需要验证码" + responseErrorBean.getData().getImage());
+                                    Dialog dialog = new Dialog(context, R.style.CustomDialog);
+                                    @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(
+                                            R.layout.dialog_identify_code, null);
+                                    final ImageView iv_identify_code = view.findViewById(R.id.iv_identify_code);
+                                    String base64 = responseErrorBean.getData().getImage();
+                                    base64 = base64.replace("\\/", "/");
+                                    byte[] bytes = Base64.decode(base64, Base64.DEFAULT);
+                                    Bitmap Code = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                    iv_identify_code.setImageBitmap(Code);
+                                    final PinView pv_identify_code = view.findViewById(R.id.pv_identify_code);
+                                    final AppCompatButton btn_refresh = view.findViewById(R.id.btn_refresh);
+                                    btn_refresh.setOnClickListener(view12 ->
+                                            RefreshVerifyCode(context, iv_identify_code, Username, load));
+                                    final AppCompatButton submit = view.findViewById(R.id.submit);
+                                    submit.setOnClickListener(view1 -> {
+                                        if (pv_identify_code.getText().toString().length() == 4) {
+                                            loginactivity.Verify_code = pv_identify_code.getText().toString();
+                                            dialog.dismiss();
+                                        } else {
+                                            Toast.makeText(context, "无效的验证码", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                    final View btn_close = view.findViewById(R.id.btn_close);
+                                    btn_close.setOnClickListener(v -> dialog.dismiss());
+                                    Window window = dialog.getWindow();
+                                    window.setContentView(view);
+                                    window.setGravity(Gravity.CENTER);
+                                    window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT,
+                                            WindowManager.LayoutParams.WRAP_CONTENT);
+                                    dialog.setCanceledOnTouchOutside(false);
+                                    WindowManager.LayoutParams lp = loginactivity.getWindow().getAttributes();
+                                    lp.alpha = 0.5f;
+                                    loginactivity.getWindow().setAttributes(lp);
+                                    dialog.setOnDismissListener(dialogInterface -> {
+                                        WindowManager.LayoutParams lp1 = loginactivity.getWindow().getAttributes();
+                                        lp1.alpha = 1f;
+                                        loginactivity.getWindow().setAttributes(lp1);
+                                    });
+                                    dialog.show();
+                                }
+                            });
                         } else {
                             handler.post(() -> {
                                 ConfigHelper.SaveLoginResultToPref(ResponseBody, context);
@@ -401,9 +401,9 @@ public class BackendUtils {
                 handler.postDelayed(() -> {
                     Toast.makeText(context, "后端服务器无响应，正在重试", Toast.LENGTH_SHORT).show();
                     LoginForLogin(context, Username, Password, loginactivity, load, VerifyCode);
-                },2000);
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                }, 2000);
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
         }).start();
     }
@@ -418,7 +418,7 @@ public class BackendUtils {
             String LocalTimestamp = timestamps[1];
             String Nonce = GetHeaderForNonce();
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=checkVerifyImageCode";
-            String PostBody = "uid=0&verfiy_image_code=&student_number=" + Username + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&device_type=android&type=1&platform=android&city_id=10";
+            String PostBody = "uid=0&verfiy_image_code=&student_number=" + Username + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&device_type=android&type=1&platform=android&city_id=10";
             String Sign = GetHeaderForSign(PostBody, Timestamp, Nonce, a);
             OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象
             Request request = new Request.Builder()
@@ -470,8 +470,8 @@ public class BackendUtils {
                     Toast.makeText(context, "刷新失败", Toast.LENGTH_SHORT).show();
                     loadingView.dismiss();
                 });
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
         }).start();
     }
@@ -504,7 +504,7 @@ public class BackendUtils {
             } catch (Exception e) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=getUserInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&otheraid=" + infoDTO.getUser_id() + "&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=getUserInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&otheraid=" + infoDTO.getUser_id() + "&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -521,7 +521,7 @@ public class BackendUtils {
                                     String Un = prefs.getString("Username", "");
                                     String Pd = prefs.getString("Password", "");
                                     Login(context, Un, Pd);
-                                }else {
+                                } else {
                                     if (!ResponseBody.contains("No Response")) {
                                         Toast.makeText(context, ResponseBody.split("\"errmsg\":\"")[1].split("\"")[0], Toast.LENGTH_SHORT).show();
                                     }
@@ -592,8 +592,8 @@ public class BackendUtils {
                     });
                 }
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
                 handler.post(() -> ReSendUserInfo(context));
             }
         }).start();
@@ -633,7 +633,7 @@ public class BackendUtils {
             } catch (Exception e) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=setClientId&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&client_id=" + ClientID + "&platform=android&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=setClientId&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&client_id=" + ClientID + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -671,8 +671,8 @@ public class BackendUtils {
                     Log.i("后端交互日志", "设置个推客户端ID失败" + e.getLocalizedMessage());
                     LogToFile.i("后端交互日志", "设置个推客户端ID失败" + e.getLocalizedMessage());
                 });
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
         }).start();
     }
@@ -694,7 +694,7 @@ public class BackendUtils {
             } catch (Exception e) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=getGallery&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=getGallery&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -735,8 +735,8 @@ public class BackendUtils {
                 }
             } catch (IOException e) {
                 handler.post(() -> GetGallery(context, banner));
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
         }).start();
     }
@@ -757,7 +757,7 @@ public class BackendUtils {
             } catch (Exception e) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=snapShot&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=snapShot&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -791,8 +791,8 @@ public class BackendUtils {
                 }
             } catch (IOException e) {
                 handler.post(() -> GetScore(context));
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
         }).start();
     }
@@ -809,7 +809,7 @@ public class BackendUtils {
             if (infoDTO == null) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=snapShot&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=snapShot&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -840,8 +840,8 @@ public class BackendUtils {
                 }
             } catch (IOException e) {
                 handler.post(() -> GetScore(context, Score));
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
         }).start();
     }
@@ -858,7 +858,7 @@ public class BackendUtils {
             if (infoDTO == null) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=snapShot&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=snapShot&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -906,8 +906,8 @@ public class BackendUtils {
                 }
             } catch (IOException e) {
                 handler.post(() -> GetScore(context, Score, Rank, Income, Outcome));
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
         }).start();
     }
@@ -923,7 +923,7 @@ public class BackendUtils {
             if (infoDTO == null) {
                 handler.post(() -> LoadQRCode(context, imageView));
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=QRCode&a=generateTimeLimitedStr&uid=0&student_number=" + (infoDTO != null ? infoDTO.getStudentNumber() : null) + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + (UserBean != null ? UserBean.getData().getVerify().replace(":", "%3A") : null) + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&ver_type=myCard&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=QRCode&a=generateTimeLimitedStr&uid=0&student_number=" + (infoDTO != null ? infoDTO.getStudentNumber() : null) + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + (UserBean != null ? UserBean.getData().getVerify().replace(":", "%3A") : null) + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&ver_type=myCard&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -968,8 +968,8 @@ public class BackendUtils {
                 }
             } catch (IOException e) {
                 handler.post(() -> LoadQRCode(context, imageView));
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
         }).start();
     }
@@ -990,7 +990,7 @@ public class BackendUtils {
             } catch (Exception e) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=reSendMsgInfo&app_version="+GetwhistleVersion()+"&stu_identity=&device_type=android&client_id=" + PushManager.getInstance().getClientid(context) + "&platform=android&uid=0&is_load_idphoto=1&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=reSendMsgInfo&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&client_id=" + PushManager.getInstance().getClientid(context) + "&platform=android&uid=0&is_load_idphoto=1&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -1056,8 +1056,8 @@ public class BackendUtils {
                 }
             } catch (IOException e) {
                 handler.post(() -> LoadIDPhoto(context, imageView));
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
         }).start();
     }
@@ -1078,7 +1078,7 @@ public class BackendUtils {
             } catch (Exception e) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=reSendMsgInfo&app_version="+GetwhistleVersion()+"&stu_identity=&device_type=android&client_id=" + PushManager.getInstance().getClientid(context) + "&platform=android&uid=0&is_load_idphoto=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=reSendMsgInfo&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&client_id=" + PushManager.getInstance().getClientid(context) + "&platform=android&uid=0&is_load_idphoto=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -1114,8 +1114,8 @@ public class BackendUtils {
                     }
                 }
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
         }).start();
     }
@@ -1136,7 +1136,7 @@ public class BackendUtils {
             } catch (Exception e) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=setUserInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&param=%7B%22nick_name%22%3A%22" + URLEncoder.encode(NewNickName) + "%22%7D&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=setUserInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&param=%7B%22nick_name%22%3A%22" + URLEncoder.encode(NewNickName) + "%22%7D&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -1185,8 +1185,8 @@ public class BackendUtils {
                 }
             } catch (IOException e) {
                 handler.post(() -> ChangeNickName(context, NewNickName, textView));
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
         }).start();
     }
@@ -1211,7 +1211,7 @@ public class BackendUtils {
         String LocalTimestamp = timestamps[1];
         String Nonce = GetHeaderForNonce();
         String requestbodystring;
-        requestbodystring = "app_key=20460cbb2ccf1c97&app_secret=1dcc14a227a6f8d9b37792b7b053f671&app_version="+GetwhistleVersion()+"&grant_type=client_credentials&platform=android&scope=all";
+        requestbodystring = "app_key=20460cbb2ccf1c97&app_secret=1dcc14a227a6f8d9b37792b7b053f671&app_version=" + GetwhistleVersion() + "&grant_type=client_credentials&platform=android&scope=all";
         String Sign = GetHeaderForSign(requestbodystring, Timestamp, Nonce, a);
         OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象
         Request request = new Request.Builder()
@@ -1253,7 +1253,7 @@ public class BackendUtils {
             return null;
         }
         String url;
-        url = "https://api.m.dlut.edu.cn/lightappapi/course/get_today_course?access_token=" + accesstoken + "&app_version="+GetwhistleVersion()+"&domain=dlut&identity="+ infoDTO.getIdentity()+"&platform=android&student_number=" + infoDTO.getStudentNumber();
+        url = "https://api.m.dlut.edu.cn/lightappapi/course/get_today_course?access_token=" + accesstoken + "&app_version=" + GetwhistleVersion() + "&domain=dlut&identity=" + infoDTO.getIdentity() + "&platform=android&student_number=" + infoDTO.getStudentNumber();
         OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象
         Request request = new Request.Builder()
                 .url(url)
@@ -1285,7 +1285,7 @@ public class BackendUtils {
             } catch (Exception e) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=checkCasService&app_version="+GetwhistleVersion()+"&tgtinfo=" + URLEncoder.encode(JSON.toJSONString(UserBean.getData().getTgtinfo())) + "&stu_identity=&device_type=android&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity="+ infoDTO.getIdentity()+"&pword=" + (UserBean.getData() != null ? UserBean.getData().getPword() : null) + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=checkCasService&app_version=" + GetwhistleVersion() + "&tgtinfo=" + URLEncoder.encode(JSON.toJSONString(UserBean.getData().getTgtinfo())) + "&stu_identity=&device_type=android&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&pword=" + (UserBean.getData() != null ? UserBean.getData().getPword() : null) + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -1353,8 +1353,8 @@ public class BackendUtils {
                 }
             } catch (IOException e) {
                 handler.post(() -> CheckTGT(context));
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
         }).start();
     }
@@ -1424,8 +1424,8 @@ public class BackendUtils {
                     response = new OkHttpClient().newCall(request).execute();
                 } catch (Exception e) {
                     Toast.makeText(uploadImageCommand.proxy.context, "出现错误" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                     e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                    e.printStackTrace();
+                    LogToFile.e("错误", e.toString());
                     uploadImageCommand.sendCancelResult();
                     return;
                 }
@@ -1443,8 +1443,8 @@ public class BackendUtils {
                                 jsonObject.put("imageUrl", string);
                             } catch (JSONException e) {
                                 Toast.makeText(uploadImageCommand.proxy.context, "出现错误" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                                e.printStackTrace();
+                                LogToFile.e("错误", e.toString());
                                 uploadImageCommand.sendCancelResult();
                                 return;
                             }
@@ -1461,8 +1461,8 @@ public class BackendUtils {
             } catch (Exception e) {
                 Log.e("后端交互日志 上传失败", "", e);
                 Toast.makeText(uploadImageCommand.proxy.context, "出现错误" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
                 handler.post(uploadImageCommand::sendCancelResult);
             }
         }).start();
@@ -1484,7 +1484,7 @@ public class BackendUtils {
             } catch (Exception e) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=setUserInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&param=%7B%22photo_live%22%3A%22" + URLEncoder.encode(HeadUrl.replace("/", "\\/")) + "%22%7D&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify() + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=setUserInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&param=%7B%22photo_live%22%3A%22" + URLEncoder.encode(HeadUrl.replace("/", "\\/")) + "%22%7D&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -1534,13 +1534,13 @@ public class BackendUtils {
                 }
             } catch (IOException e) {
                 handler.post(() -> SetNewHead(context, HeadUrl, head));
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
         }).start();
     }
 
-    public static void LoginFunInfo(Context context) throws IOException{
+    public static void LoginFunInfo(Context context) throws IOException {
         LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
         if (UserBean == null) {
             throw new IOException("用户为空");
@@ -1555,7 +1555,7 @@ public class BackendUtils {
         String LocalTimestamp = timestamps[1];
         String Nonce = GetHeaderForNonce();
         OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象
-        String requestbodystring = "uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&optfun=%7B%22phone_type%22%3A%22" + GetDeviceName() + "%22%2C%22student_number%22%3A%22" + infoDTO.getStudentNumber() + "%22%2C%22os_version%22%3A%22" + Build.VERSION.RELEASE + "%22%2C%22interface_name%22%3A%22m%5Cu003dstatistics%5Cu0026a%5Cu003dsetFunInfo%22%2C%22name%22%3A%22" + URLEncoder.encode(infoDTO.getName(), "UTF-8") + "%22%2C%22opt_type%22%3A%222%22%2C%22equipment_type%22%3A%22phone%22%2C%22fun_info%22%3A%22%E5%90%AF%E5%8A%A8%22%2C%22org_name%22%3A%22" + URLEncoder.encode(infoDTO.getOrg().get(0).getName(), "UTF-8") + "%22%7D&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+        String requestbodystring = "uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&optfun=%7B%22phone_type%22%3A%22" + GetDeviceName() + "%22%2C%22student_number%22%3A%22" + infoDTO.getStudentNumber() + "%22%2C%22os_version%22%3A%22" + Build.VERSION.RELEASE + "%22%2C%22interface_name%22%3A%22m%5Cu003dstatistics%5Cu0026a%5Cu003dsetFunInfo%22%2C%22name%22%3A%22" + URLEncoder.encode(infoDTO.getName(), "UTF-8") + "%22%2C%22opt_type%22%3A%222%22%2C%22equipment_type%22%3A%22phone%22%2C%22fun_info%22%3A%22%E5%90%AF%E5%8A%A8%22%2C%22org_name%22%3A%22" + URLEncoder.encode(infoDTO.getOrg().get(0).getName(), "UTF-8") + "%22%7D&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
         String Sign = GetHeaderForSign(requestbodystring, Timestamp, Nonce, a);
         Request request = new Request.Builder()
                 .header("a", a)
@@ -1574,7 +1574,7 @@ public class BackendUtils {
         LogToFile.i("后端交互日志 每日登录返回", result);
     }
 
-    public static void UseAppFunInfo(Context context) throws IOException{
+    public static void UseAppFunInfo(Context context) throws IOException {
         LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
         if (UserBean == null) {
             throw new IOException("用户为空");
@@ -1583,7 +1583,7 @@ public class BackendUtils {
         if (infoDTO == null) {
             throw new IOException("用户信息为空");
         }
-        String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=app&a=setAppPV&phone_type=" + GetDeviceName() + "&app_version="+GetwhistleVersion()+"&stu_identity=&os_version=" + Build.VERSION.RELEASE + "&device_type=android&equipment_type=phone&type=1&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity="+ infoDTO.getIdentity()+"&name=" + URLEncoder.encode(infoDTO.getName(), "UTF-8") + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&org_name=" + URLEncoder.encode(infoDTO.getOrg().get(0).getName(), "UTF-8") + "&aid=" + infoDTO.getUser_id() + "&app_id=19b32196decf419a&equipment_id=null&city_id=10";
+        String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=app&a=setAppPV&phone_type=" + GetDeviceName() + "&app_version=" + GetwhistleVersion() + "&stu_identity=&os_version=" + Build.VERSION.RELEASE + "&device_type=android&equipment_type=phone&type=1&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&name=" + URLEncoder.encode(infoDTO.getName(), "UTF-8") + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&org_name=" + URLEncoder.encode(infoDTO.getOrg().get(0).getName(), "UTF-8") + "&aid=" + infoDTO.getUser_id() + "&app_id=19b32196decf419a&equipment_id=null&city_id=10";
         Request request = CommonGetRequsetBuilder(url);
         Response response = new OkHttpClient().newCall(request).execute();
         String ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
@@ -1592,7 +1592,7 @@ public class BackendUtils {
     }
 
     @SuppressWarnings("ALL")
-    public static void CommentAppFunInfo(Context context,String appid,String comment,int score,AppDetailActivity appDetailActivity) {
+    public static void CommentAppFunInfo(Context context, String appid, String comment, int score, AppDetailActivity appDetailActivity) {
         Handler handler = new Handler(Looper.getMainLooper());
         new Thread(() -> {
             LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
@@ -1603,7 +1603,7 @@ public class BackendUtils {
             if (infoDTO == null) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=comment&a=add&app_version="+GetwhistleVersion()+"&stu_identity=&device_type=android&platform=android&score="+String.valueOf(score)+"&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity="+ infoDTO.getIdentity()+"&verify=" + URLEncoder.encode(UserBean.getData().getVerify()) + "&comment="+URLEncoder.encode(comment)+"&app_id="+appid+"&aid=" + infoDTO.getUser_id() + "&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=comment&a=add&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&platform=android&score=" + String.valueOf(score) + "&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&verify=" + URLEncoder.encode(UserBean.getData().getVerify()) + "&comment=" + URLEncoder.encode(comment) + "&app_id=" + appid + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -1611,45 +1611,40 @@ public class BackendUtils {
                 response = new OkHttpClient().newCall(request).execute();
             } catch (IOException e) {
                 handler.post(() -> RefreshSkeyInfo(context));
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
                 return;
             }
             String ResponseBody = null;
             try {
                 ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
             String finalResponseBody = ResponseBody;
             handler.post(() -> {
                 if (finalResponseBody != null && !finalResponseBody.contains("verify failed")) {
-                    ScoreFunResultbean scoreFunResultbean = JSON.parseObject(finalResponseBody,ScoreFunResultbean.class);
-                    if (scoreFunResultbean.getRet()!=-1)
-                    {
-                        LogToFile.i("应用评论",finalResponseBody);
-                        if (scoreFunResultbean.getData().getAdd_score()!=-1)
-                        {
-                            CenterToast.makeText(context,"添加评论成功！\n积分+"+scoreFunResultbean.getData().getAdd_score()+"\n现有积分："+scoreFunResultbean.getData().getSum(),Toast.LENGTH_LONG).show();
+                    ScoreFunResultbean scoreFunResultbean = JSON.parseObject(finalResponseBody, ScoreFunResultbean.class);
+                    if (scoreFunResultbean.getRet() != -1) {
+                        LogToFile.i("应用评论", finalResponseBody);
+                        if (scoreFunResultbean.getData().getAdd_score() != -1) {
+                            CenterToast.makeText(context, "添加评论成功！\n积分+" + scoreFunResultbean.getData().getAdd_score() + "\n现有积分：" + scoreFunResultbean.getData().getSum(), Toast.LENGTH_LONG).show();
                             BackendUtils.GetScore(context);
+                        } else {
+                            CenterToast.makeText(context, "添加评论成功！", Toast.LENGTH_LONG).show();
                         }
-                        else
-                        {
-                            CenterToast.makeText(context,"添加评论成功！" ,Toast.LENGTH_LONG).show();
-                        }
-                        BackendUtils.GetAppCommentNow(context,appid,appDetailActivity,appDetailActivity.findViewById(R.id.comment_list));
-                    }else
-                    {
-                        LogToFile.e("应用评论",finalResponseBody);
-                        CenterToast.makeText(context,scoreFunResultbean.getErrmsg(),Toast.LENGTH_SHORT).show();
+                        BackendUtils.GetAppCommentNow(context, appid, appDetailActivity, appDetailActivity.findViewById(R.id.comment_list));
+                    } else {
+                        LogToFile.e("应用评论", finalResponseBody);
+                        CenterToast.makeText(context, scoreFunResultbean.getErrmsg(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }).start();
     }
 
-    public static void AddAppFunInfo(Context context) throws IOException{
+    public static void AddAppFunInfo(Context context) throws IOException {
         LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
         if (UserBean == null) {
             throw new IOException("用户为空");
@@ -1658,7 +1653,7 @@ public class BackendUtils {
         if (infoDTO == null) {
             throw new IOException("用户信息为空");
         }
-        String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=collection&a=add&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&app_id=53fef93fd4364221&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+        String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=collection&a=add&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&app_id=53fef93fd4364221&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
         Request request = CommonGetRequsetBuilder(url);
         Response response = new OkHttpClient().newCall(request).execute();
         String ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
@@ -1666,7 +1661,7 @@ public class BackendUtils {
         LogToFile.i("后端交互日志 添加返回", ResponseBody);
     }
 
-    public static void RemoveAppFunInfo(Context context) throws IOException{
+    public static void RemoveAppFunInfo(Context context) throws IOException {
         LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
         if (UserBean == null) {
             throw new IOException("用户为空");
@@ -1675,7 +1670,7 @@ public class BackendUtils {
         if (infoDTO == null) {
             throw new IOException("用户信息为空");
         }
-        String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=collection&a=remove&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&app_id=53fef93fd4364221&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+        String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=collection&a=remove&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&app_id=53fef93fd4364221&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
         Request request = CommonGetRequsetBuilder(url);
         Response response = new OkHttpClient().newCall(request).execute();
         String ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
@@ -1683,7 +1678,7 @@ public class BackendUtils {
         LogToFile.i("后端交互日志 移除返回", ResponseBody);
     }
 
-    public static void ShareFunInfo(Context context) throws IOException{
+    public static void ShareFunInfo(Context context) throws IOException {
         LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
         if (UserBean == null) {
             throw new IOException("用户为空");
@@ -1692,7 +1687,7 @@ public class BackendUtils {
         if (infoDTO == null) {
             throw new IOException("用户信息为空");
         }
-        String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=setTaskScore&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&task_type=6&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+        String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=setTaskScore&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&task_type=6&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
         Request request = CommonGetRequsetBuilder(url);
         Response response = new OkHttpClient().newCall(request).execute();
         String ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
@@ -1700,7 +1695,7 @@ public class BackendUtils {
         LogToFile.i("后端交互日志 分享返回", ResponseBody);
     }
 
-    public static void AddCardFunInfo(Context context) throws IOException{
+    public static void AddCardFunInfo(Context context) throws IOException {
         LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
         if (UserBean == null) {
             throw new IOException("用户为空");
@@ -1715,7 +1710,7 @@ public class BackendUtils {
         String LocalTimestamp = timestamps[1];
         String Nonce = GetHeaderForNonce();
         String requestbodystring;
-        requestbodystring = "app_version="+GetwhistleVersion()+"&stu_identity=&device_type=android&sort=-7&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&app_id=50ac974f2840944c&aid=" + infoDTO.getUser_id() + "&city_id=10";
+        requestbodystring = "app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&sort=-7&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&app_id=50ac974f2840944c&aid=" + infoDTO.getUser_id() + "&city_id=10";
         String Sign = GetHeaderForSign(requestbodystring, Timestamp, Nonce, a);
         Request request = new Request.Builder()
                 .header("a", a)
@@ -1733,7 +1728,7 @@ public class BackendUtils {
         LogToFile.i("后端交互日志 添加卡片返回", result);
     }
 
-    public static void RemoveCardFunInfo(Context context) throws IOException{
+    public static void RemoveCardFunInfo(Context context) throws IOException {
         LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
         if (UserBean == null) {
             throw new IOException("用户为空");
@@ -1748,7 +1743,7 @@ public class BackendUtils {
         String LocalTimestamp = timestamps[1];
         String Nonce = GetHeaderForNonce();
         String requestbodystring;
-        requestbodystring = "uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&app_id=50ac974f2840944c&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+        requestbodystring = "uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&app_id=50ac974f2840944c&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
         String Sign = GetHeaderForSign(requestbodystring, Timestamp, Nonce, a);
         Request request = new Request.Builder()
                 .header("a", a)
@@ -1777,7 +1772,7 @@ public class BackendUtils {
             if (infoDTO == null) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=statistics&a=getSkeyInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify() + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=statistics&a=getSkeyInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -1785,16 +1780,16 @@ public class BackendUtils {
                 response = new OkHttpClient().newCall(request).execute();
             } catch (IOException e) {
                 handler.post(() -> RefreshSkeyInfo(context));
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
                 return;
             }
             String ResponseBody = null;
             try {
                 ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
             String finalResponseBody = ResponseBody;
             handler.post(() -> {
@@ -1827,7 +1822,7 @@ public class BackendUtils {
             if (infoDTO == null) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=app&a=detail&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify() + "&device_type=android&app_id="+appid+"&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=app&a=detail&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&device_type=android&app_id=" + appid + "&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -1835,23 +1830,22 @@ public class BackendUtils {
                 response = new OkHttpClient().newCall(request).execute();
             } catch (IOException e) {
                 handler.post(() -> RefreshSkeyInfo(context));
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
                 return;
             }
             String ResponseBody = null;
             try {
                 ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
             String finalResponseBody = ResponseBody;
             handler.post(() -> {
                 if (finalResponseBody != null && !finalResponseBody.contains("verify failed")) {
-                    AppDetailNowResultBean appDetailNowResultBean = JSON.parseObject(finalResponseBody,AppDetailNowResultBean.class);
-                    if (appDetailNowResultBean.getRet()!=-1)
-                    {
+                    AppDetailNowResultBean appDetailNowResultBean = JSON.parseObject(finalResponseBody, AppDetailNowResultBean.class);
+                    if (appDetailNowResultBean.getRet() != -1) {
                         RatingBar tdr = appDetailActivity.findViewById(R.id.app_rating);
                         tdr.setVisibility(View.VISIBLE);
                         tdr.setRating(appDetailNowResultBean.getData().getScore().getAverage().floatValue());
@@ -1862,8 +1856,7 @@ public class BackendUtils {
 
                         RadioButton app_instruction = appDetailActivity.findViewById(R.id.app_instruction);
                         RadioButton app_user_comment = appDetailActivity.findViewById(R.id.app_user_comment);
-                        if (comment_area.getVisibility()!=View.VISIBLE)
-                        {
+                        if (comment_area.getVisibility() != View.VISIBLE) {
                             app_instruction.setChecked(true);
                             app_user_comment.setChecked(false);
                         }
@@ -1877,15 +1870,13 @@ public class BackendUtils {
                         });
                         RecyclerView comment_list = appDetailActivity.findViewById(R.id.comment_list);
                         app_user_comment.setEnabled(true);
-                        GetAppCommentNow(context,appid,appDetailActivity,comment_list);
-                    }
-                    else
-                    {
+                        GetAppCommentNow(context, appid, appDetailActivity, comment_list);
+                    } else {
                         RadioButton app_user_comment = appDetailActivity.findViewById(R.id.app_user_comment);
                         app_user_comment.setEnabled(true);
-                        app_user_comment.setOnClickListener(view -> CenterToast.makeText(context,"抱歉，该应用暂不支持评论",Toast.LENGTH_SHORT).show());
-                        CenterToast.makeText(context,appDetailNowResultBean.getErrmsg(),Toast.LENGTH_SHORT).show();
-                        LogToFile.e("请求应用信息",finalResponseBody);
+                        app_user_comment.setOnClickListener(view -> CenterToast.makeText(context, "抱歉，该应用暂不支持评论", Toast.LENGTH_SHORT).show());
+                        CenterToast.makeText(context, appDetailNowResultBean.getErrmsg(), Toast.LENGTH_SHORT).show();
+                        LogToFile.e("请求应用信息", finalResponseBody);
                     }
                 }
             });
@@ -1904,7 +1895,7 @@ public class BackendUtils {
             if (infoDTO == null) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=comment&a=list&offset=0&app_version="+GetwhistleVersion()+"&stu_identity=&device_type=android&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity="+ infoDTO.getIdentity()+"&limit=100&verify=" + UserBean.getData().getVerify() + "&device_type=android&app_id="+appid+"&aid=" + infoDTO.getUser_id() + "&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=comment&a=list&offset=0&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&limit=100&verify=" + UserBean.getData().getVerify() + "&device_type=android&app_id=" + appid + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -1912,78 +1903,73 @@ public class BackendUtils {
                 response = new OkHttpClient().newCall(request).execute();
             } catch (IOException e) {
                 handler.post(() -> RefreshSkeyInfo(context));
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
                 return;
             }
             String ResponseBody = null;
             try {
                 ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
             String finalResponseBody = ResponseBody;
             handler.post(() -> {
                 if (finalResponseBody != null && !finalResponseBody.contains("verify failed")) {
-                    CommentDetailResultBean commentDetailResultBean  =JSON.parseObject(finalResponseBody,CommentDetailResultBean.class);
+                    CommentDetailResultBean commentDetailResultBean = JSON.parseObject(finalResponseBody, CommentDetailResultBean.class);
                     TextView comment = appDetailActivity.findViewById(R.id.comment);
-                    if (commentDetailResultBean.getRet()!=-1)
-                    {
+                    if (commentDetailResultBean.getRet() != -1) {
                         comment_list.setLayoutManager(new LinearLayoutManager(context));
-                        CommentDetailAdapter commentDetailAdapter = new CommentDetailAdapter(context,commentDetailResultBean.getData().getList_data());
+                        CommentDetailAdapter commentDetailAdapter = new CommentDetailAdapter(context, commentDetailResultBean.getData().getList_data());
                         comment_list.setAdapter(commentDetailAdapter);
                         comment_list.addItemDecoration(new DividerItemDecoration(context, LinearLayout.VERTICAL));
-                        if (commentDetailResultBean.getData().getIscomment()==0)
-                        {
+                        if (commentDetailResultBean.getData().getIscomment() == 0) {
                             comment.setOnClickListener(view -> appDetailActivity.CommentApp());
-                        }
-                        else
-                        {
+                        } else {
                             comment.setText("已评论");
                             comment.setEnabled(false);
                         }
                         RatingBar app_average = appDetailActivity.findViewById(R.id.app_average);
                         app_average.setRating(commentDetailResultBean.getData().getStatistics().getAverage().floatValue());
                         TextView app_rating_times = appDetailActivity.findViewById(R.id.app_rating_times);
-                        app_rating_times.setText("总评分人数"+commentDetailResultBean.getData().getStatistics().getTotal()+"人");
-                        double total =Double.parseDouble(commentDetailResultBean.getData().getTotal());
+                        app_rating_times.setText("总评分人数" + commentDetailResultBean.getData().getStatistics().getTotal() + "人");
+                        double total = Double.parseDouble(commentDetailResultBean.getData().getTotal());
                         JSONObject jsonObject = null;
-                        int $1=0;
-                        int $2=0;
-                        int $3=0;
-                        int $4=0;
-                        int $5=0;
+                        int $1 = 0;
+                        int $2 = 0;
+                        int $3 = 0;
+                        int $4 = 0;
+                        int $5 = 0;
                         try {
                             jsonObject = new JSONObject(finalResponseBody);
-                            jsonObject = (JSONObject)jsonObject.get("data");
-                            jsonObject = (JSONObject)jsonObject.get("statistics");
-                            jsonObject = (JSONObject)jsonObject.get("score");
-                            $1= jsonObject.getInt("1");
-                            $2= jsonObject.getInt("2");
-                            $3= jsonObject.getInt("3");
-                            $4= jsonObject.getInt("4");
-                            $5= jsonObject.getInt("5");
+                            jsonObject = (JSONObject) jsonObject.get("data");
+                            jsonObject = (JSONObject) jsonObject.get("statistics");
+                            jsonObject = (JSONObject) jsonObject.get("score");
+                            $1 = jsonObject.getInt("1");
+                            $2 = jsonObject.getInt("2");
+                            $3 = jsonObject.getInt("3");
+                            $4 = jsonObject.getInt("4");
+                            $5 = jsonObject.getInt("5");
                         } catch (JSONException e) {
-                             e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                            e.printStackTrace();
+                            LogToFile.e("错误", e.toString());
                         }
                         ProgressBar app_score_5star_parent = appDetailActivity.findViewById(R.id.app_score_5star_parent);
-                        app_score_5star_parent.setProgress((int) (($5/total)*1000000),true);
+                        app_score_5star_parent.setProgress((int) (($5 / total) * 1000000), true);
                         ProgressBar app_score_4star_parent = appDetailActivity.findViewById(R.id.app_score_4star_parent);
-                        app_score_4star_parent.setProgress((int) (($4/total)*1000000),true);
+                        app_score_4star_parent.setProgress((int) (($4 / total) * 1000000), true);
                         ProgressBar app_score_3star_parent = appDetailActivity.findViewById(R.id.app_score_3star_parent);
-                        app_score_3star_parent.setProgress((int) (($3/total)*1000000),true);
+                        app_score_3star_parent.setProgress((int) (($3 / total) * 1000000), true);
                         ProgressBar app_score_2star_parent = appDetailActivity.findViewById(R.id.app_score_2star_parent);
-                        app_score_2star_parent.setProgress((int) (($2/total)*1000000),true);
+                        app_score_2star_parent.setProgress((int) (($2 / total) * 1000000), true);
                         ProgressBar app_score_1star_parent = appDetailActivity.findViewById(R.id.app_score_1star_parent);
-                        app_score_1star_parent.setProgress((int) (($1/total)*1000000),true);
-                    }else
-                    {
+                        app_score_1star_parent.setProgress((int) (($1 / total) * 1000000), true);
+                    } else {
                         comment.setText("暂时无法评论");
                         comment.setEnabled(false);
-                        LogToFile.e("请求应用评论",finalResponseBody);
-                        CenterToast.makeText(context,commentDetailResultBean.getErrmsg(),Toast.LENGTH_SHORT).show();
+                        LogToFile.e("请求应用评论", finalResponseBody);
+                        CenterToast.makeText(context, commentDetailResultBean.getErrmsg(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -1999,7 +1985,7 @@ public class BackendUtils {
         if (infoDTO == null) {
             return;
         }
-        String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=getMsgInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify() + "&device_type=android&msg_id=" + msgid + "&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+        String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=getMsgInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&device_type=android&msg_id=" + msgid + "&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
         Request request = CommonGetRequsetBuilder(url);
         LogToFile.i("请求方法体", request.toString());
         Response response = null;
@@ -2007,16 +1993,16 @@ public class BackendUtils {
             response = new OkHttpClient().newCall(request).execute();
             LogToFile.i("请求返回", response.toString());
         } catch (IOException e) {
-             e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+            e.printStackTrace();
+            LogToFile.e("错误", e.toString());
         }
         String ResponseBody;
         try {
             ResponseBody = response != null ? response.body() != null ? Objects.requireNonNull(response.body()).string() : null : null;
         } catch (IOException e) {
             GetMsgDetailInfo(context, msgid);
-             e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+            e.printStackTrace();
+            LogToFile.e("错误", e.toString());
             return;
         }
         Log.i("后端交互日志 消息内容返回", ResponseBody);
@@ -2034,8 +2020,8 @@ public class BackendUtils {
             try {
                 str = URLDecoder.decode(str, "UTF-8");
             } catch (UnsupportedEncodingException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
             if (str.startsWith("[") && str.endsWith("]")) {
                 DLUTNoticeContentBean dlutNoticeContentBean = JSON.parseArray(str, DLUTNoticeContentBean.class).get(0);
@@ -2095,20 +2081,20 @@ public class BackendUtils {
                 response = new OkHttpClient().newCall(request).execute();
                 LogToFile.i("请求返回", response.toString());
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
             String ResponseBody;
             try {
                 ResponseBody = response != null ? response.body() != null ? Objects.requireNonNull(response.body()).string() : null : null;
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
                 return;
             }
             Log.i("测试内容返回", ResponseBody);
             LogToFile.i("测试内容返回", ResponseBody);
-            handler.post(() -> Toast.makeText(context,ResponseBody,Toast.LENGTH_LONG).show());
+            handler.post(() -> Toast.makeText(context, ResponseBody, Toast.LENGTH_LONG).show());
         }).start();
     }
 
@@ -2153,20 +2139,20 @@ public class BackendUtils {
                 response = new OkHttpClient().newCall(request).execute();
                 LogToFile.i("请求返回", response.toString());
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
             String ResponseBody;
             try {
                 ResponseBody = response != null ? response.body() != null ? Objects.requireNonNull(response.body()).string() : null : null;
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
                 return;
             }
             Log.i("测试内容返回", ResponseBody);
             LogToFile.i("测试内容返回", ResponseBody);
-            handler.post(() -> Toast.makeText(context,ResponseBody,Toast.LENGTH_LONG).show());
+            handler.post(() -> Toast.makeText(context, ResponseBody, Toast.LENGTH_LONG).show());
         }).start();
     }
 
@@ -2179,7 +2165,7 @@ public class BackendUtils {
         if (infoDTO == null) {
             return;
         }
-        String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=getMsgInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify() + "&device_type=android&msg_id=" + msgid + "&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+        String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=getMsgInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&device_type=android&msg_id=" + msgid + "&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
         Request request = CommonGetRequsetBuilder(url);
         LogToFile.i("请求方法体", request.toString());
         Response response = null;
@@ -2187,16 +2173,16 @@ public class BackendUtils {
             response = new OkHttpClient().newCall(request).execute();
             LogToFile.i("请求返回", response.toString());
         } catch (IOException e) {
-             e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+            e.printStackTrace();
+            LogToFile.e("错误", e.toString());
         }
         String ResponseBody;
         try {
             ResponseBody = response != null ? response.body() != null ? Objects.requireNonNull(response.body()).string() : null : null;
         } catch (IOException e) {
             GetMsgNewDetailInfo(context, msgid);
-             e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+            e.printStackTrace();
+            LogToFile.e("错误", e.toString());
             return;
         }
         Log.i("后端交互日志 消息内容返回", ResponseBody);
@@ -2214,8 +2200,8 @@ public class BackendUtils {
             try {
                 str = URLDecoder.decode(msgInfoResult.getData().getMsgInfo().get(0).getMsg_content(), "UTF-8");
             } catch (UnsupportedEncodingException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
                 return;
             }
             if (str.startsWith("[") && str.endsWith("]")) {
@@ -2257,15 +2243,15 @@ public class BackendUtils {
             if (infoDTO == null) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=pointRanking&offset=0&app_version="+GetwhistleVersion()+"&stu_identity=&device_type=android&type=" + type + "&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity="+ infoDTO.getIdentity()+"&limit=30&verify=" + UserBean.getData().getVerify() + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=pointRanking&offset=0&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&type=" + type + "&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&limit=30&verify=" + UserBean.getData().getVerify() + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
             try {
                 response = new OkHttpClient().newCall(request).execute();
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
                 handler.post(() -> GetRank(context, type, rankAdapter, loadingView));
                 return;
             }
@@ -2273,8 +2259,8 @@ public class BackendUtils {
             try {
                 ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
             Log.i("后端交互日志 积分排名返回", ResponseBody);
             LogToFile.i("后端交互日志 积分排名返回", ResponseBody);
@@ -2308,7 +2294,7 @@ public class BackendUtils {
             if (infoDTO == null) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=getUserPointsDetail&offset=0&app_version="+GetwhistleVersion()+"&stu_identity=&device_type=android&type=" + type + "&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity="+ infoDTO.getIdentity()+"&limit=100&verify=" + UserBean.getData().getVerify() + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=getUserPointsDetail&offset=0&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&type=" + type + "&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&limit=100&verify=" + UserBean.getData().getVerify() + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             Log.i("请求方法体", request.toString());
             LogToFile.i("请求方法体", request.toString());
@@ -2316,8 +2302,8 @@ public class BackendUtils {
             try {
                 response = new OkHttpClient().newCall(request).execute();
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
                 handler.post(() -> GetScoreDetail(context, type, scoreDetailAdapter, loadingView));
                 return;
             }
@@ -2325,8 +2311,8 @@ public class BackendUtils {
             try {
                 ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
             String result = ResponseBody;
             if (result == null) {
@@ -2357,15 +2343,15 @@ public class BackendUtils {
             if (infoDTO == null) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=exchangeDetail&offset=0&app_version="+GetwhistleVersion()+"&stu_identity=&device_type=android&type=" + type + "&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity="+ infoDTO.getIdentity()+"&limit=100&verify=" + UserBean.getData().getVerify() + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=exchangeDetail&offset=0&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&type=" + type + "&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&limit=100&verify=" + UserBean.getData().getVerify() + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
             try {
                 response = new OkHttpClient().newCall(request).execute();
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
                 handler.post(() -> GetExchangeRecord(context, type, exchangeRecordAdapter, loadingView));
                 return;
             }
@@ -2373,8 +2359,8 @@ public class BackendUtils {
             try {
                 ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
             String result = ResponseBody;
             if (result == null) {
@@ -2405,7 +2391,7 @@ public class BackendUtils {
             if (infoDTO == null) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=getPresentList&offset=0&app_version="+GetwhistleVersion()+"&stu_identity=&device_type=android&store_type=0&type=0&platform=android&points_range=0&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity="+ infoDTO.getIdentity()+"&limit=100&order_by=1&verify=" + UserBean.getData().getVerify() + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=getPresentList&offset=0&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&store_type=0&type=0&platform=android&points_range=0&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&limit=100&order_by=1&verify=" + UserBean.getData().getVerify() + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -2413,8 +2399,8 @@ public class BackendUtils {
                 response = new OkHttpClient().newCall(request).execute();
             } catch (IOException e) {
                 handler.post(() -> GetGiftList(context, presentListAdapter, loadingView));
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
                 return;
             }
             String ResponseBody;
@@ -2423,8 +2409,8 @@ public class BackendUtils {
                     ResponseBody = Objects.requireNonNull(response.body()).string();
                 } catch (IOException e) {
                     handler.post(() -> GetGiftList(context, presentListAdapter, loadingView));
-                     e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                    e.printStackTrace();
+                    LogToFile.e("错误", e.toString());
                     return;
                 }
                 String result = ResponseBody;
@@ -2442,6 +2428,52 @@ public class BackendUtils {
         }).start();
     }
 
+    public static synchronized void cancelGiftExchange(Context context, int id) {
+        Handler handler = new Handler(Looper.getMainLooper());
+        new Thread(() -> {
+            LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
+            if (UserBean == null) {
+                return;
+            }
+            LoginResponseBean.DataDTO.MyInfoDTO infoDTO = UserBean.getData().getMy_info();
+            if (infoDTO == null) {
+                return;
+            }
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=cancelPresentStatus&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&id=" + id + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
+            Request request = CommonGetRequsetBuilder(url);
+            LogToFile.i("请求方法体", request.toString());
+            Response response;
+            try {
+                response = new OkHttpClient().newCall(request).execute();
+            } catch (IOException e) {
+                handler.post(() -> cancelGiftExchange(context, id));
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
+                return;
+            }
+            String ResponseBody;
+            if (response.body() != null) {
+                try {
+                    ResponseBody = Objects.requireNonNull(response.body()).string();
+                } catch (IOException e) {
+                    handler.post(() -> cancelGiftExchange(context, id));
+                    e.printStackTrace();
+                    LogToFile.e("错误", e.toString());
+                    return;
+                }
+                String result = ResponseBody;
+                if (!result.contains("verify failed")) {
+                    ResponseErrorBean responseError = JSON.parseObject(result,ResponseErrorBean.class);
+                    Log.i("后端交互日志 取消兑换返回", JSON.toJSONString(responseError));
+                    LogToFile.i("后端交互日志 取消兑换返回", JSON.toJSONString(responseError));
+                    if (responseError.getErrcode()==0){
+                        handler.post(()->Toast.makeText(context,"取消兑换成功，请等待一个小时后再次查看！",Toast.LENGTH_LONG).show());
+                    }
+                }
+            }
+        }).start();
+    }
+
     public static synchronized void QRLogin(Context context, String UUID) {
         Handler handler = new Handler(Looper.getMainLooper());
         new Thread(() -> {
@@ -2453,15 +2485,15 @@ public class BackendUtils {
             if (infoDTO == null) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=scanQRStatusSo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&uuid_url=" + URLEncoder.encode(UUID) + "&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify() + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=scanQRStatusSo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&uuid_url=" + URLEncoder.encode(UUID) + "&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
             try {
                 response = new OkHttpClient().newCall(request).execute();
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
                 handler.post(() -> QRLogin(context, UUID));
                 return;
             }
@@ -2469,8 +2501,8 @@ public class BackendUtils {
             try {
                 ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
             String result = ResponseBody;
             if (result == null) {
@@ -2506,15 +2538,15 @@ public class BackendUtils {
             if (infoDTO == null) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=scanQRStatus&uid=0&whistle_info=" + whistle_info + "&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify() + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=scanQRStatus&uid=0&whistle_info=" + whistle_info + "&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
             try {
                 response = new OkHttpClient().newCall(request).execute();
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
                 handler.post(() -> ApiQRPreLogin(context, whistle_info));
                 return;
             }
@@ -2522,8 +2554,8 @@ public class BackendUtils {
             try {
                 ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
             } catch (IOException e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
             }
             String result = ResponseBody;
             if (result == null) {
@@ -2564,7 +2596,7 @@ public class BackendUtils {
             if (infoDTO == null) {
                 return;
             }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=setWebScanQRStatus&uid=0&whistle_info=" + whistle_info + "&student_number=" + infoDTO.getStudentNumber() + "&app_version="+GetwhistleVersion()+"&school=dlut&stu_identity=&identity="+ infoDTO.getIdentity()+"&verify=" + UserBean.getData().getVerify() + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&type=login&city_id=10";
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=setWebScanQRStatus&uid=0&whistle_info=" + whistle_info + "&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&type=login&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
             LogToFile.i("请求方法体", request.toString());
             Response response;
@@ -2572,8 +2604,8 @@ public class BackendUtils {
                 response = new OkHttpClient().newCall(request).execute();
             } catch (IOException e) {
                 handler.post(() -> ApiQRLogin(context, whistle_info));
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
                 return;
             }
             try {
@@ -2600,8 +2632,8 @@ public class BackendUtils {
                     });
                 }
             } catch (Exception e) {
-                 e.printStackTrace();
-                LogToFile.e("错误",e.toString());
+                e.printStackTrace();
+                LogToFile.e("错误", e.toString());
                 handler.post(() -> ApiQRLogin(context, whistle_info));
             }
         }).start();
@@ -2670,12 +2702,12 @@ public class BackendUtils {
                 });
             } catch (InterruptedException e) {
                 e.printStackTrace();
-                Log.e("间隔错误",e.toString());
-                LogToFile.e("间隔错误",e.toString());
+                Log.e("间隔错误", e.toString());
+                LogToFile.e("间隔错误", e.toString());
             } catch (IOException e) {
                 e.printStackTrace();
-                Log.e("输入输出错误",e.toString());
-                LogToFile.e("输入输出错误",e.toString());
+                Log.e("输入输出错误", e.toString());
+                LogToFile.e("输入输出错误", e.toString());
             }
         }).start();
     }

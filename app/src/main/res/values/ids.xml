@@ -337,4 +337,5 @@
     <item name="btn_delete" type="id" />
     <item name="btn_select_all" type="id" />
     <item name="btn_reverse" type="id" />
+    <item name="cancel_text" type="id" />
 </resources>

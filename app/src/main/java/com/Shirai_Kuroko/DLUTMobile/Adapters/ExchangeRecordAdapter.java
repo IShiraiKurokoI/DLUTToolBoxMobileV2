@@ -1,10 +1,16 @@
 package com.Shirai_Kuroko.DLUTMobile.Adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.Shirai_Kuroko.DLUTMobile.Entities.ExchangeRecordResult;
 import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.UI.ExchangeRecordActivity;
+import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -66,19 +74,75 @@ public class ExchangeRecordAdapter extends RecyclerView.Adapter<ExchangeRecordAd
         {
             holder.gift_name.setCompoundDrawables(null,null,mContext.getDrawable(R.drawable.icon_lucky),null);
         }
-        holder.record_time.setText(new Date(Long.parseLong(listDTO.getExchange_time())*1000).toLocaleString());
         Glide.with(mContext).load(listDTO.getImage().get(0)).into(holder.icon_gift);
         int is_exchange = listDTO.getIs_exchange();
-        if (is_exchange != 0) {
-            if (is_exchange != 1) {
-                if (is_exchange == 2) {
-                    holder.iv_out_date.setImageResource(R.drawable.icon_out_date);
-                    holder.record_time.setText("失效时间: "+new Date(Long.parseLong(listDTO.getExchange_time())*1000).toLocaleString());
-                }
+        int id = Integer.parseInt(listDTO.getId());
+        Log.d("TAG", "onBindViewHolder: "+listDTO);
+        switch (is_exchange){
+            case 0:{
+                holder.cancel_text.setVisibility(View.VISIBLE);
+                holder.iv_out_date.setVisibility(View.GONE);
+                holder.record_time.setText(new Date(listDTO.getCreate_time()*1000).toLocaleString());
+                holder.cancel_text.setOnClickListener(view -> {
+                    Dialog Dialog = new Dialog(mContext, R.style.CustomDialog);
+                    @SuppressLint("InflateParams") View view1 = LayoutInflater.from(mContext).inflate(
+                            R.layout.dialog_confirm_center, null);
+                    final TextView title = view1.findViewById(R.id.title);
+                    title.setText("请确认");
+                    final TextView msg = view1.findViewById(R.id.msg);
+                    msg.setText("是否撤销" + listDTO.getName() + "的兑换?");
+                    final Button ok = view1.findViewById(R.id.ok);
+                    ok.setOnClickListener(view2 -> {
+                        BackendUtils.cancelGiftExchange(mContext,id);
+                        Dialog.dismiss();
+                    });
+                    final Button cancel = view1.findViewById(R.id.cancel);
+                    cancel.setOnClickListener(view12 -> Dialog.dismiss());
+                    Window window = Dialog.getWindow();
+                    window.setContentView(view1);
+                    window.setGravity(Gravity.CENTER);
+                    window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT,
+                            android.view.WindowManager.LayoutParams.WRAP_CONTENT);
+                    Dialog.setCanceledOnTouchOutside(false);
+                    WindowManager.LayoutParams lp = ((ExchangeRecordActivity)mContext).getWindow().getAttributes();
+                    lp.alpha = 0.5f;
+                    ((ExchangeRecordActivity)mContext).getWindow().setAttributes(lp);
+                    Dialog.setOnDismissListener(dialogInterface -> {
+                        WindowManager.LayoutParams lp1 = ((ExchangeRecordActivity)mContext).getWindow().getAttributes();
+                        lp1.alpha = 1f;
+                        ((ExchangeRecordActivity)mContext).getWindow().setAttributes(lp1);
+                    });
+                    Dialog.show();
+                });
+                break;
             }
-            else {
+            case 2:{
+                holder.cancel_text.setVisibility(View.GONE);
+                holder.iv_out_date.setVisibility(View.VISIBLE);
+                holder.iv_out_date.setImageResource(R.drawable.icon_out_date);
+                holder.cancel_text.setOnClickListener(null);
+                holder.record_time.setText(new Date(listDTO.getEnd_time()*1000).toLocaleString());
+                break;
+            }
+            case 3:{
+                holder.cancel_text.setVisibility(View.GONE);
+                holder.iv_out_date.setVisibility(View.VISIBLE);
                 holder.iv_out_date.setImageResource(R.drawable.mark_gift_exchange_receive);
-                holder.record_time.setText("兑换日期: "+new Date(Long.parseLong(listDTO.getExchange_time())*1000).toLocaleString());
+                holder.cancel_text.setOnClickListener(null);
+                holder.record_time.setText(new Date(listDTO.getExchange_time()*1000).toLocaleString());
+                break;
+            }
+            case 4:{
+                holder.cancel_text.setVisibility(View.GONE);
+                holder.iv_out_date.setVisibility(View.VISIBLE);
+                holder.iv_out_date.setImageResource(R.drawable.icon_gift_exchange_undo);
+                holder.cancel_text.setOnClickListener(null);
+                holder.record_time.setText(new Date(listDTO.getExchange_time()*1000).toLocaleString());
+                break;
+            }
+            default:{
+                //俺也不知道is_exchange为1时这该显示啥
+                break;
             }
         }
     }
@@ -93,6 +157,7 @@ public class ExchangeRecordAdapter extends RecyclerView.Adapter<ExchangeRecordAd
         TextView gift_name;
         TextView record_time;
         ImageView iv_out_date;
+        TextView cancel_text;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -100,6 +165,7 @@ public class ExchangeRecordAdapter extends RecyclerView.Adapter<ExchangeRecordAd
             this.gift_name = itemView.findViewById(R.id.gift_name);
             this.record_time = itemView.findViewById(R.id.record_time);
             this.iv_out_date = itemView.findViewById(R.id.iv_out_date);
+            this.cancel_text = itemView.findViewById(R.id.cancel_text);
         }
     }
 }

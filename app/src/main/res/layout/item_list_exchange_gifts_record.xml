@@ -15,6 +15,17 @@
         android:layout_marginEnd="43.0dip"
         tools:ignore="ContentDescription" />
 
+    <TextView
+        android:id="@id/cancel_text"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="43.0dip"
+        android:textColor="@color/main_theme_color"
+        android:text="@string/cancel_exchange"/>
+
     <LinearLayout
         android:id="@id/container"
         android:layout_width="fill_parent"
