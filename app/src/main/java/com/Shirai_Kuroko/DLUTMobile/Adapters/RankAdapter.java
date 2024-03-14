@@ -67,6 +67,10 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
         if(mDatas.get(position).getHead().length()>4)
         {
             Glide.with(mContext).load(mDatas.get(position).getHead()).into(holder.user_head);
+        }else {
+            @SuppressLint("UseCompatLoadingForDrawables")
+            Drawable drawable = mContext.getResources().getDrawable(R.drawable.icon_school_card_head_pic);
+            holder.user_head.setImageDrawable(drawable);
         }
         holder.tv_top.setText(String.valueOf(position+1));
     }
