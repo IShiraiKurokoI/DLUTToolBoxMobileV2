@@ -1435,9 +1435,7 @@ public class BackendUtils {
                     @Override
                     public void onFailure(@NonNull Call call, @NonNull IOException e) {
                         Log.e("后端交互日志 上传失败", "", e);
-                        handler.post(() -> {
-                            Toast.makeText(context, "头像上传出错！", Toast.LENGTH_SHORT).show();
-                        });
+                        handler.post(() -> Toast.makeText(context, "头像上传出错！", Toast.LENGTH_SHORT).show());
                     }
 
                     @Override
@@ -1465,9 +1463,7 @@ public class BackendUtils {
                 });
             } catch (Exception e) {
                 Log.e("后端交互日志 上传失败", "", e);
-                handler.post(() -> {
-                    Toast.makeText(context, "头像上传出错！", Toast.LENGTH_SHORT).show();
-                });
+                handler.post(() -> Toast.makeText(context, "头像上传出错！", Toast.LENGTH_SHORT).show());
             }
         }).start();
     }
@@ -1530,7 +1526,6 @@ public class BackendUtils {
                         }
                     }
                 });
-                Response response;
             } catch (Exception e) {
                 Log.e("后端交互日志 上传失败", "", e);
                 Toast.makeText(uploadImageCommand.proxy.context, "出现错误" + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -2350,10 +2345,6 @@ public class BackendUtils {
                 Log.i("后端交互日志 消息内容返回", ResponseBody);
                 LogToFile.i("后端交互日志 消息内容返回", ResponseBody);
                 String result = ResponseBody;
-                if (result == null) {
-                    GetMsgNewDetailInfo(context, msgid);
-                    return;
-                }
                 if (result.contains("verify failed")) {
                     GetMsgNewDetailInfo(context, msgid);
                 } else {
