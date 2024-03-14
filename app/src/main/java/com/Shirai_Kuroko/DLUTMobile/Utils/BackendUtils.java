@@ -223,7 +223,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=userLoginCas&phone_type=" + GetDeviceName() + "&verfiy_image_code=&app_version=" + GetwhistleVersion() + "&stu_identity=&os_version=10&device_type=android&equipment_type=phone&client_id=" + PushManager.getInstance().getClientid(context) + "&platform=android&uid=0&password=" + PasswordEncoded + "&student_number=" + Username + "&school=dlut&identity=&equipment_id=null&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -240,19 +240,19 @@ public class BackendUtils {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                             if (ResponseBody.contains("{\"ret\":-1,\"")) {
                                 handler.post(() -> {
                                     Toast.makeText(context, "认证失败，请重新登录", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(context, LoginActivity.class);
                                     context.startActivity(intent);
-                                    Log.i("后端交互日志", "登录失败返回" + ResponseBody);
-                                    LogToFile.i("后端交互日志", "登录失败返回" + ResponseBody);
+                                    Log.d("后端交互日志", "登录失败返回" + ResponseBody);
+                                    LogToFile.d("后端交互日志", "登录失败返回" + ResponseBody);
                                 });
                             } else {
                                 handler.post(() -> {
-                                    Log.i("后端交互日志", "登录成功返回" + ResponseBody);
-                                    LogToFile.i("后端交互日志", "登录成功返回" + ResponseBody);
+                                    Log.d("后端交互日志", "登录成功返回" + ResponseBody);
+                                    LogToFile.d("后端交互日志", "登录成功返回" + ResponseBody);
                                     Toast.makeText(context, "登陆成功", Toast.LENGTH_SHORT).show();
                                     ConfigHelper.SaveLoginResultToPref(ResponseBody, context);
                                     RefreshNotice(context);
@@ -264,14 +264,14 @@ public class BackendUtils {
                         String ResponseBody;
                         if (response.body() != null) {
                             ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                             String finalResponseBody = ResponseBody;
                             handler.post(() -> {
                                 Toast.makeText(context, "认证失败，请重新登录", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(context, LoginActivity.class);
                                 context.startActivity(intent);
-                                Log.i("后端交互日志", "登录失败返回" + finalResponseBody);
-                                LogToFile.i("后端交互日志", "登录失败返回" + finalResponseBody);
+                                Log.d("后端交互日志", "登录失败返回" + finalResponseBody);
+                                LogToFile.d("后端交互日志", "登录失败返回" + finalResponseBody);
                             });
                         }
                     }
@@ -292,8 +292,8 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=userLoginCas&phone_type=" + GetDeviceName() + "&verfiy_image_code=" + URLEncoder.encode(VerifyCode) + "&app_version=" + GetwhistleVersion() + "&stu_identity=&os_version=10&device_type=android&equipment_type=phone&client_id=" + PushManager.getInstance().getClientid(context) + "&platform=android&uid=0&password=" + PasswordEncoded + "&student_number=" + Username + "&school=dlut&identity=&equipment_id=null&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
-            Log.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
+            Log.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -310,15 +310,15 @@ public class BackendUtils {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            Log.i("返回结果", ResponseBody);
-                            LogToFile.i("返回结果", ResponseBody);
+                            Log.d("返回结果", ResponseBody);
+                            LogToFile.d("返回结果", ResponseBody);
                             if (ResponseBody.contains("{\"ret\":-1,\"")) {
                                 handler.post(() -> {
                                     ResponseErrorBean responseErrorBean = JSON.parseObject(ResponseBody, ResponseErrorBean.class);
                                     Toast.makeText(context, responseErrorBean.getErrmsg(), Toast.LENGTH_LONG).show();
                                     if (!Objects.equals(responseErrorBean.getData().getImage(), "")) {
-                                        Log.i("后端交互日志", "需要验证码" + responseErrorBean.getData().getImage());
-                                        LogToFile.i("后端交互日志", "需要验证码" + responseErrorBean.getData().getImage());
+                                        Log.d("后端交互日志", "需要验证码" + responseErrorBean.getData().getImage());
+                                        LogToFile.d("后端交互日志", "需要验证码" + responseErrorBean.getData().getImage());
                                         Dialog dialog = new Dialog(context, R.style.CustomDialog);
                                         @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(
                                                 R.layout.dialog_identify_code, null);
@@ -375,17 +375,17 @@ public class BackendUtils {
                         String ResponseBody = null;
                         if (response.body() != null) {
                             ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                         }
-                        Log.i("后端交互日志", "登陆失败" + ResponseBody);
-                        LogToFile.i("后端交互日志", "登陆失败" + ResponseBody);
+                        Log.d("后端交互日志", "登陆失败" + ResponseBody);
+                        LogToFile.d("后端交互日志", "登陆失败" + ResponseBody);
                         String finalResponseBody = ResponseBody;
                         handler.post(() -> {
                             ResponseErrorBean responseErrorBean = JSON.parseObject(finalResponseBody, ResponseErrorBean.class);
                             Toast.makeText(context, Objects.requireNonNull(responseErrorBean).getErrmsg(), Toast.LENGTH_LONG).show();
                             if (!Objects.equals(responseErrorBean.getData().getImage(), "")) {
-                                Log.i("后端交互日志", "需要验证码" + responseErrorBean.getData().getImage());
-                                LogToFile.i("后端交互日志", "需要验证码" + responseErrorBean.getData().getImage());
+                                Log.d("后端交互日志", "需要验证码" + responseErrorBean.getData().getImage());
+                                LogToFile.d("后端交互日志", "需要验证码" + responseErrorBean.getData().getImage());
                                 Dialog dialog = new Dialog(context, R.style.CustomDialog);
                                 @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(
                                         R.layout.dialog_identify_code, null);
@@ -459,7 +459,7 @@ public class BackendUtils {
                     .header("Cookie2", "$Version=1")
                     .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), PostBody))
                     .build();//创建Request 对象
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -476,7 +476,7 @@ public class BackendUtils {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("刷新验证码请求返回", ResponseBody);
+                            LogToFile.d("刷新验证码请求返回", ResponseBody);
                             CodeRefreshResult codeRefreshResult = JSON.parseObject(ResponseBody, CodeRefreshResult.class);
                             if (codeRefreshResult.getRet() == 0 && !Objects.equals(codeRefreshResult.getData().getImage(), "")) {
                                 handler.post(() -> {
@@ -535,7 +535,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=getUserInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&otheraid=" + infoDTO.getUser_id() + "&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -549,7 +549,7 @@ public class BackendUtils {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                             if (ResponseBody.contains("{\"ret\":-1,\"")) {
                                 handler.post(() -> {
                                     if (ResponseBody.contains("verify failed")) {
@@ -562,8 +562,8 @@ public class BackendUtils {
                                             Toast.makeText(context, ResponseBody.split("\"errmsg\":\"")[1].split("\"")[0], Toast.LENGTH_SHORT).show();
                                         }
                                     }
-                                    Log.i("后端交互日志", "刷新用户数据失败" + ResponseBody);
-                                    LogToFile.i("后端交互日志", "刷新用户数据失败" + ResponseBody);
+                                    Log.d("后端交互日志", "刷新用户数据失败" + ResponseBody);
+                                    LogToFile.d("后端交互日志", "刷新用户数据失败" + ResponseBody);
                                 });
                             } else {
                                 handler.post(() -> {
@@ -604,8 +604,8 @@ public class BackendUtils {
                                             loginResponseBean.getData().getMy_info().setExpires_skey(Expires_skey);
                                         }
                                         ConfigHelper.SaveLoginResultToPref(JSON.toJSONString(loginResponseBean), context);
-                                        Log.i("后端交互日志", "刷新用户数据成功");
-                                        LogToFile.i("后端交互日志", "刷新用户数据成功");
+                                        Log.d("后端交互日志", "刷新用户数据成功");
+                                        LogToFile.d("后端交互日志", "刷新用户数据成功");
                                         CheckTGT(context);
                                     }
                                 });
@@ -615,10 +615,10 @@ public class BackendUtils {
                         String ResponseBody = null;
                         if (response.body() != null) {
                             ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                         }
-                        Log.i("后端交互日志", "刷新失败");
-                        LogToFile.i("后端交互日志", "刷新失败");
+                        Log.d("后端交互日志", "刷新失败");
+                        LogToFile.d("后端交互日志", "刷新失败");
                         String finalResponseBody = ResponseBody;
                         handler.post(() -> {
                             if (finalResponseBody != null) {
@@ -650,14 +650,14 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=setClientId&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&client_id=" + ClientID + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
                     handler.post(() -> {
                         SetClientID(context, ClientID);
-                        Log.i("后端交互日志", "设置个推客户端ID失败" + e.getLocalizedMessage());
-                        LogToFile.i("后端交互日志", "设置个推客户端ID失败" + e.getLocalizedMessage());
+                        Log.d("后端交互日志", "设置个推客户端ID失败" + e.getLocalizedMessage());
+                        LogToFile.d("后端交互日志", "设置个推客户端ID失败" + e.getLocalizedMessage());
                     });
                     e.printStackTrace();
                     LogToFile.e("错误", e.toString());
@@ -668,13 +668,13 @@ public class BackendUtils {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                             handler.post(() -> {
                                 if (ResponseBody.contains("verify failed")) {
                                     SetClientID(context, ClientID);
                                 } else {
-                                    Log.i("后端交互日志", "设置个推客户端ID成功");
-                                    LogToFile.i("后端交互日志", "设置个推客户端ID成功");
+                                    Log.d("后端交互日志", "设置个推客户端ID成功");
+                                    LogToFile.d("后端交互日志", "设置个推客户端ID成功");
                                 }
                             });
                         }
@@ -682,13 +682,13 @@ public class BackendUtils {
                         String ResponseBody = null;
                         if (response.body() != null) {
                             ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                         }
                         String finalResponseBody = ResponseBody;
                         handler.post(() -> {
                             SetClientID(context, ClientID);
-                            Log.i("后端交互日志", "设置个推客户端ID失败" + finalResponseBody);
-                            LogToFile.i("后端交互日志", "设置个推客户端ID失败" + finalResponseBody);
+                            Log.d("后端交互日志", "设置个推客户端ID失败" + finalResponseBody);
+                            LogToFile.d("后端交互日志", "设置个推客户端ID失败" + finalResponseBody);
                         });
                     }
                 }
@@ -715,7 +715,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=getGallery&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -729,7 +729,7 @@ public class BackendUtils {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                             handler.post(() -> {
                                 if (!ResponseBody.contains("verify failed")) {
                                     List<ADBannerBean> Gallery = new ArrayList<>();
@@ -744,8 +744,8 @@ public class BackendUtils {
                                     prefs.edit().putString("GalleryCache", JSON.toJSONString(Gallery)).apply();
                                     LocalDate date = LocalDate.now();
                                     prefs.edit().putString("GalleryCacheDate", date.toString()).apply();
-                                    Log.i("后端交互日志 获取轮播数据成功", ResponseBody);
-                                    LogToFile.i("后端交互日志 获取轮播数据成功", ResponseBody);
+                                    Log.d("后端交互日志 获取轮播数据成功", ResponseBody);
+                                    LogToFile.d("后端交互日志 获取轮播数据成功", ResponseBody);
                                 }
                             });
                         }
@@ -753,10 +753,10 @@ public class BackendUtils {
                         String ResponseBody = null;
                         if (response.body() != null) {
                             ResponseBody = response.body().string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                         }
-                        Log.i("后端交互日志 轮播数据获取失败", ResponseBody);
-                        LogToFile.i("后端交互日志 轮播数据获取失败", ResponseBody);
+                        Log.d("后端交互日志 轮播数据获取失败", ResponseBody);
+                        LogToFile.d("后端交互日志 轮播数据获取失败", ResponseBody);
                         handler.post(() -> GetGallery(context, banner));
                     }
                 }
@@ -782,7 +782,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=snapShot&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -796,14 +796,14 @@ public class BackendUtils {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                             handler.post(() -> {
                                 if (!ResponseBody.contains("verify failed")) {
                                     ConfigHelper.SaveUserScoreBean(context, ResponseBody);
-                                    Log.i("后端交互日志", "获取分数数据成功");
-                                    LogToFile.i("后端交互日志", "获取分数数据成功");
-                                    Log.i("后端交互日志", "启动初始化完成");
-                                    LogToFile.i("后端交互日志", "启动初始化完成");
+                                    Log.d("后端交互日志", "获取分数数据成功");
+                                    LogToFile.d("后端交互日志", "获取分数数据成功");
+                                    Log.d("后端交互日志", "启动初始化完成");
+                                    LogToFile.d("后端交互日志", "启动初始化完成");
                                     RefreshNotice(context);
                                     GainScore(context);
                                 }
@@ -813,10 +813,10 @@ public class BackendUtils {
                         String ResponseBody = null;
                         if (response.body() != null) {
                             ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                         }
-                        Log.i("后端交互日志", "分数数据获取失败" + ResponseBody);
-                        LogToFile.i("后端交互日志", "分数数据获取失败" + ResponseBody);
+                        Log.d("后端交互日志", "分数数据获取失败" + ResponseBody);
+                        LogToFile.d("后端交互日志", "分数数据获取失败" + ResponseBody);
                         handler.post(() -> GetScore(context));
                     }
                 }
@@ -838,7 +838,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=snapShot&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -852,11 +852,11 @@ public class BackendUtils {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                             handler.post(() -> {
                                 if (!ResponseBody.contains("verify failed")) {
-                                    Log.i("后端交互日志 获取分数数据成功", ResponseBody);
-                                    LogToFile.i("后端交互日志 获取分数数据成功", ResponseBody);
+                                    Log.d("后端交互日志 获取分数数据成功", ResponseBody);
+                                    LogToFile.d("后端交互日志 获取分数数据成功", ResponseBody);
                                     ConfigHelper.SaveUserScoreBean(context, ResponseBody);
                                     MobileUtils.GetScore(context, Score);
                                 }
@@ -866,10 +866,10 @@ public class BackendUtils {
                         String ResponseBody = null;
                         if (response.body() != null) {
                             ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                         }
-                        Log.i("后端交互日志 分数数据获取失败", ResponseBody);
-                        LogToFile.i("后端交互日志 分数数据获取失败", ResponseBody);
+                        Log.d("后端交互日志 分数数据获取失败", ResponseBody);
+                        LogToFile.d("后端交互日志 分数数据获取失败", ResponseBody);
                         handler.post(() -> GetScore(context, Score));
                     }
                 }
@@ -891,7 +891,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=snapShot&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -905,7 +905,7 @@ public class BackendUtils {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                             if (ResponseBody.contains("verify failed")) {
                                 handler.post(() -> {
                                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -921,8 +921,8 @@ public class BackendUtils {
                                 });
                             } else {
                                 handler.post(() -> {
-                                    Log.i("后端交互日志 获取分数数据成功", ResponseBody);
-                                    LogToFile.i("后端交互日志 获取分数数据成功", ResponseBody);
+                                    Log.d("后端交互日志 获取分数数据成功", ResponseBody);
+                                    LogToFile.d("后端交互日志 获取分数数据成功", ResponseBody);
                                     ConfigHelper.SaveUserScoreBean(context, ResponseBody);
                                     UserScoreBean userScoreBean = ConfigHelper.GetUserScoreBean(context);
                                     Score.setText(String.valueOf(userScoreBean.getData().getUser_points()));
@@ -936,10 +936,10 @@ public class BackendUtils {
                         String ResponseBody = null;
                         if (response.body() != null) {
                             ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                         }
-                        Log.i("后端交互日志 分数数据获取失败", ResponseBody);
-                        LogToFile.i("后端交互日志 分数数据获取失败", ResponseBody);
+                        Log.d("后端交互日志 分数数据获取失败", ResponseBody);
+                        LogToFile.d("后端交互日志 分数数据获取失败", ResponseBody);
                         handler.post(() -> GetScore(context, Score, Rank, Income, Outcome));
                     }
                 }
@@ -960,7 +960,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=QRCode&a=generateTimeLimitedStr&uid=0&student_number=" + (infoDTO != null ? infoDTO.getStudentNumber() : null) + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + (UserBean != null ? UserBean.getData().getVerify().replace(":", "%3A") : null) + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&ver_type=myCard&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -974,8 +974,8 @@ public class BackendUtils {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            Log.i("后端交互日志 二维码数据返回", ResponseBody);
-                            LogToFile.i("后端交互日志 二维码数据返回", ResponseBody);
+                            Log.d("后端交互日志 二维码数据返回", ResponseBody);
+                            LogToFile.d("后端交互日志 二维码数据返回", ResponseBody);
                             if (ResponseBody.contains("verify failed")) {
                                 handler.post(() -> {
                                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -1002,10 +1002,10 @@ public class BackendUtils {
                         String ResponseBody = null;
                         if (response.body() != null) {
                             ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                         }
-                        Log.i("后端交互日志 二维码数据获取失败", ResponseBody);
-                        LogToFile.i("后端交互日志 二维码数据获取失败", ResponseBody);
+                        Log.d("后端交互日志 二维码数据获取失败", ResponseBody);
+                        LogToFile.d("后端交互日志 二维码数据获取失败", ResponseBody);
                         handler.post(() -> LoadQRCode(context, imageView));
                     }
                 }
@@ -1031,7 +1031,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=reSendMsgInfo&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&client_id=" + PushManager.getInstance().getClientid(context) + "&platform=android&uid=0&is_load_idphoto=1&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -1045,8 +1045,8 @@ public class BackendUtils {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            Log.i("后端交互日志 证件照数据返回", ResponseBody);
-                            LogToFile.i("后端交互日志 证件照数据返回", ResponseBody);
+                            Log.d("后端交互日志 证件照数据返回", ResponseBody);
+                            LogToFile.d("后端交互日志 证件照数据返回", ResponseBody);
                             if (ResponseBody.contains("verify failed")) {
                                 handler.post(() -> {
                                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -1094,10 +1094,10 @@ public class BackendUtils {
                         String ResponseBody = null;
                         if (response.body() != null) {
                             ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                         }
-                        Log.i("后端交互日志 证件照数据获取失败", ResponseBody);
-                        LogToFile.i("后端交互日志 证件照数据获取失败", ResponseBody);
+                        Log.d("后端交互日志 证件照数据获取失败", ResponseBody);
+                        LogToFile.d("后端交互日志 证件照数据获取失败", ResponseBody);
                         handler.post(() -> LoadIDPhoto(context, imageView));
                     }
                 }
@@ -1123,7 +1123,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=reSendMsgInfo&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&client_id=" + PushManager.getInstance().getClientid(context) + "&platform=android&uid=0&is_load_idphoto=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -1136,8 +1136,8 @@ public class BackendUtils {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            Log.i("后端交互日志", "通知刷新数据返回 " + ResponseBody);
-                            LogToFile.i("后端交互日志", "通知刷新数据返回 " + ResponseBody);
+                            Log.d("后端交互日志", "通知刷新数据返回 " + ResponseBody);
+                            LogToFile.d("后端交互日志", "通知刷新数据返回 " + ResponseBody);
                             if (!ResponseBody.contains("verify failed")) {
                                 handler.post(() -> {
                                     MsgResult msgResult = JSON.parseObject(ResponseBody, MsgResult.class);
@@ -1185,7 +1185,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=setUserInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&param=%7B%22nick_name%22%3A%22" + URLEncoder.encode(NewNickName) + "%22%7D&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -1199,8 +1199,8 @@ public class BackendUtils {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            Log.i("后端交互日志 昵称修改返回", ResponseBody);
-                            LogToFile.i("后端交互日志 昵称修改返回", ResponseBody);
+                            Log.d("后端交互日志 昵称修改返回", ResponseBody);
+                            LogToFile.d("后端交互日志 昵称修改返回", ResponseBody);
                             if (ResponseBody.contains("verify failed")) {
                                 handler.post(() -> {
                                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -1231,10 +1231,10 @@ public class BackendUtils {
                         String ResponseBody = null;
                         if (response.body() != null) {
                             ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                         }
-                        Log.i("后端交互日志 昵称修改失败", ResponseBody);
-                        LogToFile.i("后端交互日志 昵称修改失败", ResponseBody);
+                        Log.d("后端交互日志 昵称修改失败", ResponseBody);
+                        LogToFile.d("后端交互日志 昵称修改失败", ResponseBody);
                         handler.post(() -> ChangeNickName(context, NewNickName, textView));
                     }
                 }
@@ -1278,11 +1278,11 @@ public class BackendUtils {
                 .header("Cookie2", "$Version=1")
                 .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), requestbodystring))
                 .build();//创建Request 对象
-        LogToFile.i("请求方法体", request.toString());
+        LogToFile.d("请求方法体", request.toString());
         Response response;
         try {
             response = client.newCall(request).execute();
-            LogToFile.i("请求返回", response.toString());
+            LogToFile.d("请求返回", response.toString());
             return response;
         } catch (Exception e) {
             return null;
@@ -1309,11 +1309,11 @@ public class BackendUtils {
         Request request = new Request.Builder()
                 .url(url)
                 .build();//创建Request 对象
-        LogToFile.i("请求方法体", request.toString());
+        LogToFile.d("请求方法体", request.toString());
         Response response;
         try {
             response = client.newCall(request).execute();
-            LogToFile.i("请求返回", response.toString());
+            LogToFile.d("请求返回", response.toString());
             return response;
         } catch (Exception e) {
             return null;
@@ -1338,7 +1338,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=checkCasService&app_version=" + GetwhistleVersion() + "&tgtinfo=" + URLEncoder.encode(JSON.toJSONString(UserBean.getData().getTgtinfo())) + "&stu_identity=&device_type=android&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&pword=" + (UserBean.getData() != null ? UserBean.getData().getPword() : null) + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -1352,7 +1352,7 @@ public class BackendUtils {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                             if (ResponseBody.contains("verify failed")) {
                                 handler.post(() -> {
                                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -1371,8 +1371,8 @@ public class BackendUtils {
                                     TGTRefreshResult tgtRefreshResult = JSON.parseObject(ResponseBody, TGTRefreshResult.class);
                                     TGTRefreshResult.DataDTO dataDTO = tgtRefreshResult.getData();
                                     if (dataDTO == null) {
-                                        Log.i("后端交互日志", "TGT刷新失败,数据为空");
-                                        LogToFile.i("后端交互日志", "TGT刷新失败,数据为空");
+                                        Log.d("后端交互日志", "TGT刷新失败,数据为空");
+                                        LogToFile.d("后端交互日志", "TGT刷新失败,数据为空");
                                     } else {
                                         String USER_FIRST_LOGIN = dataDTO.getUSER_FIRST_LOGIN();
                                         String cas_IS_EXPIRED_PWD = dataDTO.getCas_IS_EXPIRED_PWD();
@@ -1384,11 +1384,11 @@ public class BackendUtils {
                                         loginResponseBean.getData().setUSER_FIRST_LOGIN(USER_FIRST_LOGIN);
                                         loginResponseBean.getData().setCas_IS_EXPIRED_PWD(cas_IS_EXPIRED_PWD);
                                         ConfigHelper.SaveLoginResultToPref(JSON.toJSONString(loginResponseBean), context);
-                                        Log.i("后端交互日志", "TGT刷新成功");
-                                        LogToFile.i("后端交互日志", "TGT刷新成功");
+                                        Log.d("后端交互日志", "TGT刷新成功");
+                                        LogToFile.d("后端交互日志", "TGT刷新成功");
                                         if (ResponseBody.contains("\"ret\":-1,")) {
-                                            Log.i("后端交互日志", "密码错误,重新登陆");
-                                            LogToFile.i("后端交互日志", "密码错误,重新登陆");
+                                            Log.d("后端交互日志", "密码错误,重新登陆");
+                                            LogToFile.d("后端交互日志", "密码错误,重新登陆");
                                             Toast.makeText(context, "请重新登录", Toast.LENGTH_LONG).show();
                                             Intent intent = new Intent(context, LoginActivity.class);
                                             context.startActivity(intent);
@@ -1403,10 +1403,10 @@ public class BackendUtils {
                         String ResponseBody = null;
                         if (response.body() != null) {
                             ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.i("请求返回", ResponseBody);
+                            LogToFile.d("请求返回", ResponseBody);
                         }
-                        Log.i("后端交互日志", "TGT刷新失败" + ResponseBody);
-                        LogToFile.i("后端交互日志", "TGT刷新失败" + ResponseBody);
+                        Log.d("后端交互日志", "TGT刷新失败" + ResponseBody);
+                        LogToFile.d("后端交互日志", "TGT刷新失败" + ResponseBody);
                         handler.post(() -> CheckTGT(context));
                     }
                 }
@@ -1415,8 +1415,8 @@ public class BackendUtils {
     }
 
     public static void UploadNewHead(Context context, ImageView head, String HeadPath) {
-        Log.i("后端交互日志 要上传的头像路径", HeadPath);
-        LogToFile.i("后端交互日志 要上传的头像路径", HeadPath);
+        Log.d("后端交互日志 要上传的头像路径", HeadPath);
+        LogToFile.d("后端交互日志 要上传的头像路径", HeadPath);
         Toast.makeText(context, "正在上传头像", Toast.LENGTH_SHORT).show();
         Handler handler = new Handler(Looper.getMainLooper());
         new Thread(() -> {
@@ -1442,8 +1442,8 @@ public class BackendUtils {
                     public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                         String result = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
                         if (response.isSuccessful()) {
-                            Log.i("后端交互日志 上传成功", result);
-                            LogToFile.i("后端交互日志 上传成功", result);
+                            Log.d("后端交互日志 上传成功", result);
+                            LogToFile.d("后端交互日志 上传成功", result);
                             handler.post(() -> {
                                 HeadUploadResult headUploadResult = JSON.parseObject(result, HeadUploadResult.class);
                                 String Headurl = null;
@@ -1451,13 +1451,13 @@ public class BackendUtils {
                                     Headurl = headUploadResult.getUri();
                                 }
                                 Headurl = "https://store.m.dlut.edu.cn" + Headurl;
-                                Log.i("后端交互日志 头像地址", Headurl);
-                                LogToFile.i("后端交互日志 头像地址", Headurl);
+                                Log.d("后端交互日志 头像地址", Headurl);
+                                LogToFile.d("后端交互日志 头像地址", Headurl);
                                 SetNewHead(context, Headurl, head);
                             });
                         } else {
-                            Log.i("后端交互日志 上传失败", result);
-                            LogToFile.i("后端交互日志 上传失败", result);
+                            Log.d("后端交互日志 上传失败", result);
+                            LogToFile.d("后端交互日志 上传失败", result);
                         }
                     }
                 });
@@ -1469,8 +1469,8 @@ public class BackendUtils {
     }
 
     public static void UploadImage(String Path, UploadImageCommand uploadImageCommand) {
-        Log.i("后端交互日志 要上传的图片路径", Path);
-        LogToFile.i("后端交互日志 要上传的图片路径", Path);
+        Log.d("后端交互日志 要上传的图片路径", Path);
+        LogToFile.d("后端交互日志 要上传的图片路径", Path);
         Handler handler = new Handler(Looper.getMainLooper());
         new Thread(() -> {
             try {
@@ -1498,8 +1498,8 @@ public class BackendUtils {
                         String result = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
                         if (result != null) {
                             if (response.isSuccessful() && result.contains("\"error\":0")) {
-                                Log.i("后端交互日志 上传成功", result);
-                                LogToFile.i("后端交互日志 上传成功", result);
+                                Log.d("后端交互日志 上传成功", result);
+                                LogToFile.d("后端交互日志 上传成功", result);
                                 handler.post(() -> {
                                     FileResponseBean fileResponseBean = JSON.parseObject(result, FileResponseBean.class);
                                     final String string = "https://store.m.dlut.edu.cn" +
@@ -1517,8 +1517,8 @@ public class BackendUtils {
                                     uploadImageCommand.sendSucceedResult(jsonObject);
                                 });
                             } else {
-                                Log.i("后端交互日志 上传失败", result);
-                                LogToFile.i("后端交互日志 上传失败", result);
+                                Log.d("后端交互日志 上传失败", result);
+                                LogToFile.d("后端交互日志 上传失败", result);
                                 handler.post(uploadImageCommand::sendCancelResult);
                             }
                         } else {
@@ -1554,7 +1554,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=setUserInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&param=%7B%22photo_live%22%3A%22" + URLEncoder.encode(HeadUrl.replace("/", "\\/")) + "%22%7D&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -1568,8 +1568,8 @@ public class BackendUtils {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            Log.i("后端交互日志 头像设置返回", ResponseBody);
-                            LogToFile.i("后端交互日志 头像设置返回", ResponseBody);
+                            Log.d("后端交互日志 头像设置返回", ResponseBody);
+                            LogToFile.d("后端交互日志 头像设置返回", ResponseBody);
                             if (ResponseBody.contains("verify failed")) {
                                 handler.post(() -> {
                                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -1603,8 +1603,8 @@ public class BackendUtils {
                         if (response.body() != null) {
                             ResponseBody = Objects.requireNonNull(response.body()).string();
                         }
-                        Log.i("后端交互日志 头像设置失败", ResponseBody);
-                        LogToFile.i("后端交互日志 头像设置失败", ResponseBody);
+                        Log.d("后端交互日志 头像设置失败", ResponseBody);
+                        LogToFile.d("后端交互日志 头像设置失败", ResponseBody);
                         handler.post(() -> SetNewHead(context, HeadUrl, head));
                     }
                 }
@@ -1639,7 +1639,7 @@ public class BackendUtils {
                 .url("https://service.m.dlut.edu.cn/whistlenew/index.php?m=statistics&a=setFunInfo")
                 .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), requestbodystring))
                 .build();
-        LogToFile.i("请求方法体", request.toString());
+        LogToFile.d("请求方法体", request.toString());
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -1649,8 +1649,8 @@ public class BackendUtils {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 String result = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
-                Log.i("后端交互日志 每日登录返回", result);
-                LogToFile.i("后端交互日志 每日登录返回", result);
+                Log.d("后端交互日志 每日登录返回", result);
+                LogToFile.d("后端交互日志 每日登录返回", result);
             }
         });
     }
@@ -1675,8 +1675,8 @@ public class BackendUtils {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 String ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
-                Log.i("后端交互日志 APP使用返回", ResponseBody);
-                LogToFile.i("后端交互日志 APP使用返回", ResponseBody);
+                Log.d("后端交互日志 APP使用返回", ResponseBody);
+                LogToFile.d("后端交互日志 APP使用返回", ResponseBody);
             }
         });
     }
@@ -1695,7 +1695,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=comment&a=add&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&platform=android&score=" + String.valueOf(score) + "&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&verify=" + URLEncoder.encode(UserBean.getData().getVerify()) + "&comment=" + URLEncoder.encode(comment) + "&app_id=" + appid + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -1718,7 +1718,7 @@ public class BackendUtils {
                         if (finalResponseBody != null && !finalResponseBody.contains("verify failed")) {
                             ScoreFunResultbean scoreFunResultbean = JSON.parseObject(finalResponseBody, ScoreFunResultbean.class);
                             if (scoreFunResultbean.getRet() != -1) {
-                                LogToFile.i("应用评论", finalResponseBody);
+                                LogToFile.d("应用评论", finalResponseBody);
                                 if (scoreFunResultbean.getData().getAdd_score() != -1) {
                                     CenterToast.makeText(context, "添加评论成功！\n积分+" + scoreFunResultbean.getData().getAdd_score() + "\n现有积分：" + scoreFunResultbean.getData().getSum(), Toast.LENGTH_LONG).show();
                                     BackendUtils.GetScore(context);
@@ -1757,8 +1757,8 @@ public class BackendUtils {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 String ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
-                Log.i("后端交互日志 添加返回", ResponseBody);
-                LogToFile.i("后端交互日志 添加返回", ResponseBody);
+                Log.d("后端交互日志 添加返回", ResponseBody);
+                LogToFile.d("后端交互日志 添加返回", ResponseBody);
             }
         });
     }
@@ -1783,8 +1783,8 @@ public class BackendUtils {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 String ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
-                Log.i("后端交互日志 移除返回", ResponseBody);
-                LogToFile.i("后端交互日志 移除返回", ResponseBody);
+                Log.d("后端交互日志 移除返回", ResponseBody);
+                LogToFile.d("后端交互日志 移除返回", ResponseBody);
             }
         });
     }
@@ -1809,8 +1809,8 @@ public class BackendUtils {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 String ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
-                Log.i("后端交互日志 分享返回", ResponseBody);
-                LogToFile.i("后端交互日志 分享返回", ResponseBody);
+                Log.d("后端交互日志 分享返回", ResponseBody);
+                LogToFile.d("后端交互日志 分享返回", ResponseBody);
             }
         });
     }
@@ -1851,8 +1851,8 @@ public class BackendUtils {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 String ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
-                Log.i("后端交互日志 添加卡片返回", ResponseBody);
-                LogToFile.i("后端交互日志 添加卡片返回", ResponseBody);
+                Log.d("后端交互日志 添加卡片返回", ResponseBody);
+                LogToFile.d("后端交互日志 添加卡片返回", ResponseBody);
             }
         });
     }
@@ -1893,8 +1893,8 @@ public class BackendUtils {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 String ResponseBody = response.body() != null ? Objects.requireNonNull(response.body()).string() : null;
-                Log.i("后端交互日志 移除卡片返回", ResponseBody);
-                LogToFile.i("后端交互日志 移除卡片返回", ResponseBody);
+                Log.d("后端交互日志 移除卡片返回", ResponseBody);
+                LogToFile.d("后端交互日志 移除卡片返回", ResponseBody);
             }
         });
     }
@@ -1912,7 +1912,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=statistics&a=getSkeyInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -1940,8 +1940,8 @@ public class BackendUtils {
                                     LoginResponseBean loginResponseBean = ConfigHelper.GetUserBean(context);
                                     loginResponseBean.getData().getMy_info().setSkey(skey);
                                     ConfigHelper.SaveLoginResultToPref(JSON.toJSONString(loginResponseBean), context);
-                                    Log.i("后端交互日志", "刷新Skey成功");
-                                    LogToFile.i("后端交互日志", "刷新Skey成功");
+                                    Log.d("后端交互日志", "刷新Skey成功");
+                                    LogToFile.d("后端交互日志", "刷新Skey成功");
                                     GetScore(context);
                                 }
                             }
@@ -1965,7 +1965,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=app&a=detail&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&device_type=android&app_id=" + appid + "&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -2041,7 +2041,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=comment&a=list&offset=0&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&limit=100&verify=" + UserBean.getData().getVerify() + "&device_type=android&app_id=" + appid + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -2134,7 +2134,7 @@ public class BackendUtils {
         }
         String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=getMsgInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&device_type=android&msg_id=" + msgid + "&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
         Request request = CommonGetRequsetBuilder(url);
-        LogToFile.i("请求方法体", request.toString());
+        LogToFile.d("请求方法体", request.toString());
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -2153,8 +2153,8 @@ public class BackendUtils {
                     LogToFile.e("错误", e.toString());
                     return;
                 }
-                Log.i("后端交互日志 消息内容返回", ResponseBody);
-                LogToFile.i("后端交互日志 消息内容返回", ResponseBody);
+                Log.d("后端交互日志 消息内容返回", ResponseBody);
+                LogToFile.d("后端交互日志 消息内容返回", ResponseBody);
                 String result = ResponseBody;
                 if (result == null) {
                     GetMsgDetailInfo(context, msgid);
@@ -2179,11 +2179,11 @@ public class BackendUtils {
                     NotificationHistoryDataBaseBean original = msgHistoryManager.query(msgid);
                     if (original != null) {
                         msgHistoryManager.update(msgid, str, msgInfoResult.getData().getMsg_info().get(0).getApp_id());
-                        Log.i("后端交互日志 获取消息内容", "成功");
-                        LogToFile.i("后端交互日志 获取消息内容", "成功");
+                        Log.d("后端交互日志 获取消息内容", "成功");
+                        LogToFile.d("后端交互日志 获取消息内容", "成功");
                     } else {
-                        Log.i("后端交互日志 获取消息内容", "失败");
-                        LogToFile.i("后端交互日志 获取消息内容", "失败");
+                        Log.d("后端交互日志 获取消息内容", "失败");
+                        LogToFile.d("后端交互日志 获取消息内容", "失败");
                     }
                 }
             }
@@ -2208,8 +2208,8 @@ public class BackendUtils {
             String Nonce = GetHeaderForNonce();
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=parentInviteDebug";
             String PostBody = "stu_identity=" + infoDTO.getIdentity() + "&parent_bind=" + phone + "&device_type=android&type=1&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=student&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
-            Log.i("test", PostBody);
-            LogToFile.i("test", PostBody);
+            Log.d("test", PostBody);
+            LogToFile.d("test", PostBody);
             String Sign = GetHeaderForSign(PostBody, Timestamp, Nonce, a);
             Request request = new Request.Builder()
                     .url(url)
@@ -2224,8 +2224,8 @@ public class BackendUtils {
                     .header("Cookie2", "$Version=1")
                     .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), PostBody))
                     .build();//创建Request 对象
-            LogToFile.i("请求方法体", request.toString());
-            Log.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
+            Log.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -2243,8 +2243,8 @@ public class BackendUtils {
                         LogToFile.e("错误", e.toString());
                         return;
                     }
-                    Log.i("测试内容返回", ResponseBody);
-                    LogToFile.i("测试内容返回", ResponseBody);
+                    Log.d("测试内容返回", ResponseBody);
+                    LogToFile.d("测试内容返回", ResponseBody);
                     handler.post(() -> Toast.makeText(context, ResponseBody, Toast.LENGTH_LONG).show());
                 }
             });
@@ -2269,8 +2269,8 @@ public class BackendUtils {
             String Nonce = GetHeaderForNonce();
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=parentInviteAdd";
             String PostBody = "stu_identity=" + infoDTO.getIdentity() + "&parent_bind=" + phone + "&device_type=android&type=1&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=student&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
-            Log.i("test", PostBody);
-            LogToFile.i("test", PostBody);
+            Log.d("test", PostBody);
+            LogToFile.d("test", PostBody);
             String Sign = GetHeaderForSign(PostBody, Timestamp, Nonce, a);
             Request request = new Request.Builder()
                     .url(url)
@@ -2285,8 +2285,8 @@ public class BackendUtils {
                     .header("Cookie2", "$Version=1")
                     .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), PostBody))
                     .build();//创建Request 对象
-            LogToFile.i("请求方法体", request.toString());
-            Log.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
+            Log.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -2304,8 +2304,8 @@ public class BackendUtils {
                         LogToFile.e("错误", e.toString());
                         return;
                     }
-                    Log.i("测试内容返回", ResponseBody);
-                    LogToFile.i("测试内容返回", ResponseBody);
+                    Log.d("测试内容返回", ResponseBody);
+                    LogToFile.d("测试内容返回", ResponseBody);
                     handler.post(() -> Toast.makeText(context, ResponseBody, Toast.LENGTH_LONG).show());
                 }
             });
@@ -2323,7 +2323,7 @@ public class BackendUtils {
         }
         String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=orginfo&a=getMsgInfo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&device_type=android&msg_id=" + msgid + "&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
         Request request = CommonGetRequsetBuilder(url);
-        LogToFile.i("请求方法体", request.toString());
+        LogToFile.d("请求方法体", request.toString());
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -2342,8 +2342,8 @@ public class BackendUtils {
                     LogToFile.e("错误", e.toString());
                     return;
                 }
-                Log.i("后端交互日志 消息内容返回", ResponseBody);
-                LogToFile.i("后端交互日志 消息内容返回", ResponseBody);
+                Log.d("后端交互日志 消息内容返回", ResponseBody);
+                LogToFile.d("后端交互日志 消息内容返回", ResponseBody);
                 String result = ResponseBody;
                 if (result.contains("verify failed")) {
                     GetMsgNewDetailInfo(context, msgid);
@@ -2400,7 +2400,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=pointRanking&offset=0&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&type=" + type + "&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&limit=30&verify=" + UserBean.getData().getVerify() + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
@@ -2425,14 +2425,14 @@ public class BackendUtils {
                             return;
                         }
                         if (!result.contains("verify failed")) {
-                            Log.i("后端交互日志 分数排名返回", result);
+                            Log.d("后端交互日志 分数排名返回", result);
                             com.Shirai_Kuroko.DLUTMobile.Entities.RankResult rankResult = JSON.parseObject(result, com.Shirai_Kuroko.DLUTMobile.Entities.RankResult.class);
                             List<com.Shirai_Kuroko.DLUTMobile.Entities.RankResult.DataDTO.ListDTO> dtoArrayList = rankResult.getData().getList();
                             handler.post(() -> {
                                 rankAdapter.datarefresh(dtoArrayList);
                                 loadingView.dismiss();
                             });
-                            LogToFile.i("后端交互日志 分数排名返回", result);
+                            LogToFile.d("后端交互日志 分数排名返回", result);
                         }
                     }
                 }
@@ -2454,8 +2454,8 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=getUserPointsDetail&offset=0&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&type=" + type + "&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&limit=100&verify=" + UserBean.getData().getVerify() + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            Log.i("请求方法体", request.toString());
-            LogToFile.i("请求方法体", request.toString());
+            Log.d("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -2485,8 +2485,8 @@ public class BackendUtils {
                             scoreDetailAdapter.datarefresh(dtoArrayList);
                             loadingView.dismiss();
                         });
-                        Log.i("后端交互日志 分数明细返回", JSON.toJSONString(dtoArrayList));
-                        LogToFile.i("后端交互日志 分数明细返回", JSON.toJSONString(dtoArrayList));
+                        Log.d("后端交互日志 分数明细返回", JSON.toJSONString(dtoArrayList));
+                        LogToFile.d("后端交互日志 分数明细返回", JSON.toJSONString(dtoArrayList));
                     }
                 }
             });
@@ -2506,7 +2506,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=exchangeDetail&offset=0&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&type=" + type + "&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&limit=100&verify=" + UserBean.getData().getVerify() + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -2536,8 +2536,8 @@ public class BackendUtils {
                             exchangeRecordAdapter.datarefresh(dtoArrayList);
                             loadingView.dismiss();
                         });
-                        Log.i("后端交互日志 兑换明细返回", JSON.toJSONString(dtoArrayList));
-                        LogToFile.i("后端交互日志 兑换明细返回", JSON.toJSONString(dtoArrayList));
+                        Log.d("后端交互日志 兑换明细返回", JSON.toJSONString(dtoArrayList));
+                        LogToFile.d("后端交互日志 兑换明细返回", JSON.toJSONString(dtoArrayList));
                     }
                 }
             });
@@ -2557,7 +2557,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=getPresentList&offset=0&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&store_type=0&type=0&platform=android&points_range=0&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&limit=100&order_by=1&verify=" + UserBean.getData().getVerify() + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -2586,8 +2586,8 @@ public class BackendUtils {
                                 presentListAdapter.datarefresh(dtoArrayList);
                                 loadingView.dismiss();
                             });
-                            Log.i("后端交互日志 礼物明细返回", JSON.toJSONString(dtoArrayList));
-                            LogToFile.i("后端交互日志 礼物明细返回", JSON.toJSONString(dtoArrayList));
+                            Log.d("后端交互日志 礼物明细返回", JSON.toJSONString(dtoArrayList));
+                            LogToFile.d("后端交互日志 礼物明细返回", JSON.toJSONString(dtoArrayList));
                         }
                     }
                 }
@@ -2608,7 +2608,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=cancelPresentStatus&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&id=" + id + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -2632,8 +2632,8 @@ public class BackendUtils {
                         String result = ResponseBody;
                         if (!result.contains("verify failed")) {
                             ResponseErrorBean responseError = JSON.parseObject(result,ResponseErrorBean.class);
-                            Log.i("后端交互日志 取消兑换返回", JSON.toJSONString(responseError));
-                            LogToFile.i("后端交互日志 取消兑换返回", JSON.toJSONString(responseError));
+                            Log.d("后端交互日志 取消兑换返回", JSON.toJSONString(responseError));
+                            LogToFile.d("后端交互日志 取消兑换返回", JSON.toJSONString(responseError));
                             if (responseError.getErrcode()==0){
                                 handler.post(()->Toast.makeText(context,"取消兑换成功，请等待一个小时后再次查看！",Toast.LENGTH_LONG).show());
                             }
@@ -2657,7 +2657,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=exchangePresent&present_id="+present_id+"&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -2680,8 +2680,8 @@ public class BackendUtils {
                         }
                         String result = ResponseBody;
                         if (!result.contains("verify failed")) {
-                            Log.i("后端交互日志 兑换返回", result);
-                            LogToFile.i("后端交互日志 兑换返回", result);
+                            Log.d("后端交互日志 兑换返回", result);
+                            LogToFile.d("后端交互日志 兑换返回", result);
                             ResponseErrorBean responseError = JSON.parseObject(result,ResponseErrorBean.class);
                             if (responseError.getErrcode()==0){
                                 handler.post(()->Toast.makeText(context,"兑换成功,请前往兑换记录查看！",Toast.LENGTH_LONG).show());
@@ -2706,7 +2706,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=scanQRStatusSo&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&uuid_url=" + URLEncoder.encode(UUID) + "&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -2740,8 +2740,8 @@ public class BackendUtils {
                                 Activity activity = (Activity) context;
                                 activity.finish();
                             }
-                            Log.i("扫码登录结果", result);
-                            LogToFile.i("扫码登录结果", result);
+                            Log.d("扫码登录结果", result);
+                            LogToFile.d("扫码登录结果", result);
                         });
                     }
                 }
@@ -2762,7 +2762,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=scanQRStatus&uid=0&whistle_info=" + whistle_info + "&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -2802,7 +2802,7 @@ public class BackendUtils {
                                     activity.finish();
                                 }
                             }
-                            Log.i("扫码登录结果", result);
+                            Log.d("扫码登录结果", result);
                         });
                     }
                 }
@@ -2823,7 +2823,7 @@ public class BackendUtils {
             }
             String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=user&a=setWebScanQRStatus&uid=0&whistle_info=" + whistle_info + "&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&type=login&city_id=10";
             Request request = CommonGetRequsetBuilder(url);
-            LogToFile.i("请求方法体", request.toString());
+            LogToFile.d("请求方法体", request.toString());
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -2837,8 +2837,8 @@ public class BackendUtils {
                     try {
                         String ResponseBody = Objects.requireNonNull(response.body()).string();
                         if (!ResponseBody.contains("verify failed")) {
-                            Log.i("后端交互日志 扫码登陆返回", ResponseBody);
-                            LogToFile.i("后端交互日志 扫码登陆返回", ResponseBody);
+                            Log.d("后端交互日志 扫码登陆返回", ResponseBody);
+                            LogToFile.d("后端交互日志 扫码登陆返回", ResponseBody);
                             handler.post(() -> {
                                 if (ResponseBody.contains("\\u4e8c\\u7ef4\\u7801\\u5df2\\u7ecf\\u5931\\u6548")) {
                                     Toast.makeText(context, "二维码已失效", Toast.LENGTH_SHORT).show();
@@ -2872,7 +2872,7 @@ public class BackendUtils {
         String Gain = prefs.getString("GainDate", "");
         if (!Gain.equals("")) {
             if (Gain.contains(LocalDate.now().toString())) {
-                Log.i("积分获取", "今日已获取积分");
+                Log.d("积分获取", "今日已获取积分");
                 return;
             }
         }
@@ -2924,8 +2924,8 @@ public class BackendUtils {
                 handler.post(() -> {
                     LocalDate date = LocalDate.now();
                     prefs.edit().putString("GainDate", date.toString()).apply();
-                    Log.i("积分获取", "积分获取完成");
-                    LogToFile.i("积分获取", "积分获取完成");
+                    Log.d("积分获取", "积分获取完成");
+                    LogToFile.d("积分获取", "积分获取完成");
                     GetScore(context);
                 });
             } catch (InterruptedException e) {

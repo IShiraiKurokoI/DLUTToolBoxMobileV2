@@ -43,8 +43,8 @@ public class PermissionHelper {
                     ActivityCompat.requestPermissions(mContext, permissions, MY_REQUEST_CODE);
                 }
             } else {
-                Log.i("权限申请", "您已获得了【" + permissionName + "】的权限");
-                LogToFile.i("权限申请", "您已获得了【" + permissionName + "】的权限");
+                Log.d("权限申请", "您已获得了【" + permissionName + "】的权限");
+                LogToFile.d("权限申请", "您已获得了【" + permissionName + "】的权限");
             }
         }
     }
