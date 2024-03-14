@@ -78,7 +78,7 @@ public class ServiceCenterAdapter extends BaseAdapter {
             List<ApplicationConfig> list = new ArrayList<>();
             mList = ConfigHelper.Getmlist(mcontext.requireContext());
             for (ApplicationConfig p : mList) {
-                if (p.getAppName().contains(str)) {
+                if (p.getAppName().contains(str) || p.getDescribe().contains(str)) {
                     list.add(p);
                 }
             }
