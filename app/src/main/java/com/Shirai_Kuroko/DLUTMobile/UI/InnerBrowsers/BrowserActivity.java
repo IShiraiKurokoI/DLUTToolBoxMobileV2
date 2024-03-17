@@ -97,11 +97,8 @@ public class BrowserActivity extends BaseActivity {
             SyncCookie(this);
         }
         webView = findViewById(R.id.BrowserWebView);
-//        loading = new LoadingView(this, R.style.CustomDialog);
         progressBar = findViewById(R.id.progressbar);
-//        if (!thisapp.getUrl().contains("rj")) {
         progressBar.setVisibility(View.VISIBLE);
-//        }
         BrowserProxy browserProxy = new BrowserProxy(this, webView);
         webView.addJavascriptInterface(browserProxy, "__nativeWhistleProxy");
         webView.addJavascriptInterface(new PicShareInterFace(), "Share");
@@ -163,6 +160,7 @@ public class BrowserActivity extends BaseActivity {
         {
             SyncCookie(this);
         }
+        webView.setWebContentsDebuggingEnabled(true);
     }
 
     public void SyncCookie(Context context) {
@@ -248,6 +246,26 @@ public class BrowserActivity extends BaseActivity {
             {
                 view.evaluateJavascript("document.getElementById('cas-login').click()", null);
                 return;
+            }
+            if (url.contains("/PayPreService") && url.contains("WapBackResReturn"))
+            {
+                view.evaluateJavascript(
+                        "(function() { return document.documentElement.innerText; })();",
+                        new ValueCallback<String>() {
+                            @Override
+                            public void onReceiveValue(String html) {
+                                try {
+                                    html = html.split("script>")[1].split("';")[0];
+                                    html = html +"'";
+                                    Log.d("跳转修复", "页面脚本内容: "+html);
+                                    view.evaluateJavascript(html, null);
+                                }catch (Exception e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                );
             }
             SpecialHandle(url);
         }

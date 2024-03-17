@@ -41,12 +41,14 @@ public class ADBannerAdapter extends BannerAdapter<ADBannerBean, ADBannerAdapter
     @Override
     public void onBindView(BannerViewHolder holder, ADBannerBean data, int position, int size) {
         Glide.with(mContext).load(data.getPicUrl()).into(holder.imageView);
-        holder.imageView.setOnClickListener(view -> {
-            Intent intent = new Intent(mContext, PureBrowserActivity.class);
-            intent.putExtra("Name", "");
-            intent.putExtra("Url", data.getUrl());
-            mContext.startActivity(intent);
-        });
+        if (!data.getUrl().isEmpty()){
+            holder.imageView.setOnClickListener(view -> {
+                    Intent intent = new Intent(mContext, PureBrowserActivity.class);
+                    intent.putExtra("Name", "");
+                    intent.putExtra("Url", data.getUrl());
+                    mContext.startActivity(intent);
+            });
+        }
     }
 
     static class BannerViewHolder extends RecyclerView.ViewHolder {
