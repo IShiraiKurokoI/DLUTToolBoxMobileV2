@@ -58,12 +58,7 @@ public class GiftDetailActivity extends AppCompatActivity {
         tv_gift_intro.setForceDarkAllowed(true);
         tv_gift_intro.getSettings().setDisabledActionModeMenuItems(DEFAULT_KEYS_DISABLE);
         tv_gift_intro.setLongClickable(true);
-        tv_gift_intro.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return true;
-            }
-        });
+        tv_gift_intro.setOnLongClickListener(v -> true);
         if (ConfigHelper.GetThemeType(this)) { //判断如果系统是深色主题
             tv_gift_intro.getSettings().setForceDark(WebSettings.FORCE_DARK_ON);//强制开启webview深色主题模式
         } else {

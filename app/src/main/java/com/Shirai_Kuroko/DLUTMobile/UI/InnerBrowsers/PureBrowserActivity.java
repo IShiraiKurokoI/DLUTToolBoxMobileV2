@@ -58,13 +58,14 @@ import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.BrowserProxy;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.WebDownloadListener;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
 
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.Objects;
 
 public class PureBrowserActivity extends BaseActivity {
 
     private WebView webView;
-//    private LoadingView loading;
+    //    private LoadingView loading;
     boolean NoTitle = false;
     private ProgressBar progressBar;
     private Activity mContext;
@@ -75,23 +76,21 @@ public class PureBrowserActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         WebView.enableSlowWholeDocumentDraw();
         setContentView(R.layout.activity_pure_browser);
-        mContext=this;
+        mContext = this;
         Intent intent = getIntent();
         String Url = intent.getStringExtra("Url");
         String Name = intent.getStringExtra("Name");
         try {
             String MsgID = intent.getStringExtra("MsgID");
-            if (MsgID!=null)
-            {
-                Log.i("PureBrowser", "Msgid: "+MsgID);
-                LogToFile.i("PureBrowser", "Msgid: "+MsgID);
+            if (MsgID != null) {
+                Log.i("PureBrowser", "Msgid: " + MsgID);
+                LogToFile.i("PureBrowser", "Msgid: " + MsgID);
                 new MsgHistoryManager(this).SetRead(MsgID);
                 new NotificationHelper().Cancel(this, "1919810", "消息通知", Integer.parseInt(MsgID));
                 Intent Updateintent = new Intent("com.Shirai_Kuroko.DLUTMobile.ReceivedNew");
                 LocalBroadcastManager.getInstance(this).sendBroadcast(Updateintent);
             }
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             Log.i("Purebrowser", "无需设置已读");
         }
         webView = findViewById(R.id.PureBrowser);
@@ -104,8 +103,6 @@ public class PureBrowserActivity extends BaseActivity {
         if (Objects.equals(Name, "")) {
             NoTitle = true;
         }
-//        loading = new LoadingView(this, R.style.CustomDialog);
-//        loading.show();
         webView.setWebChromeClient(this.webChromeClient);
         webView.setWebViewClient(this.webViewClient);
         webView.setDownloadListener(new WebDownloadListener(this));
@@ -136,12 +133,13 @@ public class PureBrowserActivity extends BaseActivity {
         webView.setBackgroundColor(Color.WHITE); // 设置背景色
         webView.getBackground().setAlpha(125); // 设置透明度 范围：0-255
         SyncCookie(this);
-//        if (!Url.contains("rj")) {
-//            loading.show();
-//        }
-        progressBar=findViewById(R.id.progressbar);
+        progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
-        webView.loadUrl(Url.replace("202.118.65.217","webvpn.dlut.edu.cn"));
+        if (!Url.contains("file:///android_asset/ScoreIntro.html")){
+            webView.loadUrl(Url.replace("202.118.65.217", "webvpn.dlut.edu.cn"));
+        }else {
+            webView.loadDataWithBaseURL("about:blank", URLDecoder.decode(ConfigHelper.GetIntros(this,"ScoreIntro")), "text/html", "utf-8", null);
+        }
     }
 
     public void showPopupWindow(View view) {
@@ -227,8 +225,7 @@ public class PureBrowserActivity extends BaseActivity {
             if (NoTitle) {
                 TextView tv_title = requireViewById(R.id.tv_title);
                 String title = webView.getTitle();
-                if (!title.startsWith("https://")&&!title.startsWith("http://"))
-                {
+                if (!title.startsWith("https://") && !title.startsWith("http://")) {
                     tv_title.setText(title);
                 }
             }
@@ -278,15 +275,29 @@ public class PureBrowserActivity extends BaseActivity {
                 });
                 return;
             }
+            if (url.contains("/PayPreService") && url.contains("WapBackResReturn"))
+            {
+                view.evaluateJavascript(
+                        "(function() { return document.documentElement.innerText; })();",
+                        html -> {
+                            try {
+                                html = html.split("script>")[1].split("';")[0];
+                                html = html +"'";
+                                Log.d("跳转修复", "页面脚本内容: "+html);
+                                view.evaluateJavascript(html, null);
+                            }catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                );
+            }
             webView.clearHistory();
         }
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {//页面开始加载
-//            if (!url.contains("https://api.m.dlut.edu.cn/login?")) {
-//                loading.show();//显示加载条
-                progressBar.setVisibility(View.VISIBLE);
-//            }
+            progressBar.setVisibility(View.VISIBLE);
             Log.i("开始加载", url);//日志记录加载了什么页面
         }
 
@@ -340,6 +351,7 @@ public class PureBrowserActivity extends BaseActivity {
             //直接同意即可     deny是拒绝
             request.grant(request.getResources());
         }
+
         //不支持js的alert弹窗，需要自己监听然后通过dialog弹窗
         @Override
         public boolean onJsAlert(WebView webView, String url, String message, JsResult result) {
@@ -355,7 +367,7 @@ public class PureBrowserActivity extends BaseActivity {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
-            progressBar.setProgress(newProgress,true);
+            progressBar.setProgress(newProgress, true);
         }
 
         //获取网页标题
@@ -364,9 +376,8 @@ public class PureBrowserActivity extends BaseActivity {
             super.onReceivedTitle(view, title);
             if (NoTitle) {
                 TextView tv_title = requireViewById(R.id.tv_title);
-                Log.i("TAG", "onReceivedTitle: "+title);
-                if (!title.startsWith("https://")&&!title.startsWith("http://"))
-                {
+                Log.i("TAG", "onReceivedTitle: " + title);
+                if (!title.startsWith("https://") && !title.startsWith("http://")) {
                     tv_title.setText(title);
                 }
             }
@@ -404,23 +415,21 @@ public class PureBrowserActivity extends BaseActivity {
         }
 
 
-
         CustomViewCallback customViewCallback;
         Dialog dialog;
 
         @Override
         public void onShowCustomView(View view, CustomViewCallback callback) {
-            if (dialog!=null)
-            {
+            if (dialog != null) {
                 callback.onCustomViewHidden();
                 return;
             }
-            customViewCallback=callback;
+            customViewCallback = callback;
             dialog = new Dialog(mContext, R.style.CustomDialog);
             Window window = dialog.getWindow();
             window.setContentView(view);
             window.setGravity(Gravity.CENTER);
-            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,android.view.WindowManager.LayoutParams.MATCH_PARENT);
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, android.view.WindowManager.LayoutParams.MATCH_PARENT);
             dialog.setCanceledOnTouchOutside(false);
             dialog.setOnDismissListener(dialogInterface -> {
                 mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
@@ -433,10 +442,10 @@ public class PureBrowserActivity extends BaseActivity {
 
         @Override
         public void onHideCustomView() {
-            if (dialog==null)
+            if (dialog == null)
                 return;
             dialog.dismiss();
-            dialog=null;
+            dialog = null;
             customViewCallback.onCustomViewHidden();
         }
     };
@@ -445,8 +454,7 @@ public class PureBrowserActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         //释放资源
-        if (!getIntent().getBooleanExtra("NoClean",false))
-        {
+        if (!getIntent().getBooleanExtra("NoClean", false)) {
             webView.destroy();
             CookieManager.getInstance().removeAllCookies(null);
             CookieManager.getInstance().flush();
@@ -488,16 +496,16 @@ public class PureBrowserActivity extends BaseActivity {
                 return true;
             }
             case 2: {
-                Toast.makeText(getBaseContext(),"正在生成分享图片",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "正在生成分享图片", Toast.LENGTH_SHORT).show();
                 webView.evaluateJavascript("window.Share.StartShare(document.getElementsByTagName('html')[0].scrollWidth,document.getElementsByTagName('html')[0].scrollHeight)", null);
                 return true;
             }
             case 3: {
-                MobileUtils.ShareTextToFriend(getBaseContext(),"原始链接："+webView.getOriginalUrl()+"\n当前页面："+webView.getUrl());
+                MobileUtils.ShareTextToFriend(getBaseContext(), "原始链接：" + webView.getOriginalUrl() + "\n当前页面：" + webView.getUrl());
                 return true;
             }
             case 4: {
-                Toast.makeText(getBaseContext(),"正在生成保存图片",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "正在生成保存图片", Toast.LENGTH_SHORT).show();
                 webView.evaluateJavascript("window.Share.StartSave(document.getElementsByTagName('html')[0].scrollWidth,document.getElementsByTagName('html')[0].scrollHeight)", null);
                 return true;
             }
@@ -507,7 +515,7 @@ public class PureBrowserActivity extends BaseActivity {
 
     public class PicShareInterFace {
         @JavascriptInterface
-        public void StartShare(String s,String s1) {
+        public void StartShare(String s, String s1) {
             Handler handler = new Handler(Looper.getMainLooper());
             handler.post(() -> {
                 float scale = webView.getScale();
@@ -528,8 +536,9 @@ public class PureBrowserActivity extends BaseActivity {
                 MobileUtils.PureBrowserSharePictureToFriend(getBaseContext(), webView, bitmap);
             });
         }
+
         @JavascriptInterface
-        public void StartSave(String s,String s1) {
+        public void StartSave(String s, String s1) {
             Handler handler = new Handler(Looper.getMainLooper());
             handler.post(() -> {
                 float scale = webView.getScale();
@@ -547,7 +556,7 @@ public class PureBrowserActivity extends BaseActivity {
                     Bitmap qr = QRCodeHelper.createQRCodeBitmap(webView.getOriginalUrl(), 200, 200, "UTF-8", "L", "0", Color.BLACK, Color.WHITE);
                     canvas.drawBitmap(qr, 10, bitmap.getHeight() - 210, null);
                 }
-                MobileUtils.SaveImageToGallery(getBaseContext(),bitmap,webView.getTitle()+new Date().toLocaleString()+".bmp");
+                MobileUtils.SaveImageToGallery(getBaseContext(), bitmap, webView.getTitle() + new Date().toLocaleString() + ".bmp");
             });
         }
     }

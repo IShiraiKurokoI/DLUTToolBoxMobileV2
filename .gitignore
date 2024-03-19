@@ -14,7 +14,6 @@
 /app/src/main/java/com/Shirai_Kuroko/DLUTMobile/Utils/e.java
 /app/release/app-release.apk
 /app/release/output-metadata.json
-/app/src/main/AndroidManifest.xml
 .DS_Store
 /build
 /captures
@@ -22,3 +21,4 @@
 .cxx
 local.properties
 /app/src/main/java/com/Shirai_Kuroko/DLUTMobile/Utils/c.java
+.idea

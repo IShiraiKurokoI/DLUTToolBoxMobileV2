@@ -155,4 +155,11 @@
     <string name="comment_star">星评</string>
     <string name="comment_succeed">评论添加成功</string>
     <string name="cancel_exchange">撤销  </string>
+    <string name="exchange_success_tips">恭喜你成功兑换礼品！请按下方提示进行领取！</string>
+    <string name="exchange_number_title">流水号</string>
+    <string name="valid_date_title">有效期</string>
+    <string name="exchange_time_title">兑换时间</string>
+    <string name="redeem_time_title">领取时间</string>
+    <string name="redeem_tips_title">领取说明</string>
+    <string name="exchange_caution">*活动奖品需兑换者本人带有效证件自行领取</string>
 </resources>

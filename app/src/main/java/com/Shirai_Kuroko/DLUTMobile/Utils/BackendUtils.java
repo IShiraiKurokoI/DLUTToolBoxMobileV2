@@ -54,6 +54,8 @@ import com.Shirai_Kuroko.DLUTMobile.Entities.CodeRefreshResult;
 import com.Shirai_Kuroko.DLUTMobile.Entities.CommentDetailResultBean;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ExchangeRecordResult;
 import com.Shirai_Kuroko.DLUTMobile.Entities.GalleryListBean;
+import com.Shirai_Kuroko.DLUTMobile.Entities.GiftDetailResponse;
+import com.Shirai_Kuroko.DLUTMobile.Entities.GiftExchangeResponse;
 import com.Shirai_Kuroko.DLUTMobile.Entities.HeadUploadResult;
 import com.Shirai_Kuroko.DLUTMobile.Entities.IDPhotoResult;
 import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
@@ -77,6 +79,8 @@ import com.Shirai_Kuroko.DLUTMobile.Helpers.NotificationHelper;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.QRCodeHelper;
 import com.Shirai_Kuroko.DLUTMobile.Managers.MsgHistoryManager;
 import com.Shirai_Kuroko.DLUTMobile.R;
+import com.Shirai_Kuroko.DLUTMobile.UI.GiftDetailActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.GiftExchangeActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.PureBrowserActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.UploadImageCommand;
 import com.Shirai_Kuroko.DLUTMobile.UI.LoginActivity;
@@ -2635,7 +2639,7 @@ public class BackendUtils {
                             Log.d("后端交互日志 取消兑换返回", JSON.toJSONString(responseError));
                             LogToFile.d("后端交互日志 取消兑换返回", JSON.toJSONString(responseError));
                             if (responseError.getErrcode()==0){
-                                handler.post(()->Toast.makeText(context,"取消兑换成功，请等待一个小时后再次查看！",Toast.LENGTH_LONG).show());
+                                handler.post(()->Toast.makeText(context,"取消兑换成功，请一小时后再次查看！",Toast.LENGTH_LONG).show());
                             }
                         }
                     }
@@ -2682,9 +2686,76 @@ public class BackendUtils {
                         if (!result.contains("verify failed")) {
                             Log.d("后端交互日志 兑换返回", result);
                             LogToFile.d("后端交互日志 兑换返回", result);
-                            ResponseErrorBean responseError = JSON.parseObject(result,ResponseErrorBean.class);
-                            if (responseError.getErrcode()==0){
-                                handler.post(()->Toast.makeText(context,"兑换成功,请前往兑换记录查看！",Toast.LENGTH_LONG).show());
+                            GiftExchangeResponse giftExchangeResponse = JSON.parseObject(result,GiftExchangeResponse.class);
+                            if (giftExchangeResponse.getErrcode()==0){
+                                handler.post(()-> {
+                                    Toast.makeText(context, "兑换成功！", Toast.LENGTH_LONG).show();
+                                    ConfigHelper.SetIntros(context,"ExchangeIntro",giftExchangeResponse.getData().getPointsConfig().getGetExplainSet());
+                                    ConfigHelper.SetIntros(context,"ScoreIntro",giftExchangeResponse.getData().getPointsConfig().getPointsExplainSet());
+                                    Intent intent = new Intent(context, GiftExchangeActivity.class);
+                                    intent.putExtra("data", JSON.toJSONString(giftExchangeResponse.getData().getList()));
+                                    context.startActivity(intent);
+                                });
+                            }else {
+                                handler.post(()-> {
+                                    Toast.makeText(context, "兑换失败："+giftExchangeResponse.getErrmsg(), Toast.LENGTH_LONG).show();
+                                });
+                            }
+                        }
+                    }
+                }
+            });
+        }).start();
+    }
+
+    public static synchronized void SetGiftExchangeHeaderClickListener(GiftExchangeActivity context, long id) {
+        Handler handler = new Handler(Looper.getMainLooper());
+        new Thread(() -> {
+            LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
+            if (UserBean == null) {
+                return;
+            }
+            LoginResponseBean.DataDTO.MyInfoDTO infoDTO = UserBean.getData().getMy_info();
+            if (infoDTO == null) {
+                return;
+            }
+            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=getPresentDetail&app_version=" + GetwhistleVersion() + "&stu_identity=&device_type=android&platform=android&uid=0&student_number=" + infoDTO.getStudentNumber() + "&school=dlut&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify() + "&present_id=" + id + "&aid=" + infoDTO.getUser_id() + "&city_id=10";
+            Request request = CommonGetRequsetBuilder(url);
+            LogToFile.d("请求方法体", request.toString());
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    handler.post(() -> cancelGiftExchange(context, id));
+                    e.printStackTrace();
+                    LogToFile.e("错误", e.toString());
+                }
+
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) {
+                    String ResponseBody;
+                    if (response.body() != null) {
+                        try {
+                            ResponseBody = Objects.requireNonNull(response.body()).string();
+                        } catch (IOException e) {
+                            handler.post(() -> cancelGiftExchange(context, id));
+                            e.printStackTrace();
+                            LogToFile.e("错误", e.toString());
+                            return;
+                        }
+                        String result = ResponseBody;
+                        if (!result.contains("verify failed")) {
+                            GiftDetailResponse giftDetailResponse = JSON.parseObject(result,GiftDetailResponse.class);
+                            Log.d("后端交互日志 礼物信息返回", JSON.toJSONString(giftDetailResponse));
+                            LogToFile.d("后端交互日志 礼物信息返回", JSON.toJSONString(giftDetailResponse));
+                            if (giftDetailResponse.getErrcode()==0){
+                                if (giftDetailResponse.getData().getDetail().size()>0)
+                                {
+                                    handler.post(()-> context.findViewById(R.id.exchange_gift_header).setOnClickListener(view -> {
+                                        Intent intent = new Intent(context, GiftDetailActivity.class);
+                                        intent.putExtra("GiftObject", JSON.toJSONString(giftDetailResponse.getData().getDetail().get(0)));
+                                        context.startActivity(intent);
+                                    }));
+                                }
                             }
                         }
                     }

@@ -3,6 +3,7 @@ package com.Shirai_Kuroko.DLUTMobile.Adapters;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ExchangeRecordResult;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.ExchangeRecordActivity;
+import com.Shirai_Kuroko.DLUTMobile.UI.GiftExchangeActivity;
 import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
+import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -143,6 +146,14 @@ public class ExchangeRecordAdapter extends RecyclerView.Adapter<ExchangeRecordAd
                 break;
             }
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, GiftExchangeActivity.class);
+                intent.putExtra("data", JSON.toJSONString(listDTO));
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

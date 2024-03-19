@@ -338,4 +338,21 @@
     <item name="btn_select_all" type="id" />
     <item name="btn_reverse" type="id" />
     <item name="cancel_text" type="id" />
+    <item name="iv_exchange_gift_icon" type="id" />
+    <item name="rl_gift_exchange_info" type="id" />
+    <item name="tv_exchange_gift_name" type="id" />
+    <item name="iv_exchange_gift_coin" type="id" />
+    <item name="tv_gift_exchange_score" type="id" />
+    <item name="iv_gift_exchange_mark" type="id" />
+    <item name="tv_gift_exchange_tips" type="id" />
+    <item name="tv_gift_exchange_number" type="id" />
+    <item name="textView2" type="id" />
+    <item name="tv_exchange_gift_valid_date" type="id" />
+    <item name="tv_exchange_gift_third_title" type="id" />
+    <item name="tv_exchange_gift_third_value" type="id" />
+    <item name="ll_gift_exchange_fourth_line" type="id" />
+    <item name="tv_gift_exchange_fourth_title" type="id" />
+    <item name="tv_gift_exchange_fourth_value" type="id" />
+    <item name="wv_receive_explain" type="id" />
+    <item name="iv_exchange_gift_icon_wrapper" type="id" />
 </resources>

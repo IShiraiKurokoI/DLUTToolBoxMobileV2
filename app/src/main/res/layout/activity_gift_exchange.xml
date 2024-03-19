@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UI.GiftExchangeActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="56.0dip"
+        android:background="@color/main_theme_color"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0">
+
+        <TextView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="16.0dip"
+            android:paddingRight="16.0dip"
+            android:text="@string/back_to"
+            android:textColor="@color/white"
+            app:drawableStartCompat="@drawable/notice_detail_back_sel"
+            tools:ignore="RelativeOverlap" />
+
+        <TextView
+            android:id="@id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="礼品兑换"
+            android:textColor="@color/white"
+            android:textSize="18.0sp"
+            tools:ignore="HardcodedText" />
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@id/tv_gift_exchange_tips"
+                android:layout_width="fill_parent"
+                android:layout_height="27.0dip"
+                android:background="#ff005e9b"
+                android:gravity="center"
+                android:text="@string/exchange_success_tips"
+                android:textColor="#ffffffff"
+                android:textSize="12.0sp" />
+
+            <RelativeLayout
+                android:id="@+id/exchange_gift_header"
+                android:layout_width="fill_parent"
+                android:layout_height="125.0dip"
+                android:background="@drawable/shape_bg_exchange_gift_header">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@id/iv_exchange_gift_icon_wrapper"
+                    android:layout_width="86.0dip"
+                    android:layout_height="86.0dip"
+                    app:cardCornerRadius="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16.0dip"
+                    android:background="@color/transparent">
+                <ImageView
+                    android:id="@id/iv_exchange_gift_icon"
+                    android:layout_width="86.0dip"
+                    android:layout_height="86.0dip"
+                    android:scaleType="centerCrop"
+                    android:layout_centerVertical="true"/>
+                </androidx.cardview.widget.CardView>
+
+                <RelativeLayout
+                    android:id="@id/rl_gift_exchange_info"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="24.0dip"
+                    android:layout_toLeftOf="@id/iv_gift_exchange_mark"
+                    android:layout_toRightOf="@id/iv_exchange_gift_icon_wrapper">
+
+                    <TextView
+                        android:id="@id/tv_exchange_gift_name"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:paddingRight="3.0dip"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="16.0sp" />
+
+                    <ImageView
+                        android:id="@id/iv_exchange_gift_coin"
+                        android:layout_width="16.0dip"
+                        android:layout_height="16.0dip"
+                        android:layout_below="@id/tv_exchange_gift_name"
+                        android:layout_marginTop="8.0dip"
+                        android:src="@drawable/icon_score" />
+
+                    <TextView
+                        android:id="@id/tv_gift_exchange_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16.0dip"
+                        android:layout_alignTop="@id/iv_exchange_gift_coin"
+                        android:layout_marginLeft="4.0dip"
+                        android:layout_toRightOf="@id/iv_exchange_gift_coin"
+                        android:gravity="center"
+                        android:maxLength="9"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="12.0sp" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@id/iv_gift_exchange_mark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20.0dip"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14.0dip">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:text="@string/exchange_number_title"
+                        android:textSize="14.0dip" />
+
+                    <TextView
+                        android:id="@id/tv_gift_exchange_number"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_weight="1.0"
+                        android:includeFontPadding="false"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="12.0dip" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12.0dip"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:text="@string/valid_date_title"
+                        android:textSize="14.0dip" />
+
+                    <TextView
+                        android:id="@id/tv_exchange_gift_valid_date"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_weight="1.0"
+                        android:includeFontPadding="false"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="12.0dip"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12.0dip"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@id/tv_exchange_gift_third_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:text="@string/exchange_time_title"
+                        android:textSize="14.0dip" />
+
+                    <TextView
+                        android:id="@id/tv_exchange_gift_third_value"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_weight="1.0"
+                        android:includeFontPadding="false"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="12.0dip" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@id/ll_gift_exchange_fourth_line"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12.0dip"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@id/tv_gift_exchange_fourth_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:text="@string/redeem_time_title"
+                        android:textSize="14.0dip" />
+
+                    <TextView
+                        android:id="@id/tv_gift_exchange_fourth_value"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_weight="1.0"
+                        android:includeFontPadding="false"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="12.0dip" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="8.0dip"
+                android:orientation="vertical"
+                android:padding="16.0dip">
+
+                <TextView
+                    android:id="@id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:text="@string/redeem_tips_title"
+                    android:textSize="14.0dip" />
+
+                <WebView
+                    android:id="@id/wv_receive_explain"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7.0dip" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16.0dip"
+                    android:includeFontPadding="false"
+                    android:text="@string/exchange_caution"
+                    android:textSize="12.0sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

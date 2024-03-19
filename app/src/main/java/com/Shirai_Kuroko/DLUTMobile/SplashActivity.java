@@ -38,6 +38,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LogToFile.init(this);
+        ConfigHelper.InitIntros(this);
         AutoCleaner.Clean(this);
         CrashHandler.getInstance().init(this);
         MobileUtils.SetShortCuts(this);

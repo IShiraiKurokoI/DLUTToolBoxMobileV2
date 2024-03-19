@@ -73,12 +73,12 @@ public class ConfigHelper {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
             if (prefs.getString("DynamicAppDefaultConfig", null)!=null)
             {
-                Log.i("读取配置", "动态网络配置存在，加载网络配置");
+                Log.d("读取配置", "动态网络配置存在，加载网络配置");
                 return prefs.getString("DynamicAppDefaultConfig", null);
             }
             else
             {
-                Log.i("读取配置", "动态网络配置为空，加载内置默认配置");
+                Log.d("读取配置", "动态网络配置为空，加载内置默认配置");
                 LogToFile.i("读取配置", "动态网络配置为空，加载内置默认配置");
             }
             reader = new BufferedReader(
@@ -371,5 +371,50 @@ public class ConfigHelper {
     public static void AgreeFP(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         prefs.edit().putBoolean("FP", true).apply();
+    }
+    
+    public static String GetDefaultIntro(Context context, String IntroName){
+        StringBuilder termsString = new StringBuilder();
+        BufferedReader reader;
+        try {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            reader = new BufferedReader(
+                    new InputStreamReader(context.getAssets().open(IntroName+".html")));
+            String str;
+            while ((str = reader.readLine()) != null) {
+                termsString.append(str);
+            }
+            reader.close();
+            return termsString.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public static void InitIntros(Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        if (prefs.getString("ExchangeIntro", null)==null)
+        {
+            prefs.edit().putString("ExchangeIntro", GetDefaultIntro(context,"ExchangeIntro")).apply();
+        }
+        if (prefs.getString("ScoreIntro", null)==null)
+        {
+            prefs.edit().putString("ScoreIntro", GetDefaultIntro(context,"ScoreIntro")).apply();
+        }
+    }
+
+    public static String GetIntros(Context context, String IntroName){
+        Log.d("加载介绍", IntroName);
+        LogToFile.d("加载介绍", IntroName);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getString(IntroName,GetDefaultIntro(context,IntroName));
+    }
+
+    public static void SetIntros(Context context, String IntroName,String content){
+        Log.d("设置介绍", IntroName);
+        LogToFile.d("设置介绍", IntroName);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.edit().putString(IntroName,content).apply();
     }
 }
