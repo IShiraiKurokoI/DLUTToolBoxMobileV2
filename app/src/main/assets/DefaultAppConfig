@@ -424,8 +424,8 @@
     "app_name": "心理测评",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/02/A1/ynZM2WBYEe-ALSxiAAA-gtcEwFw355.png",
     "describe": "为学生提供心理健康相关服务，包括心理测试、报告查询、心理咨询预约、个人信息查询等相关服务。",
-    "popularity": "100351",
-    "url": "https://webvpn.dlut.edu.cn/http/57787a7876706e323032336b6579402460110c14f54d9742bf58b43d95aecb2446/psym/Default/Index?filter=app&from=rj",
+    "popularity": "253998",
+    "url": "https://webvpn.dlut.edu.cn/http/57787a7876706e323032336b65794024680b1b56f80f865ae449fe2ddfb88b/psym/Default/Index?from=rj&filter=app",
     "issubscription": 0
   },
   {
@@ -1017,6 +1017,17 @@
     "describe": "档案馆毕业生档案服务",
     "popularity": "1194",
     "url": "https://webvpn.dlut.edu.cn/https/57787a7876706e323032336b657940247c190856f80f865ae449fe2ddfb88b/jsp/archivesweb/custom/dlut/sso/index.jsp?filter=app",
+    "issubscription": 0
+  },
+  {
+    "id": 93,
+    "app_id": "6a8a1d399c723553",
+    "category": "life",
+    "app_name": "后勤报修系统",
+    "icon": "https://store.m.dlut.edu.cn/group1/M00/06/08/ynZM2WU5tWWAEs01AAAunirRhCY524.png",
+    "describe": "报修系统是针对校园报修流程建设的一站式服务平台，为师生校内报修提供线上平台，提升校园维修效率。",
+    "popularity": "3207",
+    "url": "https://webvpn.dlut.edu.cn/http/57787a7876706e323032336b657940247a001a0cb2079f5bbe02ff3c84f58629/repairphone/sso/login?from=rj&filter=app",
     "issubscription": 0
   }
 ]
