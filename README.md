@@ -4,10 +4,10 @@
 同时也支持手机夜间模式！</br>
 | 首页 | 消息 | 服务大厅 |
 | ---- | ---- | -------- |
-| ![Screenshot_20220907_160540_com Shirai_Kuroko DLUT](https://user-images.githubusercontent.com/73374735/188825159-db56637d-668a-49b5-97a6-c03ad354d825.jpg) | ![Screenshot_20230122_224016_com Shirai_Kuroko DLUT](https://user-images.githubusercontent.com/73374735/213921786-2e58f423-7645-4cdb-8cf0-57dcf4a089b3.jpg) | ![Screenshot_20220804_071902_com Shirai_Kuroko DLUT](https://user-images.githubusercontent.com/73374735/182729396-81f2cc28-ed5c-4121-a5fd-f5171224b23e.jpg) |
+| ![Screenshot_20240325_141313_com Shirai_Kuroko DLUT](https://github.com/IShiraiKurokoI/DLUTToolBoxMobileV2/assets/73374735/56c9dbe9-def0-4b3f-8e4e-c1f6e906c8d8) | ![Screenshot_20230122_224016_com Shirai_Kuroko DLUT](https://user-images.githubusercontent.com/73374735/213921786-2e58f423-7645-4cdb-8cf0-57dcf4a089b3.jpg) | ![Screenshot_20220804_071902_com Shirai_Kuroko DLUT](https://user-images.githubusercontent.com/73374735/182729396-81f2cc28-ed5c-4121-a5fd-f5171224b23e.jpg) |
 | 我的 | 浏览器界面 | 通知栏 |
 | ![Screenshot_20220804_071908_com Shirai_Kuroko DLUT](https://user-images.githubusercontent.com/73374735/182729406-701c30f2-d2f5-486d-9076-96a8f239b550.jpg) | ![Screenshot_20220919_074136_com Shirai_Kuroko DLUT](https://user-images.githubusercontent.com/73374735/190933482-4929eb4c-f931-497c-bbfa-6aa667566267.jpg) | ![Screenshot_20221114_135834_com Shirai_Kuroko DLUT](https://user-images.githubusercontent.com/73374735/201586843-d2e71768-9ae3-4afa-ace8-7aad1783c370.jpg) |
 
 如有问题，BUG反馈及建议请提Issue或者联系作者邮箱：ishirai_kurokoi@foxmail.com
 
-<span style="color:red;">注意：本仓库代码中不包含数据包签名校验类！无法自行构建编译！如有开发意向请邮件联系提供DLUT相关在读证明！</span>
+<span style="color:red;">注意：仓库代码中不包含数据包签名校验类！无法自行构建编译！如有开发意向请邮件联系提供DLUT相关在读证明！</span>
