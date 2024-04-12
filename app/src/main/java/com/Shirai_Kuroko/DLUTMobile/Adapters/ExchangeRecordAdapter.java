@@ -117,20 +117,20 @@ public class ExchangeRecordAdapter extends RecyclerView.Adapter<ExchangeRecordAd
                 });
                 break;
             }
+            case 1:{
+                holder.cancel_text.setVisibility(View.GONE);
+                holder.iv_out_date.setVisibility(View.VISIBLE);
+                holder.iv_out_date.setImageResource(R.drawable.icon_gift_exchange_receive);
+                holder.cancel_text.setOnClickListener(null);
+                holder.record_time.setText(new Date(listDTO.getExchange_time()*1000).toLocaleString());
+                break;
+            }
             case 2:{
                 holder.cancel_text.setVisibility(View.GONE);
                 holder.iv_out_date.setVisibility(View.VISIBLE);
                 holder.iv_out_date.setImageResource(R.drawable.icon_out_date);
                 holder.cancel_text.setOnClickListener(null);
                 holder.record_time.setText(new Date(listDTO.getEnd_time()*1000).toLocaleString());
-                break;
-            }
-            case 3:{
-                holder.cancel_text.setVisibility(View.GONE);
-                holder.iv_out_date.setVisibility(View.VISIBLE);
-                holder.iv_out_date.setImageResource(R.drawable.mark_gift_exchange_receive);
-                holder.cancel_text.setOnClickListener(null);
-                holder.record_time.setText(new Date(listDTO.getExchange_time()*1000).toLocaleString());
                 break;
             }
             case 4:{
@@ -142,7 +142,11 @@ public class ExchangeRecordAdapter extends RecyclerView.Adapter<ExchangeRecordAd
                 break;
             }
             default:{
-                //俺也不知道is_exchange为1时这该显示啥
+                //俺也不知道is_exchange为3时这该显示啥
+                holder.cancel_text.setVisibility(View.GONE);
+                holder.iv_out_date.setVisibility(View.GONE);
+                holder.cancel_text.setOnClickListener(null);
+                holder.record_time.setText(new Date(listDTO.getExchange_time()*1000).toLocaleString());
                 break;
             }
         }

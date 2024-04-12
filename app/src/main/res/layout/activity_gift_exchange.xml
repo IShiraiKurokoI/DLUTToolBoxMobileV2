@@ -275,6 +275,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16.0dip"
                     android:includeFontPadding="false"
+                    android:textColor="@color/bg_color_card_red"
                     android:text="@string/exchange_caution"
                     android:textSize="12.0sp" />
             </LinearLayout>
