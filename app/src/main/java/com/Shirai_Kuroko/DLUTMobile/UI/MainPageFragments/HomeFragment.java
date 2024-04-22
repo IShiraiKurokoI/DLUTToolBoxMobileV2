@@ -42,6 +42,7 @@ import com.Shirai_Kuroko.DLUTMobile.UI.OpenVirtualCardActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.SearchActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.ServiceManagement.AppGridManageActivity;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
+import com.Shirai_Kuroko.DLUTMobile.Utils.UIUtils;
 import com.bumptech.glide.Glide;
 import com.maning.mlkitscanner.scan.MNScanManager;
 import com.youth.banner.Banner;
@@ -133,7 +134,10 @@ public class HomeFragment extends Fragment {
     public void showPopupWindow(View view) {
         @SuppressLint("InflateParams")
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.popup_main_right_more, null);
-        PopupWindow window = new PopupWindow(v, 350, 450, true);
+
+        int[] size = UIUtils.calculateDpiSize(getContext(),350,450);
+        PopupWindow window = new PopupWindow(v, size[0], size[1], true);
+
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         window.setOutsideTouchable(true);
         window.setTouchable(true);
