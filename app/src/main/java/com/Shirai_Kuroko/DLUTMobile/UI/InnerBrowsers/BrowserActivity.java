@@ -57,6 +57,7 @@ import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.BaseActivity;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.BrowserProxy;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.SDK.WebDownloadListener;
 import com.Shirai_Kuroko.DLUTMobile.Utils.MobileUtils;
+import com.Shirai_Kuroko.DLUTMobile.Utils.UIUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
@@ -677,7 +678,8 @@ public class BrowserActivity extends BaseActivity {
     public void showPopupWindow(View view) {
         @SuppressLint("InflateParams")
         View v = LayoutInflater.from(this).inflate(R.layout.popup_browser_right_more, null);
-        PopupWindow window = new PopupWindow(v, 480, 900, true);
+        int[] size = UIUtils.calculateDpiSize(mContext,480,900);
+        PopupWindow window = new PopupWindow(v, size[0], size[1], true);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         window.setOutsideTouchable(true);
         window.setTouchable(true);

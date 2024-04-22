@@ -27,6 +27,7 @@ import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Managers.MsgHistoryManager;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.MainPageFragments.NotificationsFragment;
+import com.Shirai_Kuroko.DLUTMobile.Utils.UIUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +86,8 @@ public class NotificationManageActivity extends AppCompatActivity {
     public void showPopupWindow(View view) {
         @SuppressLint("InflateParams")
         View v = LayoutInflater.from(this).inflate(R.layout.popup_notification_manage_right_more, null);
-        PopupWindow window = new PopupWindow(v, 360, 750, true);
+        int[] size = UIUtils.calculateDpiSize(this,360,750);
+        PopupWindow window = new PopupWindow(v, size[0], size[1], true);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         window.setOutsideTouchable(true);
         window.setTouchable(true);
