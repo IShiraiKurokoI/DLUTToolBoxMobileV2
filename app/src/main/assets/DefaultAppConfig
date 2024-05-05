@@ -105,8 +105,8 @@
     "app_name": "体育场馆预订",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/02/30/ynZM2V9Mj2GAXxRpAAAZEquDC1U035.png",
     "describe": "提供在线购买体育馆票、卡、场地等功能，在线查看自己已购买的订单等信息。",
-    "popularity": "2332500",
-    "url": "https://webvpn.dlut.edu.cn/https/57787a7876706e323032336b657940246c01011fb2079f5bbe02ff3c84f58629/diantuo/mobileLogin.do?from=rj&filter=app",
+    "popularity": "4022247",
+    "url": "http://webvpn.dlut.edu.cn/http/57787a7876706e323032336b65794024791c0f55e81a9049e448f62d85f58023f6c217c3/api/login/login?from=rj&filter=app",
     "issubscription": 0
   },
   {
@@ -149,8 +149,8 @@
     "app_name": "研究生系统",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/2B/ynZM2VwcpHeADVLoAAAxsF8nPV0948.png",
     "describe": "研究生管理信息系统移动版本",
-    "popularity": "1013553",
-    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=abccc53d6b78cb01&redirect_uri=http%3a%2f%2fdutgs.dlut.edu.cn%3a443%2fSmartWap%2foAuth.do&response_type=code&scope=base_api&state=dlut",
+    "popularity": "1804558",
+    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=abccc53d6b78cb01&redirect_uri=http%3a%2f%2fdutgs.dlut.edu.cn%3a8443%2fSmartWap%2foAuth.do&response_type=code&scope=base_api&state=dlut",
     "issubscription": 0
   },
   {
@@ -183,7 +183,7 @@
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2VlVDfOAH_FlAAAQiDCdlzs0313949",
     "describe": "图书借阅、委托、账目清单、遗失赔偿信息查询",
     "popularity": "769498",
-    "url": "http://mobile.lib.dlut.edu.cn/m/reader/hwthau.action?from=rj",
+    "url": "https://sso.dlut.edu.cn/cas/login?service=https%3A%2F%2Fopac.lib.dlut.edu.cn%3A443%2Fmeta-local%2Fopac%2Fcas%2Frosetta&from=rj",
     "issubscription": 0
   },
   {
@@ -271,7 +271,7 @@
     "icon": "https://store.m.dlut.edu.cn/group1/M00/00/09/ynZM2VlocseAbGj2AAAhfXbUWgg692.png",
     "describe": "通过中国教育考试网进行四六级成绩的查询。",
     "popularity": "534154",
-    "url": "http://cet.neea.edu.cn/html1/folder/21045/4870-1.htm",
+    "url": "https://cjcx.neea.edu.cn/html1/folder/21033/658-1.htm",
     "issubscription": 0
   },
   {
@@ -500,9 +500,9 @@
     "category": "office",
     "app_name": "照片采集",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/19/ynZM2VvAP52AemfbAAA0ZwVo190430.png",
-    "describe": "本应用用于会议签到、宿舍通道机等人脸识别服务。如果您本人在上述场景下不能被人脸识别设备识别，或者本应用显示“您的人脸识别照片不满足识别要求，请点击照片采集框进行采集，建议您上传证件照”，则需要您通过本应用上传照片进行照片采集。（本应用仅限于校园网环境下使用）",
-    "popularity": "58067",
-    "url": "https://api.m.dlut.edu.cn/oauth/authorize?client_id=e792ad1aad829c78&redirect_uri=http%3a%2f%2fdutisc2.dlut.edu.cn%2fctm02h5c%2fschool&response_type=code&scope=base_api&state=authorize",
+    "describe": "自助采集的人像照片将应用于校园进出综合管控、一卡通系统、会议签到、门禁考勤等校园内人脸识别认证和人像照片显示。建议上传本人近期正面免冠彩色头像标准证明照，照片分辨率不低于480*640，大小不超过2M。",
+    "popularity": "84711",
+    "url": "https://card.m.dlut.edu.cn/repair/openRjOSelfPhoto",
     "issubscription": 0
   },
   {
@@ -621,8 +621,8 @@
     "app_name": "机构知识库",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/14/ynZM2VurU1CAWR60AAAdLHl4Y2E380.png",
     "describe": "大连理工大学机构知识库作为支撑我校学术研究的基础设施，以知识管理与学术交流为目标，收集、组织、管理、保存、传播我校教职工的学术研究成果，全面展示我校学术科研水平，实现知识传播与共享。机构知识库中拥有期刊论文、会议论文、学位论文、专利、著作、报纸、标准等多种类型学术成果。",
-    "popularity": "24737",
-    "url": "http://dlutir.dlut.edu.cn/Mobile/Home/Index",
+    "popularity": "30592",
+    "url": "https://webvpn.dlut.edu.cn/http/57787a7876706e323032336b657940247c14170cf511dd4aa659ee7694bf9069fc02/dlut/",
     "issubscription": 0
   },
   {
@@ -633,7 +633,7 @@
     "icon": "https://store.m.dlut.edu.cn/group1/M00/01/25/ynZM2Vv97QaAZQDFAAAXvITm0Jg604.png",
     "describe": "自助打印服务平台为师生提供线上电子成绩单和电子证明文件申请，线下自助打印情况及自助打印终端位置查看等服务。",
     "popularity": "22572",
-    "url": "https://sso.dlut.edu.cn/cas/login?from=rj&service=http%3A%2F%2Feproof.dlut.edu.cn%2Fsso%2Flogin.jsp",
+    "url": "http://eproof.dlut.edu.cn/sso/login_sj.jsp?from=rj",
     "issubscription": 0
   },
   {
@@ -709,7 +709,7 @@
     "icon": "https://store.m.dlut.edu.cn/group1/M00/02/83/ynZM2V_N3euAAn5PAAAZ46zJWmQ263.png",
     "describe": "供师生预约使用会议室、多功能厅等各类公共资源",
     "popularity": "12497",
-    "url": "https://webvpn.dlut.edu.cn/http/57787a7876706e323032336b657940247f1f1801b2079f5bbe02ff3c84f58629/cas/account/RedirectPage?redirect_uri=http%3a%2f%2fresource.dlut.edu.cn%2f%23%2fapp%2fbooking-types/?from=rj&filter=app",
+    "url": "https://webvpn.dlut.edu.cn/http/57787a7876706e323032336b657940247f1f1801b2079f5bbe02ff3c84f58629/InteAuth/Account/IntegratedAuth?filter=app&from=rj",
     "issubscription": 0
   },
   {
@@ -730,7 +730,7 @@
     "icon": "https://my.m.dlut.edu.cn/images/appicon/yule.png",
     "describe": "打开大连理工大学新闻网",
     "popularity": "9778",
-    "url": "https://lightapp.m.dlut.edu.cn/openwechat",
+    "url": "https://news.dlut.edu.cn",
     "issubscription": 0
   },
   {
@@ -906,7 +906,7 @@
     "describe": "师生可在此应用下完成图书馆入馆培训。",
     "type": "custom",
     "popularity": "1395454",
-    "url": "http://webvpn.dlut.edu.cn/http/57787a7876706e323032336b657940247f0d0b1cb20f9a4ce448f62d85f5802345904e3a/site/index.html?filter=app&from=rj",
+    "url": "https://webvpn.dlut.edu.cn/https/57787a7876706e323032336b657940246c0a0311f24d9f47a802fe3484afcb22ec20bb291d/?filter=app&from=rj",
     "issubscription": 0
   },
   {
@@ -1004,8 +1004,8 @@
     "app_name": "试剂耗材采购",
     "icon": "https://store.m.dlut.edu.cn/group1/M00/05/97/ynZM2WQRl1SATUGsAAC2LMYE5UY141.png",
     "describe": "试剂耗材综合管理系统是集线上采购（化学药品、实验气体、生物制品、实验耗材）、审批、库房管理，信息查询等功能于一体，实现科研物资采购“事前可预警，事后可追溯，管理透明化”，进一步规范学校的试剂耗材全流程的数字化管理的系统。",
-    "popularity": "2568",
-    "url": "http://hxpgl.dlut.edu.cn/dist/?from=rj",
+    "popularity": "8340",
+    "url": "https://webvpn.dlut.edu.cn/http/57787a7876706e323032336b657940247000121ff04d9742bf58b43d95aecb24c3/dist/?from=rj",
     "issubscription": 0
   },
   {
