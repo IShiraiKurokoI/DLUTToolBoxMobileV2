@@ -31,5 +31,7 @@ public class b extends h
             return;
         }
         this.e.appBean.setSelectTab(this.d);
+        this.e.h(1);
+        this.e.f();
     }
 }
