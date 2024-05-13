@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@id/root_container"
     android:layout_width="fill_parent"
@@ -13,30 +14,11 @@
         android:background="@drawable/shape_bg_app_widget_full"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="42.0dip"
             android:gravity="center_vertical"
             android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="26.0dip"
-                android:layout_height="26.0dip"
-                android:layout_marginStart="16.0dip"
-                android:src="@drawable/icon"
-                tools:ignore="ContentDescription" />
-
-            <TextView
-                android:layout_width="0.0dip"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8.0dip"
-                android:layout_weight="1.0"
-                android:text="i大工+"
-                android:textColor="#ff333333"
-                android:textSize="14.0sp"
-                android:textStyle="bold"
-                android:typeface="monospace"
-                tools:ignore="HardcodedText" />
 
             <ImageView
                 android:id="@id/btn_refresh"
@@ -48,8 +30,37 @@
                 android:paddingRight="16.0dip"
                 android:paddingBottom="10.0dip"
                 android:src="@drawable/ic_app_widget_refresh"
+                android:layout_alignParentEnd="true"
                 tools:ignore="ContentDescription" />
-        </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/CourseWidgetTitleBar"
+                android:layout_width="match_parent"
+                android:layout_height="42.0dip"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:layout_toLeftOf="@id/btn_refresh" >
+
+                <ImageView
+                    android:layout_width="26.0dip"
+                    android:layout_height="26.0dip"
+                    android:layout_marginStart="16.0dip"
+                    android:src="@drawable/icon"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8.0dip"
+                    android:layout_weight="1.0"
+                    android:text="i大工+"
+                    android:textColor="#ff333333"
+                    android:textSize="14.0sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+        </RelativeLayout>
 
         <TextView
             android:layout_width="fill_parent"

@@ -68,6 +68,14 @@ public class CourseWidget extends AppWidgetProvider {
 
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.layout_course_widget);
         remoteViews.setOnClickPendingIntent(R.id.root_container, null);
+
+        //新增点击标题进入程序主界面
+        Intent TitleBarIntent = new Intent(context, SplashActivity.class);
+        TitleBarIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        @SuppressLint("UnspecifiedImmutableFlag")
+        PendingIntent TitleBarPendingIntent = PendingIntent.getActivity(context, 0, TitleBarIntent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
+        remoteViews.setOnClickPendingIntent(R.id.CourseWidgetTitleBar, TitleBarPendingIntent);
+
         Intent intent = new Intent(context, WidgetQRLauncherActivity.class);
         @SuppressLint("UnspecifiedImmutableFlag")
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
@@ -118,10 +126,19 @@ public class CourseWidget extends AppWidgetProvider {
 
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.layout_course_widget);
         remoteViews.setOnClickPendingIntent(R.id.root_container, null);
+
+        //新增点击标题进入程序主界面
+        Intent TitleBarIntent = new Intent(context, SplashActivity.class);
+        TitleBarIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        @SuppressLint("UnspecifiedImmutableFlag")
+        PendingIntent TitleBarPendingIntent = PendingIntent.getActivity(context, 0, TitleBarIntent, PendingIntent.FLAG_ONE_SHOT);
+        remoteViews.setOnClickPendingIntent(R.id.CourseWidgetTitleBar, TitleBarPendingIntent);
+
         Intent intent = new Intent(context, WidgetQRLauncherActivity.class);
         @SuppressLint("UnspecifiedImmutableFlag")
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
         remoteViews.setOnClickPendingIntent(R.id.btn_start_qr_scan, pendingIntent);
+
         Intent intent1 = new Intent(context, OpenVirtualCardActivity.class);
         @SuppressLint("UnspecifiedImmutableFlag")
         PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
