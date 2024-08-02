@@ -220,7 +220,7 @@ public class ServiceCenterFragment extends Fragment {
             l1.setBackgroundColor(CatagorySelected);
             ananEditText.setText("");
         } else {
-            if (catagoryfilter.equals("")) {
+            if (catagoryfilter.isEmpty()) {
                 adapter.showAllProduct();
             } else {
                 adapter.getCatagoryFilter().filter(catagoryfilter);

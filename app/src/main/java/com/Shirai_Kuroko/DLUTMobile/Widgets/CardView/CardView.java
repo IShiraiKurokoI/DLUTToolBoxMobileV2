@@ -401,7 +401,7 @@ public class CardView extends MaxHeightView implements View.OnClickListener {
             final float n2 = (float) array[1];
             if (n2 > n) {
                 linearLayout.measure(View.MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-                final int n3 = (new int[]{linearLayout.getMeasuredWidth(), linearLayout.getMeasuredHeight()})[1];
+                final int n3 = linearLayout.getMeasuredHeight();
                 linearLayout.setBackgroundResource(R.drawable.bg_card_menu_up);
                 linearLayout.setY(n2 - c - n3);
             } else {

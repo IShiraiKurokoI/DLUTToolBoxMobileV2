@@ -74,7 +74,7 @@ public class CardInfoBean
 
 
     public <T> List<T> duplicateRemovalByCircle(List<T> list){
-        List newList = new ArrayList();
+        List<T> newList = new ArrayList<>();
         for (int i = 0;i < list.size();i++){
             for (int j = 0;j < i;j++){
                 if(list.get(i).equals(list.get(j))){

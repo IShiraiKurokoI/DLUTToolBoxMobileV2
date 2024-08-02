@@ -154,7 +154,7 @@ public class MobileUtils {
         new Thread(() -> {
             String Version = MobileUtils.GetAppVersion(context);
             String UpdateJson = GithubUtils.GetGithubHttpRequest("https://api.github.com/repos/IShiraiKurokoI/DLUTToolBoxMobileV2/releases/latest");
-            if (UpdateJson.equals("")) {
+            if (UpdateJson.isEmpty()) {
                 Log.i("错误", "API 请求超限");
                 handler.post(() -> {
                     textView.setText("检查更新失败");
@@ -204,7 +204,7 @@ public class MobileUtils {
         new Thread(() -> {
             String Version = MobileUtils.GetAppVersion(context);
             String UpdateJson = GithubUtils.GetGithubHttpRequest("https://api.github.com/repos/MuoRanLY/DLUTToolBoxMobileV2/releases/latest");
-            if (UpdateJson.equals("")) {
+            if (UpdateJson.isEmpty()) {
                 return;
             }
             GithubLatestBean githubLatestBean = JSON.parseObject(UpdateJson, GithubLatestBean.class);
@@ -246,7 +246,6 @@ public class MobileUtils {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         String ResponseBody = Objects.requireNonNull(response.body()).string();
-                        LogToFile.i("请求返回", ResponseBody);
                         handler.post(() -> {
                             if (ResponseBody.contains("\"app_name\": \"玉兰卡\""))
                             {

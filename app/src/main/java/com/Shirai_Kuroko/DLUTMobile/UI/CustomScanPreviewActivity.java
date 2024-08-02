@@ -31,7 +31,6 @@ import com.maning.mlkitscanner.scan.view.ViewfinderView;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -258,10 +257,8 @@ public class CustomScanPreviewActivity extends AppCompatActivity {
                                         Toast.makeText(CustomScanPreviewActivity.this.mContext, "未找到二维码或者条形码", Toast.LENGTH_SHORT).show();
                                     } else {
                                         ArrayList<String> results = new ArrayList();
-                                        Iterator var2 = barcodes.iterator();
 
-                                        while(var2.hasNext()) {
-                                            Barcode barcode = (Barcode)var2.next();
+                                        for (Barcode barcode : barcodes) {
                                             String value = barcode.getDisplayValue();
                                             Log.e("======", "value:" + value);
                                             results.add(value);

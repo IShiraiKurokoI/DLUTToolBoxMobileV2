@@ -340,8 +340,7 @@ public class AppBean implements Serializable
 
     public boolean getIsCanelRecomend() {
         final int isCelRe = this.isCelRe;
-        boolean b = isCelRe == 1;
-        return b;
+        return isCelRe == 1;
     }
 
     public int getIsCelRe() {
@@ -358,8 +357,7 @@ public class AppBean implements Serializable
 
     public boolean getIs_sso() {
         final int is_sso = this.is_sso;
-        boolean b = is_sso == 1;
-        return b;
+        return is_sso == 1;
     }
 
     public int getIscollection() {
@@ -552,14 +550,12 @@ public class AppBean implements Serializable
 
     public boolean isAddCard() {
         final int is_add_card = this.is_add_card;
-        boolean b = is_add_card == 1;
-        return b;
+        return is_add_card == 1;
     }
 
     public boolean isCollection() {
         final int iscollection = this.iscollection;
-        boolean b = iscollection == 1;
-        return b;
+        return iscollection == 1;
     }
 
     public boolean isExpand() {
@@ -572,8 +568,7 @@ public class AppBean implements Serializable
 
     public boolean isNewApp() {
         final int isNewApp = this.isNewApp;
-        boolean b = isNewApp == 1;
-        return b;
+        return isNewApp == 1;
     }
 
     public boolean isRecommend() {
@@ -582,8 +577,7 @@ public class AppBean implements Serializable
 
     public boolean isSubscribe() {
         final int issubscription = this.issubscription;
-        boolean b = issubscription == 1;
-        return b;
+        return issubscription == 1;
     }
 
     public void setAndroid_pakage_name(final String android_pakage_name) {

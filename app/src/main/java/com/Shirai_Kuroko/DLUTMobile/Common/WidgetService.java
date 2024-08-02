@@ -101,7 +101,7 @@ public class WidgetService extends RemoteViewsService {
                     remoteViews = new RemoteViews(this.a.getPackageName(), R.layout.item_widget_course);
                     remoteViews.setTextViewText(R.id.tv_date, courseBean.getLessonSuccession());
                     remoteViews.setTextViewText(R.id.tv_time, courseBean.getBeginTime());
-                    if (!courseBean.getEndTime().equals(""))
+                    if (!courseBean.getEndTime().isEmpty())
                     {
                         remoteViews.setTextViewText(R.id.tv_time, courseBean.getBeginTime()+"-"+courseBean.getEndTime());
                     }

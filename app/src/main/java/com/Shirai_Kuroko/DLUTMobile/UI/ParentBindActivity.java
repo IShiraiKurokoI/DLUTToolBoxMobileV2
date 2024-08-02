@@ -53,7 +53,7 @@ public class ParentBindActivity extends AppCompatActivity {
         }
         else
         {
-            if (!infoDTO.getParent_bind().equals(""))
+            if (!infoDTO.getParent_bind().isEmpty())
             {
                 tv_activated_wording.setText("您已邀请"+infoDTO.getParent_bind().replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2")+"开通为您的家长账号");
                 tv_activated_time.setText("重新邀请");

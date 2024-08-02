@@ -111,7 +111,7 @@ public class ServiceCenterAdapter extends BaseAdapter {
             List<ApplicationConfig> list = new ArrayList<>();
             mList = ConfigHelper.Getmlist(mcontext.requireContext());
             mcontext.catagoryfilter = str;
-            if (str.equals("")) {
+            if (str.isEmpty()) {
                 list = mList;
             } else {
                 for (ApplicationConfig p : mList) {

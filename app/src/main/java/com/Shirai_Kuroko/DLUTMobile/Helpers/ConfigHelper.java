@@ -300,20 +300,17 @@ public class ConfigHelper {
     }
 
     public static String GetCatogoryName(String cat) {
-        if (cat.equals("study")) {
-            return "学习类";
-        }
-        if (cat.equals("office")) {
-            return "工作类";
-        }
-        if (cat.equals("life")) {
-            return "生活类";
-        }
-        if (cat.equals("social")) {
-            return "社交类";
-        }
-        if (cat.equals("game")) {
-            return "游戏类";
+        switch (cat) {
+            case "study":
+                return "学习类";
+            case "office":
+                return "工作类";
+            case "life":
+                return "生活类";
+            case "social":
+                return "社交类";
+            case "game":
+                return "游戏类";
         }
         return "未知分类";
     }

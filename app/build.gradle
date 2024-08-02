@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.application'
-    id 'plugin.cdh.okone'
 }
 
 android {
@@ -35,9 +34,10 @@ android {
     defaultConfig {
         applicationId "com.Shirai_Kuroko.DLUTMobile"
         minSdk 29
+        //noinspection ExpiredTargetSdkVersion
         targetSdk 32
         versionCode 1
-        versionName "1.8.1.8"
+        versionName "1.8.1.9"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders =[
                 PUSH_APPID:"EM2xtY6UCM64MPEoE4cEZ1",
@@ -96,9 +96,9 @@ dependencies {
     implementation files('libs/httpclient-4.0.1.jar')
     implementation files('libs/httpcore-4.0.1.jar')
     implementation files('libs/httpmime-4.0.1.jar')
-    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
     //noinspection AnnotationProcessorOnCompilePath
-    implementation 'org.projectlombok:lombok:1.18.8'
+    implementation 'org.projectlombok:lombok:1.18.34'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
@@ -111,10 +111,10 @@ dependencies {
     implementation 'com.github.maning0303:MNMLKitScanner:V1.0.4'
     //下面版本自己控制，barcode-scanning>=17.0.2
     implementation 'com.google.mlkit:barcode-scanning:17.0.2'
-    implementation "androidx.camera:camera-core:1.0.2"
-    implementation "androidx.camera:camera-camera2:1.0.2"
-    implementation "androidx.camera:camera-lifecycle:1.0.2"
-    implementation "androidx.camera:camera-view:1.0.0-alpha25"
+    implementation "androidx.camera:camera-core:1.1.0"
+    implementation "androidx.camera:camera-camera2:1.1.0"
+    implementation "androidx.camera:camera-lifecycle:1.1.0"
+    implementation "androidx.camera:camera-view:1.1.0"
 
     implementation 'com.getui:gtsdk:3.2.10.0'  //个推SDK
     implementation 'com.getui:gtc:3.1.9.0' //个推核心组件

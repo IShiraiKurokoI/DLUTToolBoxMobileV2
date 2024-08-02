@@ -70,7 +70,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             holder.ServiceItem.setVisibility(View.GONE);
             holder.NoticeItem.setVisibility(View.VISIBLE);
             holder.tv_notice_title.setText(URLDecoder.decode(searchBean.notificationHistoryDataBaseBean.getMsg_content().getTitle()));
-            if (!URLDecoder.decode(searchBean.notificationHistoryDataBaseBean.getMsg_content().getDescription()).replace(" ", "").equals("")) {
+            if (!URLDecoder.decode(searchBean.notificationHistoryDataBaseBean.getMsg_content().getDescription()).replace(" ", "").isEmpty()) {
                 holder.tv_notice_content.setText(URLDecoder.decode(searchBean.notificationHistoryDataBaseBean.getMsg_content().getDescription()));
             } else {
                 holder.tv_notice_content.setVisibility(View.GONE);

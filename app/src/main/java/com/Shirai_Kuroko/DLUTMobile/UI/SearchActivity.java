@@ -70,7 +70,7 @@ public class SearchActivity extends AppCompatActivity {
                 String query = editable.toString();
                 Log.i("搜索内容", query);
                 List<SearchBean> Result = new ArrayList<>();
-                if (!query.replace(" ", "").equals(""))
+                if (!query.replace(" ", "").isEmpty())
                 {
                     for (SearchBean searchBean:searchBeanList)
                     {
@@ -81,7 +81,7 @@ public class SearchActivity extends AppCompatActivity {
                                 Result.add(searchBean);
                                 continue;
                             }
-                            if (!URLDecoder.decode(searchBean.notificationHistoryDataBaseBean.getMsg_content().getDescription()).replace(" ", "").equals(""))
+                            if (!URLDecoder.decode(searchBean.notificationHistoryDataBaseBean.getMsg_content().getDescription()).replace(" ", "").isEmpty())
                             {
                                 if(URLDecoder.decode(searchBean.notificationHistoryDataBaseBean.getMsg_content().getDescription()).contains(query))
                                 {

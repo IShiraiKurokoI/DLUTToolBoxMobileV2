@@ -151,8 +151,7 @@ public class CustomScanResultPointView extends FrameLayout {
         float scaleWidth = ((float) w / width);
         float scaleHeight = ((float) h / height);
         matrix.postScale(scaleWidth, scaleHeight);
-        Bitmap newBmp = Bitmap.createBitmap(bitmap, 0, 0, width, height,matrix, true);
-        return newBmp;
+        return Bitmap.createBitmap(bitmap, 0, 0, width, height,matrix, true);
     }
 
     private void drawableResultPoint() {
