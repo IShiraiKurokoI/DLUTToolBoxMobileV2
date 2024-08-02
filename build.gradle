@@ -16,7 +16,7 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'com.android.tools.build:gradle:7.4.2'
         classpath 'com.github.chidehang.OkOne:okone-gradle-plugin:2.3.0'
     }
 }
