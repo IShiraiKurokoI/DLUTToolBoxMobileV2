@@ -244,7 +244,6 @@ public class CourseWidget extends AppWidgetProvider {
                             b.c(context, State.DEFAULT);
                             Log.i("课表微件", "加载成功");
                             LogToFile.i("课表微件", "加载成功");
-                            BackendUtils.GainScore(context);
                         } else {
                             final State data_NULL = State.DATA_NULL;
                             b.c(context, data_NULL);
