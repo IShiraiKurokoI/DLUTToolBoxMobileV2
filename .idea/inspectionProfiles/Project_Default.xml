@@ -34,7 +34,7 @@
       <option name="myAdditionalJavadocTags" value="date,Desc" />
     </inspection_tool>
     <inspection_tool class="JavadocDeclaration" enabled="true" level="WARNING" enabled_by_default="true">
-      <option name="ADDITIONAL_TAGS" value="date,Desc,ClassName,Description,createTime" />
+      <option name="ADDITIONAL_TAGS" value="date,Desc,ClassName,Description,createTime,author：luck,date：2019-11-13,describe：Glide加载引擎,author：luck,date：2019-11-13,describe：Glide加载引擎" />
     </inspection_tool>
     <inspection_tool class="MissingJavadoc" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="PACKAGE_SETTINGS">

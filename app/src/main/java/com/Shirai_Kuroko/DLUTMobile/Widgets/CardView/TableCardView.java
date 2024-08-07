@@ -48,7 +48,7 @@ public class TableCardView extends ListCardContentView<TableCardRowBean>
         View o2;
         o2 = null;
         if (data != null) {
-            if (data.size() != 0) {
+            if (!data.isEmpty()) {
                 if (data.size() > 4) {
                 }
                 else {
@@ -87,12 +87,6 @@ public class TableCardView extends ListCardContentView<TableCardRowBean>
                         tableCardRowBean1.setSingleLine();
                         tableCardRowBean1.setEllipsize(TextUtils.TruncateAt.END);
                         tableCardRowBean1.setLayoutParams(layoutParams2);
-//                        try {
-////                            ((TextView)tableCardRowBean1).setTextColor(f(tableCellBean.getColor()));
-//                        }
-//                        catch (Exception ex) {
-//                            ex.printStackTrace();
-//                        }
                         linearLayout.addView(tableCardRowBean1);
                     }
                 }

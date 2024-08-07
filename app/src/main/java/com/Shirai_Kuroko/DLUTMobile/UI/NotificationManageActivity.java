@@ -58,7 +58,7 @@ public class NotificationManageActivity extends AppCompatActivity {
             return;
         }
         recyclerView.addItemDecoration(new NotificationsFragment.SimplePaddingDecoration(this));
-        if (notificationPayloadhistoryList.size() == 0) {
+        if (notificationPayloadhistoryList.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
             NoticeEmptyView.setVisibility(View.VISIBLE);
         } else {

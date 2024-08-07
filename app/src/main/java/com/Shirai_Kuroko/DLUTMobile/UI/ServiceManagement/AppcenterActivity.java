@@ -20,9 +20,4 @@ public class AppcenterActivity extends AppCompatActivity {
                     .commit();
         }
     }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
 }

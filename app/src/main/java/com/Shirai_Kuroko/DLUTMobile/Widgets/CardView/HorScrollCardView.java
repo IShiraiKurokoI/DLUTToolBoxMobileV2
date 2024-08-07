@@ -44,7 +44,7 @@ public class HorScrollCardView extends BaseCardContentView<HorScrollCardItemBean
     }
 
     public static <V> boolean v0(final List<V> list) {
-        return list == null || list.size() == 0;
+        return list == null || list.isEmpty();
     }
 
     @Override

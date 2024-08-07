@@ -49,14 +49,6 @@ public class SortViewAdapter extends RecyclerView.Adapter {
             MainCardBean.MainCardDataBean mainCardDataBean = ConfigHelper.GetCardList(mContext).get(mDatas.get(position).getId());
             holder.card_name.setText(mainCardDataBean.getApp_name());
             Glide.with(mContext).load(mainCardDataBean.getIcon()).into(holder.card_icon);
-//            if (position==mDatas.size()-1)
-//            {
-//                holder.v_item_divider.setVisibility(View.GONE);
-//            }
-//            else
-//            {
-//                holder.v_item_divider.setVisibility(View.VISIBLE);
-//            }
         }
     }
 

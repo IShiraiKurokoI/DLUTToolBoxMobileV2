@@ -215,9 +215,4 @@ public class PersonalInfoActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 }

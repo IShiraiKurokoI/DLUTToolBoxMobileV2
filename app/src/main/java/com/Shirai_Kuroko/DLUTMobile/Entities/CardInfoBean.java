@@ -37,7 +37,7 @@ public class CardInfoBean
         final ArrayList<T> list = new ArrayList<>();
         final List<JSONObject> data = this.data;
         if (data != null) {
-            if (data.size() != 0) {
+            if (!data.isEmpty()) {
                 for (final JSONObject jsonObject : this.data) {
                     try {
                         list.add(JSON.parseObject(jsonObject.toJSONString(),clazz));
@@ -56,7 +56,7 @@ public class CardInfoBean
         final ArrayList<T> list = new ArrayList<>();
         final List<JSONObject> data = this.data;
         if (data != null) {
-            if (data.size() != 0) {
+            if (!data.isEmpty()) {
                 for (final JSONObject jsonObject : this.data) {
                     try {
                         list.add(JSON.parseObject(jsonObject.toJSONString(),clazz));

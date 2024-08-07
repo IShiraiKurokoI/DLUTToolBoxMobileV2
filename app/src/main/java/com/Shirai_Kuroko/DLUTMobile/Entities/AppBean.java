@@ -397,7 +397,7 @@ public class AppBean implements Serializable
     }
 
     public List<String> getScreenshot() {
-        final ArrayList<String> list = new ArrayList<String>();
+        final ArrayList<String> list = new ArrayList<>();
         for (final String e : this.screenshot) {
             if (!TextUtils.isEmpty(e)) {
                 list.add(e);

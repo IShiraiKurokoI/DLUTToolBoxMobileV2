@@ -48,7 +48,7 @@ public abstract class ListCardContentView<T> extends ExpandableCardContentView<T
             this.j.setDividerDrawable(super.f.getResources().getDrawable(R.drawable.divider_hor));
         }
         final List<T> c = super.c;
-        if (c != null && c.size() > 0) {
+        if (c != null && !c.isEmpty()) {
             for (int i = 0; i < super.c.size(); ++i) {
                 final T value = super.c.get(i);
                 if (value != null) {

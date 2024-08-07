@@ -27,7 +27,7 @@ public class CardTabsBean implements Serializable
 
     public boolean hasTabs() {
         final List<TabBean> data = this.data;
-        return data != null && data.size() > 0;
+        return data != null && !data.isEmpty();
     }
 
     public void setData(final List<TabBean> data) {

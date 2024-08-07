@@ -126,17 +126,6 @@ public class MobileUtils {
                 .build();
         ShortcutManagerCompat.pushDynamicShortcut(context, shortcut);
 
-//        Intent YLKIntent = new Intent(context, BrowserActivity.class);
-//        YLKIntent.putExtra("App_ID", String.valueOf(0));
-//        YLKIntent.setAction(Intent.ACTION_VIEW);
-//        ShortcutInfoCompat shortcut4 = new ShortcutInfoCompat.Builder(context, "YLK")
-//                .setShortLabel("玉兰卡")
-//                .setLongLabel("玉兰卡")
-//                .setIcon(IconCompat.createWithResource(context, R.drawable.icon_short_ylk))
-//                .setIntent(YLKIntent)
-//                .build();
-//        ShortcutManagerCompat.pushDynamicShortcut(context, shortcut4);
-
         Intent examIntent = new Intent(context, BrowserActivity.class);
         examIntent.putExtra("App_ID", String.valueOf(71));
         examIntent.setAction(Intent.ACTION_VIEW);

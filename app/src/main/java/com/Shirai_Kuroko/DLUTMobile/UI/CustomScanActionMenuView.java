@@ -61,29 +61,23 @@ public class CustomScanActionMenuView extends FrameLayout {
         this.ll_custom_view = (LinearLayout)this.findViewById(R.id.ll_custom_view);
         this.rl_default_menu.setVisibility(View.GONE);
         this.ll_custom_view.setVisibility(View.GONE);
-        this.btn_scan_light.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                if (CustomScanActionMenuView.this.onScanActionMenuListener != null) {
-                    CustomScanActionMenuView.this.onScanActionMenuListener.onLight();
-                }
-
+        this.btn_scan_light.setOnClickListener(v -> {
+            if (CustomScanActionMenuView.this.onScanActionMenuListener != null) {
+                CustomScanActionMenuView.this.onScanActionMenuListener.onLight();
             }
+
         });
-        this.btn_close.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                if (CustomScanActionMenuView.this.onScanActionMenuListener != null) {
-                    CustomScanActionMenuView.this.onScanActionMenuListener.onClose();
-                }
-
+        this.btn_close.setOnClickListener(v -> {
+            if (CustomScanActionMenuView.this.onScanActionMenuListener != null) {
+                CustomScanActionMenuView.this.onScanActionMenuListener.onClose();
             }
+
         });
-        this.btn_photo.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                if (CustomScanActionMenuView.this.onScanActionMenuListener != null) {
-                    CustomScanActionMenuView.this.onScanActionMenuListener.onPhoto();
-                }
-
+        this.btn_photo.setOnClickListener(v -> {
+            if (CustomScanActionMenuView.this.onScanActionMenuListener != null) {
+                CustomScanActionMenuView.this.onScanActionMenuListener.onPhoto();
             }
+
         });
     }
 

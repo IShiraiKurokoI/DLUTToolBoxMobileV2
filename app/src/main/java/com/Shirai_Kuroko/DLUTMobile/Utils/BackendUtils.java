@@ -1065,17 +1065,17 @@ public class BackendUtils {
                                     imageView.setImageBitmap(myBitmap);
                                     MsgResult msgResult = JSON.parseObject(ResponseBody, MsgResult.class);
                                     if (msgResult.getRet() == 0) {
-                                        if (msgResult.getData().getMsgId().size() != 0) {
+                                        if (!msgResult.getData().getMsgId().isEmpty()) {
                                             for (String id : msgResult.getData().getMsgId()) {
                                                 new Thread(() -> BackendUtils.GetMsgNewDetailInfo(context, id)).start();
                                             }
                                         }
-                                        if (msgResult.getData().getAppMsgId().size() != 0) {
+                                        if (!msgResult.getData().getAppMsgId().isEmpty()) {
                                             for (String id : msgResult.getData().getAppMsgId()) {
                                                 new Thread(() -> BackendUtils.GetMsgNewDetailInfo(context, id)).start();
                                             }
                                         }
-                                        if (msgResult.getData().getConverMsgId().size() != 0) {
+                                        if (!msgResult.getData().getConverMsgId().isEmpty()) {
                                             for (String id : msgResult.getData().getConverMsgId()) {
                                                 new Thread(() -> BackendUtils.GetMsgNewDetailInfo(context, id)).start();
                                             }
@@ -1136,17 +1136,17 @@ public class BackendUtils {
                                 handler.post(() -> {
                                     MsgResult msgResult = JSON.parseObject(ResponseBody, MsgResult.class);
                                     if (msgResult.getRet() == 0) {
-                                        if (msgResult.getData().getMsgId().size() != 0) {
+                                        if (!msgResult.getData().getMsgId().isEmpty()) {
                                             for (String id : msgResult.getData().getMsgId()) {
                                                 new Thread(() -> BackendUtils.GetMsgNewDetailInfo(context, id)).start();
                                             }
                                         }
-                                        if (msgResult.getData().getAppMsgId().size() != 0) {
+                                        if (!msgResult.getData().getAppMsgId().isEmpty()) {
                                             for (String id : msgResult.getData().getAppMsgId()) {
                                                 new Thread(() -> BackendUtils.GetMsgNewDetailInfo(context, id)).start();
                                             }
                                         }
-                                        if (msgResult.getData().getConverMsgId().size() != 0) {
+                                        if (!msgResult.getData().getConverMsgId().isEmpty()) {
                                             for (String id : msgResult.getData().getConverMsgId()) {
                                                 new Thread(() -> BackendUtils.GetMsgNewDetailInfo(context, id)).start();
                                             }
@@ -1841,7 +1841,7 @@ public class BackendUtils {
                                 TextView app_rating_times = appDetailActivity.findViewById(R.id.app_rating_times);
                                 app_rating_times.setText("总评分人数" + commentDetailResultBean.getData().getStatistics().getTotal() + "人");
                                 double total = Double.parseDouble(commentDetailResultBean.getData().getTotal());
-                                JSONObject jsonObject = null;
+                                JSONObject jsonObject;
                                 int $1 = 0;
                                 int $2 = 0;
                                 int $3 = 0;
@@ -2438,7 +2438,7 @@ public class BackendUtils {
                             Log.d("后端交互日志 礼物信息返回", JSON.toJSONString(giftDetailResponse));
                             LogToFile.d("后端交互日志 礼物信息返回", JSON.toJSONString(giftDetailResponse));
                             if (giftDetailResponse.getErrcode() == 0) {
-                                if (giftDetailResponse.getData().getDetail().size() > 0) {
+                                if (!giftDetailResponse.getData().getDetail().isEmpty()) {
                                     handler.post(() -> context.findViewById(R.id.exchange_gift_header).setOnClickListener(view -> {
                                         Intent intent = new Intent(context, GiftDetailActivity.class);
                                         intent.putExtra("GiftObject", JSON.toJSONString(giftDetailResponse.getData().getDetail().get(0)));

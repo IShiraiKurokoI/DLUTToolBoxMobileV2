@@ -59,8 +59,4 @@ public class CenterToast extends Toast
     public void setText(final CharSequence text) {
         this.b.setText(text);
     }
-
-    public void show() {
-        super.show();
-    }
 }

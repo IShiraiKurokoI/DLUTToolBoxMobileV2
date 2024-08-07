@@ -61,11 +61,6 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
     @SuppressWarnings("ALL")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

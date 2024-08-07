@@ -40,7 +40,7 @@ public abstract class ExpandableCardContentView<T> extends BaseCardContentView<T
     }
 
     public static <V> boolean v0(final List<V> list) {
-        return list == null || list.size() == 0;
+        return list == null || list.isEmpty();
     }
 
     @Override

@@ -28,15 +28,5 @@ public class LoadingView extends ProgressDialog {
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
         getWindow().setAttributes(params);
     }
-
-    @Override
-    public void show() {//开启
-        super.show();
-    }
-
-    @Override
-    public void dismiss() {//关闭
-        super.dismiss();
-    }
 }
 

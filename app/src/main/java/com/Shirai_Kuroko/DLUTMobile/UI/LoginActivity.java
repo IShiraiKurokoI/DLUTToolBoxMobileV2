@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
@@ -133,16 +134,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
         PrivacyText.setText("已阅读并同意");
-        SpannableString spannableString1 = new SpannableString("隐私政策");
-        spannableString1.setSpan(new ClickableSpan() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, PureBrowserActivity.class);
-                intent.putExtra("Name", "隐私政策");
-                intent.putExtra("Url", "https://its.dlut.edu.cn/upload/app/privacy/index.html");
-                startActivity(intent);
-            }
-        }, 0, spannableString1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        SpannableString spannableString1 = getSpannableString();
         PrivacyText.append(spannableString1);
         PrivacyText.append("、");
         SpannableString spannableString2 = new SpannableString("服务协议");
@@ -158,6 +150,20 @@ public class LoginActivity extends AppCompatActivity {
         PrivacyText.append(spannableString2);
         PrivacyText.setMovementMethod(LinkMovementMethod.getInstance());
         UserName.setText(Un);
+    }
+
+    private @NonNull SpannableString getSpannableString() {
+        SpannableString spannableString1 = new SpannableString("隐私政策");
+        spannableString1.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, PureBrowserActivity.class);
+                intent.putExtra("Name", "隐私政策");
+                intent.putExtra("Url", "https://its.dlut.edu.cn/upload/app/privacy/index.html");
+                startActivity(intent);
+            }
+        }, 0, spannableString1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannableString1;
     }
 
     public void CheckState() {

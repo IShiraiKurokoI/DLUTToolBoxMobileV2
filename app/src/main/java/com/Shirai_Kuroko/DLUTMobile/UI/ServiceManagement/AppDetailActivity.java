@@ -141,11 +141,6 @@ public class AppDetailActivity extends BaseActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
-
     public void onOpenClick(View v) {
         Intent intent = new Intent(this, BrowserActivity.class);
         intent.putExtra("App_ID", thisapp.getId().toString());

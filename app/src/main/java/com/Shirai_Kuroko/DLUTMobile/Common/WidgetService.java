@@ -31,16 +31,6 @@ public class WidgetService extends RemoteViewsService {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-    }
-
-    @Override
     public boolean onUnbind(Intent intent) {
         return super.onUnbind(intent);
     }

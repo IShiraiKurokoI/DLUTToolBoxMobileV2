@@ -43,7 +43,7 @@ public class CardManageListAdapter extends RecyclerView.Adapter<CardManageListAd
     public void datarefresh(List<ID> arrayList) {
         mDatas = arrayList;
         if (emptyview != null) {
-            if (mDatas.size() == 0) {
+            if (mDatas.isEmpty()) {
                 recyclerView.setVisibility(View.GONE);
                 emptyview.setVisibility(View.VISIBLE);
             } else {

@@ -102,9 +102,4 @@ public class MeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         UIInitialize();
     }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
 }

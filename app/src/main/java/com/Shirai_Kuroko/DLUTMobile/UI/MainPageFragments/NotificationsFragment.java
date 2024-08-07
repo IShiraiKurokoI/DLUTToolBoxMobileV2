@@ -114,7 +114,7 @@ public class NotificationsFragment extends Fragment {
         }
         recyclerView.addItemDecoration(new SimplePaddingDecoration(requireContext()));
 
-        if (notificationPayloadhistoryList.size() == 0) {
+        if (notificationPayloadhistoryList.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
             NoticeEmptyView.setVisibility(View.VISIBLE);
         } else {
@@ -175,7 +175,7 @@ public class NotificationsFragment extends Fragment {
             return;
         }
 
-        if (notificationPayloadhistoryList.size() == 0) {
+        if (notificationPayloadhistoryList.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
             NoticeEmptyView.setVisibility(View.VISIBLE);
         } else {
@@ -244,10 +244,5 @@ public class NotificationsFragment extends Fragment {
         if (prefs.getBoolean("unread", false)) {
            Resumeinit();
         }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
     }
 }

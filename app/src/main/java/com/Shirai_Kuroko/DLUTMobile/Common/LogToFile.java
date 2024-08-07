@@ -45,11 +45,11 @@ public class LogToFile {
         File mfolder = new File(logPath); //打开目录文件夹
         if (mfolder.isDirectory()) {
             File[] AllFiles = mfolder.listFiles(); //列出目录下的所有文件
-            ArrayList<String> mFilesList = new ArrayList<String>();  //存放/myLog 下的所有文件
+            ArrayList<String> mFilesList = new ArrayList<>();  //存放/myLog 下的所有文件
             //得到文件
             for (File mFile : AllFiles) {
                 String Name = mFile.getName(); //得到文件的名字
-                if (Name.length() < 1)
+                if (Name.isEmpty())
                     return;
                 if (Name.startsWith("程序运行日志") && Name.endsWith(".log")) {  //筛选出log
                     mFilesList.add(Name); //把文件名添加到链表里
@@ -70,7 +70,7 @@ public class LogToFile {
          */
     private static String getFilePath(Context context) {
 
-        if (Environment.MEDIA_MOUNTED.equals(Environment.MEDIA_MOUNTED) || !Environment.isExternalStorageRemovable()) {//如果外部储存可用
+        if (!Environment.isExternalStorageRemovable()) {//如果外部储存可用
             return context.getExternalFilesDir(null).getPath();//获得外部存储路径,默认路径为 /storage/emulated/0/Android/data/com.waka.workspace.logtofile/files/Logs/log_2016-03-14_16-15-09.log
         } else {
             return context.getFilesDir().getPath();//直接存在/data/data里，非root手机是看不到的

@@ -69,21 +69,6 @@ public class AnanEditText extends EditText {
         this.addTextChangedListener(new a(this));
         this.setTextColor(getResources().getColor(R.color.black));
     }
-//
-//    public static void a(final AnanEditText ananEditText, final String s) {
-//        if (ananEditText.c != null) {
-//            final int i = ananEditText.a - s.length();
-//            final c c = ananEditText.c;
-//            if (i < 0) {
-//                final ContentInputActivity a = c.a;
-//                a.b.setTextColor(a.getResources().getColor(R.color.time_count_red));
-//            } else {
-//                final ContentInputActivity a2 = c.a;
-//                a2.b.setTextColor(a2.getResources().getColor(R.color.comment_edit_hint));
-//            }
-//            c.a.b.setText((CharSequence) String.valueOf(i));
-//        }
-//    }
 
     public int b() {
         return this.a - this.getText().toString().length();

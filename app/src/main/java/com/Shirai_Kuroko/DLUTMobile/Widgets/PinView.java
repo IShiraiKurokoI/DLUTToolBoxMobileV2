@@ -12,7 +12,6 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -53,11 +52,6 @@ public class PinView extends EditText {
 
     public PinView(final Context context, @Nullable final AttributeSet set) {
         this(context, set, R.attr.pinViewStyle);
-    }
-
-    @Override
-    public Editable getText() {
-        return super.getText();
     }
 
     public PinView(final Context context, @Nullable final AttributeSet set, int n) {

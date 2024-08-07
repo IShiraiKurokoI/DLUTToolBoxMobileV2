@@ -18,6 +18,7 @@ import android.view.Gravity;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
 
@@ -111,46 +112,13 @@ public class DownloadService extends Service {
                 toast.show();
             }
         }
-//        public void pauseDownload(){
-//            if (downLoadTask!=null){
-//                downLoadTask.pauseDownload();
-//            }
-//        }
-//        //取消下载后需要将下载中的任务取消
-//        public void cancelDownload(){
-//            if(downLoadTask!=null){
-//                downLoadTask.cancelDownload();
-//            }else {
-//                if (downloadUrl!=null)
-//                {
-//                    //取消需要将文件删除并将通知关闭
-//                    String fileName=downloadUrl.substring(downloadUrl.lastIndexOf("/"));
-//                    String directory= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
-//                    File file=new File(directory+fileName);
-//                    if(file.exists()){
-//                        file.delete();
-//                    }
-//                    getNotificationManager().cancel(1);
-//                    stopForeground(true);
-//                    Toast.makeText(DownloadService.this,"下载取消",Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        }
     }
 
     private NotificationManager getNotificationManager(){
         return (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
     }
     private Notification getNotification(String title,int progress,String downloadUrl){
-        String CHANNEL_ONE_ID = "1911";
-        String CHANNEL_ONE_NAME = "文件下载服务";
-        NotificationChannel notificationChannel;
-        notificationChannel = new NotificationChannel(CHANNEL_ONE_ID,
-                CHANNEL_ONE_NAME, NotificationManager.IMPORTANCE_HIGH);
-        notificationChannel.enableLights(false);
-        notificationChannel.setLightColor(Color.RED);
-        notificationChannel.setShowBadge(true);
-        notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
+        NotificationChannel notificationChannel = getNotificationChannel();
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if (manager != null) {
             manager.createNotificationChannel(notificationChannel);
@@ -165,5 +133,18 @@ public class DownloadService extends Service {
             builder.setProgress(100,progress,false);//最大进度，当前进度，是否使用模糊进度条
         }
         return builder.build();
+    }
+
+    private static @NonNull NotificationChannel getNotificationChannel() {
+        String CHANNEL_ONE_ID = "1911";
+        String CHANNEL_ONE_NAME = "文件下载服务";
+        NotificationChannel notificationChannel;
+        notificationChannel = new NotificationChannel(CHANNEL_ONE_ID,
+                CHANNEL_ONE_NAME, NotificationManager.IMPORTANCE_HIGH);
+        notificationChannel.enableLights(false);
+        notificationChannel.setLightColor(Color.RED);
+        notificationChannel.setShowBadge(true);
+        notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
+        return notificationChannel;
     }
 }

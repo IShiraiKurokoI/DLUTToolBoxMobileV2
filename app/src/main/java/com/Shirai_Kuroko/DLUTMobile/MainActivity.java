@@ -169,9 +169,4 @@ public class MainActivity extends AppCompatActivity {
     public Resources getResources() {
         return MobileUtils.getResources(super.getResources());
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 }

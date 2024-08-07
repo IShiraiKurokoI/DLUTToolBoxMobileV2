@@ -94,11 +94,6 @@ public class CardActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         handler.removeCallbacks(runnable);

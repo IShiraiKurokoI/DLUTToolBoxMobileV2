@@ -46,7 +46,7 @@ public class ExchangeRecordAdapter extends RecyclerView.Adapter<ExchangeRecordAd
     @SuppressLint("NotifyDataSetChanged")
     public void datarefresh(List<ExchangeRecordResult.DataDTO.ListDTO> arrayList) {
         mDatas = arrayList;
-        if(mDatas.size()==0)
+        if(mDatas.isEmpty())
         {
             recyclerView.setVisibility(View.GONE);
             emptyview.setVisibility(View.VISIBLE);
@@ -150,13 +150,10 @@ public class ExchangeRecordAdapter extends RecyclerView.Adapter<ExchangeRecordAd
                 break;
             }
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, GiftExchangeActivity.class);
-                intent.putExtra("data", JSON.toJSONString(listDTO));
-                mContext.startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(mContext, GiftExchangeActivity.class);
+            intent.putExtra("data", JSON.toJSONString(listDTO));
+            mContext.startActivity(intent);
         });
     }
 

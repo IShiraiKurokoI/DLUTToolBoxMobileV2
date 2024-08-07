@@ -73,7 +73,7 @@ public class BaseCardContentView<T> extends LinearLayout {
                     if (this.b.getGlobal().getTheme().getNoDataText() == null) {
                         break Label_0325;
                     }
-                    if (this.b.getGlobal().getTheme().getNoDataText().size() == 0) {
+                    if (this.b.getGlobal().getTheme().getNoDataText().isEmpty()) {
                         break Label_0325;
                     }
                     final List<String> noDataText = this.b.getGlobal().getTheme().getNoDataText();

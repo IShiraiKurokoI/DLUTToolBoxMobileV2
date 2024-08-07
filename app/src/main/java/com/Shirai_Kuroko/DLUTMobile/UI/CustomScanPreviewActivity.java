@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,7 +21,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.mlkit.vision.barcode.common.Barcode;
 import com.google.mlkit.vision.common.InputImage;
-import com.maning.mlkitscanner.scan.callback.OnCameraAnalyserCallback;
 import com.maning.mlkitscanner.scan.camera.CameraManager;
 import com.maning.mlkitscanner.scan.model.MNScanConfig;
 import com.maning.mlkitscanner.scan.utils.ImageUtils;
@@ -70,7 +68,7 @@ public class CustomScanPreviewActivity extends AppCompatActivity {
     }
 
     private void initStatusBar() {
-        if (Build.VERSION.SDK_INT >= 19) {
+        {
             StatusBarUtil.setTransparentForWindow(this);
             int statusBarHeight = StatusBarUtil.getStatusBarHeight(this.mContext);
             ViewGroup.LayoutParams fakeStatusBarLayoutParams = this.fakeStatusBar.getLayoutParams();
@@ -82,21 +80,13 @@ public class CustomScanPreviewActivity extends AppCompatActivity {
 
             String statusBarColor = this.mScanConfig.getStatusBarColor();
             this.fakeStatusBar.setBackgroundColor(Color.parseColor(statusBarColor));
-        } else {
-            ViewGroup.LayoutParams fakeStatusBarLayoutParams = this.fakeStatusBar.getLayoutParams();
-            fakeStatusBarLayoutParams.height = 0;
-            this.fakeStatusBar.setLayoutParams(fakeStatusBarLayoutParams);
         }
 
     }
 
     private void initPermission() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (this.checkSelfPermission("android.permission.CAMERA") != PackageManager.PERMISSION_GRANTED) {
-                this.requestPermissions(new String[]{"android.permission.CAMERA"}, 10011);
-            } else {
-                this.startCamera();
-            }
+        if (this.checkSelfPermission("android.permission.CAMERA") != PackageManager.PERMISSION_GRANTED) {
+            this.requestPermissions(new String[]{"android.permission.CAMERA"}, 10011);
         } else {
             this.startCamera();
         }
@@ -106,15 +96,13 @@ public class CustomScanPreviewActivity extends AppCompatActivity {
     private void initCamera() {
         this.cameraManager = CameraManager.getInstance((Context)sActivityRef.get(), this.mPreviewView);
         this.cameraManager.setScanConfig(this.mScanConfig);
-        this.cameraManager.setOnCameraAnalyserCallback(new OnCameraAnalyserCallback() {
-            public void onSuccess(Bitmap bitmap, List<Barcode> barcodes) {
-                CustomScanPreviewActivity.this.result_point_view.setDatas(barcodes, bitmap);
-                CustomScanPreviewActivity.this.result_point_view.setVisibility(View.VISIBLE);
-                if (barcodes.size() == 1) {
-                    CustomScanPreviewActivity.this.finishSuccess(((Barcode)barcodes.get(0)).getDisplayValue());
-                }
-
+        this.cameraManager.setOnCameraAnalyserCallback((bitmap, barcodes) -> {
+            CustomScanPreviewActivity.this.result_point_view.setDatas(barcodes, bitmap);
+            CustomScanPreviewActivity.this.result_point_view.setVisibility(View.VISIBLE);
+            if (barcodes.size() == 1) {
+                CustomScanPreviewActivity.this.finishSuccess(((Barcode)barcodes.get(0)).getDisplayValue());
             }
+
         });
     }
 
@@ -201,7 +189,7 @@ public class CustomScanPreviewActivity extends AppCompatActivity {
     }
 
     private boolean checkStoragePermission() {
-        if (Build.VERSION.SDK_INT >= 23 && this.checkSelfPermission("android.permission.WRITE_EXTERNAL_STORAGE") != PackageManager.PERMISSION_GRANTED) {
+        if (this.checkSelfPermission("android.permission.WRITE_EXTERNAL_STORAGE") != PackageManager.PERMISSION_GRANTED) {
             this.requestPermissions(new String[]{"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.READ_EXTERNAL_STORAGE"}, 10012);
             return false;
         } else {
@@ -244,37 +232,35 @@ public class CustomScanPreviewActivity extends AppCompatActivity {
             }
 
             this.cameraManager.setAnalyze(false);
-            (new Thread(new Runnable() {
-                public void run() {
-                    InputImage inputImage = InputImage.fromBitmap(decodeAbleBitmap, 0);
-                    CustomScanPreviewActivity.this.cameraManager.getBarcodeAnalyser().getBarcodeScanner().process(inputImage).addOnSuccessListener(new OnSuccessListener<List<Barcode>>() {
-                        public void onSuccess(@NonNull final List<Barcode> barcodes) {
-                            CustomScanPreviewActivity.this.runOnUiThread(new Runnable() {
-                                public void run() {
-                                    Log.e("======", "barcodes.size():" + barcodes.size());
-                                    if (barcodes.size() == 0) {
-                                        CustomScanPreviewActivity.this.cameraManager.setAnalyze(true);
-                                        Toast.makeText(CustomScanPreviewActivity.this.mContext, "未找到二维码或者条形码", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        ArrayList<String> results = new ArrayList();
+            (new Thread(() -> {
+                InputImage inputImage = InputImage.fromBitmap(decodeAbleBitmap, 0);
+                CustomScanPreviewActivity.this.cameraManager.getBarcodeAnalyser().getBarcodeScanner().process(inputImage).addOnSuccessListener(new OnSuccessListener<List<Barcode>>() {
+                    public void onSuccess(@NonNull final List<Barcode> barcodes) {
+                        CustomScanPreviewActivity.this.runOnUiThread(new Runnable() {
+                            public void run() {
+                                Log.e("======", "barcodes.size():" + barcodes.size());
+                                if (barcodes.isEmpty()) {
+                                    CustomScanPreviewActivity.this.cameraManager.setAnalyze(true);
+                                    Toast.makeText(CustomScanPreviewActivity.this.mContext, "未找到二维码或者条形码", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    ArrayList<String> results = new ArrayList();
 
-                                        for (Barcode barcode : barcodes) {
-                                            String value = barcode.getDisplayValue();
-                                            Log.e("======", "value:" + value);
-                                            results.add(value);
-                                        }
-
-                                        CustomScanPreviewActivity.this.finishSuccess(results);
+                                    for (Barcode barcode : barcodes) {
+                                        String value = barcode.getDisplayValue();
+                                        Log.e("======", "value:" + value);
+                                        results.add(value);
                                     }
+
+                                    CustomScanPreviewActivity.this.finishSuccess(results);
                                 }
-                            });
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        public void onFailure(@NonNull Exception e) {
-                            Log.e("======", "onFailure---:" + e.toString());
-                        }
-                    });
-                }
+                            }
+                        });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("======", "onFailure---:" + e.toString());
+                    }
+                });
             })).start();
         }
 
@@ -362,6 +348,6 @@ public class CustomScanPreviewActivity extends AppCompatActivity {
     }
 
     public static boolean isLightOn() {
-        return sActivityRef != null && sActivityRef.get() != null ? ((CustomScanPreviewActivity)sActivityRef.get()).is_light_on : false;
+        return sActivityRef != null && sActivityRef.get() != null && ((CustomScanPreviewActivity) sActivityRef.get()).is_light_on;
     }
 }

@@ -35,7 +35,7 @@ public class ScoreDetailAdapter extends RecyclerView.Adapter<ScoreDetailAdapter.
     @SuppressLint("NotifyDataSetChanged")
     public void datarefresh(List<ScoreDetailResult.DataDTO.ListDTO> arrayList) {
         mDatas = arrayList;
-        if(mDatas.size()==0)
+        if(mDatas.isEmpty())
         {
             recyclerView.setVisibility(View.GONE);
             emptyview.setVisibility(View.VISIBLE);

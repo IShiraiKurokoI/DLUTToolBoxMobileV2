@@ -393,9 +393,9 @@ public class WIFIStateChangeBroadcastReceiver extends BroadcastReceiver {
                 builder.setContentText(content);
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                builder.addAction(R.drawable.icon, "手动连接", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.ManualConnect"), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE));
-                builder.addAction(R.drawable.icon, "断开连接", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.ManualDisconnect"), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE));
-                builder.addAction(R.drawable.icon, "打开自服务", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.OpenService"), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE));
+                builder.addAction(R.drawable.icon, "手动连接", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.ManualConnect"), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE));
+                builder.addAction(R.drawable.icon, "断开连接", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.ManualDisconnect"), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE));
+                builder.addAction(R.drawable.icon, "打开自服务", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.OpenService"), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE));
             } else {
                 builder.addAction(R.drawable.icon, "手动连接", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.ManualConnect"), PendingIntent.FLAG_IMMUTABLE));
                 builder.addAction(R.drawable.icon, "断开连接", PendingIntent.getBroadcast(context, 0, new Intent("com.Shirai_Kuroko.DLUTMobile.ManualDisconnect"), PendingIntent.FLAG_IMMUTABLE));

@@ -36,7 +36,7 @@ public class QRCodeHelper {
         if (width < 0 || height < 0) {
             return null;
         }
-        /** 1.设置二维码相关配置 */
+        /* 1.设置二维码相关配置 */
         Hashtable<EncodeHintType, String> hints = new Hashtable<>();
         // 字符转码格式设置
         if (!TextUtils.isEmpty(character_set)) {
@@ -50,7 +50,7 @@ public class QRCodeHelper {
         if (!TextUtils.isEmpty(margin)) {
             hints.put(EncodeHintType.MARGIN, margin);
         }
-        /** 2.将配置参数传入到QRCodeWriter的encode方法生成BitMatrix(位矩阵)对象 */
+        /* 2.将配置参数传入到QRCodeWriter的encode方法生成BitMatrix(位矩阵)对象 */
         BitMatrix bitMatrix = null;
         try {
             bitMatrix = new QRCodeWriter().encode(content, BarcodeFormat.QR_CODE, width, height, hints);
@@ -58,7 +58,7 @@ public class QRCodeHelper {
             e.printStackTrace();
         }
 
-        /** 3.创建像素数组,并根据BitMatrix(位矩阵)对象为数组元素赋颜色值 */
+        /* 3.创建像素数组,并根据BitMatrix(位矩阵)对象为数组元素赋颜色值 */
         int[] pixels = new int[width * height];
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
@@ -72,7 +72,7 @@ public class QRCodeHelper {
                 }
             }
         }
-        /** 4.创建Bitmap对象,根据像素数组设置Bitmap每个像素点的颜色值,并返回Bitmap对象 */
+        /* 4.创建Bitmap对象,根据像素数组设置Bitmap每个像素点的颜色值,并返回Bitmap对象 */
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
         return bitmap;

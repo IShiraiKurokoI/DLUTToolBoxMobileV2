@@ -119,40 +119,6 @@ public class ServiceCenterFragment extends Fragment {
         } else {
             return;
         }
-//        androidx.appcompat.widget.SearchView search;
-//        search = requireActivity().findViewById(R.id.search);
-//        search.setIconifiedByDefault(false);
-//        search.setSubmitButtonEnabled(true);
-//        search.setQueryHint("查找");
-//        search.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
-//            //            单击搜索按钮时激发该方法
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                if (TextUtils.isEmpty(query)) {
-//                    adapter.showAllProduct();
-//                } else {
-//                    adapter.getFilter().filter(query);
-//                }
-//                cleanbg();
-//                LinearLayout l1 = requireActivity().findViewById(R.id.CatagoryLinear1);
-//                l1.setBackgroundColor(CatagorySelected);
-////                search.clearFocus();
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                if (TextUtils.isEmpty(newText)) {
-//                    adapter.showAllProduct();
-//                } else {
-//                    adapter.getFilter().filter(newText);
-//                }
-//                cleanbg();
-//                LinearLayout l1 = requireActivity().findViewById(R.id.CatagoryLinear1);
-//                l1.setBackgroundColor(CatagorySelected);
-//                return true;
-//            }
-//        });
         LinearLayout l1 = requireActivity().findViewById(R.id.CatagoryLinear1);
         LinearLayout l2 = requireActivity().findViewById(R.id.CatagoryLinear2);
         LinearLayout l3 = requireActivity().findViewById(R.id.CatagoryLinear3);
@@ -209,9 +175,6 @@ public class ServiceCenterFragment extends Fragment {
 
 
     public void Refresh() {
-//        androidx.appcompat.widget.SearchView search;
-//        search = requireActivity().findViewById(R.id.search);
-//        String query = search.getQuery().toString();
         AnanEditText ananEditText = requireActivity().findViewById(R.id.item_search_et);
         String query = ananEditText.getText().toString();
         if (!TextUtils.isEmpty(query)) {

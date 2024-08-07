@@ -74,24 +74,18 @@ public class CustomScanResultPointView extends FrameLayout {
         this.tv_cancle = (TextView)view.findViewById(R.id.tv_cancle);
         this.fl_result_point_root = (FrameLayout)view.findViewById(R.id.fl_result_point_root);
         this.statusBarHeight = StatusBarUtil.getStatusBarHeight(this.getContext());
-        if (Build.VERSION.SDK_INT >= 19) {
-            ViewGroup.LayoutParams fakeStatusBarLayoutParams =  this.fakeStatusBar.getLayoutParams();
-            fakeStatusBarLayoutParams.height = this.statusBarHeight;
-            this.fakeStatusBar.setLayoutParams(fakeStatusBarLayoutParams);
-        }
+        ViewGroup.LayoutParams fakeStatusBarLayoutParams = this.fakeStatusBar.getLayoutParams();
+        fakeStatusBarLayoutParams.height = this.statusBarHeight;
+        this.fakeStatusBar.setLayoutParams(fakeStatusBarLayoutParams);
 
-        this.tv_cancle.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                if (CustomScanResultPointView.this.onResultPointClickListener != null) {
-                    CustomScanResultPointView.this.onResultPointClickListener.onCancle();
-                }
-
-                CustomScanResultPointView.this.removeAllPoints();
+        this.tv_cancle.setOnClickListener(v -> {
+            if (CustomScanResultPointView.this.onResultPointClickListener != null) {
+                CustomScanResultPointView.this.onResultPointClickListener.onCancle();
             }
+
+            CustomScanResultPointView.this.removeAllPoints();
         });
-        this.iv_show_result.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-            }
+        this.iv_show_result.setOnClickListener(v -> {
         });
     }
 
@@ -158,7 +152,7 @@ public class CustomScanResultPointView extends FrameLayout {
         Log.e(">>>>>>", "drawableResultPoint---start");
         this.iv_show_result.setBackground(new BitmapDrawable(this.barcodeBitmap));
         this.removeAllPoints();
-        if (this.resultPoint != null && this.resultPoint.size() != 0) {
+        if (this.resultPoint != null && !this.resultPoint.isEmpty()) {
             if (this.scanConfig == null) {
                 this.scanConfig = (new MNScanConfig.Builder()).builder();
             }
@@ -203,13 +197,11 @@ public class CustomScanResultPointView extends FrameLayout {
                     iv_point_arrow.setVisibility(View.GONE);
                 }
 
-                iv_point_bg.setOnClickListener(new OnClickListener() {
-                    public void onClick(View v) {
-                        if (CustomScanResultPointView.this.onResultPointClickListener != null) {
-                            CustomScanResultPointView.this.onResultPointClickListener.onPointClick(barcode.getDisplayValue());
-                        }
-
+                iv_point_bg.setOnClickListener(v -> {
+                    if (CustomScanResultPointView.this.onResultPointClickListener != null) {
+                        CustomScanResultPointView.this.onResultPointClickListener.onPointClick(barcode.getDisplayValue());
                     }
+
                 });
                 this.fl_result_point_root.addView(inflate);
             }
