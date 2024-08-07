@@ -3,6 +3,7 @@ package com.Shirai_Kuroko.DLUTMobile.UI;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -59,10 +60,14 @@ public class GiftDetailActivity extends AppCompatActivity {
         tv_gift_intro.getSettings().setDisabledActionModeMenuItems(DEFAULT_KEYS_DISABLE);
         tv_gift_intro.setLongClickable(true);
         tv_gift_intro.setOnLongClickListener(v -> true);
-        if (ConfigHelper.GetThemeType(this)) { //判断如果系统是深色主题
-            tv_gift_intro.getSettings().setForceDark(WebSettings.FORCE_DARK_ON);//强制开启webview深色主题模式
-        } else {
-            tv_gift_intro.getSettings().setForceDark(WebSettings.FORCE_DARK_OFF);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            tv_gift_intro.getSettings().setAlgorithmicDarkeningAllowed(ConfigHelper.GetThemeType(this));
+        }else {
+            if (ConfigHelper.GetThemeType(this)) {
+                tv_gift_intro.getSettings().setForceDark(WebSettings.FORCE_DARK_ON);
+            } else {
+                tv_gift_intro.getSettings().setForceDark(WebSettings.FORCE_DARK_OFF);
+            }
         }
         tv_gift_intro.loadDataWithBaseURL(null, URLDecoder.decode(Gift.getRemark()), "text/html", "utf-8", null);
         tv_gift_intro.setScrollBarSize(0);

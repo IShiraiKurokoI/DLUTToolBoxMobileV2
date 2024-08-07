@@ -12,10 +12,16 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -148,20 +154,26 @@
         <service
             android:name=".Services.BackgroudWIFIMonitorService"
             android:enabled="true"
+            android:foregroundServiceType="dataSync"
             android:exported="false" />
-        <service android:name=".Services.IntentService" />
+        <service
+            android:name=".Services.IntentService"
+            android:foregroundServiceType="dataSync"/>
         <service
             android:name=".Common.WidgetService"
             android:exported="false"
+            android:foregroundServiceType="dataSync"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
         <service
             android:name=".Services.DownloadService"
-            android:exported="false" />
+            android:exported="false"
+            android:foregroundServiceType="dataSync"/>
         <service
             android:name=".Services.PushService"
             android:exported="false"
             android:label="PushService"
-            android:process=":pushservice" />
+            android:process=":pushservice"
+            android:foregroundServiceType="dataSync"/>
 
         <activity
             android:name=".UI.OpenVirtualCardActivity"

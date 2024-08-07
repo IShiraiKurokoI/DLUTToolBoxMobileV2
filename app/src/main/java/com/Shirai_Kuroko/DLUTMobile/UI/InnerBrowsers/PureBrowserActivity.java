@@ -13,6 +13,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -125,10 +126,14 @@ public class PureBrowserActivity extends BaseActivity {
         //禁止系统缩放字体
         webSettings.setTextZoom(100);
         webView.setDrawingCacheEnabled(true);
-        if (ConfigHelper.GetThemeType(this)) { //判断如果系统是深色主题
-            webSettings.setForceDark(WebSettings.FORCE_DARK_ON);//强制开启webview深色主题模式
-        } else {
-            webSettings.setForceDark(WebSettings.FORCE_DARK_OFF);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            webSettings.setAlgorithmicDarkeningAllowed(ConfigHelper.GetThemeType(this));
+        }else {
+            if (ConfigHelper.GetThemeType(this)) {
+                webSettings.setForceDark(WebSettings.FORCE_DARK_ON);
+            } else {
+                webSettings.setForceDark(WebSettings.FORCE_DARK_OFF);
+            }
         }
         //背景透明
         webView.setBackgroundColor(Color.WHITE); // 设置背景色

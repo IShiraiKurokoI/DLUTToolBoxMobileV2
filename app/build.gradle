@@ -29,13 +29,12 @@ android {
         }
     }
 
-    compileSdk 32
+    compileSdk 34
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.Shirai_Kuroko.DLUTMobile"
         minSdk 29
-        //noinspection ExpiredTargetSdkVersion
-        targetSdk 32
+        targetSdk 34
         versionCode 1
         versionName "1.8.1.9"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

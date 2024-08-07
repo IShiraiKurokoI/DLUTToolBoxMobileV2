@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -49,11 +50,16 @@ public class AccountSafeActivity extends AppCompatActivity {
         webView.setWebChromeClient(webChromeClient);
         webView.setWebViewClient(webViewClient);
         WebSettings webSettings = webView.getSettings();
-        if (ConfigHelper.GetThemeType(this)) { //判断如果系统是深色主题
-            webSettings.setForceDark(WebSettings.FORCE_DARK_ON);//强制开启webview深色主题模式
-        } else {
-            webSettings.setForceDark(WebSettings.FORCE_DARK_OFF);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            webSettings.setAlgorithmicDarkeningAllowed(ConfigHelper.GetThemeType(this));
+        }else {
+            if (ConfigHelper.GetThemeType(this)) {
+                webSettings.setForceDark(WebSettings.FORCE_DARK_ON);
+            } else {
+                webSettings.setForceDark(WebSettings.FORCE_DARK_OFF);
+            }
         }
+
         webSettings.setJavaScriptEnabled(true);//允许使用js
         /*
           LOAD_CACHE_ONLY: 不使用网络，只读取本地缓存数据

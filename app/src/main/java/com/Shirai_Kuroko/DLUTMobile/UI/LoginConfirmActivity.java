@@ -52,7 +52,7 @@ public class LoginConfirmActivity extends AppCompatActivity {
         settings.setUseWideViewPort(true);
         settings.setLoadWithOverviewMode(true);
         settings.setDomStorageEnabled(true);
-        settings.setAppCacheEnabled(true);
+        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
         settings.setTextZoom(100);
         settings.setMixedContentMode(0);
         d1.loadUrl(URL);

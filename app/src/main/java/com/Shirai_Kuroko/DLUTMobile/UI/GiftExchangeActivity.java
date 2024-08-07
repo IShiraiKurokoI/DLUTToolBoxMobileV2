@@ -1,6 +1,7 @@
 package com.Shirai_Kuroko.DLUTMobile.UI;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -80,10 +81,14 @@ public class GiftExchangeActivity extends AppCompatActivity {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDisabledActionModeMenuItems(WebSettings.MENU_ITEM_NONE);
-        if (ConfigHelper.GetThemeType(this)) {
-            webSettings.setForceDark(WebSettings.FORCE_DARK_ON);
-        } else {
-            webSettings.setForceDark(WebSettings.FORCE_DARK_OFF);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            webSettings.setAlgorithmicDarkeningAllowed(ConfigHelper.GetThemeType(this));
+        }else {
+            if (ConfigHelper.GetThemeType(this)) {
+                webSettings.setForceDark(WebSettings.FORCE_DARK_ON);
+            } else {
+                webSettings.setForceDark(WebSettings.FORCE_DARK_OFF);
+            }
         }
         webView.loadDataWithBaseURL("about:blank", URLDecoder.decode(ConfigHelper.GetIntros(this,"ExchangeIntro")), "text/html", "utf-8", null);
         BackendUtils.SetGiftExchangeHeaderClickListener(this, Long.parseLong(DTO.getPresent_id()));

@@ -72,29 +72,27 @@ public class CourseWidget extends AppWidgetProvider {
         //新增点击标题进入程序主界面
         Intent TitleBarIntent = new Intent(context, SplashActivity.class);
         TitleBarIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        @SuppressLint("UnspecifiedImmutableFlag")
-        PendingIntent TitleBarPendingIntent = PendingIntent.getActivity(context, 0, TitleBarIntent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
+        PendingIntent TitleBarPendingIntent = PendingIntent.getActivity(context, 0, TitleBarIntent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
         remoteViews.setOnClickPendingIntent(R.id.CourseWidgetTitleBar, TitleBarPendingIntent);
 
         Intent intent = new Intent(context, WidgetQRLauncherActivity.class);
-        @SuppressLint("UnspecifiedImmutableFlag")
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
         remoteViews.setOnClickPendingIntent(R.id.btn_start_qr_scan, pendingIntent);
         Intent intent1 = new Intent(context, OpenVirtualCardActivity.class);
-        @SuppressLint("UnspecifiedImmutableFlag")
-        PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
+        PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
         remoteViews.setOnClickPendingIntent(R.id.btn_start_virtual_card, pendingIntent1);
 
         final int list_course = R.id.list_course;
         final Intent intent2 = new Intent("android.appwidget.action.APPWIDGET_UPDATE");
-        remoteViews.setOnClickPendingIntent(R.id.btn_refresh, PendingIntent.getBroadcast(context, 0, intent2, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
+
+        remoteViews.setOnClickPendingIntent(R.id.btn_refresh, PendingIntent.getBroadcast(context, 0, intent2, PendingIntent.FLAG_UPDATE_CURRENT| PendingIntent.FLAG_IMMUTABLE));
 
         if (ConfigHelper.NeedLogin(context)) {
             final int content_container = R.id.content_container;
             remoteViews.removeAllViews(content_container);
             final RemoteViews remoteViews2 = new RemoteViews(context.getPackageName(), R.layout.layout_course_widget_login_view);
             final Intent intent4 = new Intent(context, SplashActivity.class);
-            remoteViews2.setOnClickPendingIntent(R.id.btn_login, PendingIntent.getActivity(context, 0, intent4, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
+            remoteViews2.setOnClickPendingIntent(R.id.btn_login, PendingIntent.getActivity(context, 0, intent4, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE));
             remoteViews.addView(content_container, remoteViews2);
             WidgetHelper.M(remoteViews, false);
         } else {
@@ -112,7 +110,7 @@ public class CourseWidget extends AppWidgetProvider {
                 remoteViews.setRemoteAdapter(list_course, adapter);
                 final Intent intent6 = new Intent(context, BrowserActivity.class);
                 intent6.putExtra("App_ID", String.valueOf(1));
-                remoteViews.setPendingIntentTemplate(list_course, PendingIntent.getActivity(context, 0, intent6, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
+                remoteViews.setPendingIntentTemplate(list_course, PendingIntent.getActivity(context, 0, intent6, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE));
                 appWidgetManager.notifyAppWidgetViewDataChanged(i, list_course);
             }
         }
@@ -136,24 +134,24 @@ public class CourseWidget extends AppWidgetProvider {
 
         Intent intent = new Intent(context, WidgetQRLauncherActivity.class);
         @SuppressLint("UnspecifiedImmutableFlag")
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
         remoteViews.setOnClickPendingIntent(R.id.btn_start_qr_scan, pendingIntent);
 
         Intent intent1 = new Intent(context, OpenVirtualCardActivity.class);
         @SuppressLint("UnspecifiedImmutableFlag")
-        PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
+        PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
         remoteViews.setOnClickPendingIntent(R.id.btn_start_virtual_card, pendingIntent1);
 
         final int list_course = R.id.list_course;
         final Intent intent2 = new Intent("android.appwidget.action.APPWIDGET_UPDATE");
-        remoteViews.setOnClickPendingIntent(R.id.btn_refresh, PendingIntent.getBroadcast(context, 0, intent2, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
+        remoteViews.setOnClickPendingIntent(R.id.btn_refresh, PendingIntent.getBroadcast(context, 0, intent2, PendingIntent.FLAG_UPDATE_CURRENT| PendingIntent.FLAG_IMMUTABLE));
 
         if (ConfigHelper.NeedLogin(context)) {
             final int content_container = R.id.content_container;
             remoteViews.removeAllViews(content_container);
             final RemoteViews remoteViews2 = new RemoteViews(context.getPackageName(), R.layout.layout_course_widget_login_view);
             final Intent intent4 = new Intent(context, SplashActivity.class);
-            remoteViews2.setOnClickPendingIntent(R.id.btn_login, PendingIntent.getActivity(context, 0, intent4, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE));
+            remoteViews2.setOnClickPendingIntent(R.id.btn_login, PendingIntent.getActivity(context, 0, intent4, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE));
             remoteViews.addView(content_container, remoteViews2);
             WidgetHelper.M(remoteViews, false);
         } else {
@@ -282,7 +280,7 @@ public class CourseWidget extends AppWidgetProvider {
                                 Log.e("课表微件", "连接服务器失败");
                                 LogToFile.e("课表微件", "连接服务器失败");
                                 if(CourseBean.getLocalList()!=null){
-                                    if (CourseBean.getLocalList().size()!=0){
+                                    if (!CourseBean.getLocalList().isEmpty()){
                                         Log.i("课表微件", "显示缓存数据");
                                         LogToFile.i("课表微件", "显示缓存数据");
                                         b.c(context, State.DEFAULT);
@@ -315,7 +313,7 @@ public class CourseWidget extends AppWidgetProvider {
                 Log.e("课表微件", "连接服务器失败");
                 LogToFile.e("课表微件", "连接服务器失败");
                 if(CourseBean.getLocalList()!=null){
-                    if (CourseBean.getLocalList().size()!=0){
+                    if (!CourseBean.getLocalList().isEmpty()){
                         Log.i("课表微件", "显示缓存数据");
                         LogToFile.i("课表微件", "显示缓存数据");
                         b.c(context, State.DEFAULT);
