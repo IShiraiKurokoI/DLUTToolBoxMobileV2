@@ -547,7 +547,7 @@ public class BackendUtils {
                             LogToFile.d("请求返回", ResponseBody);
                             if (ResponseBody.contains("{\"ret\":-1,\"")) {
                                 handler.post(() -> {
-                                    if (ResponseBody.contains("verify failed")) {
+                                    if (ResponseBody.contains("\"ret\":-1")) {
                                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                                         String Un = prefs.getString("Username", "");
                                         String Pd = prefs.getString("Password", "");
@@ -566,7 +566,7 @@ public class BackendUtils {
                                     String Un = prefs.getString("Username", "");
                                     String Pd = prefs.getString("Password", "");
                                     boolean b = Un.length() * Pd.length() != 0;
-                                    if (ResponseBody.contains("verify failed")) {
+                                    if (ResponseBody.contains("\"ret\":-1")) {
                                         if (b) {
                                             Login(context, Un, Pd);
                                         } else {
@@ -665,7 +665,7 @@ public class BackendUtils {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
                             LogToFile.d("请求返回", ResponseBody);
                             handler.post(() -> {
-                                if (ResponseBody.contains("verify failed")) {
+                                if (ResponseBody.contains("\"ret\":-1")) {
                                     SetClientID(context, ClientID);
                                 } else {
                                     Log.d("后端交互日志", "设置个推客户端ID成功");
@@ -726,9 +726,17 @@ public class BackendUtils {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
                             LogToFile.d("请求返回", ResponseBody);
                             handler.post(() -> {
-                                if (!ResponseBody.contains("verify failed")) {
+                                if (!ResponseBody.contains("\"ret\":-1")) {
                                     List<ADBannerBean> Gallery = new ArrayList<>();
                                     GalleryListBean galleryListBean = JSON.parseObject(ResponseBody, GalleryListBean.class);
+                                    if (galleryListBean.getData() == null){
+                                        Toast.makeText(context,"轮播加载失败，请稍后刷新再试",Toast.LENGTH_LONG).show();
+                                        return;
+                                    }
+                                    if (galleryListBean.getData().getCarousel_gallery().isEmpty()){
+                                        Toast.makeText(context,"轮播加载失败，请稍后刷新再试",Toast.LENGTH_LONG).show();
+                                        return;
+                                    }
                                     for (GalleryListBean.DataDTO.CarouselGalleryDTO carouselGalleryDTO : galleryListBean.getData().getCarousel_gallery()) {
                                         Gallery.add(new ADBannerBean(carouselGalleryDTO.getPic_uri(), carouselGalleryDTO.getUrl()));
                                     }
@@ -793,7 +801,7 @@ public class BackendUtils {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
                             LogToFile.d("请求返回", ResponseBody);
                             handler.post(() -> {
-                                if (!ResponseBody.contains("verify failed")) {
+                                if (!ResponseBody.contains("\"ret\":-1")) {
                                     ConfigHelper.SaveUserScoreBean(context, ResponseBody);
                                     Log.d("后端交互日志", "获取分数数据成功");
                                     LogToFile.d("后端交互日志", "获取分数数据成功");
@@ -848,7 +856,7 @@ public class BackendUtils {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
                             LogToFile.d("请求返回", ResponseBody);
                             handler.post(() -> {
-                                if (!ResponseBody.contains("verify failed")) {
+                                if (!ResponseBody.contains("\"ret\":-1")) {
                                     Log.d("后端交互日志 获取分数数据成功", ResponseBody);
                                     LogToFile.d("后端交互日志 获取分数数据成功", ResponseBody);
                                     ConfigHelper.SaveUserScoreBean(context, ResponseBody);
@@ -900,7 +908,7 @@ public class BackendUtils {
                         if (response.body() != null) {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
                             LogToFile.d("请求返回", ResponseBody);
-                            if (ResponseBody.contains("verify failed")) {
+                            if (ResponseBody.contains("\"ret\":-1")) {
                                 handler.post(() -> {
                                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                                     String Un = prefs.getString("Username", "");
@@ -970,7 +978,7 @@ public class BackendUtils {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
                             Log.d("后端交互日志 二维码数据返回", ResponseBody);
                             LogToFile.d("后端交互日志 二维码数据返回", ResponseBody);
-                            if (ResponseBody.contains("verify failed")) {
+                            if (ResponseBody.contains("\"ret\":-1")) {
                                 handler.post(() -> {
                                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                                     String Un = prefs.getString("Username", "");
@@ -1041,7 +1049,7 @@ public class BackendUtils {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
                             Log.d("后端交互日志 证件照数据返回", ResponseBody);
                             LogToFile.d("后端交互日志 证件照数据返回", ResponseBody);
-                            if (ResponseBody.contains("verify failed")) {
+                            if (ResponseBody.contains("\"ret\":-1")) {
                                 handler.post(() -> {
                                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                                     String Un = prefs.getString("Username", "");
@@ -1132,7 +1140,7 @@ public class BackendUtils {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
                             Log.d("后端交互日志", "通知刷新数据返回 " + ResponseBody);
                             LogToFile.d("后端交互日志", "通知刷新数据返回 " + ResponseBody);
-                            if (!ResponseBody.contains("verify failed")) {
+                            if (!ResponseBody.contains("\"ret\":-1")) {
                                 handler.post(() -> {
                                     MsgResult msgResult = JSON.parseObject(ResponseBody, MsgResult.class);
                                     if (msgResult.getRet() == 0) {
@@ -1195,7 +1203,7 @@ public class BackendUtils {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
                             Log.d("后端交互日志 昵称修改返回", ResponseBody);
                             LogToFile.d("后端交互日志 昵称修改返回", ResponseBody);
-                            if (ResponseBody.contains("verify failed")) {
+                            if (ResponseBody.contains("\"ret\":-1")) {
                                 handler.post(() -> {
                                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                                     String Un = prefs.getString("Username", "");
@@ -1347,7 +1355,7 @@ public class BackendUtils {
                         if (response.body() != null) {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
                             LogToFile.d("请求返回", ResponseBody);
-                            if (ResponseBody.contains("verify failed")) {
+                            if (ResponseBody.contains("\"ret\":-1")) {
                                 handler.post(() -> {
                                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                                     String Un = prefs.getString("Username", "");
@@ -1564,7 +1572,7 @@ public class BackendUtils {
                             String ResponseBody = Objects.requireNonNull(response.body()).string();
                             Log.d("后端交互日志 头像设置返回", ResponseBody);
                             LogToFile.d("后端交互日志 头像设置返回", ResponseBody);
-                            if (ResponseBody.contains("verify failed")) {
+                            if (ResponseBody.contains("\"ret\":-1")) {
                                 handler.post(() -> {
                                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                                     String Un = prefs.getString("Username", "");
@@ -1639,7 +1647,7 @@ public class BackendUtils {
                     }
                     String finalResponseBody = ResponseBody;
                     handler.post(() -> {
-                        if (finalResponseBody != null && !finalResponseBody.contains("verify failed")) {
+                        if (finalResponseBody != null && !finalResponseBody.contains("\"ret\":-1")) {
                             ScoreFunResultbean scoreFunResultbean = JSON.parseObject(finalResponseBody, ScoreFunResultbean.class);
                             if (scoreFunResultbean.getRet() != -1) {
                                 LogToFile.d("应用评论", finalResponseBody);
@@ -1694,7 +1702,7 @@ public class BackendUtils {
                     }
                     String finalResponseBody = ResponseBody;
                     handler.post(() -> {
-                        if (finalResponseBody != null && !finalResponseBody.contains("verify failed")) {
+                        if (finalResponseBody != null && !finalResponseBody.contains("\"ret\":-1")) {
                             SkeyRefreshResult skeyRefreshResult = JSON.parseObject(finalResponseBody, SkeyRefreshResult.class);
                             if (skeyRefreshResult.getData() != null) {
                                 String skey = skeyRefreshResult.getData().getSkey();
@@ -1747,7 +1755,7 @@ public class BackendUtils {
                     }
                     String finalResponseBody = ResponseBody;
                     handler.post(() -> {
-                        if (finalResponseBody != null && !finalResponseBody.contains("verify failed")) {
+                        if (finalResponseBody != null && !finalResponseBody.contains("\"ret\":-1")) {
                             AppDetailNowResultBean appDetailNowResultBean = JSON.parseObject(finalResponseBody, AppDetailNowResultBean.class);
                             if (appDetailNowResultBean.getRet() != -1) {
                                 RatingBar tdr = appDetailActivity.findViewById(R.id.app_rating);
@@ -1822,7 +1830,7 @@ public class BackendUtils {
                     }
                     String finalResponseBody = ResponseBody;
                     handler.post(() -> {
-                        if (finalResponseBody != null && !finalResponseBody.contains("verify failed")) {
+                        if (finalResponseBody != null && !finalResponseBody.contains("\"ret\":-1")) {
                             CommentDetailResultBean commentDetailResultBean = JSON.parseObject(finalResponseBody, CommentDetailResultBean.class);
                             TextView comment = appDetailActivity.findViewById(R.id.comment);
                             if (commentDetailResultBean.getRet() != -1) {
@@ -1917,7 +1925,7 @@ public class BackendUtils {
                 Log.d("后端交互日志 消息内容返回", ResponseBody);
                 LogToFile.d("后端交互日志 消息内容返回", ResponseBody);
                 String result = ResponseBody;
-                if (result.contains("verify failed")) {
+                if (result.contains("\"ret\":-1")) {
                     GetMsgDetailInfo(context, msgid);
                 } else {
                     MsgInfoResult msgInfoResult = JSON.parseObject(result, MsgInfoResult.class);
@@ -2041,7 +2049,7 @@ public class BackendUtils {
                 Log.d("后端交互日志 消息内容返回", ResponseBody);
                 LogToFile.d("后端交互日志 消息内容返回", ResponseBody);
                 String result = ResponseBody;
-                if (result.contains("verify failed")) {
+                if (result.contains("\"ret\":-1")) {
                     GetMsgNewDetailInfo(context, msgid);
                 } else {
                     NewMsgInfo msgInfoResult = JSON.parseObject(result, NewMsgInfo.class);
@@ -2120,7 +2128,7 @@ public class BackendUtils {
                             handler.post(() -> GetRank(context, type, rankAdapter, loadingView));
                             return;
                         }
-                        if (!result.contains("verify failed")) {
+                        if (!result.contains("\"ret\":-1")) {
                             Log.d("后端交互日志 分数排名返回", result);
                             com.Shirai_Kuroko.DLUTMobile.Entities.RankResult rankResult = JSON.parseObject(result, com.Shirai_Kuroko.DLUTMobile.Entities.RankResult.class);
                             List<com.Shirai_Kuroko.DLUTMobile.Entities.RankResult.DataDTO.ListDTO> dtoArrayList = rankResult.getData().getList();
@@ -2174,7 +2182,7 @@ public class BackendUtils {
                         handler.post(() -> GetScoreDetail(context, type, scoreDetailAdapter, loadingView));
                         return;
                     }
-                    if (!result.contains("verify failed")) {
+                    if (!result.contains("\"ret\":-1")) {
                         com.Shirai_Kuroko.DLUTMobile.Entities.ScoreDetailResult Scoreresult = JSON.parseObject(result, com.Shirai_Kuroko.DLUTMobile.Entities.ScoreDetailResult.class);
                         List<ScoreDetailResult.DataDTO.ListDTO> dtoArrayList = Scoreresult.getData().getList();
                         handler.post(() -> {
@@ -2225,7 +2233,7 @@ public class BackendUtils {
                         handler.post(() -> GetExchangeRecord(context, type, exchangeRecordAdapter, loadingView));
                         return;
                     }
-                    if (!result.contains("verify failed")) {
+                    if (!result.contains("\"ret\":-1")) {
                         com.Shirai_Kuroko.DLUTMobile.Entities.ExchangeRecordResult ExchangeRecordresult = JSON.parseObject(result, com.Shirai_Kuroko.DLUTMobile.Entities.ExchangeRecordResult.class);
                         List<ExchangeRecordResult.DataDTO.ListDTO> dtoArrayList = ExchangeRecordresult.getData().getList();
                         handler.post(() -> {
@@ -2275,7 +2283,7 @@ public class BackendUtils {
                             return;
                         }
                         String result = ResponseBody;
-                        if (!result.contains("verify failed")) {
+                        if (!result.contains("\"ret\":-1")) {
                             PresentListResult ListResult = JSON.parseObject(result, PresentListResult.class);
                             List<PresentListResult.DataDTO.ListDTO> dtoArrayList = ListResult.getData().getList();
                             handler.post(() -> {
@@ -2326,7 +2334,7 @@ public class BackendUtils {
                             return;
                         }
                         String result = ResponseBody;
-                        if (!result.contains("verify failed")) {
+                        if (!result.contains("\"ret\":-1")) {
                             ResponseErrorBean responseError = JSON.parseObject(result, ResponseErrorBean.class);
                             Log.d("后端交互日志 取消兑换返回", JSON.toJSONString(responseError));
                             LogToFile.d("后端交互日志 取消兑换返回", JSON.toJSONString(responseError));
@@ -2375,7 +2383,7 @@ public class BackendUtils {
                             return;
                         }
                         String result = ResponseBody;
-                        if (!result.contains("verify failed")) {
+                        if (!result.contains("\"ret\":-1")) {
                             Log.d("后端交互日志 兑换返回", result);
                             LogToFile.d("后端交互日志 兑换返回", result);
                             GiftExchangeResponse giftExchangeResponse = JSON.parseObject(result, GiftExchangeResponse.class);
@@ -2433,7 +2441,7 @@ public class BackendUtils {
                             return;
                         }
                         String result = ResponseBody;
-                        if (!result.contains("verify failed")) {
+                        if (!result.contains("\"ret\":-1")) {
                             GiftDetailResponse giftDetailResponse = JSON.parseObject(result, GiftDetailResponse.class);
                             Log.d("后端交互日志 礼物信息返回", JSON.toJSONString(giftDetailResponse));
                             LogToFile.d("后端交互日志 礼物信息返回", JSON.toJSONString(giftDetailResponse));
@@ -2489,7 +2497,7 @@ public class BackendUtils {
                         handler.post(() -> QRLogin(context, UUID));
                         return;
                     }
-                    if (!result.contains("verify failed")) {
+                    if (!result.contains("\"ret\":-1")) {
                         handler.post(() -> {
                             if (result.contains("\\u4e8c\\u7ef4\\u7801\\u5df2\\u7ecf\\u5931\\u6548")) {
                                 Toast.makeText(context, "二维码已失效", Toast.LENGTH_SHORT).show();
@@ -2545,7 +2553,7 @@ public class BackendUtils {
                         handler.post(() -> ApiQRPreLogin(context, whistle_info));
                         return;
                     }
-                    if (!result.contains("verify failed")) {
+                    if (!result.contains("\"ret\":-1")) {
                         handler.post(() -> {
                             if (result.contains("\\u4e8c\\u7ef4\\u7801\\u5df2\\u7ecf\\u5931\\u6548")) {
                                 Toast.makeText(context, "二维码已失效", Toast.LENGTH_SHORT).show();
@@ -2596,7 +2604,7 @@ public class BackendUtils {
                 public void onResponse(@NonNull Call call, @NonNull Response response) {
                     try {
                         String ResponseBody = Objects.requireNonNull(response.body()).string();
-                        if (!ResponseBody.contains("verify failed")) {
+                        if (!ResponseBody.contains("\"ret\":-1")) {
                             Log.d("后端交互日志 扫码登陆返回", ResponseBody);
                             LogToFile.d("后端交互日志 扫码登陆返回", ResponseBody);
                             handler.post(() -> {
