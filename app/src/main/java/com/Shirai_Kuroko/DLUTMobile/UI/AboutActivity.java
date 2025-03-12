@@ -43,7 +43,7 @@ public class AboutActivity extends AppCompatActivity {
         Intro.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, PureBrowserActivity.class);
             intent.putExtra("Name", "版本介绍");
-            intent.putExtra("Url", "file:///android_asset/version_intro.txt");
+            intent.putExtra("Url", "file:///android_asset/version_intro.html");
             startActivity(intent);
         });
         RelativeLayout DisClaimer = requireViewById(R.id.service_disclaimer);

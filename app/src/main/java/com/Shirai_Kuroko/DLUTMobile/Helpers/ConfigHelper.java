@@ -82,7 +82,7 @@ public class ConfigHelper {
                 LogToFile.i("读取配置", "动态网络配置为空，加载内置默认配置");
             }
             reader = new BufferedReader(
-                    new InputStreamReader(context.getAssets().open("DefaultAppConfig")));
+                    new InputStreamReader(context.getAssets().open("DefaultAppConfig.json")));
             String str;
             while ((str = reader.readLine()) != null) {
                 termsString.append(str);
@@ -101,7 +101,7 @@ public class ConfigHelper {
         BufferedReader reader;
         try {
             reader = new BufferedReader(
-                    new InputStreamReader(context.getAssets().open("DefaultCardConfig")));
+                    new InputStreamReader(context.getAssets().open("DefaultCardConfig.json")));
 
             String str;
             while ((str = reader.readLine()) != null) {
