@@ -128,4 +128,6 @@ dependencies {
     implementation 'io.github.lucksiege:ucrop:v3.10.4'
     implementation 'io.github.lucksiege:camerax:v3.10.4'
     implementation 'com.github.chidehang.OkOne:okone:2.3.0'
+
+    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
 }

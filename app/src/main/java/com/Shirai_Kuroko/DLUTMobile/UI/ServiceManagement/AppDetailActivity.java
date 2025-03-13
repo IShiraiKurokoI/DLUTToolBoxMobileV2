@@ -142,8 +142,23 @@ public class AppDetailActivity extends BaseActivity {
     }
 
     public void onOpenClick(View v) {
-        Intent intent = new Intent(this, BrowserActivity.class);
-        intent.putExtra("App_ID", thisapp.getId().toString());
-        startActivity(intent);
+        if (thisapp.getUrl().startsWith("https://lightapp.m.dlut.edu.cn/openwechat"))
+        {
+            CenterToast.makeText(this, "因为签名校验问题，暂不支持启动小程序", Toast.LENGTH_LONG).show();
+//            IWXAPI createWXAPI = WXAPIFactory.createWXAPI(this,"wxf7fa2fb6e68ef0e4");
+//            WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
+//            req.userName = thisapp.getUrl().split("&program_id=")[1];
+//            req.path = thisapp.getUrl().split("&program_id=")[0].replace("{name}", ConfigHelper.GetUserBean(this).getData().getMy_info().getStudentNumber());
+//            req.miniprogramType =  WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_PREVIEW;
+//            boolean sendReq = createWXAPI.sendReq(req);
+//            if (!sendReq)
+//            {
+//                CenterToast.makeText(this, "小程序启动失败，请安装微信后再试", Toast.LENGTH_SHORT).show();
+//            }
+        }else {
+            Intent intent = new Intent(this, BrowserActivity.class);
+            intent.putExtra("App_ID", thisapp.getId().toString());
+            startActivity(intent);
+        }
     }
 }

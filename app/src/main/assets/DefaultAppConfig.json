@@ -1049,7 +1049,7 @@
     "icon": "https://store.m.dlut.edu.cn/group1/M00/06/72/ynZM2WbWsr-AOM2xAAAxyC94mdc716.png",
     "describe": "大连理工大学大型仪器共享系统小程序于2024年8月正式上线，用户通过统一身份认证即可完成登录，可随时查找仪器、快速审批办公，快捷高效查询各类统计数据，同时可搭配蓝牙机时记录仪使用，实现一键开关仪器，操作灵活便捷。",
     "popularity": "4539",
-    "url": "https://lightapp.m.dlut.edu.cn/openwechat",
+    "url": "https://lightapp.m.dlut.edu.cn/openwechat?username={name}&&app_id=iDlutApp&program_id=gh_95a4d70f9425",
     "issubscription": 0
   },
   {
