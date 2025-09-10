@@ -5,13 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Looper;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.Gravity;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,81 +27,91 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * <h3>全局捕获异常</h3>
+ * <h3>Global Exception Handler</h3>
  * <br>
- * 当程序发生Uncaught异常的时候,有该类来接管程序,并记录错误日志
+ * This class is used to catch uncaught exceptions and handle them by displaying a Toast
+ * and saving crash logs for debugging.
  *
  */
 @SuppressLint("SimpleDateFormat")
 public class CrashHandler implements UncaughtExceptionHandler {
 
     public static String TAG = "MyCrash";
-    // 系统默认的UncaughtException处理类
+    // Default system UncaughtException handler
     private Thread.UncaughtExceptionHandler mDefaultHandler;
 
     private static CrashHandler instance = new CrashHandler();
     private Context mContext;
 
-    // 用来存储设备信息和异常信息
+    // To store device information and crash details
     private Map<String, String> infos = new HashMap<>();
 
-    /** 保证只有一个CrashHandler实例 */
+    /** Ensure only one CrashHandler instance */
     private CrashHandler() {
     }
 
-    /** 获取CrashHandler实例 ,单例模式 */
+    /** Get CrashHandler instance, Singleton pattern */
     public static CrashHandler getInstance() {
         return instance;
     }
 
+    /** Initialize CrashHandler with the application context */
     public void init(Context context) {
         mContext = context;
-        // 获取系统默认的UncaughtException处理器
+        // Get system's default UncaughtException handler
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
-        // 设置该CrashHandler为程序的默认处理器
+        // Set this CrashHandler as the default handler
         Thread.setDefaultUncaughtExceptionHandler(this);
     }
 
     /**
-     * 当UncaughtException发生时会转入该函数来处理
+     * This method is triggered when an uncaught exception occurs.
      */
     @Override
     public void uncaughtException(@NonNull Thread thread, @NonNull Throwable ex) {
+        // If the exception is handled, proceed to exit the app
         if (!handleException(ex) && mDefaultHandler != null) {
-            // 如果用户没有处理则让系统默认的异常处理器来处理
+            // If not handled, pass it to the system default handler
             mDefaultHandler.uncaughtException(thread, ex);
         } else {
+            // Wait for 3 seconds before closing the app
             SystemClock.sleep(3000);
-            // 退出程序
+            // Kill the process and exit
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(1);
+            // Restart the app (optional, for example, in SplashActivity)
             Intent intent = new Intent(mContext, SplashActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             mContext.startActivity(intent);
         }
     }
 
+    /**
+     * Handle the exception by displaying a Toast and saving crash log.
+     *
+     * @param ex The uncaught exception
+     * @return true if the exception was handled, false otherwise
+     */
     private boolean handleException(Throwable ex) {
         if (ex == null)
             return false;
         try {
-            // 使用Toast来显示异常信息
+            // Show a Toast with crash message
             new Thread(() -> {
                 Looper.prepare();
-                Toast toast = Toast.makeText(mContext, "很抱歉,程序出现异常,即将退出.\n崩溃日志保存在程序/Android/com.Shirai_Kuroko.DLUTMobile/files/Logs目录下",
-                        Toast.LENGTH_LONG);
-                int tvToastId = Resources.getSystem().getIdentifier("message", "id", "android");
-                TextView tvToast = toast.getView().findViewById(tvToastId);
-                if(tvToast != null){
-                    tvToast.setGravity(Gravity.CENTER);
-                }
+                Toast toast = Toast.makeText(mContext, "Sorry, the app crashed. The crash log is saved in the /files/Logs directory.", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0); // Ensure the toast is centered
                 toast.show();
                 Looper.loop();
             }).start();
-            // 收集设备参数信息
+
+            // Collect device information (e.g., model, OS version)
             collectDeviceInfo(mContext);
-            // 保存日志文件
+
+            // Save the crash information and stack trace to a file
             saveCrashInfoFile(ex);
+
+            // Wait for 3 seconds to ensure the user sees the crash message
             SystemClock.sleep(3000);
         } catch (Exception e) {
             e.printStackTrace();
@@ -111,11 +119,15 @@ public class CrashHandler implements UncaughtExceptionHandler {
         return true;
     }
 
+    /**
+     * Collects device information such as version, model, and OS version.
+     * @param ctx The application context
+     */
     public void collectDeviceInfo(Context ctx) {
         try {
+            // Get package info (app version, version code)
             PackageManager pm = ctx.getPackageManager();
-            PackageInfo pi = pm.getPackageInfo(ctx.getPackageName(),
-                    PackageManager.GET_ACTIVITIES);
+            PackageInfo pi = pm.getPackageInfo(ctx.getPackageName(), PackageManager.GET_ACTIVITIES);
             if (pi != null) {
                 String versionName = pi.versionName + "";
                 String versionCode = pi.versionCode + "";
@@ -123,32 +135,41 @@ public class CrashHandler implements UncaughtExceptionHandler {
                 infos.put("versionCode", versionCode);
             }
         } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "an error occured when collect package info", e);
+            Log.e(TAG, "Error occurred while collecting package info", e);
         }
+
+        // Collect system and hardware info (e.g., manufacturer, model, SDK version)
         Field[] fields = Build.class.getDeclaredFields();
         for (Field field : fields) {
             try {
                 field.setAccessible(true);
                 infos.put(field.getName(), Objects.requireNonNull(field.get(null)).toString());
             } catch (Exception e) {
-                Log.e(TAG, "an error occured when collect crash info", e);
+                Log.e(TAG, "Error occurred while collecting crash info", e);
             }
         }
     }
 
+    /**
+     * Save the crash information (device info, stack trace) to a log file.
+     *
+     * @param ex The uncaught exception
+     * @return null
+     */
     private String saveCrashInfoFile(Throwable ex) {
         StringBuilder sb = new StringBuilder();
         try {
-            SimpleDateFormat sDateFormat = new SimpleDateFormat(
-                    "yyyy-MM-dd HH:mm:ss");
+            // Format the date when the crash happened
+            SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String date = sDateFormat.format(new java.util.Date());
             sb.append("\r\n").append(date).append("\n");
+
+            // Append device information
             for (Map.Entry<String, String> entry : infos.entrySet()) {
-                String key = entry.getKey();
-                String value = entry.getValue();
-                sb.append(key).append("=").append(value).append("\n");
+                sb.append(entry.getKey()).append("=").append(entry.getValue()).append("\n");
             }
 
+            // Write the stack trace of the exception
             Writer writer = new StringWriter();
             PrintWriter printWriter = new PrintWriter(writer);
             ex.printStackTrace(printWriter);
@@ -162,16 +183,23 @@ public class CrashHandler implements UncaughtExceptionHandler {
             String result = writer.toString();
             sb.append(result);
 
+            // Save the log to a file
             LogToFile.init(mContext);
-            LogToFile.c(ex.getLocalizedMessage(),sb.toString());
+            LogToFile.c(ex.getLocalizedMessage(), sb.toString());
+
             return null;
         } catch (Exception e) {
-            Log.e(TAG, "an error occured while writing file...", e);
-            sb.append("an error occured while writing file...\r\n");
+            Log.e(TAG, "Error occurred while writing crash log", e);
+            sb.append("Error occurred while writing log...\r\n");
         }
         return null;
     }
 
+    /**
+     * Set a custom tag for logging purposes.
+     *
+     * @param tag The custom tag for logging
+     */
     public static void setTag(String tag) {
         TAG = tag;
     }

@@ -68,10 +68,8 @@ import com.Shirai_Kuroko.DLUTMobile.Entities.PresentListResult;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ResendedUserInfo;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ResponseErrorBean;
 import com.Shirai_Kuroko.DLUTMobile.Entities.ScoreDetailResult;
-import com.Shirai_Kuroko.DLUTMobile.Entities.ScoreFunResultbean;
 import com.Shirai_Kuroko.DLUTMobile.Entities.SkeyRefreshResult;
 import com.Shirai_Kuroko.DLUTMobile.Entities.TGTRefreshResult;
-import com.Shirai_Kuroko.DLUTMobile.Entities.UserScoreBean;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.ContextHelper;
 import com.Shirai_Kuroko.DLUTMobile.Helpers.NotificationHelper;
@@ -251,7 +249,6 @@ public class BackendUtils {
                                     Toast.makeText(context, "登陆成功", Toast.LENGTH_SHORT).show();
                                     ConfigHelper.SaveLoginResultToPref(ResponseBody, context);
                                     RefreshNotice(context);
-                                    GetScore(context);
                                 });
                             }
                         }
@@ -361,7 +358,6 @@ public class BackendUtils {
                                     Toast.makeText(context, "登陆成功", Toast.LENGTH_SHORT).show();
                                     load.dismiss();
                                     loginactivity.finish();
-                                    GetScore(context);
                                     RefreshNotice(context);
                                 });
                             }
@@ -768,185 +764,19 @@ public class BackendUtils {
     }
 
     public static void GetScore(Context context) {
-        Handler handler = new Handler(Looper.getMainLooper());
-        new Thread(() -> {
-            LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
-            LoginResponseBean.DataDTO.MyInfoDTO infoDTO;
-            try {
-                if (UserBean == null) {
-                    return;
-                }
-                infoDTO = UserBean.getData().getMy_info();
-                if (infoDTO == null) {
-                    return;
-                }
-            } catch (Exception e) {
-                return;
-            }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=snapShot&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
-            Request request = CommonGetRequsetBuilder(url);
-            LogToFile.d("请求方法体", request.toString());
-            client.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                    handler.post(() -> GetScore(context));
-                    e.printStackTrace();
-                    LogToFile.e("错误", e.toString());
-                }
-
-                @Override
-                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                    if (response.isSuccessful()) {
-                        if (response.body() != null) {
-                            String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.d("请求返回", ResponseBody);
-                            handler.post(() -> {
-                                if (!ResponseBody.contains("\"ret\":-1")) {
-                                    ConfigHelper.SaveUserScoreBean(context, ResponseBody);
-                                    Log.d("后端交互日志", "获取分数数据成功");
-                                    LogToFile.d("后端交互日志", "获取分数数据成功");
-                                    Log.d("后端交互日志", "启动初始化完成");
-                                    LogToFile.d("后端交互日志", "启动初始化完成");
-                                    RefreshNotice(context);
-                                }
-                            });
-                        }
-                    } else {
-                        String ResponseBody = null;
-                        if (response.body() != null) {
-                            ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.d("请求返回", ResponseBody);
-                        }
-                        Log.d("后端交互日志", "分数数据获取失败" + ResponseBody);
-                        LogToFile.d("后端交互日志", "分数数据获取失败" + ResponseBody);
-                        handler.post(() -> GetScore(context));
-                    }
-                }
-            });
-        }).start();
     }
 
 
     public static void GetScore(Context context, TextView Score) {
-        Handler handler = new Handler(Looper.getMainLooper());
-        new Thread(() -> {
-            LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
-            if (UserBean == null) {
-                return;
-            }
-            LoginResponseBean.DataDTO.MyInfoDTO infoDTO = UserBean.getData().getMy_info();
-            if (infoDTO == null) {
-                return;
-            }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=snapShot&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
-            Request request = CommonGetRequsetBuilder(url);
-            LogToFile.d("请求方法体", request.toString());
-            client.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                    handler.post(() -> GetScore(context, Score));
-                    e.printStackTrace();
-                    LogToFile.e("错误", e.toString());
-                }
-
-                @Override
-                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                    if (response.isSuccessful()) {
-                        if (response.body() != null) {
-                            String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.d("请求返回", ResponseBody);
-                            handler.post(() -> {
-                                if (!ResponseBody.contains("\"ret\":-1")) {
-                                    Log.d("后端交互日志 获取分数数据成功", ResponseBody);
-                                    LogToFile.d("后端交互日志 获取分数数据成功", ResponseBody);
-                                    ConfigHelper.SaveUserScoreBean(context, ResponseBody);
-                                    MobileUtils.GetScore(context, Score);
-                                }
-                            });
-                        }
-                    } else {
-                        String ResponseBody = null;
-                        if (response.body() != null) {
-                            ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.d("请求返回", ResponseBody);
-                        }
-                        Log.d("后端交互日志 分数数据获取失败", ResponseBody);
-                        LogToFile.d("后端交互日志 分数数据获取失败", ResponseBody);
-                        handler.post(() -> GetScore(context, Score));
-                    }
-                }
-            });
-        }).start();
+        Score.setText("0");
     }
 
     @SuppressLint("SetTextI18n")
     public static void GetScore(Context context, TextView Score, TextView Rank, TextView Income, TextView Outcome) {
-        Handler handler = new Handler(Looper.getMainLooper());
-        new Thread(() -> {
-            LoginResponseBean UserBean = ConfigHelper.GetUserBean(context);
-            if (UserBean == null) {
-                return;
-            }
-            LoginResponseBean.DataDTO.MyInfoDTO infoDTO = UserBean.getData().getMy_info();
-            if (infoDTO == null) {
-                return;
-            }
-            String url = "https://service.m.dlut.edu.cn/whistlenew/index.php?m=score&a=snapShot&uid=0&student_number=" + infoDTO.getStudentNumber() + "&app_version=" + GetwhistleVersion() + "&school=dlut&stu_identity=&identity=" + infoDTO.getIdentity() + "&verify=" + UserBean.getData().getVerify().replace(":", "%3A") + "&device_type=android&aid=" + infoDTO.getUser_id() + "&platform=android&city_id=10";
-            Request request = CommonGetRequsetBuilder(url);
-            LogToFile.d("请求方法体", request.toString());
-            client.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                    handler.post(() -> GetScore(context, Score, Rank, Income, Outcome));
-                    e.printStackTrace();
-                    LogToFile.e("错误", e.toString());
-                }
-
-                @Override
-                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                    if (response.isSuccessful()) {
-                        if (response.body() != null) {
-                            String ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.d("请求返回", ResponseBody);
-                            if (ResponseBody.contains("\"ret\":-1")) {
-                                handler.post(() -> {
-                                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-                                    String Un = prefs.getString("Username", "");
-                                    String Pd = prefs.getString("Password", "");
-                                    if (Un.length() * Pd.length() != 0) {
-                                        Login(context, Un, Pd);
-                                    } else {
-                                        Toast.makeText(context, "认证失败，请重新登录", Toast.LENGTH_LONG).show();
-                                        Intent intent = new Intent(context, LoginActivity.class);
-                                        context.startActivity(intent);
-                                    }
-                                });
-                            } else {
-                                handler.post(() -> {
-                                    Log.d("后端交互日志 获取分数数据成功", ResponseBody);
-                                    LogToFile.d("后端交互日志 获取分数数据成功", ResponseBody);
-                                    ConfigHelper.SaveUserScoreBean(context, ResponseBody);
-                                    UserScoreBean userScoreBean = ConfigHelper.GetUserScoreBean(context);
-                                    Score.setText(String.valueOf(userScoreBean.getData().getUser_points()));
-                                    Rank.setText("超过了全校" + userScoreBean.getData().getRank() + "的人");
-                                    Income.setText(String.valueOf(userScoreBean.getData().getIn_points()));
-                                    Outcome.setText(String.valueOf(userScoreBean.getData().getOut_points()));
-                                });
-                            }
-                        }
-                    } else {
-                        String ResponseBody = null;
-                        if (response.body() != null) {
-                            ResponseBody = Objects.requireNonNull(response.body()).string();
-                            LogToFile.d("请求返回", ResponseBody);
-                        }
-                        Log.d("后端交互日志 分数数据获取失败", ResponseBody);
-                        LogToFile.d("后端交互日志 分数数据获取失败", ResponseBody);
-                        handler.post(() -> GetScore(context, Score, Rank, Income, Outcome));
-                    }
-                }
-            });
-        }).start();
+        Score.setText("0");
+        Rank.setText("还看呐，都不让用了 ");
+        Income.setText("0");
+        Outcome.setText("0");
     }
 
     public static void LoadQRCode(Context context, ImageView imageView) {
@@ -1648,20 +1478,7 @@ public class BackendUtils {
                     String finalResponseBody = ResponseBody;
                     handler.post(() -> {
                         if (finalResponseBody != null && !finalResponseBody.contains("\"ret\":-1")) {
-                            ScoreFunResultbean scoreFunResultbean = JSON.parseObject(finalResponseBody, ScoreFunResultbean.class);
-                            if (scoreFunResultbean.getRet() != -1) {
-                                LogToFile.d("应用评论", finalResponseBody);
-                                if (scoreFunResultbean.getData().getAdd_score() != -1) {
-                                    CenterToast.makeText(context, "添加评论成功！\n积分+" + scoreFunResultbean.getData().getAdd_score() + "\n现有积分：" + scoreFunResultbean.getData().getSum(), Toast.LENGTH_LONG).show();
-                                    BackendUtils.GetScore(context);
-                                } else {
-                                    CenterToast.makeText(context, "添加评论成功！", Toast.LENGTH_LONG).show();
-                                }
-                                BackendUtils.GetAppCommentNow(context, appid, appDetailActivity, appDetailActivity.findViewById(R.id.comment_list));
-                            } else {
-                                LogToFile.e("应用评论", finalResponseBody);
-                                CenterToast.makeText(context, scoreFunResultbean.getErrmsg(), Toast.LENGTH_SHORT).show();
-                            }
+                            CenterToast.makeText(context, "添加评论成功！", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -1712,7 +1529,6 @@ public class BackendUtils {
                                     ConfigHelper.SaveLoginResultToPref(JSON.toJSONString(loginResponseBean), context);
                                     Log.d("后端交互日志", "刷新Skey成功");
                                     LogToFile.d("后端交互日志", "刷新Skey成功");
-                                    GetScore(context);
                                 }
                             }
                         }

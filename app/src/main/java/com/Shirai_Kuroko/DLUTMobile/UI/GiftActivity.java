@@ -10,8 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.Shirai_Kuroko.DLUTMobile.Entities.UserScoreBean;
-import com.Shirai_Kuroko.DLUTMobile.Helpers.ConfigHelper;
 import com.Shirai_Kuroko.DLUTMobile.R;
 import com.Shirai_Kuroko.DLUTMobile.UI.InnerBrowsers.PureBrowserActivity;
 import com.Shirai_Kuroko.DLUTMobile.Utils.BackendUtils;
@@ -29,11 +27,10 @@ public class GiftActivity extends AppCompatActivity {
         TextView Rank = findViewById(R.id.tv_gift_home_rank);
         TextView Income = findViewById(R.id.tv_gift_home_income);
         TextView Outcome = findViewById(R.id.tv_gift_home_pay);
-        UserScoreBean userScoreBean = ConfigHelper.GetUserScoreBean(this);
-        Score.setText(String.valueOf(userScoreBean.getData().getUser_points()));
-        Rank.setText("超过了全校" + userScoreBean.getData().getRank() + "的人");
-        Income.setText(String.valueOf(userScoreBean.getData().getIn_points()));
-        Outcome.setText(String.valueOf(userScoreBean.getData().getOut_points()));
+        Score.setText("0");
+        Rank.setText("还看呐，都不让用了 ");
+        Income.setText("0");
+        Outcome.setText("0");
         BackendUtils.GetScore(this, Score, Rank, Income, Outcome);
         TextView tv_intro = findViewById(R.id.tv_intro);
         tv_intro.setOnClickListener(view -> {

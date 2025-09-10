@@ -18,7 +18,6 @@ import com.Shirai_Kuroko.DLUTMobile.Entities.IDPhotoResult;
 import com.Shirai_Kuroko.DLUTMobile.Entities.LoginResponseBean;
 import com.Shirai_Kuroko.DLUTMobile.Entities.MainCardBean;
 import com.Shirai_Kuroko.DLUTMobile.Entities.NotificationHistoryDataBaseBean;
-import com.Shirai_Kuroko.DLUTMobile.Entities.UserScoreBean;
 import com.Shirai_Kuroko.DLUTMobile.Managers.MsgHistoryManager;
 import com.alibaba.fastjson.JSON;
 
@@ -332,19 +331,6 @@ public class ConfigHelper {
         LoginResponseBean loginResponseBean = new LoginResponseBean();
         loginResponseBean = JSON.parseObject(Json, LoginResponseBean.class);
         return loginResponseBean;
-    }
-
-    public static UserScoreBean GetUserScoreBean(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String Json = prefs.getString("UserScoreBean", "");
-        UserScoreBean userScoreBean = new UserScoreBean();
-        userScoreBean = JSON.parseObject(Json, UserScoreBean.class);
-        return userScoreBean;
-    }
-
-    public static void SaveUserScoreBean(Context context, String json) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        prefs.edit().putString("UserScoreBean", json).apply();
     }
 
     public static IDPhotoResult GetIDPhoto(Context context) {

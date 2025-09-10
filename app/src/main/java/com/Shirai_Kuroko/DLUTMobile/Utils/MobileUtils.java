@@ -688,17 +688,11 @@ public class MobileUtils {
             StudentSex.setImageResource(R.drawable.icon_sex_girl);
         }
         StudentOrg.setText(infoDTO.getOrg().get(0).getName());
-        if (ConfigHelper.GetUserScoreBean(context) != null) {
-            StudentScore.setText(String.valueOf(ConfigHelper.GetUserScoreBean(context).getData().getUser_points()));
-        } else {
-            BackendUtils.GetScore(context, StudentScore);
-        }
+        StudentScore.setText("0");
     }
 
     public static void GetScore(Context context, TextView Score) {
-        if (ConfigHelper.GetUserScoreBean(context) != null) {
-            Score.setText(String.valueOf(ConfigHelper.GetUserScoreBean(context).getData().getUser_points()));
-        }
+        Score.setText("0");
     }
 
     public static void InitializePersonalInfo(Context context, ScrollView InfoScrollView) {
